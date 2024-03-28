@@ -1,24 +1,26 @@
 class AppStrings {
   // onboarding ::
-  static String next = 'next';
-  static String back = 'back';
-  static String done = 'DONE';
+  static const String next = 'next';
+  static const String back = 'back';
+  static const String done = 'DONE';
 
-  static String selectDateAndTime = 'Select the date / time';
-  static String selectDateAndTimeBody =
+  static const String selectDateAndTime = 'Select the date / time';
+  static const String selectDateAndTimeBody =
       'Pick your departure time. Select the date and time for your journey effortlessly';
 
-  static String chooseTheRoute = 'Choose the route';
-  static String chooseTheRouteBody = 'Select your preferred route. Find the best path to your destination with ease.';
+  static const String chooseTheRoute = 'Choose the route';
+  static const String chooseTheRouteBody =
+      'Select your preferred route. Find the best path to your destination with ease.';
 
-  static String travel = 'Travel';
-  static String travelBody = 'Begin your journey. Join rides, connect with drivers and passengers, and enjoy the trip';
+  static const String travel = 'Travel';
+  static const String travelBody =
+      'Begin your journey. Join rides, connect with drivers and passengers, and enjoy the trip';
 
   // AUTH ::
-  static String howDoYouWantToContinueAs = 'How do you want to    continue as?';
-  static String howDoYouWantToContinueAsBody =
+  static const String howDoYouWantToContinueAs = 'How do you want to    continue as?';
+  static const String howDoYouWantToContinueAsBody =
       'You can login as a driver or a traveller,                select one to continue ';
 
-  static String traveller = 'Traveller';
-  static String driver = 'Driver';
+  static const String traveller = 'Traveller';
+  static const String driver = 'Driver';
 }

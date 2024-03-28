@@ -3,6 +3,7 @@ import 'package:carpool/presentation/components/assets_manager.dart';
 import 'package:carpool/presentation/components/color_manager.dart';
 import 'package:carpool/presentation/components/strings_manager.dart';
 import 'package:carpool/presentation/components/styles_manager.dart';
+import 'package:carpool/presentation/components/widgets.dart';
 import 'package:flutter/material.dart';
 
 class TravellerOrDriverView extends StatelessWidget {
@@ -38,40 +39,14 @@ class TravellerOrDriverView extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: AppSize.s110),
-              SizedBox(
-                width: 350,
-                height: 50,
-                child: ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: ColorManager.yellow,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(AppPadding.p10),
-                    ),
-                  ),
-                  child: Text(
-                    AppStrings.traveller,
-                    style: getMeduimStyle(color: ColorManager.white),
-                  ),
-                ),
+              CustomLargeButton(
+                label: AppStrings.traveller,
+                onPressed: () {},
               ),
               const SizedBox(height: AppSize.s15),
-              SizedBox(
-                width: 350,
-                height: 50,
-                child: ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: ColorManager.yellow,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(AppPadding.p10),
-                    ),
-                  ),
-                  child: Text(
-                    AppStrings.driver,
-                    style: getMeduimStyle(color: ColorManager.white),
-                  ),
-                ),
+              CustomLargeButton(
+                label: AppStrings.driver,
+                onPressed: () {},
               ),
             ],
           ),
