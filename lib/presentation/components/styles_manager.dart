@@ -26,10 +26,10 @@ TextStyle getSmallRegularStyle({
 }
 
 TextStyle getMeduimStyle({
-  double fontSize = FontSize.s18,
+  double fontSize = FontSize.s20,
   required Color color,
 }) {
-  return _getTextStyle(fontSize, FontWeightManager.medium, color);
+  return _getTextStyle(fontSize, FontWeightManager.semiBold, color);
 }
 
 TextStyle getRegularStyle({
