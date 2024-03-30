@@ -23,4 +23,10 @@ class AppStrings {
 
   static const String traveller = 'Traveller';
   static const String driver = 'Driver';
+
+  static const String phoneNumber = 'Phone number';
+  static const String password = 'Password';
+  static const String login = 'Login';
+  static const String dontHaveAnAccount = "Don't have an account?";
+  static const String register = "Register";
 }

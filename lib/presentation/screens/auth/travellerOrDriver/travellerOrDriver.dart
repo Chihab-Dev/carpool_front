@@ -4,6 +4,7 @@ import 'package:carpool/presentation/components/color_manager.dart';
 import 'package:carpool/presentation/components/strings_manager.dart';
 import 'package:carpool/presentation/components/styles_manager.dart';
 import 'package:carpool/presentation/components/widgets.dart';
+import 'package:carpool/presentation/screens/auth/login/view/login.dart';
 import 'package:flutter/material.dart';
 
 class TravellerOrDriverView extends StatelessWidget {
@@ -41,12 +42,22 @@ class TravellerOrDriverView extends StatelessWidget {
               const SizedBox(height: AppSize.s110),
               CustomLargeButton(
                 label: AppStrings.traveller,
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const LoginView()),
+                  );
+                },
               ),
               const SizedBox(height: AppSize.s15),
               CustomLargeButton(
                 label: AppStrings.driver,
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const LoginView()),
+                  );
+                },
               ),
             ],
           ),
