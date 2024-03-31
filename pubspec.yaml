@@ -14,8 +14,10 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_screenutil: ^5.9.0
+  get_it: ^7.6.7
   image_picker: ^1.0.7
   introduction_screen: ^3.1.14
+  shared_preferences: ^2.2.2
 
 dev_dependencies:
   flutter_test:

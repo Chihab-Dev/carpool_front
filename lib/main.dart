@@ -1,38 +1,49 @@
 import 'package:carpool/app/localizations.dart';
+import 'package:carpool/app/service_locator.dart';
+import 'package:carpool/app/shared_prefrences.dart';
+import 'package:carpool/presentation/screens/auth/login/view/login.dart';
 import 'package:carpool/presentation/screens/onboarding/onboarding.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-void main() {
-  runApp(const MainApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await ServiceLocator().init();
+
+  runApp(MainApp());
 }
 
 class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+  MainApp({super.key});
+
+  final AppPrefences _appPrefences = AppPrefences(getIt());
 
   @override
   Widget build(BuildContext context) {
+    bool isOnboardingWatched = _appPrefences.getWatchedOnBoarding();
+
     return ScreenUtilInit(
       designSize: const Size(430, 932),
       minTextAdapt: true,
       splitScreenMode: true,
       useInheritedMediaQuery: true,
       builder: (context, child) {
-        return const MaterialApp(
+        return MaterialApp(
           debugShowCheckedModeBanner: false,
-          locale: Locale('en'),
-          supportedLocales: [
+          locale: const Locale('en'),
+          supportedLocales: const [
             Locale('en'),
             Locale('ar'),
           ],
-          localizationsDelegates: [
+          localizationsDelegates: const [
             AppLocalizations.delegate,
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate
           ],
-          home: OnboardingView(),
+          home: isOnboardingWatched ? const LoginView() : OnboardingView(),
         );
       },
     );

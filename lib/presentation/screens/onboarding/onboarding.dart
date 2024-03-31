@@ -1,3 +1,5 @@
+import 'package:carpool/app/service_locator.dart';
+import 'package:carpool/app/shared_prefrences.dart';
 import 'package:carpool/presentation/components/appsize.dart';
 import 'package:carpool/presentation/components/assets_manager.dart';
 import 'package:carpool/presentation/components/color_manager.dart';
@@ -8,7 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
 class OnboardingView extends StatelessWidget {
-  const OnboardingView({super.key});
+  OnboardingView({super.key});
+
+  final AppPrefences _appPrefences = AppPrefences(getIt());
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +23,7 @@ class OnboardingView extends StatelessWidget {
       showBackButton: true,
       showDoneButton: true,
       onDone: () {
+        _appPrefences.setWatchedOnBoarding();
         Navigator.pushReplacement(
             context,
             MaterialPageRoute(
