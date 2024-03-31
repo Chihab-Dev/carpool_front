@@ -56,8 +56,11 @@ class CustomFormField extends StatelessWidget {
     return SizedBox(
       width: 350,
       child: TextFormField(
+        controller: textEditingcontroller,
         keyboardType: keyboardType,
+        onChanged: onChanged,
         decoration: InputDecoration(
+          errorText: errorLabel,
           suffixIcon: Icon(
             icon,
             color: ColorManager.dark.withOpacity(0.5),
@@ -125,6 +128,8 @@ class CustomPasswordFormField extends StatelessWidget {
       child: TextFormField(
         keyboardType: keyboardType,
         obscureText: isPasswordVisible,
+        onChanged: onChanged,
+        controller: textEditingcontroller,
         decoration: InputDecoration(
           suffixIcon: IconButton(
             onPressed: onVisibleChanged,
@@ -134,7 +139,7 @@ class CustomPasswordFormField extends StatelessWidget {
             ),
           ),
           contentPadding: EdgeInsets.symmetric(horizontal: AppPadding.p20, vertical: AppPadding.p16),
-          floatingLabelBehavior: FloatingLabelBehavior.never,
+          // floatingLabelBehavior: FloatingLabelBehavior.never,
           border: InputBorder.none,
           filled: true,
           fillColor: ColorManager.lightGrey,
@@ -143,6 +148,7 @@ class CustomPasswordFormField extends StatelessWidget {
             label,
             style: getSmallLightStyle(color: ColorManager.dark.withOpacity(0.5)),
           ),
+          errorText: errorLabel,
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(AppSize.s10),
             borderSide: BorderSide.none,

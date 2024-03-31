@@ -36,4 +36,6 @@ class AppStrings {
   static const String pick = 'Pick';
   static const String createAnAccount = 'Create an account';
   static const String wilaya = "Wilaya";
+
+  static String phoneNumberValid = 'Phone number is not valid';
 }
