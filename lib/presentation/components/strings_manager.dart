@@ -29,4 +29,11 @@ class AppStrings {
   static const String login = 'Login';
   static const String dontHaveAnAccount = "Don't have an account?";
   static const String register = "Register";
+  static const String name = "Name";
+  static const String familyName = "Family name";
+  static const String address = "Address";
+  static const String birthday = "Birthday";
+  static const String pick = 'Pick';
+  static const String createAnAccount = 'Create an account';
+  static const String wilaya = "Wilaya";
 }

@@ -4,6 +4,7 @@ import 'package:carpool/presentation/components/color_manager.dart';
 import 'package:carpool/presentation/components/strings_manager.dart';
 import 'package:carpool/presentation/components/styles_manager.dart';
 import 'package:carpool/presentation/components/widgets.dart';
+import 'package:carpool/presentation/screens/auth/register/view/register.dart';
 import 'package:flutter/material.dart';
 
 class LoginView extends StatelessWidget {
@@ -43,9 +44,10 @@ class LoginView extends StatelessWidget {
                   keyboardType: TextInputType.phone,
                   errorLabel: null,
                   onChanged: (value) {},
+                  icon: null,
                 ),
                 const SizedBox(height: AppSize.s20),
-                customPasswordFormField(
+                CustomPasswordFormField(
                   textEditingcontroller: passwordController,
                   label: AppStrings.password,
                   errorLabel: null,
@@ -65,7 +67,14 @@ class LoginView extends StatelessWidget {
                       style: getSmallRegularStyle(color: ColorManager.dark.withOpacity(0.5)),
                     ),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const RegisterView(),
+                          ),
+                        );
+                      },
                       child: Text(
                         AppStrings.register,
                         style: getSmallRegularStyle(color: ColorManager.yellow),
