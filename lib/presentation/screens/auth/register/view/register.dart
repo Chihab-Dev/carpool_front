@@ -38,7 +38,7 @@ class _RegisterViewState extends State<RegisterView> {
               ),
             ),
             body: Padding(
-              padding: const EdgeInsets.all(AppPadding.p18),
+              padding: EdgeInsets.all(AppPadding.p18),
               child: SingleChildScrollView(
                 child: Center(
                   child: Column(
@@ -67,7 +67,7 @@ class _RegisterViewState extends State<RegisterView> {
                           ),
                         ],
                       ),
-                      const SizedBox(height: AppSize.s40),
+                      SizedBox(height: AppSize.s40),
                       CustomFormField(
                         textEditingcontroller: cubit.nameController,
                         label: AppStrings.name,
@@ -76,7 +76,7 @@ class _RegisterViewState extends State<RegisterView> {
                         onChanged: (value) {},
                         icon: Icons.person_outline_rounded,
                       ),
-                      const SizedBox(height: AppSize.s20),
+                      SizedBox(height: AppSize.s20),
                       CustomFormField(
                         textEditingcontroller: cubit.familyNameController,
                         label: AppStrings.familyName,
@@ -85,7 +85,7 @@ class _RegisterViewState extends State<RegisterView> {
                         onChanged: (value) {},
                         icon: Icons.person_outline_rounded,
                       ),
-                      const SizedBox(height: AppSize.s20),
+                      SizedBox(height: AppSize.s20),
                       CustomFormField(
                         textEditingcontroller: cubit.phoneNumberController,
                         label: AppStrings.phoneNumber,
@@ -94,7 +94,7 @@ class _RegisterViewState extends State<RegisterView> {
                         onChanged: (value) {},
                         icon: Icons.phone_outlined,
                       ),
-                      const SizedBox(height: AppSize.s20),
+                      SizedBox(height: AppSize.s20),
                       CustomPasswordFormField(
                         textEditingcontroller: cubit.passwordController,
                         label: AppStrings.password,
@@ -104,20 +104,20 @@ class _RegisterViewState extends State<RegisterView> {
                         onVisibleChanged: () {},
                         isPasswordVisible: false,
                       ),
-                      const SizedBox(height: AppSize.s20),
+                      SizedBox(height: AppSize.s20),
                       CustomDropDown(
                         wilaya: cubit.wilaya,
                         onChanged: (value) {
                           cubit.pickWilaya(value);
                         },
                       ),
-                      const SizedBox(height: AppSize.s10),
+                      SizedBox(height: AppSize.s10),
                       Stack(
                         alignment: Alignment.topLeft,
                         children: [
                           Column(
                             children: [
-                              const SizedBox(height: 10),
+                              SizedBox(height: AppSize.s10),
                               Container(
                                 width: 350,
                                 height: 55,
@@ -126,14 +126,14 @@ class _RegisterViewState extends State<RegisterView> {
                                   borderRadius: BorderRadius.circular(AppSize.s10),
                                 ),
                                 child: Padding(
-                                  padding: const EdgeInsets.only(left: AppPadding.p20),
+                                  padding: EdgeInsets.only(left: AppPadding.p20),
                                   child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
                                         cubit.selectedDate.toString().substring(0, 10),
                                         style: getMeduimStyle(color: ColorManager.dark),
                                       ),
-                                      const Spacer(),
                                       TextButton(
                                         onPressed: () async {
                                           await cubit.pickDate(context);
@@ -144,7 +144,7 @@ class _RegisterViewState extends State<RegisterView> {
                                             borderRadius: BorderRadius.circular(AppSize.s10),
                                           ),
                                           child: Padding(
-                                            padding: const EdgeInsets.symmetric(
+                                            padding: EdgeInsets.symmetric(
                                                 horizontal: AppPadding.p8, vertical: AppPadding.p2),
                                             child: Text(
                                               AppStrings.pick,
@@ -160,7 +160,7 @@ class _RegisterViewState extends State<RegisterView> {
                             ],
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(left: AppSize.s20),
+                            padding: EdgeInsets.only(left: AppSize.s20),
                             child: Text(
                               AppStrings.birthday,
                               style: getSmallLightStyle(color: ColorManager.dark.withOpacity(0.5)),
@@ -168,12 +168,12 @@ class _RegisterViewState extends State<RegisterView> {
                           ),
                         ],
                       ),
-                      const SizedBox(height: AppSize.s20),
+                      SizedBox(height: AppSize.s20),
                       CustomLargeButton(
                         label: AppStrings.createAnAccount,
                         onPressed: () {},
                       ),
-                      const SizedBox(height: AppSize.s20),
+                      SizedBox(height: AppSize.s20),
                       SizedBox(
                         width: AppSize.s350,
                         child: RichText(
@@ -226,7 +226,7 @@ class CustomDropDown extends StatelessWidget {
       width: 350,
       child: DropdownButtonFormField<String>(
         decoration: InputDecoration(
-          contentPadding: const EdgeInsets.symmetric(horizontal: AppPadding.p20, vertical: AppPadding.p16),
+          contentPadding: EdgeInsets.symmetric(horizontal: AppPadding.p20, vertical: AppPadding.p16),
           border: InputBorder.none,
           filled: true,
           fillColor: ColorManager.lightGrey,

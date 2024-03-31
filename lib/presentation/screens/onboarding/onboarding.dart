@@ -56,7 +56,7 @@ List<PageViewModel> pagesViewModel = [
     image: Image.asset(ImageAsset.onboardingDate),
     decoration: PageDecoration(
       titleTextStyle: getRegularStyle(color: ColorManager.dark),
-      bodyPadding: const EdgeInsets.symmetric(horizontal: AppPadding.p20),
+      bodyPadding: EdgeInsets.symmetric(horizontal: AppPadding.p20),
       bodyTextStyle: TextStyle(
         fontWeight: FontWeight.w400,
         fontSize: 15,
@@ -70,7 +70,7 @@ List<PageViewModel> pagesViewModel = [
     image: Image.asset(ImageAsset.onboardingRoute),
     decoration: PageDecoration(
       titleTextStyle: getRegularStyle(color: ColorManager.dark),
-      bodyPadding: const EdgeInsets.symmetric(horizontal: AppPadding.p20),
+      bodyPadding: EdgeInsets.symmetric(horizontal: AppPadding.p20),
       bodyTextStyle: TextStyle(
         fontWeight: FontWeight.w400,
         fontSize: 15,
@@ -84,7 +84,7 @@ List<PageViewModel> pagesViewModel = [
     image: Image.asset(ImageAsset.onboardingTravel),
     decoration: PageDecoration(
       titleTextStyle: getRegularStyle(color: ColorManager.dark),
-      bodyPadding: const EdgeInsets.symmetric(horizontal: AppPadding.p20),
+      bodyPadding: EdgeInsets.symmetric(horizontal: AppPadding.p20),
       bodyTextStyle: TextStyle(
         fontWeight: FontWeight.w400,
         fontSize: 15,

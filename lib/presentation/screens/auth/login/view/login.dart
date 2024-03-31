@@ -27,17 +27,17 @@ class LoginView extends StatelessWidget {
       body: SingleChildScrollView(
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.all(AppPadding.p18),
+            padding: EdgeInsets.all(AppPadding.p18),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const SizedBox(height: AppSize.s80),
+                SizedBox(height: AppSize.s80),
                 SizedBox(
                   width: AppSize.s350,
                   child: Image.asset(ImageAsset.login),
                 ),
-                const SizedBox(height: AppSize.s80),
+                SizedBox(height: AppSize.s80),
                 CustomFormField(
                   textEditingcontroller: phoneNumberController,
                   label: AppStrings.phoneNumber,
@@ -46,7 +46,7 @@ class LoginView extends StatelessWidget {
                   onChanged: (value) {},
                   icon: null,
                 ),
-                const SizedBox(height: AppSize.s20),
+                SizedBox(height: AppSize.s20),
                 CustomPasswordFormField(
                   textEditingcontroller: passwordController,
                   label: AppStrings.password,
@@ -56,9 +56,9 @@ class LoginView extends StatelessWidget {
                   onVisibleChanged: () {},
                   isPasswordVisible: false,
                 ),
-                const SizedBox(height: AppSize.s20),
+                SizedBox(height: AppSize.s20),
                 CustomLargeButton(label: AppStrings.login, onPressed: () {}),
-                const SizedBox(height: AppSize.s20),
+                SizedBox(height: AppSize.s20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
