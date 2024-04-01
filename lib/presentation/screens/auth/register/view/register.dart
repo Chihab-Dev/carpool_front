@@ -27,6 +27,7 @@ class _RegisterViewState extends State<RegisterView> {
           var cubit = RegisterCubit.get(context);
           return Scaffold(
             backgroundColor: ColorManager.white,
+            extendBodyBehindAppBar: true,
             appBar: AppBar(
               backgroundColor: Colors.transparent,
               elevation: 0,
@@ -43,6 +44,7 @@ class _RegisterViewState extends State<RegisterView> {
                 child: Center(
                   child: Column(
                     children: [
+                      const SizedBox(height: kToolbarHeight + kToolbarHeight / 2),
                       Stack(
                         alignment: Alignment.bottomRight,
                         children: [
@@ -72,8 +74,10 @@ class _RegisterViewState extends State<RegisterView> {
                         textEditingcontroller: cubit.nameController,
                         label: AppStrings.name,
                         keyboardType: TextInputType.name,
-                        errorLabel: null,
-                        onChanged: (value) {},
+                        errorLabel: cubit.nameErrorMessage,
+                        onChanged: (value) {
+                          cubit.isNameValid();
+                        },
                         icon: Icons.person_outline_rounded,
                       ),
                       SizedBox(height: AppSize.s20),
@@ -81,8 +85,10 @@ class _RegisterViewState extends State<RegisterView> {
                         textEditingcontroller: cubit.familyNameController,
                         label: AppStrings.familyName,
                         keyboardType: TextInputType.name,
-                        errorLabel: null,
-                        onChanged: (value) {},
+                        errorLabel: cubit.familyNameErrorMessage,
+                        onChanged: (value) {
+                          cubit.isFamilyNameValid();
+                        },
                         icon: Icons.person_outline_rounded,
                       ),
                       SizedBox(height: AppSize.s20),
@@ -90,19 +96,25 @@ class _RegisterViewState extends State<RegisterView> {
                         textEditingcontroller: cubit.phoneNumberController,
                         label: AppStrings.phoneNumber,
                         keyboardType: TextInputType.name,
-                        errorLabel: null,
-                        onChanged: (value) {},
+                        errorLabel: cubit.phoneNumberErrorMessage,
+                        onChanged: (value) {
+                          cubit.isPhoneNumberValid();
+                        },
                         icon: Icons.phone_outlined,
                       ),
                       SizedBox(height: AppSize.s20),
                       CustomPasswordFormField(
                         textEditingcontroller: cubit.passwordController,
                         label: AppStrings.password,
-                        errorLabel: null,
+                        errorLabel: cubit.passwordErrorMessage,
                         keyboardType: TextInputType.visiblePassword,
-                        onChanged: (value) {},
-                        onVisibleChanged: () {},
-                        isPasswordVisible: false,
+                        onChanged: (value) {
+                          cubit.isPasswordValid();
+                        },
+                        onVisibleChanged: () {
+                          cubit.changePasswordVisibility();
+                        },
+                        isPasswordVisible: cubit.isPasswordVisible,
                       ),
                       SizedBox(height: AppSize.s20),
                       CustomDropDown(

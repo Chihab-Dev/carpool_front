@@ -23,14 +23,13 @@ class LoginCubit extends Cubit<LoginStates> {
     emit(LoginChangePasswordVisibilityState());
   }
 
-
   void isPhoneNumberValid() {
-    bool isEmailValid = PresentationConstances.isPhoneNumberValid(phoneNumberController.text);
-    if (isEmailValid) {
+    bool isPhoneNumberValid = PresentationConstances.isPhoneNumberValid(phoneNumberController.text);
+    if (isPhoneNumberValid) {
       phoneNumberErrorMessage = null;
       phoneNumberValid = true;
     } else {
-      phoneNumberErrorMessage = AppStrings.phoneNumberValid;
+      phoneNumberErrorMessage = AppStrings.phoneNumberNotValid;
     }
     emit(LoginIsEmailValidState());
   }

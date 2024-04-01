@@ -37,5 +37,8 @@ class AppStrings {
   static const String createAnAccount = 'Create an account';
   static const String wilaya = "Wilaya";
 
-  static String phoneNumberValid = 'Phone number is not valid';
+  static String phoneNumberNotValid = 'Phone number is not valid';
+
+  static String familyNameNotValid = 'Family name is not valid';
+  static String nameNotValid = 'name is not valid';
 }
