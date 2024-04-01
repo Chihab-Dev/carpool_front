@@ -23,7 +23,7 @@ class RegisterCubit extends Cubit<RegisterStates> {
     emit(RegisterPickImageState());
   }
 
-  String wilaya = 'oran';
+  String wilaya = 'Adrar';
 
   pickWilaya(String? value) {
     if (value != null) {

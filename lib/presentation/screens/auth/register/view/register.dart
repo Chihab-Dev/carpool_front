@@ -271,22 +271,204 @@ class CustomDropDown extends StatelessWidget {
         value: wilaya,
         style: getMeduimStyle(color: ColorManager.dark),
         dropdownColor: ColorManager.white,
-        items: const [
-          DropdownMenuItem<String>(
-            value: 'khenchela',
-            child: Text('khenchela'),
-          ),
-          DropdownMenuItem<String>(
-            value: 'batna',
-            child: Text('batna'),
-          ),
-          DropdownMenuItem<String>(
-            value: 'oran',
-            child: Text('oran'),
-          ),
-        ],
+        items: wilayaDropdownItems,
         onChanged: onChanged,
       ),
     );
   }
 }
+
+List<DropdownMenuItem<String>>? wilayaDropdownItems = [
+  const DropdownMenuItem<String>(
+    value: 'Adrar',
+    child: Text('1 - Adrar'),
+  ),
+  const DropdownMenuItem<String>(
+    value: 'Chlef',
+    child: Text('2 - Chlef'),
+  ),
+  const DropdownMenuItem<String>(
+    value: 'Laghouat',
+    child: Text('3 - Laghouat'),
+  ),
+  const DropdownMenuItem<String>(
+    value: 'Oum El Bouaghi',
+    child: Text('4 - Oum El Bouaghi'),
+  ),
+  const DropdownMenuItem<String>(
+    value: 'Batna',
+    child: Text('5 - Batna'),
+  ),
+  const DropdownMenuItem<String>(
+    value: 'Béjaïa',
+    child: Text('6 - Béjaïa'),
+  ),
+  const DropdownMenuItem<String>(
+    value: 'Biskra',
+    child: Text('7 - Biskra'),
+  ),
+  const DropdownMenuItem<String>(
+    value: 'Béchar',
+    child: Text('8 - Béchar'),
+  ),
+  const DropdownMenuItem<String>(
+    value: 'Blida',
+    child: Text('9 - Blida'),
+  ),
+  const DropdownMenuItem<String>(
+    value: 'Bouira',
+    child: Text('10 - Bouira'),
+  ),
+  const DropdownMenuItem<String>(
+    value: 'Tamanrasset',
+    child: Text('11 - Tamanrasset'),
+  ),
+  const DropdownMenuItem<String>(
+    value: 'Tébessa',
+    child: Text('12 - Tébessa'),
+  ),
+  const DropdownMenuItem<String>(
+    value: 'Tlemcen',
+    child: Text('13 - Tlemcen'),
+  ),
+  const DropdownMenuItem<String>(
+    value: 'Tiaret',
+    child: Text('14 - Tiaret'),
+  ),
+  const DropdownMenuItem<String>(
+    value: 'Tizi Ouzou',
+    child: Text('15 - Tizi Ouzou'),
+  ),
+  const DropdownMenuItem<String>(
+    value: 'Alger',
+    child: Text('16 - Alger'),
+  ),
+  const DropdownMenuItem<String>(
+    value: 'Djelfa',
+    child: Text('17 - Djelfa'),
+  ),
+  const DropdownMenuItem<String>(
+    value: 'Jijel',
+    child: Text('18 - Jijel'),
+  ),
+  const DropdownMenuItem<String>(
+    value: 'Sétif',
+    child: Text('19 - Sétif'),
+  ),
+  const DropdownMenuItem<String>(
+    value: 'Saïda',
+    child: Text('20 - Saïda'),
+  ),
+  const DropdownMenuItem<String>(
+    value: 'Skikda',
+    child: Text('21 - Skikda'),
+  ),
+  const DropdownMenuItem<String>(
+    value: 'Sidi Bel Abbès',
+    child: Text('22 - Sidi Bel Abbès'),
+  ),
+  const DropdownMenuItem<String>(
+    value: 'Annaba',
+    child: Text('23 - Annaba'),
+  ),
+  const DropdownMenuItem<String>(
+    value: 'Guelma',
+    child: Text('24 - Guelma'),
+  ),
+  const DropdownMenuItem<String>(
+    value: 'Constantine',
+    child: Text('25 - Constantine'),
+  ),
+  const DropdownMenuItem<String>(
+    value: 'Médéa',
+    child: Text('26 - Médéa'),
+  ),
+  const DropdownMenuItem<String>(
+    value: 'Mostaganem',
+    child: Text('27 - Mostaganem'),
+  ),
+  const DropdownMenuItem<String>(
+    value: 'M\'Sila',
+    child: Text('28 - M\'Sila'),
+  ),
+  const DropdownMenuItem<String>(
+    value: 'Mascara',
+    child: Text('29 - Mascara'),
+  ),
+  const DropdownMenuItem<String>(
+    value: 'Ouargla',
+    child: Text('30 - Ouargla'),
+  ),
+  const DropdownMenuItem<String>(
+    value: 'Oran',
+    child: Text('31 - Oran'),
+  ),
+  const DropdownMenuItem<String>(
+    value: 'El Bayadh',
+    child: Text('32 - El Bayadh'),
+  ),
+  const DropdownMenuItem<String>(
+    value: 'Illizi',
+    child: Text('33 - Illizi'),
+  ),
+  const DropdownMenuItem<String>(
+    value: 'Bordj Bou Arréridj',
+    child: Text('34 - Bordj Bou Arréridj'),
+  ),
+  const DropdownMenuItem<String>(
+    value: 'Boumerdès',
+    child: Text('35 - Boumerdès'),
+  ),
+  const DropdownMenuItem<String>(
+    value: 'El Tarf',
+    child: Text('36 - El Tarf'),
+  ),
+  const DropdownMenuItem<String>(
+    value: 'Tindouf',
+    child: Text('37 - Tindouf'),
+  ),
+  const DropdownMenuItem<String>(
+    value: 'Tissemsilt',
+    child: Text('38 - Tissemsilt'),
+  ),
+  const DropdownMenuItem<String>(
+    value: 'El Oued',
+    child: Text('39 - El Oued'),
+  ),
+  const DropdownMenuItem<String>(
+    value: 'Khenchela',
+    child: Text('40 - Khenchela'),
+  ),
+  const DropdownMenuItem<String>(
+    value: 'Souk Ahras',
+    child: Text('41 - Souk Ahras'),
+  ),
+  const DropdownMenuItem<String>(
+    value: 'Tipaza',
+    child: Text('42 - Tipaza'),
+  ),
+  const DropdownMenuItem<String>(
+    value: 'Mila',
+    child: Text('43 - Mila'),
+  ),
+  const DropdownMenuItem<String>(
+    value: 'Aïn Defla',
+    child: Text('44 - Aïn Defla'),
+  ),
+  const DropdownMenuItem<String>(
+    value: 'Naâma',
+    child: Text('45 - Naâma'),
+  ),
+  const DropdownMenuItem<String>(
+    value: 'Aïn Témouchent',
+    child: Text('46 - Aïn Témouchent'),
+  ),
+  const DropdownMenuItem<String>(
+    value: 'Ghardaïa',
+    child: Text('47 - Ghardaïa'),
+  ),
+  const DropdownMenuItem<String>(
+    value: 'Relizane',
+    child: Text('48 - Relizane'),
+  ),
+];
