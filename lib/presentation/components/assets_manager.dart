@@ -10,6 +10,8 @@ class ImageAsset {
   static const String travellerOrDriver = "$imagePath/travellerOrDriver.png";
   static const String login = "$imagePath/login.png";
   static const String userProfile = "$imagePath/user_profile.png";
+  static const String background = "$imagePath/bg.png";
+  static const String correct = "$imagePath/correct.png";
 }
 
 class LottieAsset {}

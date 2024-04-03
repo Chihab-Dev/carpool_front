@@ -34,6 +34,37 @@ class CustomLargeButton extends StatelessWidget {
   }
 }
 
+class CustomMediumButton extends StatelessWidget {
+  final String label;
+  final Function()? onPressed;
+  const CustomMediumButton({
+    super.key,
+    required this.label,
+    required this.onPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 300,
+      height: 55,
+      child: ElevatedButton(
+        onPressed: onPressed,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: ColorManager.yellow,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(AppPadding.p10),
+          ),
+        ),
+        child: Text(
+          label,
+          style: getMeduimStyle(color: ColorManager.white),
+        ),
+      ),
+    );
+  }
+}
+
 class CustomFormField extends StatelessWidget {
   final TextEditingController textEditingcontroller;
   final String label;

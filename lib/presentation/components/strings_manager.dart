@@ -41,4 +41,10 @@ class AppStrings {
 
   static String familyNameNotValid = 'Family name is not valid';
   static String nameNotValid = 'name is not valid';
+  static String phoneVerification = 'Phone Verification';
+  static String phoneVerificationDesc = 'Enter you OTP code here';
+
+  static String verify = "Verify";
+
+  static String youAccountUnderReview = "Thanks for registering Your account is now under review";
 }
