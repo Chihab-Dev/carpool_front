@@ -1,5 +1,5 @@
 const String imagePath = "assets/images";
-const String lottiePath = "assets/lottie";
+const String lottiePath = "assets/animations";
 
 class ImageAsset {
   // static const String name = "$imagePath/name.png";
@@ -14,4 +14,6 @@ class ImageAsset {
   static const String correct = "$imagePath/correct.png";
 }
 
-class LottieAsset {}
+class LottieAsset {
+  static const String map = "$lottiePath/map.json";
+}

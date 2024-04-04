@@ -15,8 +15,8 @@ class CustomLargeButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 350,
-      height: 55,
+      width: AppSize.s350,
+      height: AppSize.s55,
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
@@ -46,8 +46,8 @@ class CustomMediumButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 300,
-      height: 55,
+      width: AppSize.s300,
+      height: AppSize.s55,
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(

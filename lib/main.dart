@@ -1,7 +1,7 @@
 import 'package:carpool/app/localizations.dart';
 import 'package:carpool/app/service_locator.dart';
 import 'package:carpool/app/shared_prefrences.dart';
-import 'package:carpool/presentation/screens/auth/login/view/login.dart';
+import 'package:carpool/presentation/screens/main/view/main_view.dart';
 import 'package:carpool/presentation/screens/onboarding/onboarding.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -43,7 +43,7 @@ class MainApp extends StatelessWidget {
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate
           ],
-          home: isOnboardingWatched ? const LoginView() : OnboardingView(),
+          home: isOnboardingWatched ? const MainView() : OnboardingView(),
         );
       },
     );

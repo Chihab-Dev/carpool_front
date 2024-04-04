@@ -15,8 +15,10 @@ dependencies:
     sdk: flutter
   flutter_screenutil: ^5.9.0
   get_it: ^7.6.7
+  google_nav_bar: ^5.0.6
   image_picker: ^1.0.7
   introduction_screen: ^3.1.14
+  lottie: ^3.1.0
   pin_code_fields: ^8.0.1
   shared_preferences: ^2.2.2
 
@@ -31,3 +33,4 @@ flutter:
    - assets/images/
    - assets/lang/en.json
    - assets/lang/ar.json
+   - assets/animations/

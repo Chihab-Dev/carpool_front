@@ -47,4 +47,17 @@ class AppStrings {
   static String verify = "Verify";
 
   static String youAccountUnderReview = "Thanks for registering Your account is now under review";
+
+  static String findARide = 'Find a ride';
+  static String from = 'From';
+  static String to = 'To';
+
+  static String today = 'Today';
+
+  static String search = 'Search';
+
+  static String home = 'Home';
+  static String yourRide = 'Your ride';
+  static String message = 'message';
+  static String account = 'account';
 }

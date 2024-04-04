@@ -39,3 +39,10 @@ TextStyle getRegularStyle({
 }) {
   return _getTextStyle(fontSize, FontWeightManager.semiBold, color);
 }
+
+TextStyle getLargeStyle({
+  double fontSize = FontSize.s35,
+  required Color color,
+}) {
+  return _getTextStyle(fontSize, FontWeightManager.bold, color);
+}
