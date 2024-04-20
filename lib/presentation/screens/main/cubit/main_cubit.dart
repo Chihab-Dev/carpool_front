@@ -16,7 +16,6 @@ class MainCubit extends Cubit<MainStates> {
     const HomeView(),
     Container(),
     const SizedBox(),
-    const SizedBox(),
   ];
 
   void onTap(int index) {

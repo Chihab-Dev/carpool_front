@@ -52,19 +52,15 @@ class _MainViewState extends State<MainView> {
         color: ColorManager.darkGrey,
         activeColor: ColorManager.white,
         tabBackgroundColor: ColorManager.yellow,
-        padding: EdgeInsets.all(AppPadding.p16),
-        tabMargin: EdgeInsets.symmetric(horizontal: AppPadding.p14, vertical: AppPadding.p14),
-        gap: AppSize.s15,
+        padding: EdgeInsets.symmetric(horizontal: AppPadding.p8, vertical: AppPadding.p16),
+        tabMargin: EdgeInsets.symmetric(horizontal: AppPadding.p25, vertical: AppPadding.p14),
+        gap: AppSize.s20,
         onTabChange: (value) => cubit.onTap(value),
         textStyle: getMeduimStyle(color: ColorManager.white).copyWith(fontSize: AppSize.s15),
         tabs: [
           GButton(
             icon: Icons.home_outlined,
             text: AppStrings.home,
-          ),
-          GButton(
-            icon: Icons.message_outlined,
-            text: AppStrings.message,
           ),
           GButton(
             icon: Icons.local_taxi_outlined,
