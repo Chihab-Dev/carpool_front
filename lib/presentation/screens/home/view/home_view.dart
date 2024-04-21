@@ -1,3 +1,4 @@
+import 'package:carpool/app/localizations.dart';
 import 'package:carpool/presentation/components/appsize.dart';
 import 'package:carpool/presentation/components/assets_manager.dart';
 import 'package:carpool/presentation/components/color_manager.dart';
@@ -41,7 +42,7 @@ class _HomeViewState extends State<HomeView> {
                       child: Lottie.asset(LottieAsset.map),
                     ),
                     Text(
-                      AppStrings.findARide,
+                      AppStrings.findARide.tr(context),
                       style: getLargeStyle(color: ColorManager.dark),
                     ),
                     SizedBox(
@@ -70,7 +71,7 @@ class _HomeViewState extends State<HomeView> {
                               children: [
                                 ListTile(
                                   title: Text(
-                                    cubit.pickedFromLocation?.address.toString() ?? AppStrings.from,
+                                    cubit.pickedFromLocation?.address.toString() ?? AppStrings.from.tr(context),
                                     style: getMeduimStyle(color: ColorManager.dark.withOpacity(0.75)),
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
@@ -94,7 +95,7 @@ class _HomeViewState extends State<HomeView> {
                                 ),
                                 ListTile(
                                   title: Text(
-                                    cubit.pickedToLocation?.address.toString() ?? AppStrings.to,
+                                    cubit.pickedToLocation?.address.toString() ?? AppStrings.to.tr(context),
                                     style: getMeduimStyle(color: ColorManager.dark.withOpacity(0.75)),
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
@@ -247,7 +248,7 @@ class _HomeViewState extends State<HomeView> {
                                   ),
                                 ),
                                 child: Text(
-                                  AppStrings.search,
+                                  AppStrings.search.tr(context),
                                   style: getRegularStyle(color: ColorManager.white),
                                 ),
                               ),

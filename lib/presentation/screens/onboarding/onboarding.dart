@@ -1,3 +1,4 @@
+import 'package:carpool/app/localizations.dart';
 import 'package:carpool/app/service_locator.dart';
 import 'package:carpool/app/shared_prefrences.dart';
 import 'package:carpool/presentation/components/appsize.dart';
@@ -18,7 +19,50 @@ class OnboardingView extends StatelessWidget {
   Widget build(BuildContext context) {
     return IntroductionScreen(
       globalBackgroundColor: ColorManager.white,
-      pages: pagesViewModel,
+      pages: [
+        PageViewModel(
+          title: AppStrings.selectDateAndTime.tr(context),
+          body: AppStrings.selectDateAndTimeBody.tr(context),
+          image: Image.asset(ImageAsset.onboardingDate),
+          decoration: PageDecoration(
+            titleTextStyle: getRegularStyle(color: ColorManager.dark),
+            bodyPadding: EdgeInsets.symmetric(horizontal: AppPadding.p20),
+            bodyTextStyle: TextStyle(
+              fontWeight: FontWeight.w400,
+              fontSize: 15,
+              color: ColorManager.darkGrey,
+            ),
+          ),
+        ),
+        PageViewModel(
+          title: AppStrings.chooseTheRoute.tr(context),
+          body: AppStrings.chooseTheRouteBody.tr(context),
+          image: Image.asset(ImageAsset.onboardingRoute),
+          decoration: PageDecoration(
+            titleTextStyle: getRegularStyle(color: ColorManager.dark),
+            bodyPadding: EdgeInsets.symmetric(horizontal: AppPadding.p20),
+            bodyTextStyle: TextStyle(
+              fontWeight: FontWeight.w400,
+              fontSize: 15,
+              color: ColorManager.darkGrey,
+            ),
+          ),
+        ),
+        PageViewModel(
+          title: AppStrings.travel.tr(context),
+          body: AppStrings.travelBody.tr(context),
+          image: Image.asset(ImageAsset.onboardingTravel),
+          decoration: PageDecoration(
+            titleTextStyle: getRegularStyle(color: ColorManager.dark),
+            bodyPadding: EdgeInsets.symmetric(horizontal: AppPadding.p20),
+            bodyTextStyle: TextStyle(
+              fontWeight: FontWeight.w400,
+              fontSize: 15,
+              color: ColorManager.darkGrey,
+            ),
+          ),
+        ),
+      ],
       showNextButton: true,
       showBackButton: true,
       showDoneButton: true,
@@ -31,15 +75,15 @@ class OnboardingView extends StatelessWidget {
             ));
       },
       next: Text(
-        AppStrings.next,
+        AppStrings.next.tr(context),
         style: getSmallRegularStyle(color: ColorManager.dark).copyWith(fontSize: 17),
       ),
       back: Text(
-        AppStrings.back,
+        AppStrings.back.tr(context),
         style: getSmallRegularStyle(color: ColorManager.dark).copyWith(fontSize: 17),
       ),
       done: Text(
-        AppStrings.done,
+        AppStrings.done.tr(context),
         style: getSmallRegularStyle(color: ColorManager.dark).copyWith(fontSize: 17),
       ),
       dotsDecorator: DotsDecorator(
@@ -53,48 +97,3 @@ class OnboardingView extends StatelessWidget {
     );
   }
 }
-
-List<PageViewModel> pagesViewModel = [
-  PageViewModel(
-    title: AppStrings.selectDateAndTime,
-    body: AppStrings.selectDateAndTimeBody,
-    image: Image.asset(ImageAsset.onboardingDate),
-    decoration: PageDecoration(
-      titleTextStyle: getRegularStyle(color: ColorManager.dark),
-      bodyPadding: EdgeInsets.symmetric(horizontal: AppPadding.p20),
-      bodyTextStyle: TextStyle(
-        fontWeight: FontWeight.w400,
-        fontSize: 15,
-        color: ColorManager.darkGrey,
-      ),
-    ),
-  ),
-  PageViewModel(
-    title: AppStrings.chooseTheRoute,
-    body: AppStrings.chooseTheRouteBody,
-    image: Image.asset(ImageAsset.onboardingRoute),
-    decoration: PageDecoration(
-      titleTextStyle: getRegularStyle(color: ColorManager.dark),
-      bodyPadding: EdgeInsets.symmetric(horizontal: AppPadding.p20),
-      bodyTextStyle: TextStyle(
-        fontWeight: FontWeight.w400,
-        fontSize: 15,
-        color: ColorManager.darkGrey,
-      ),
-    ),
-  ),
-  PageViewModel(
-    title: AppStrings.travel,
-    body: AppStrings.travelBody,
-    image: Image.asset(ImageAsset.onboardingTravel),
-    decoration: PageDecoration(
-      titleTextStyle: getRegularStyle(color: ColorManager.dark),
-      bodyPadding: EdgeInsets.symmetric(horizontal: AppPadding.p20),
-      bodyTextStyle: TextStyle(
-        fontWeight: FontWeight.w400,
-        fontSize: 15,
-        color: ColorManager.darkGrey,
-      ),
-    ),
-  ),
-];

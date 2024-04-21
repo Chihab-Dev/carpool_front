@@ -1,6 +1,8 @@
+import 'package:carpool/app/localizations.dart';
 import 'package:carpool/presentation/components/appsize.dart';
 import 'package:carpool/presentation/components/assets_manager.dart';
 import 'package:carpool/presentation/components/color_manager.dart';
+import 'package:carpool/presentation/components/strings_manager.dart';
 import 'package:carpool/presentation/components/styles_manager.dart';
 import 'package:carpool/presentation/components/widgets.dart';
 import 'package:carpool/presentation/screens/home/cubit/home_cubit.dart';
@@ -106,7 +108,7 @@ class TravelDetailsView extends StatelessWidget {
                         ),
                         const Spacer(),
                         Text(
-                          'for 1 person  ',
+                          AppStrings.forOnePerson.tr(context),
                           style: getSmallRegularStyle(color: ColorManager.darkGrey),
                         ),
                         Text(
@@ -154,7 +156,7 @@ class TravelDetailsView extends StatelessWidget {
                     ),
                     SizedBox(height: AppSize.s25),
                     Padding(
-                      padding: EdgeInsets.only(left: AppPadding.p10),
+                      padding: EdgeInsets.symmetric(horizontal: AppPadding.p10),
                       child: Row(
                         children: [
                           Icon(
@@ -164,7 +166,7 @@ class TravelDetailsView extends StatelessWidget {
                           ),
                           SizedBox(width: AppSize.s25),
                           Text(
-                            "Baggage up to size L is allowed",
+                            AppStrings.baggageAllowed.tr(context),
                             style: getSmallRegularStyle(color: ColorManager.dark),
                           ),
                         ],
@@ -172,7 +174,7 @@ class TravelDetailsView extends StatelessWidget {
                     ),
                     SizedBox(height: AppSize.s16),
                     Padding(
-                      padding: EdgeInsets.only(left: AppPadding.p10),
+                      padding: EdgeInsets.symmetric(horizontal: AppPadding.p10),
                       child: Row(
                         children: [
                           Stack(
@@ -191,7 +193,7 @@ class TravelDetailsView extends StatelessWidget {
                           ),
                           SizedBox(width: AppSize.s25),
                           Text(
-                            "Pets not allowed",
+                            AppStrings.petsNotAllowed.tr(context),
                             style: getSmallRegularStyle(color: ColorManager.dark),
                           ),
                         ],
@@ -199,7 +201,7 @@ class TravelDetailsView extends StatelessWidget {
                     ),
                     SizedBox(height: AppSize.s16),
                     Padding(
-                      padding: EdgeInsets.only(left: AppPadding.p10),
+                      padding: EdgeInsets.symmetric(horizontal: AppPadding.p10),
                       child: Row(
                         children: [
                           Icon(
@@ -209,7 +211,7 @@ class TravelDetailsView extends StatelessWidget {
                           ),
                           SizedBox(width: AppSize.s25),
                           Text(
-                            "Smoking is allowed",
+                            AppStrings.smokingAllowed.tr(context),
                             style: getSmallRegularStyle(color: ColorManager.dark),
                           ),
                         ],

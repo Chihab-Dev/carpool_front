@@ -1,3 +1,4 @@
+import 'package:carpool/app/localizations.dart';
 import 'package:carpool/presentation/components/appsize.dart';
 import 'package:carpool/presentation/components/assets_manager.dart';
 import 'package:carpool/presentation/components/color_manager.dart';
@@ -34,7 +35,7 @@ class _RegisterViewState extends State<RegisterView> {
               bottomOpacity: 0,
               scrolledUnderElevation: 0,
               title: Text(
-                AppStrings.register,
+                AppStrings.register.tr(context),
                 style: getMeduimStyle(color: ColorManager.dark),
               ),
             ),
@@ -72,7 +73,7 @@ class _RegisterViewState extends State<RegisterView> {
                       SizedBox(height: AppSize.s40),
                       CustomFormField(
                         textEditingcontroller: cubit.nameController,
-                        label: AppStrings.name,
+                        label: AppStrings.name.tr(context),
                         keyboardType: TextInputType.name,
                         errorLabel: cubit.nameErrorMessage,
                         onChanged: (value) {
@@ -83,7 +84,7 @@ class _RegisterViewState extends State<RegisterView> {
                       SizedBox(height: AppSize.s20),
                       CustomFormField(
                         textEditingcontroller: cubit.familyNameController,
-                        label: AppStrings.familyName,
+                        label: AppStrings.familyName.tr(context),
                         keyboardType: TextInputType.name,
                         errorLabel: cubit.familyNameErrorMessage,
                         onChanged: (value) {
@@ -94,7 +95,7 @@ class _RegisterViewState extends State<RegisterView> {
                       SizedBox(height: AppSize.s20),
                       CustomFormField(
                         textEditingcontroller: cubit.phoneNumberController,
-                        label: AppStrings.phoneNumber,
+                        label: AppStrings.phoneNumber.tr(context),
                         keyboardType: TextInputType.name,
                         errorLabel: cubit.phoneNumberErrorMessage,
                         onChanged: (value) {
@@ -105,7 +106,7 @@ class _RegisterViewState extends State<RegisterView> {
                       SizedBox(height: AppSize.s20),
                       CustomPasswordFormField(
                         textEditingcontroller: cubit.passwordController,
-                        label: AppStrings.password,
+                        label: AppStrings.password.tr(context),
                         errorLabel: cubit.passwordErrorMessage,
                         keyboardType: TextInputType.visiblePassword,
                         onChanged: (value) {
@@ -125,7 +126,8 @@ class _RegisterViewState extends State<RegisterView> {
                       ),
                       SizedBox(height: AppSize.s10),
                       Stack(
-                        alignment: Alignment.topLeft,
+                        alignment:
+                            AppStrings.birthday.tr(context) == 'Birthday' ? Alignment.topLeft : Alignment.topRight,
                         children: [
                           Column(
                             children: [
@@ -138,7 +140,7 @@ class _RegisterViewState extends State<RegisterView> {
                                   borderRadius: BorderRadius.circular(AppSize.s10),
                                 ),
                                 child: Padding(
-                                  padding: EdgeInsets.only(left: AppPadding.p20),
+                                  padding: EdgeInsets.symmetric(horizontal: AppPadding.p20),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
@@ -159,7 +161,7 @@ class _RegisterViewState extends State<RegisterView> {
                                             padding: EdgeInsets.symmetric(
                                                 horizontal: AppPadding.p8, vertical: AppPadding.p2),
                                             child: Text(
-                                              AppStrings.pick,
+                                              AppStrings.pick.tr(context),
                                               style: getMeduimStyle(color: ColorManager.white),
                                             ),
                                           ),
@@ -172,9 +174,9 @@ class _RegisterViewState extends State<RegisterView> {
                             ],
                           ),
                           Padding(
-                            padding: EdgeInsets.only(left: AppSize.s20),
+                            padding: EdgeInsets.symmetric(horizontal: AppSize.s20),
                             child: Text(
-                              AppStrings.birthday,
+                              AppStrings.birthday.tr(context),
                               style: getSmallLightStyle(color: ColorManager.dark.withOpacity(0.5)),
                             ),
                           ),
@@ -182,7 +184,7 @@ class _RegisterViewState extends State<RegisterView> {
                       ),
                       SizedBox(height: AppSize.s20),
                       CustomLargeButton(
-                        label: AppStrings.createAnAccount,
+                        label: AppStrings.createAnAccount.tr(context),
                         onPressed: () {},
                       ),
                       SizedBox(height: AppSize.s20),
@@ -244,7 +246,7 @@ class CustomDropDown extends StatelessWidget {
           fillColor: ColorManager.lightGrey,
           alignLabelWithHint: true,
           label: Text(
-            AppStrings.wilaya,
+            AppStrings.wilaya.tr(context),
             style: getSmallLightStyle(color: ColorManager.dark.withOpacity(0.5)).copyWith(fontSize: 20),
           ),
           enabledBorder: OutlineInputBorder(

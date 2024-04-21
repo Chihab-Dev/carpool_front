@@ -1,3 +1,4 @@
+import 'package:carpool/app/localizations.dart';
 import 'package:carpool/presentation/components/appsize.dart';
 import 'package:carpool/presentation/components/assets_manager.dart';
 import 'package:carpool/presentation/components/color_manager.dart';
@@ -46,7 +47,7 @@ class LoginView extends StatelessWidget {
                       SizedBox(height: AppSize.s80),
                       CustomFormField(
                         textEditingcontroller: cubit.phoneNumberController,
-                        label: AppStrings.phoneNumber,
+                        label: AppStrings.phoneNumber.tr(context),
                         keyboardType: TextInputType.phone,
                         errorLabel: cubit.phoneNumberErrorMessage,
                         onChanged: (value) {
@@ -57,7 +58,7 @@ class LoginView extends StatelessWidget {
                       SizedBox(height: AppSize.s20),
                       CustomPasswordFormField(
                         textEditingcontroller: cubit.passwordController,
-                        label: AppStrings.password,
+                        label: AppStrings.password.tr(context),
                         errorLabel: null,
                         keyboardType: TextInputType.visiblePassword,
                         onChanged: (value) {},
@@ -68,7 +69,7 @@ class LoginView extends StatelessWidget {
                       ),
                       SizedBox(height: AppSize.s20),
                       CustomLargeButton(
-                          label: AppStrings.login,
+                          label: AppStrings.login.tr(context),
                           onPressed: () {
                             cubit.login();
                           }),
@@ -77,7 +78,7 @@ class LoginView extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            AppStrings.dontHaveAnAccount,
+                            AppStrings.dontHaveAnAccount.tr(context),
                             style: getSmallRegularStyle(color: ColorManager.dark.withOpacity(0.5)),
                           ),
                           TextButton(
@@ -90,7 +91,7 @@ class LoginView extends StatelessWidget {
                               );
                             },
                             child: Text(
-                              AppStrings.register,
+                              AppStrings.register.tr(context),
                               style: getSmallRegularStyle(color: ColorManager.yellow),
                             ),
                           )

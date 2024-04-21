@@ -1,63 +1,63 @@
 class AppStrings {
-  // onboarding ::
+  // onboarding
   static const String next = 'next';
   static const String back = 'back';
-  static const String done = 'DONE';
+  static const String done = 'done';
 
-  static const String selectDateAndTime = 'Select the date / time';
-  static const String selectDateAndTimeBody =
-      'Pick your departure time. Select the date and time for your journey effortlessly';
+  static const String selectDateAndTime = 'selectDateAndTime';
+  static const String selectDateAndTimeBody = 'selectDateAndTimeBody';
 
-  static const String chooseTheRoute = 'Choose the route';
-  static const String chooseTheRouteBody =
-      'Select your preferred route. Find the best path to your destination with ease.';
+  static const String chooseTheRoute = 'chooseTheRoute';
+  static const String chooseTheRouteBody = 'chooseTheRouteBody';
 
-  static const String travel = 'Travel';
-  static const String travelBody =
-      'Begin your journey. Join rides, connect with drivers and passengers, and enjoy the trip';
+  static const String travel = 'travel';
+  static const String travelBody = 'travelBody';
 
-  // AUTH ::
-  static const String howDoYouWantToContinueAs = 'How do you want to    continue as?';
-  static const String howDoYouWantToContinueAsBody =
-      'You can login as a driver or a traveller,                select one to continue ';
+  // AUTH
+  static const String howDoYouWantToContinueAs = 'howDoYouWantToContinueAs';
+  static const String howDoYouWantToContinueAsBody = 'howDoYouWantToContinueAsBody';
 
-  static const String traveller = 'Traveller';
-  static const String driver = 'Driver';
+  static const String traveller = 'traveller';
+  static const String driver = 'driver';
 
-  static const String phoneNumber = 'Phone number';
-  static const String password = 'Password';
-  static const String login = 'Login';
-  static const String dontHaveAnAccount = "Don't have an account?";
-  static const String register = "Register";
-  static const String name = "Name";
-  static const String familyName = "Family name";
-  static const String address = "Address";
-  static const String birthday = "Birthday";
-  static const String pick = 'Pick';
-  static const String createAnAccount = 'Create an account';
-  static const String wilaya = "Wilaya";
+  static const String phoneNumber = 'phoneNumber';
+  static const String password = 'password';
+  static const String login = 'login';
+  static const String dontHaveAnAccount = "dontHaveAnAccount";
+  static const String register = "register";
+  static const String name = "name";
+  static const String familyName = "familyName";
+  static const String address = "address";
+  static const String birthday = "birthday";
+  static const String pick = 'pick';
+  static const String createAnAccount = 'createAnAccount';
+  static const String wilaya = "wilaya";
 
-  static String phoneNumberNotValid = 'Phone number is not valid';
+  static const String phoneNumberNotValid = 'phoneNumberNotValid';
+  static const String familyNameNotValid = 'familyNameNotValid';
+  static const String nameNotValid = 'nameNotValid';
+  static const String phoneVerification = 'phoneVerification';
+  static const String phoneVerificationDesc = 'phoneVerificationDesc';
 
-  static String familyNameNotValid = 'Family name is not valid';
-  static String nameNotValid = 'name is not valid';
-  static String phoneVerification = 'Phone Verification';
-  static String phoneVerificationDesc = 'Enter you OTP code here';
+  static const String verify = "verify";
 
-  static String verify = "Verify";
+  static const String yourAccountUnderReview = "yourAccountUnderReview";
 
-  static String youAccountUnderReview = "Thanks for registering Your account is now under review";
+  static const String findARide = 'findARide';
+  static const String from = 'from';
+  static const String to = 'to';
 
-  static String findARide = 'Find a ride';
-  static String from = 'From';
-  static String to = 'To';
+  static const String today = 'today';
 
-  static String today = 'Today';
+  static const String search = 'search';
 
-  static String search = 'Search';
+  static const String home = 'home';
+  static const String yourRide = 'yourRide';
+  static const String message = 'message';
+  static const String account = 'account';
 
-  static String home = 'Home';
-  static String yourRide = 'Your ride';
-  static String message = 'message';
-  static String account = 'account';
+  static const String forOnePerson = 'forOnePerson';
+  static const String baggageAllowed = 'baggageAllowed';
+  static const String petsNotAllowed = 'petsNotAllowed';
+  static const String smokingAllowed = 'smokingAllowed';
 }

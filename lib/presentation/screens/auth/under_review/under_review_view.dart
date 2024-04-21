@@ -58,7 +58,7 @@ class UnderReviewView extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: AppPadding.p25),
                     child: Text(
-                      AppStrings.youAccountUnderReview,
+                      AppStrings.yourAccountUnderReview,
                       textAlign: TextAlign.center,
                       style: getRegularStyle(color: ColorManager.dark),
                     ),

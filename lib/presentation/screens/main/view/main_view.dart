@@ -1,3 +1,4 @@
+import 'package:carpool/app/localizations.dart';
 import 'package:carpool/presentation/components/appsize.dart';
 import 'package:carpool/presentation/components/color_manager.dart';
 import 'package:carpool/presentation/components/strings_manager.dart';
@@ -60,15 +61,15 @@ class _MainViewState extends State<MainView> {
         tabs: [
           GButton(
             icon: Icons.home_outlined,
-            text: AppStrings.home,
+            text: AppStrings.home.tr(context),
           ),
           GButton(
             icon: Icons.local_taxi_outlined,
-            text: AppStrings.yourRide,
+            text: AppStrings.yourRide.tr(context),
           ),
           GButton(
             icon: Icons.person_outline_rounded,
-            text: AppStrings.account,
+            text: AppStrings.account.tr(context),
           ),
         ],
       ),

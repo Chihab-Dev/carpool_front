@@ -1,3 +1,4 @@
+import 'package:carpool/app/localizations.dart';
 import 'package:carpool/presentation/components/appsize.dart';
 import 'package:carpool/presentation/components/assets_manager.dart';
 import 'package:carpool/presentation/components/color_manager.dart';
@@ -27,21 +28,21 @@ class TravellerOrDriverView extends StatelessWidget {
               ),
               SizedBox(height: AppSize.s110),
               Text(
-                AppStrings.howDoYouWantToContinueAs,
+                AppStrings.howDoYouWantToContinueAs.tr(context),
                 style: getRegularStyle(color: ColorManager.dark),
                 maxLines: 2,
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: AppSize.s15),
               Text(
-                AppStrings.howDoYouWantToContinueAsBody,
+                AppStrings.howDoYouWantToContinueAsBody.tr(context),
                 style: getSmallRegularStyle(color: ColorManager.darkGrey),
                 maxLines: 2,
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: AppSize.s110),
               CustomLargeButton(
-                label: AppStrings.traveller,
+                label: AppStrings.traveller.tr(context),
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -51,7 +52,7 @@ class TravellerOrDriverView extends StatelessWidget {
               ),
               SizedBox(height: AppSize.s15),
               CustomLargeButton(
-                label: AppStrings.driver,
+                label: AppStrings.driver.tr(context),
                 onPressed: () {
                   Navigator.push(
                     context,
