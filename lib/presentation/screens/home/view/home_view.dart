@@ -4,6 +4,7 @@ import 'package:carpool/presentation/components/color_manager.dart';
 import 'package:carpool/presentation/components/strings_manager.dart';
 import 'package:carpool/presentation/components/styles_manager.dart';
 import 'package:carpool/presentation/screens/home/cubit/home_cubit.dart';
+import 'package:carpool/presentation/screens/home/view/travels_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -228,7 +229,14 @@ class _HomeViewState extends State<HomeView> {
                               width: AppSize.s350,
                               // height: double.infinity,
                               child: ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const TravelsView(),
+                                    ),
+                                  );
+                                },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: ColorManager.yellow,
                                   shape: RoundedRectangleBorder(

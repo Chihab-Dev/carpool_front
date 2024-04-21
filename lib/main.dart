@@ -1,6 +1,7 @@
 import 'package:carpool/app/localizations.dart';
 import 'package:carpool/app/service_locator.dart';
 import 'package:carpool/app/shared_prefrences.dart';
+import 'package:carpool/presentation/components/color_manager.dart';
 import 'package:carpool/presentation/screens/home/cubit/home_cubit.dart';
 import 'package:carpool/presentation/screens/main/view/main_view.dart';
 import 'package:carpool/presentation/screens/onboarding/onboarding.dart';
@@ -41,6 +42,9 @@ class MainApp extends StatelessWidget {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             locale: const Locale('en'),
+            theme: ThemeData(
+              scaffoldBackgroundColor: ColorManager.white,
+            ),
             supportedLocales: const [
               Locale('en'),
               Locale('ar'),

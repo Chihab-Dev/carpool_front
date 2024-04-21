@@ -12,6 +12,8 @@ class ImageAsset {
   static const String userProfile = "$imagePath/user_profile.png";
   static const String background = "$imagePath/bg.png";
   static const String correct = "$imagePath/correct.png";
+  static const String profilePicture = "$imagePath/profile_picture.png";
+  static const String leon = "$imagePath/leon.png";
 }
 
 class LottieAsset {

@@ -205,3 +205,12 @@ class CustomPasswordFormField extends StatelessWidget {
     );
   }
 }
+
+Container separator() {
+  return Container(
+    margin: EdgeInsets.symmetric(vertical: AppSize.s25),
+    width: double.infinity,
+    height: AppSize.s4,
+    color: ColorManager.darkGrey.withOpacity(0.2),
+  );
+}
