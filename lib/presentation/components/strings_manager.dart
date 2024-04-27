@@ -60,4 +60,26 @@ class AppStrings {
   static const String baggageAllowed = 'baggageAllowed';
   static const String petsNotAllowed = 'petsNotAllowed';
   static const String smokingAllowed = 'smokingAllowed';
+
+  static const String newTravel = "newTravel";
+
+  static const String numberOfSeats = "Number of seats : ";
+  static const String placePrice = "Price for 1 place : ";
+  static const String baggageAllowed2 = "Baggage allowed : ";
+  static const String petsAllowed2 = "Pets allowed : ";
+  static const String smokingAllowed2 = "Smoking allowed : ";
+  static const String yes = "YES";
+
+  static const String no = "NO";
+
+  static const String date = "Date : ";
+
+  static const String carName = "Car name";
+  static const String carImage = "Car image";
+  static const String createTravel = "Create travel";
+  static const String clientsRequests = "Client requests";
+  static const String accept = "Accept";
+  static const String reject = "Reject";
+  static const String accepted = "Accepted";
+  static const String profile = "Profile";
 }

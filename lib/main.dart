@@ -2,8 +2,9 @@ import 'package:carpool/app/localizations.dart';
 import 'package:carpool/app/service_locator.dart';
 import 'package:carpool/app/shared_prefrences.dart';
 import 'package:carpool/presentation/components/color_manager.dart';
-import 'package:carpool/presentation/screens/home/cubit/home_cubit.dart';
-import 'package:carpool/presentation/screens/main/view/main_view.dart';
+import 'package:carpool/presentation/screens/Client/home/cubit/home_cubit.dart';
+import 'package:carpool/presentation/screens/Driver/home/cubit/driver_home_cubit.dart';
+import 'package:carpool/presentation/screens/Driver/main/view/driver_main_view.dart';
 import 'package:carpool/presentation/screens/onboarding/onboarding.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,6 +33,9 @@ class MainApp extends StatelessWidget {
         BlocProvider(
           create: (context) => HomeCubit(),
         ),
+        BlocProvider(
+          create: (context) => DriverHomeCubit(),
+        ),
       ],
       child: ScreenUtilInit(
         designSize: const Size(430, 932),
@@ -55,7 +59,7 @@ class MainApp extends StatelessWidget {
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate
             ],
-            home: isOnboardingWatched ? const MainView() : OnboardingView(),
+            home: isOnboardingWatched ? const DriverMainView() : OnboardingView(),
           );
         },
       ),

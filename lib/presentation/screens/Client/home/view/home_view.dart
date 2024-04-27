@@ -4,8 +4,8 @@ import 'package:carpool/presentation/components/assets_manager.dart';
 import 'package:carpool/presentation/components/color_manager.dart';
 import 'package:carpool/presentation/components/strings_manager.dart';
 import 'package:carpool/presentation/components/styles_manager.dart';
-import 'package:carpool/presentation/screens/home/cubit/home_cubit.dart';
-import 'package:carpool/presentation/screens/home/view/travels_view.dart';
+import 'package:carpool/presentation/screens/Client/home/cubit/home_cubit.dart';
+import 'package:carpool/presentation/screens/Client/home/view/travels_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -128,7 +128,7 @@ class _HomeViewState extends State<HomeView> {
                                           style: getMeduimStyle(color: ColorManager.dark.withOpacity(0.75)),
                                         ),
                                         leading: Icon(
-                                          Icons.location_on_outlined,
+                                          Icons.date_range_outlined,
                                           size: AppSize.s30,
                                           color: ColorManager.darkGrey,
                                         ),
@@ -161,62 +161,7 @@ class _HomeViewState extends State<HomeView> {
                                         ),
                                         contentPadding: EdgeInsets.zero,
                                         onTap: () {
-                                          showModalBottomSheet(
-                                              backgroundColor: ColorManager.white,
-                                              useSafeArea: true,
-                                              context: context,
-                                              builder: (context) {
-                                                return BlocConsumer<HomeCubit, HomeState>(
-                                                  listener: (context, state) {},
-                                                  builder: (context, state) {
-                                                    return Container(
-                                                      height: AppSize.s250,
-                                                      width: double.infinity,
-                                                      decoration: BoxDecoration(
-                                                        color: ColorManager.white,
-                                                        borderRadius: BorderRadius.circular(AppSize.s10),
-                                                      ),
-                                                      child: Padding(
-                                                        padding: EdgeInsets.all(AppPadding.p18),
-                                                        child: Column(
-                                                          children: [
-                                                            Text(
-                                                              'Pick number of plcaes : ',
-                                                              style: getMeduimStyle(color: ColorManager.dark),
-                                                            ),
-                                                            SizedBox(height: AppSize.s20),
-                                                            CupertinoSlidingSegmentedControl(
-                                                              onValueChanged: (value) {
-                                                                cubit.pickNumberOfPlaces(value);
-                                                              },
-                                                              children: {
-                                                                1: Padding(
-                                                                  padding: EdgeInsets.all(AppPadding.p20),
-                                                                  child: Text(
-                                                                    '1',
-                                                                    style: getLargeStyle(color: ColorManager.dark),
-                                                                  ),
-                                                                ),
-                                                                2: Text(
-                                                                  '2',
-                                                                  style: getLargeStyle(color: ColorManager.dark),
-                                                                ),
-                                                                3: Text(
-                                                                  '3',
-                                                                  style: getLargeStyle(color: ColorManager.dark),
-                                                                ),
-                                                              },
-                                                              groupValue: cubit.numberOfPlaces,
-                                                              backgroundColor: ColorManager.lightGrey,
-                                                              thumbColor: ColorManager.white,
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    );
-                                                  },
-                                                );
-                                              });
+                                          pickNumberOfPlaces(context, cubit);
                                         },
                                       ),
                                     ),
@@ -265,6 +210,65 @@ class _HomeViewState extends State<HomeView> {
         );
       },
     );
+  }
+
+  Future<dynamic> pickNumberOfPlaces(BuildContext context, HomeCubit cubit) {
+    return showModalBottomSheet(
+        backgroundColor: ColorManager.white,
+        useSafeArea: true,
+        context: context,
+        builder: (context) {
+          return BlocConsumer<HomeCubit, HomeState>(
+            listener: (context, state) {},
+            builder: (context, state) {
+              return Container(
+                height: AppSize.s250,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: ColorManager.white,
+                  borderRadius: BorderRadius.circular(AppSize.s10),
+                ),
+                child: Padding(
+                  padding: EdgeInsets.all(AppPadding.p18),
+                  child: Column(
+                    children: [
+                      Text(
+                        'Pick number of plcaes : ',
+                        style: getMeduimStyle(color: ColorManager.dark),
+                      ),
+                      SizedBox(height: AppSize.s20),
+                      CupertinoSlidingSegmentedControl(
+                        onValueChanged: (value) {
+                          cubit.pickNumberOfPlaces(value);
+                        },
+                        children: {
+                          1: Padding(
+                            padding: EdgeInsets.all(AppPadding.p20),
+                            child: Text(
+                              '1',
+                              style: getLargeStyle(color: ColorManager.dark),
+                            ),
+                          ),
+                          2: Text(
+                            '2',
+                            style: getLargeStyle(color: ColorManager.dark),
+                          ),
+                          3: Text(
+                            '3',
+                            style: getLargeStyle(color: ColorManager.dark),
+                          ),
+                        },
+                        groupValue: cubit.numberOfPlaces,
+                        backgroundColor: ColorManager.lightGrey,
+                        thumbColor: ColorManager.white,
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          );
+        });
   }
 
   Future<dynamic> customBottomSheet(BuildContext context, HomeCubit cubit) {

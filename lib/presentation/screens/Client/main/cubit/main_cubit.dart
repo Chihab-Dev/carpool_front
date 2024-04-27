@@ -1,5 +1,5 @@
-import 'package:carpool/presentation/screens/home/view/home_view.dart';
-import 'package:carpool/presentation/screens/main/cubit/main_states.dart';
+import 'package:carpool/presentation/screens/Client/home/view/home_view.dart';
+import 'package:carpool/presentation/screens/Client/main/cubit/main_states.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

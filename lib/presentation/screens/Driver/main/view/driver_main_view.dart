@@ -3,28 +3,28 @@ import 'package:carpool/presentation/components/appsize.dart';
 import 'package:carpool/presentation/components/color_manager.dart';
 import 'package:carpool/presentation/components/strings_manager.dart';
 import 'package:carpool/presentation/components/styles_manager.dart';
-import 'package:carpool/presentation/screens/main/cubit/main_cubit.dart';
-import 'package:carpool/presentation/screens/main/cubit/main_states.dart';
+import 'package:carpool/presentation/screens/Driver/main/cubit/driver_main_cubit.dart';
+import 'package:carpool/presentation/screens/Driver/main/cubit/driver_main_states.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
-class MainView extends StatefulWidget {
-  const MainView({super.key});
+class DriverMainView extends StatefulWidget {
+  const DriverMainView({super.key});
 
   @override
-  State<MainView> createState() => _MainViewState();
+  State<DriverMainView> createState() => _DriverMainViewState();
 }
 
-class _MainViewState extends State<MainView> {
+class _DriverMainViewState extends State<DriverMainView> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => MainCubit(),
-      child: BlocConsumer<MainCubit, MainStates>(
+      create: (context) => DriverMainCubit(),
+      child: BlocConsumer<DriverMainCubit, DriverMainStates>(
         listener: (context, state) {},
         builder: (context, state) {
-          var cubit = MainCubit.get(context);
+          var cubit = DriverMainCubit.get(context);
           return Scaffold(
             body: Center(
               child: cubit.pages[cubit.currentIndex],
@@ -36,7 +36,7 @@ class _MainViewState extends State<MainView> {
     );
   }
 
-  Widget bottomNavigationBar(MainCubit cubit) {
+  Widget bottomNavigationBar(DriverMainCubit cubit) {
     return Container(
       decoration: BoxDecoration(
         boxShadow: [
@@ -60,8 +60,8 @@ class _MainViewState extends State<MainView> {
         textStyle: getMeduimStyle(color: ColorManager.white).copyWith(fontSize: AppSize.s15),
         tabs: [
           GButton(
-            icon: Icons.home_outlined,
-            text: AppStrings.home.tr(context),
+            icon: Icons.add_circle_outline,
+            text: AppStrings.newTravel.tr(context),
           ),
           GButton(
             icon: Icons.local_taxi_outlined,

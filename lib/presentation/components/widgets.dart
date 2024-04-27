@@ -214,3 +214,31 @@ Container separator() {
     color: ColorManager.darkGrey.withOpacity(0.2),
   );
 }
+
+class CustomSmallButton extends StatelessWidget {
+  final String label;
+  final Function()? onPressed;
+  final Color? backgroundColor;
+  const CustomSmallButton({super.key, required this.label, required this.onPressed, required this.backgroundColor});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      // width: AppSize.s100,
+      // height: AppSize.s55,
+      child: ElevatedButton(
+        onPressed: onPressed,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: backgroundColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(AppPadding.p10),
+          ),
+        ),
+        child: Text(
+          label,
+          style: getMeduimStyle(color: ColorManager.white).copyWith(fontSize: AppSize.s15),
+        ),
+      ),
+    );
+  }
+}
