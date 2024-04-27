@@ -17,3 +17,9 @@ class RegisterIsNameValidState extends RegisterStates {}
 class RegisterIsFamilyNameValidState extends RegisterStates {}
 
 class RegisterIsPhoneNumberValidState extends RegisterStates {}
+
+class RegisterLoadingState extends RegisterStates {}
+
+class RegisterSuccessState extends RegisterStates {}
+
+class RegisterErrorState extends RegisterStates {}

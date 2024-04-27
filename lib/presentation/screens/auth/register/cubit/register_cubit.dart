@@ -1,9 +1,18 @@
+import 'dart:convert';
 import 'dart:io';
 
+import 'package:carpool/app/service_locator.dart';
+import 'package:carpool/app/shared_prefrences.dart';
+import 'package:carpool/data/models/models.dart';
+import 'package:carpool/domain/usecase/client/register_usecase.dart';
+import 'package:carpool/domain/usecase/driver/driver_register.dart';
 import 'package:carpool/presentation/components/color_manager.dart';
 import 'package:carpool/presentation/components/constants.dart';
 import 'package:carpool/presentation/components/strings_manager.dart';
+import 'package:carpool/presentation/components/widgets.dart';
+import 'package:carpool/presentation/screens/Client/main/view/main_view.dart';
 import 'package:carpool/presentation/screens/auth/register/cubit/register_state.dart';
+import 'package:carpool/presentation/screens/auth/under_review/under_review_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -14,11 +23,15 @@ class RegisterCubit extends Cubit<RegisterStates> {
   static RegisterCubit get(context) => BlocProvider.of(context);
 
   File? image;
+  String base64String = '';
 
   pickImage() async {
-    var selectedImage = await ImagePicker().pickImage(source: ImageSource.gallery);
+    var selectedImage = await ImagePicker().pickImage(source: ImageSource.gallery, imageQuality: 50);
     if (selectedImage != null) {
       image = File(selectedImage.path);
+      List<int> imageBytes = File(selectedImage.path).readAsBytesSync();
+      base64String = base64Encode(imageBytes);
+      print(base64String);
     }
     emit(RegisterPickImageState());
   }
@@ -37,8 +50,8 @@ class RegisterCubit extends Cubit<RegisterStates> {
   pickDate(BuildContext context) async {
     final DateTime? datetime = await showDatePicker(
       context: context,
-      firstDate: selectedDate,
-      lastDate: DateTime(2026),
+      firstDate: DateTime(1962),
+      lastDate: DateTime.now(),
       builder: (context, child) {
         return Theme(
             data: Theme.of(context).copyWith(
@@ -148,5 +161,89 @@ class RegisterCubit extends Cubit<RegisterStates> {
     emit(RegisterIsPhoneNumberValidState());
   }
 
-  void register() {}
+  bool isEverythingValid() {
+    if (nameValid && familyNameValid && wilaya != '' && passwordValid && phoneNumberValid && base64String != '') {
+      return true;
+    }
+    return false;
+  }
+
+  final ClientRegisterUsecase _clientRegisterUsecase = ClientRegisterUsecase(getIt());
+  final DriverRegisterUsecase _driverRegisterUsecase = DriverRegisterUsecase(getIt());
+
+  final AppPrefences _appPrefences = AppPrefences(getIt());
+  Future<void> register(BuildContext context, bool isClient) async {
+    if (isClient) {
+      emit(RegisterLoadingState());
+      (await _clientRegisterUsecase.execute(
+        ClientModel(
+          id: '',
+          name: nameController.text,
+          familyname: familyNameController.text,
+          address: wilaya,
+          dateofbirth: selectedDate.toString().substring(0, 10),
+          password: passwordController.text,
+          phoneNumber: phoneNumberController.text,
+          image: "base64String",
+          feedbackes: [],
+          token: '',
+        ),
+      ))
+          .fold(
+        (failure) {
+          errorToast(failure.message).show(context);
+          emit(RegisterErrorState());
+        },
+        (data) {
+          _appPrefences.setId(data.id);
+          _appPrefences.setToken(data.token);
+          _appPrefences.setIsClient(isClient);
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const MainView(),
+            ),
+            (route) => false,
+          );
+          emit(RegisterSuccessState());
+        },
+      );
+    } else {
+      emit(RegisterLoadingState());
+      (await _driverRegisterUsecase.execute(
+        DriverModel(
+          id: '',
+          name: nameController.text,
+          familyname: familyNameController.text,
+          address: wilaya,
+          dateofbirth: selectedDate.toString().substring(0, 10),
+          password: passwordController.text,
+          phoneNumber: phoneNumberController.text,
+          image: 'base64String',
+          feedbackes: [],
+          token: '',
+          isAccepted: false,
+        ),
+      ))
+          .fold(
+        (failure) {
+          errorToast(failure.message).show(context);
+          emit(RegisterErrorState());
+        },
+        (data) {
+          _appPrefences.setId(data.id);
+          _appPrefences.setToken(data.token);
+          _appPrefences.setIsClient(isClient);
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const UnderReviewView(),
+            ),
+            (route) => false,
+          );
+          emit(RegisterSuccessState());
+        },
+      );
+    }
+  }
 }

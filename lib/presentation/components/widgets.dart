@@ -1,6 +1,8 @@
 import 'package:carpool/presentation/components/appsize.dart';
 import 'package:carpool/presentation/components/color_manager.dart';
 import 'package:carpool/presentation/components/styles_manager.dart';
+import 'package:cherry_toast/cherry_toast.dart';
+import 'package:cherry_toast/resources/arrays.dart';
 import 'package:flutter/material.dart';
 
 class CustomLargeButton extends StatelessWidget {
@@ -241,4 +243,23 @@ class CustomSmallButton extends StatelessWidget {
       ),
     );
   }
+}
+
+// Toasts ::
+
+CherryToast errorToast(String msg) {
+  return CherryToast.error(
+    title: Text(msg, style: const TextStyle(color: Colors.red)),
+    backgroundColor: ColorManager.white,
+    toastPosition: Position.bottom,
+    toastDuration: const Duration(seconds: 5),
+  );
+}
+
+CherryToast successToast(String msg) {
+  return CherryToast.success(
+    title: Text(msg, style: TextStyle(color: ColorManager.yellow)),
+    toastPosition: Position.bottom,
+    toastDuration: const Duration(seconds: 5),
+  );
 }

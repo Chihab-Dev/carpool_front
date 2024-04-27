@@ -1,3 +1,4 @@
+import 'package:carpool/app/localizations.dart';
 import 'package:carpool/presentation/components/appsize.dart';
 import 'package:carpool/presentation/components/assets_manager.dart';
 import 'package:carpool/presentation/components/color_manager.dart';
@@ -34,7 +35,7 @@ class UnderReviewView extends StatelessWidget {
                 Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const LoginView(),
+                      builder: (context) => const LoginView(true),
                     ),
                     (route) => false);
               },
@@ -58,7 +59,7 @@ class UnderReviewView extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: AppPadding.p25),
                     child: Text(
-                      AppStrings.yourAccountUnderReview,
+                      AppStrings.yourAccountUnderReview.tr(context),
                       textAlign: TextAlign.center,
                       style: getRegularStyle(color: ColorManager.dark),
                     ),

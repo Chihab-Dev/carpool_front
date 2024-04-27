@@ -46,7 +46,7 @@ class TravellerOrDriverView extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const LoginView()),
+                    MaterialPageRoute(builder: (context) => const LoginView(true)),
                   );
                 },
               ),
@@ -56,7 +56,7 @@ class TravellerOrDriverView extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const LoginView()),
+                    MaterialPageRoute(builder: (context) => const LoginView(false)),
                   );
                 },
               ),

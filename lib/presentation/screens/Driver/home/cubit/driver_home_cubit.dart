@@ -174,6 +174,7 @@ class DriverHomeCubit extends Cubit<DriverHomeState> {
     final imagePicker = ImagePicker();
     var selectedImage = await imagePicker.pickImage(source: ImageSource.gallery);
     if (selectedImage != null) {
+      print(selectedImage.path);
       image = File(selectedImage.path);
     }
     emit(DriverHomePickImage());

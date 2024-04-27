@@ -12,7 +12,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginView extends StatelessWidget {
-  const LoginView({super.key});
+  const LoginView(this.isClient, {super.key});
+
+  final bool isClient;
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +24,7 @@ class LoginView extends StatelessWidget {
         listener: (context, state) {},
         builder: (context, state) {
           var cubit = LoginCubit.get(context);
+
           return Scaffold(
             extendBodyBehindAppBar: true,
             appBar: AppBar(
@@ -61,18 +64,27 @@ class LoginView extends StatelessWidget {
                         label: AppStrings.password.tr(context),
                         errorLabel: null,
                         keyboardType: TextInputType.visiblePassword,
-                        onChanged: (value) {},
+                        onChanged: (value) {
+                          cubit.passwordChanged();
+                        },
                         onVisibleChanged: () {
                           cubit.changePasswordVisibility();
                         },
                         isPasswordVisible: cubit.isPasswordVisible,
                       ),
                       SizedBox(height: AppSize.s20),
-                      CustomLargeButton(
-                          label: AppStrings.login.tr(context),
-                          onPressed: () {
-                            cubit.login();
-                          }),
+                      state is LoginLoadingState
+                          ? CircularProgressIndicator(
+                              color: ColorManager.yellow,
+                            )
+                          : CustomLargeButton(
+                              label: AppStrings.login.tr(context),
+                              onPressed: cubit.phoneNumberValid && cubit.passwordController.text.isNotEmpty
+                                  ? () {
+                                      cubit.login(context, isClient);
+                                    }
+                                  : null,
+                            ),
                       SizedBox(height: AppSize.s20),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -86,7 +98,7 @@ class LoginView extends StatelessWidget {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => const RegisterView(),
+                                  builder: (context) => RegisterView(isClient),
                                 ),
                               );
                             },

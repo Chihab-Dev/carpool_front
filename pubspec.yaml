@@ -8,6 +8,8 @@ environment:
 
 dependencies:
   bloc: ^8.1.4
+  cherry_toast: ^1.10.1
+  dartz: ^0.10.1
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.5
@@ -18,7 +20,9 @@ dependencies:
   font_awesome_flutter: ^10.7.0
   get_it: ^7.6.7
   google_nav_bar: ^5.0.6
+  http: ^1.2.1
   image_picker: ^1.0.7
+  internet_connection_checker: ^1.0.0+1
   introduction_screen: ^3.1.14
   lottie: ^3.1.0
   numberpicker: ^2.1.2

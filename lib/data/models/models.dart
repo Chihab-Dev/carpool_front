@@ -1,0 +1,294 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+// ignore_for_String: public_member_api_docs, sort_constructors_first
+import 'dart:convert';
+
+class ClientModel {
+  String id;
+  String name;
+  String familyname;
+  String address;
+  String dateofbirth;
+  String phoneNumber;
+  String password;
+  String image;
+  List<FeedbackModel> feedbackes;
+  String token;
+  String email = 'chihab@gmail.com';
+  ClientModel({
+    required this.id,
+    required this.name,
+    required this.familyname,
+    required this.address,
+    required this.dateofbirth,
+    required this.password,
+    required this.phoneNumber,
+    required this.image,
+    required this.feedbackes,
+    required this.token,
+  });
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'name': name,
+      'familyname': familyname,
+      'address': address,
+      'birthday': dateofbirth,
+      'phoneNumber': phoneNumber,
+      'password': password,
+      'image': image,
+      'email': email,
+    };
+  }
+
+  factory ClientModel.fromMap(Map<String, dynamic> map) {
+    return ClientModel(
+      id: map['_id'] as String,
+      familyname: map['familyname'] as String,
+      name: map['name'] as String,
+      dateofbirth: map['birthday'] as String,
+      address: map['address'] as String,
+      phoneNumber: map['phoneNumber'] as String,
+      password: '',
+      image: map['image'] as String,
+      token: map['token'] as String,
+      feedbackes: List<FeedbackModel>.from(
+        (map['feedback'] as List<dynamic>).map<FeedbackModel>(
+          (x) => FeedbackModel.fromMap(x as Map<String, dynamic>),
+        ),
+      ),
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory ClientModel.fromJson(String source) => ClientModel.fromMap(json.decode(source) as Map<String, dynamic>);
+}
+
+class DriverModel {
+  String id;
+  String name;
+  String familyname;
+  String address;
+  String dateofbirth;
+  String phoneNumber;
+  String image;
+  String password;
+  List<FeedbackModel> feedbackes;
+  bool isAccepted;
+  String token;
+  DriverModel({
+    required this.id,
+    required this.name,
+    required this.familyname,
+    required this.address,
+    required this.dateofbirth,
+    required this.phoneNumber,
+    required this.image,
+    required this.password,
+    required this.feedbackes,
+    required this.isAccepted,
+    required this.token,
+  });
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'name': name,
+      'familyname': familyname,
+      'address': address,
+      'dateofbirth': dateofbirth,
+      'phoneNumber': phoneNumber,
+      'image': image,
+      'password': password,
+    };
+  }
+
+  factory DriverModel.fromMap(Map<String, dynamic> map) {
+    return DriverModel(
+      id: map['_id'] as String,
+      name: map['name'] as String,
+      familyname: map['familyname'] as String,
+      address: map['address'] as String,
+      dateofbirth: map['dateofbirth'] as String,
+      phoneNumber: map['phoneNumber'] as String,
+      image: map['image'] as String,
+      password: '',
+      feedbackes: List<FeedbackModel>.from(
+        (map['feedback'] as List<dynamic>).map<FeedbackModel>(
+          (x) => FeedbackModel.fromMap(x as Map<String, dynamic>),
+        ),
+      ),
+      isAccepted: map['isAccepted'] as bool,
+      token: map['token'] as String,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory DriverModel.fromJson(String source) => DriverModel.fromMap(json.decode(source) as Map<String, dynamic>);
+}
+
+class AdminModel {
+  String id;
+  String name;
+  String phoneNumber;
+
+  AdminModel({
+    required this.id,
+    required this.name,
+    required this.phoneNumber,
+  });
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'id': id,
+      'name': name,
+      'phoneNumber': phoneNumber,
+    };
+  }
+
+  factory AdminModel.fromMap(Map<String, dynamic> map) {
+    return AdminModel(
+      id: map['id'] as String,
+      name: map['name'] as String,
+      phoneNumber: map['phoneNumber'] as String,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory AdminModel.fromJson(String source) => AdminModel.fromMap(json.decode(source) as Map<String, dynamic>);
+}
+
+class FeedbackModel {
+  double note;
+  String comment;
+  String userId;
+
+  FeedbackModel({
+    required this.note,
+    required this.comment,
+    required this.userId,
+  });
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'note': note,
+      'comment': comment,
+      'userId': userId,
+    };
+  }
+
+  factory FeedbackModel.fromMap(Map<String, dynamic> map) {
+    return FeedbackModel(
+      note: map['note'] as double,
+      comment: map['comment'] as String,
+      userId: map['userId'] as String,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory FeedbackModel.fromJson(String source) => FeedbackModel.fromMap(json.decode(source) as Map<String, dynamic>);
+}
+
+class TravelModel {
+  String driverId;
+  String placeOfDeparture;
+  String timeOfDeparture;
+  String placeOfArrival;
+  String timeOfArrival;
+  int numberOfPlaces;
+  String carName;
+  String carImage;
+  int priceOfPlace;
+  bool allowSloking;
+  bool allowAnimals;
+  List<RequestModel> requests;
+  TravelModel({
+    required this.driverId,
+    required this.placeOfDeparture,
+    required this.timeOfDeparture,
+    required this.placeOfArrival,
+    required this.timeOfArrival,
+    required this.numberOfPlaces,
+    required this.carName,
+    required this.carImage,
+    required this.priceOfPlace,
+    required this.allowSloking,
+    required this.allowAnimals,
+    required this.requests,
+  });
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'driverId': driverId,
+      'placeOfDeparture': placeOfDeparture,
+      'timeOfDeparture': timeOfDeparture,
+      'placeOfArrival': placeOfArrival,
+      'timeOfArrival': timeOfArrival,
+      'numberOfPlaces': numberOfPlaces,
+      'carName': carName,
+      'carImage': carImage,
+      'priceOfPlace': priceOfPlace,
+      'allowSloking': allowSloking,
+      'allowAnimals': allowAnimals,
+      'requests': requests.map((x) => x.toMap()).toList(),
+    };
+  }
+
+  factory TravelModel.fromMap(Map<String, dynamic> map) {
+    return TravelModel(
+      driverId: map['driverId'] as String,
+      placeOfDeparture: map['placeOfDeparture'] as String,
+      timeOfDeparture: map['timeOfDeparture'] as String,
+      placeOfArrival: map['placeOfArrival'] as String,
+      timeOfArrival: map['timeOfArrival'] as String,
+      numberOfPlaces: map['numberOfPlaces'] as int,
+      carName: map['carName'] as String,
+      carImage: map['carImage'] as String,
+      priceOfPlace: map['priceOfPlace'] as int,
+      allowSloking: map['allowSloking'] as bool,
+      allowAnimals: map['allowAnimals'] as bool,
+      requests: List<RequestModel>.from(
+        (map['requests'] as List<int>).map<RequestModel>(
+          (x) => RequestModel.fromMap(x as Map<String, dynamic>),
+        ),
+      ),
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory TravelModel.fromJson(String source) => TravelModel.fromMap(json.decode(source) as Map<String, dynamic>);
+}
+
+class RequestModel {
+  String clientId;
+  String driverId;
+  bool isAccepted;
+  RequestModel({
+    required this.clientId,
+    required this.driverId,
+    required this.isAccepted,
+  });
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'clientId': clientId,
+      'driverId': driverId,
+      'isAccepted': isAccepted,
+    };
+  }
+
+  factory RequestModel.fromMap(Map<String, dynamic> map) {
+    return RequestModel(
+      clientId: map['clientId'] as String,
+      driverId: map['driverId'] as String,
+      isAccepted: map['isAccepted'] as bool,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory RequestModel.fromJson(String source) => RequestModel.fromMap(json.decode(source) as Map<String, dynamic>);
+}

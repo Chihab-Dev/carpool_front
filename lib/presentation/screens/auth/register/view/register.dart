@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:carpool/app/localizations.dart';
 import 'package:carpool/presentation/components/appsize.dart';
 import 'package:carpool/presentation/components/assets_manager.dart';
@@ -11,7 +13,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RegisterView extends StatefulWidget {
-  const RegisterView({super.key});
+  const RegisterView(this.isClient, {super.key});
+  final bool isClient;
 
   @override
   State<RegisterView> createState() => _RegisterViewState();
@@ -53,7 +56,8 @@ class _RegisterViewState extends State<RegisterView> {
                             radius: AppSize.s70,
                             backgroundColor: ColorManager.lightGrey,
                             backgroundImage: const AssetImage(ImageAsset.userProfile),
-                            foregroundImage: cubit.image != null ? FileImage(cubit.image!) : null,
+                            foregroundImage:
+                                cubit.base64String != '' ? MemoryImage(base64Decode(cubit.base64String)) : null,
                           ),
                           InkWell(
                             onTap: () async {
@@ -183,10 +187,18 @@ class _RegisterViewState extends State<RegisterView> {
                         ],
                       ),
                       SizedBox(height: AppSize.s20),
-                      CustomLargeButton(
-                        label: AppStrings.createAnAccount.tr(context),
-                        onPressed: () {},
-                      ),
+                      state is RegisterLoadingState
+                          ? CircularProgressIndicator(
+                              color: ColorManager.yellow,
+                            )
+                          : CustomLargeButton(
+                              label: AppStrings.createAnAccount.tr(context),
+                              onPressed: cubit.isEverythingValid()
+                                  ? () {
+                                      cubit.register(context, widget.isClient);
+                                    }
+                                  : null,
+                            ),
                       SizedBox(height: AppSize.s20),
                       SizedBox(
                         width: AppSize.s350,
