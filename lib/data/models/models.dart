@@ -227,20 +227,19 @@ class TravelModel {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'placeOfDeparture': placeOfDeparture,
-      'timeOfDeparture': timeOfDeparture,
-      'placeOfArrival': placeOfArrival,
-      'timeOfArrival': timeOfArrival,
-      'numberOfPlaces': numberOfPlaces,
+      'PlaceOfDeparture': placeOfDeparture,
+      'TimeOfDeparture': timeOfDeparture,
+      'PlaceOfArrival': placeOfArrival,
+      'TimeOfArrival': timeOfArrival,
+      'NumberOfPlaces': numberOfPlaces,
       'carname': carName,
-      'carimage': carImage,
+      'carImage': carImage,
       'placeprice': placePrice,
       'allowSmoking': allowSmoking,
       'allowPets': allowPets,
-      'requestList': requests.map((x) => x.toMap()).toList(),
-      'driverinf': driver,
       'Baggage': baggage,
       'dateOfDeparture': dateOfDeparture,
+      'AcceptAutoClients': false,
     };
   }
 

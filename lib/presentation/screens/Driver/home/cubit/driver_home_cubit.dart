@@ -1,6 +1,10 @@
 import 'dart:io';
 
+import 'package:carpool/app/service_locator.dart';
+import 'package:carpool/data/models/models.dart';
+import 'package:carpool/domain/usecase/driver/create_travel_usecase.dart';
 import 'package:carpool/presentation/components/color_manager.dart';
+import 'package:carpool/presentation/components/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
@@ -178,5 +182,67 @@ class DriverHomeCubit extends Cubit<DriverHomeState> {
       image = File(selectedImage.path);
     }
     emit(DriverHomePickImage());
+  }
+
+  DriverCreateTravelUsecase driverCreateTravelUsecase = DriverCreateTravelUsecase(getIt());
+
+  Future<void> createTravel(BuildContext context) async {
+    emit(DriverCreateTravelLoadingState());
+    (await driverCreateTravelUsecase.execute(
+      TravelModel(
+        travelId: '',
+        placeOfDeparture: pickedFromLocation!.address.toString(),
+        timeOfDeparture: "${pickedFromTime!.hour}:${pickedFromTime!.minute}",
+        placeOfArrival: pickedToLocation!.address.toString(),
+        timeOfArrival: "${pickedtoTime!.hour}:${pickedtoTime!.minute}",
+        numberOfPlaces: numberOfSeats,
+        carName: carNameController.text,
+        carImage: image.toString(),
+        placePrice: placePrice,
+        allowSmoking: smokingAllowed,
+        allowPets: petsAllowed,
+        requests: [],
+        driver: DriverModel(
+          id: 'id',
+          name: 'name',
+          familyname: 'familyname',
+          address: 'address',
+          birthday: 'birthday',
+          phoneNumber: 'adsfaf',
+          image: 'image',
+          password: 'password',
+          feedbackes: [],
+          isAccepted: true,
+          token: 'token',
+        ),
+        baggage: baggageSizeAllowed,
+        dateOfDeparture: selectedDate.toString(),
+      ),
+    ))
+        .fold(
+      (failure) {
+        errorToast(failure.message).show(context);
+        emit(DriverCreateTravelErrorState());
+      },
+      (data) {
+        emit(DriverCreateTravelSuccessState());
+      },
+    );
+  }
+
+  bool isEverythingValid = false;
+  bool checkValidation() {
+    if (pickedFromLocation != null &&
+        pickedToLocation != null &&
+        pickedFromTime != null &&
+        pickedtoTime != null &&
+        carNameController.text.isNotEmpty &&
+        image != null) {
+      isEverythingValid = true;
+    } else {
+      isEverythingValid = false;
+    }
+    emit(DriverCheckValidationState());
+    return isEverythingValid;
   }
 }

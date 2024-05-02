@@ -325,10 +325,18 @@ class DriverHomeView extends StatelessWidget {
                       ),
                     ),
                     separator(),
-                    CustomLargeButton(
-                      label: AppStrings.createTravel,
-                      onPressed: () {},
-                    ),
+                    state is DriverCreateTravelLoadingState
+                        ? CircularProgressIndicator(
+                            color: ColorManager.yellow,
+                          )
+                        : CustomLargeButton(
+                            label: AppStrings.createTravel,
+                            onPressed: cubit.checkValidation()
+                                ? () {
+                                    cubit.createTravel(context);
+                                  }
+                                : null,
+                          ),
                     separator(),
                   ],
                 ),

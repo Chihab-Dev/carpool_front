@@ -14,4 +14,5 @@ abstract class Repository {
   Future<Either<Failure, DriverModel>> driverLogin(String phoneNumber, String password);
   Future<Either<Failure, DriverModel>> driverRegister(DriverModel driver);
   Future<Either<Failure, DriverModel>> getDriverById(String id);
+  Future<Either<Failure, void>> createTravel(TravelModel travelModel);
 }

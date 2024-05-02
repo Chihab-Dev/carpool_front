@@ -4,6 +4,7 @@ import 'package:carpool/app/shared_prefrences.dart';
 import 'package:carpool/presentation/components/color_manager.dart';
 import 'package:carpool/presentation/screens/Client/home/cubit/home_cubit.dart';
 import 'package:carpool/presentation/screens/Client/main/view/main_view.dart';
+import 'package:carpool/presentation/screens/Driver/home/cubit/driver_home_cubit.dart';
 import 'package:carpool/presentation/screens/Driver/main/view/driver_main_view.dart';
 import 'package:carpool/presentation/screens/auth/travellerOrDriver/travellerOrDriver.dart';
 import 'package:carpool/presentation/screens/onboarding/onboarding.dart';
@@ -28,23 +29,18 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // _appPrefences.removeId();
+    // _appPrefences.removeIsClient();
     bool isOnboardingWatched = _appPrefences.getWatchedOnBoarding();
     String id = _appPrefences.getId();
     bool isClient = _appPrefences.getIsClient();
-
-    // ClientGetClientByIdUsecase clientGetClientByIdUsecase = ClientGetClientByIdUsecase(getIt());
-    // clientGetClientByIdUsecase.execute("662cf03f2283efebc8a83f5b");
-
-    // DriverGetDriverByIdUsecase driverByIdUsecase = DriverGetDriverByIdUsecase(getIt());
-    // driverByIdUsecase.execute('662d0334d105bfaef2080831');
-
-    // RemoteDataSource remoteDataSource = RemoteDataSourceImpl();
-    // remoteDataSource.requestToBook("662d0764155f9414c4d1d0eb");
 
     return MultiBlocProvider(
       providers: [
         BlocProvider(
           create: (context) => HomeCubit(),
+        ),
+        BlocProvider(
+          create: (context) => DriverHomeCubit(),
         ),
       ],
       child: ScreenUtilInit(

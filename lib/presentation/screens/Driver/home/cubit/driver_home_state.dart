@@ -24,3 +24,11 @@ final class DriverHomePickSmokingAllowed extends DriverHomeState {}
 final class DriverHomePickDate extends DriverHomeState {}
 
 final class DriverHomePickImage extends DriverHomeState {}
+
+final class DriverCreateTravelLoadingState extends DriverHomeState {}
+
+final class DriverCreateTravelSuccessState extends DriverHomeState {}
+
+final class DriverCreateTravelErrorState extends DriverHomeState {}
+
+final class DriverCheckValidationState extends DriverHomeState {}

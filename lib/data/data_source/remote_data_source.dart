@@ -19,6 +19,7 @@ abstract class RemoteDataSource {
   Future<DriverModel> driverLogin(String phoneNumber, String password);
   Future<DriverModel> driverRegister(DriverModel driver);
   Future<DriverModel> getDriverById(String id);
+  Future<void> createTravel(TravelModel travelModel);
 }
 
 class RemoteDataSourceImpl extends RemoteDataSource {
@@ -276,38 +277,65 @@ class RemoteDataSourceImpl extends RemoteDataSource {
       throw response.body;
     }
   }
-}
 
-bool validateTravelJson(Map<String, dynamic> map) {
-  final requiredProperties = [
-    'PlaceOfDeparture',
-    'TimeOfDeparture',
-    'PlaceOfArrival',
-    'TimeOfArrival',
-    'NumberOfPlaces',
-    'carname',
-    'carimage',
-    'placeprice',
-    'allowSmoking',
-    'allowPets',
-    'requestList',
-    'driverinf', // Ensure driver information is present
-  ];
+  @override
+  Future<void> createTravel(TravelModel travelModel) async {
+    String token = _appPrefences.getToken();
 
-  for (var property in requiredProperties) {
-    if (!map.containsKey(property)) {
-      print('Error: Missing property: $property in travel JSON');
-      return false;
+    final url = Uri.parse("${ApiConstance.travelsBaseUrl}/create");
+    final headers = {
+      "Content-Type": ApiConstance.contentType,
+      "token": token,
+    };
+    final json = travelModel.toJson();
+
+    final Response response = await post(
+      url,
+      headers: headers,
+      body: json,
+    );
+
+    final statusCode = response.statusCode;
+
+    print(statusCode);
+
+    if (statusCode == 201) {
+      print('✅ createTravel SUCCESS ✅');
+      print("🔥🌟${response.body}");
+    } else {
+      print('🛑 createTravel FAILURE 🛑');
+      print(response.body);
+      throw response.body;
     }
   }
-
-  // Additional driver information check (optional)
-  final driverInfo = map['driverinf'] as Map<String, dynamic>;
-
-  // You can optionally validate specific driver properties here:
-  // if (!driverInfo.containsKey('driverId') || !driverInfo.containsKey('name')) {
-  //   throw Exception('Invalid travel JSON: Missing required driver properties');
-  // }
-
-  return true;
 }
+
+// bool validateTravelJson(Map<String, dynamic> map) {
+//   final requiredProperties = [
+//     'PlaceOfDeparture',
+//     'TimeOfDeparture',
+//     'PlaceOfArrival',
+//     'TimeOfArrival',
+//     'NumberOfPlaces',
+//     'carname',
+//     'carimage',
+//     'placeprice',
+//     'allowSmoking',
+//     'allowPets',
+//     'requestList',
+//     'driverinf', // Ensure driver information is present
+//   ];
+//   for (var property in requiredProperties) {
+//     if (!map.containsKey(property)) {
+//       print('Error: Missing property: $property in travel JSON');
+//       return false;
+//     }
+//   }
+//   // Additional driver information check (optional)
+//   final driverInfo = map['driverinf'] as Map<String, dynamic>;
+//   // You can optionally validate specific driver properties here:
+//   // if (!driverInfo.containsKey('driverId') || !driverInfo.containsKey('name')) {
+//   //   throw Exception('Invalid travel JSON: Missing required driver properties');
+//   // }
+//   return true;
+// }
