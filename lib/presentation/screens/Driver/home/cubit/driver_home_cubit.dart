@@ -1,8 +1,10 @@
 import 'dart:io';
 
 import 'package:carpool/app/service_locator.dart';
+import 'package:carpool/app/shared_prefrences.dart';
 import 'package:carpool/data/models/models.dart';
 import 'package:carpool/domain/usecase/driver/create_travel_usecase.dart';
+import 'package:carpool/domain/usecase/driver/get_driver_by_id_usecase.dart';
 import 'package:carpool/presentation/components/color_manager.dart';
 import 'package:carpool/presentation/components/widgets.dart';
 import 'package:flutter/material.dart';
@@ -244,5 +246,26 @@ class DriverHomeCubit extends Cubit<DriverHomeState> {
     }
     emit(DriverCheckValidationState());
     return isEverythingValid;
+  }
+
+  final DriverGetDriverByIdUsecase _driverByIdUsecase = DriverGetDriverByIdUsecase(getIt());
+
+  DriverModel? driverModel;
+
+  Future<void> getDriverById(BuildContext context) async {
+    emit(DriverGetDriverLoadingState());
+    final AppPrefences appPrefences = AppPrefences(getIt());
+    var id = appPrefences.getId();
+
+    (await _driverByIdUsecase.execute(id)).fold(
+      (failure) {
+        errorToast(failure.message).show(context);
+        emit(DriverGetDriverErrorState());
+      },
+      (data) {
+        driverModel = data;
+        emit(DriverGetDriverSuccessState());
+      },
+    );
   }
 }

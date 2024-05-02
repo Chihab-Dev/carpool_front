@@ -32,3 +32,9 @@ final class DriverCreateTravelSuccessState extends DriverHomeState {}
 final class DriverCreateTravelErrorState extends DriverHomeState {}
 
 final class DriverCheckValidationState extends DriverHomeState {}
+
+final class DriverGetDriverLoadingState extends DriverHomeState {}
+
+final class DriverGetDriverSuccessState extends DriverHomeState {}
+
+final class DriverGetDriverErrorState extends DriverHomeState {}
