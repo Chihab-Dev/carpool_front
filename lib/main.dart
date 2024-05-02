@@ -27,10 +27,19 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    _appPrefences.removeId();
+    // _appPrefences.removeId();
     bool isOnboardingWatched = _appPrefences.getWatchedOnBoarding();
     String id = _appPrefences.getId();
     bool isClient = _appPrefences.getIsClient();
+
+    // ClientGetClientByIdUsecase clientGetClientByIdUsecase = ClientGetClientByIdUsecase(getIt());
+    // clientGetClientByIdUsecase.execute("662cf03f2283efebc8a83f5b");
+
+    // DriverGetDriverByIdUsecase driverByIdUsecase = DriverGetDriverByIdUsecase(getIt());
+    // driverByIdUsecase.execute('662d0334d105bfaef2080831');
+
+    // RemoteDataSource remoteDataSource = RemoteDataSourceImpl();
+    // remoteDataSource.requestToBook("662d0764155f9414c4d1d0eb");
 
     return MultiBlocProvider(
       providers: [

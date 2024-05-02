@@ -1,3 +1,4 @@
+import 'package:carpool/data/models/models.dart';
 import 'package:carpool/presentation/components/appsize.dart';
 import 'package:carpool/presentation/components/assets_manager.dart';
 import 'package:carpool/presentation/components/color_manager.dart';
@@ -23,6 +24,7 @@ class TravelsView extends StatelessWidget {
           body: Padding(
             padding: EdgeInsets.all(AppSize.s18).copyWith(top: 0.0),
             child: SingleChildScrollView(
+              physics: const ScrollPhysics(),
               child: Center(
                 child: Column(
                   children: [
@@ -63,8 +65,21 @@ class TravelsView extends StatelessWidget {
                         ],
                       ),
                     ),
-                    travelDetailsContainer(context, cubit),
-                    travelDetailsContainer(context, cubit),
+                    state is HomeGetTravelLoadingState
+                        ? Container(
+                            margin: EdgeInsets.only(top: AppSize.s50),
+                            child: CircularProgressIndicator(
+                              color: ColorManager.yellow,
+                            ),
+                          )
+                        : ListView.builder(
+                            physics: const NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: cubit.travels.length,
+                            itemBuilder: (context, index) {
+                              return travelDetailsContainer(context, cubit.travels[index]);
+                            },
+                          ),
                   ],
                 ),
               ),
@@ -75,19 +90,19 @@ class TravelsView extends StatelessWidget {
     );
   }
 
-  Widget travelDetailsContainer(BuildContext context, HomeCubit cubit) {
+  Widget travelDetailsContainer(BuildContext context, TravelModel travel) {
     return InkWell(
       onTap: () {
         Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const TravelDetailsView(),
+              builder: (context) => TravelDetailsView(travel),
             ));
       },
       child: Container(
         width: AppSize.s350,
         // height: AppSize.s250,
-        margin: EdgeInsets.only(top: AppSize.s25),
+        margin: EdgeInsets.symmetric(horizontal: AppSize.s20),
         padding: EdgeInsets.all(AppPadding.p18),
         decoration: BoxDecoration(
           color: ColorManager.white,
@@ -119,19 +134,19 @@ class TravelsView extends StatelessWidget {
                 ),
               ),
               startChild: Text(
-                '14:00',
+                travel.timeOfDeparture,
                 style: getMeduimStyle(color: ColorManager.dark).copyWith(fontSize: AppSize.s16),
               ),
               endChild: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    "${cubit.pickedFromLocation?.address.toString().split(',').first}",
+                    travel.placeOfDeparture,
                     style: getMeduimStyle(color: ColorManager.dark).copyWith(fontSize: AppSize.s16),
                   ),
                   const Spacer(),
                   Text(
-                    "1500DA",
+                    "${travel.placePrice} DA",
                     style: getMeduimStyle(color: ColorManager.dark).copyWith(fontSize: AppSize.s16),
                   ),
                 ],
@@ -161,11 +176,11 @@ class TravelsView extends StatelessWidget {
                 ),
               ),
               startChild: Text(
-                '21:00',
+                travel.timeOfArrival,
                 style: getMeduimStyle(color: ColorManager.dark).copyWith(fontSize: AppSize.s16),
               ),
               endChild: Text(
-                "${cubit.pickedToLocation?.address.toString().split(',').first}",
+                travel.placeOfArrival,
                 style: getMeduimStyle(color: ColorManager.dark).copyWith(fontSize: AppSize.s16),
               ),
             ),
@@ -182,7 +197,7 @@ class TravelsView extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Chihab elhak",
+                      '${travel.driver.name} ${travel.driver.familyname}',
                       style: getMeduimStyle(color: ColorManager.dark).copyWith(fontSize: AppSize.s16),
                     ),
                     Row(
@@ -194,7 +209,7 @@ class TravelsView extends StatelessWidget {
                         ),
                         SizedBox(width: AppSize.s5),
                         Text(
-                          "4.5",
+                          travel.driver.feedbackes.length.toString(),
                           style: getMeduimStyle(color: ColorManager.dark).copyWith(fontSize: AppSize.s16),
                         ),
                       ],
@@ -202,6 +217,7 @@ class TravelsView extends StatelessWidget {
                   ],
                 ),
                 const Spacer(),
+                SizedBox(width: AppSize.s12),
                 Icon(
                   FontAwesomeIcons.cartFlatbedSuitcase,
                   size: AppSize.s25,
@@ -209,7 +225,7 @@ class TravelsView extends StatelessWidget {
                 ),
                 SizedBox(width: AppSize.s12),
                 Text(
-                  "L",
+                  travel.baggage,
                   style: getMeduimStyle(color: ColorManager.dark),
                 ),
               ],

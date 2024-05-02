@@ -57,7 +57,6 @@ class AppStrings {
   static const String account = 'account';
 
   static const String forOnePerson = 'forOnePerson';
-  static const String baggageAllowed = 'baggageAllowed';
   static const String petsNotAllowed = 'petsNotAllowed';
   static const String smokingAllowed = 'smokingAllowed';
 
@@ -82,4 +81,16 @@ class AppStrings {
   static const String reject = "Reject";
   static const String accepted = "Accepted";
   static const String profile = "Profile";
+  static const String allowPets = 'pets are Allowed';
+  static const String dontAllowSmoking = "Smoking is not allowed";
+
+  static const String baggageAllowed = 'Baggage allowed';
+
+  static const String baggageSAllowed = 'Baggage up to size S allowed';
+
+  static const String baggageMAllowed = 'Baggage up to size M allowed';
+
+  static const String baggageLAllowed = 'Baggage up to size L allowed';
+
+  static const String requestToBook = 'Request to book';
 }

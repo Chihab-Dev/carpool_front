@@ -196,7 +196,7 @@ class RegisterCubit extends Cubit<RegisterStates> {
         },
         (data) {
           _appPrefences.setId(data.id);
-          _appPrefences.setToken(data.token);
+          _appPrefences.setToken(data.token!);
           _appPrefences.setIsClient(isClient);
           Navigator.pushAndRemoveUntil(
             context,
@@ -216,7 +216,7 @@ class RegisterCubit extends Cubit<RegisterStates> {
           name: nameController.text,
           familyname: familyNameController.text,
           address: wilaya,
-          dateofbirth: selectedDate.toString().substring(0, 10),
+          birthday: selectedDate.toString().substring(0, 10),
           password: passwordController.text,
           phoneNumber: phoneNumberController.text,
           image: 'base64String',
@@ -232,7 +232,7 @@ class RegisterCubit extends Cubit<RegisterStates> {
         },
         (data) {
           _appPrefences.setId(data.id);
-          _appPrefences.setToken(data.token);
+          _appPrefences.setToken(data.token!);
           _appPrefences.setIsClient(isClient);
           Navigator.pushAndRemoveUntil(
             context,

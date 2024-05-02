@@ -175,14 +175,17 @@ class _HomeViewState extends State<HomeView> {
                               width: AppSize.s350,
                               // height: double.infinity,
                               child: ElevatedButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => const TravelsView(),
-                                    ),
-                                  );
-                                },
+                                onPressed: cubit.pickedFromLocation != null && cubit.pickedToLocation != null
+                                    ? () {
+                                        cubit.getTravel(context);
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => const TravelsView(),
+                                          ),
+                                        );
+                                      }
+                                    : null,
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: ColorManager.yellow,
                                   shape: RoundedRectangleBorder(

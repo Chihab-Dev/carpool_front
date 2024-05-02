@@ -172,7 +172,7 @@ class DriverMyTravelView extends StatelessWidget {
                           ),
                           SizedBox(width: AppSize.s25),
                           Text(
-                            AppStrings.baggageAllowed.tr(context),
+                            AppStrings.baggageAllowed,
                             style: getSmallRegularStyle(color: ColorManager.dark),
                           ),
                         ],

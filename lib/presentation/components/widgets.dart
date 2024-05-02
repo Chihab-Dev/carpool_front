@@ -263,3 +263,13 @@ CherryToast successToast(String msg) {
     toastDuration: const Duration(seconds: 5),
   );
 }
+
+String calculateAgeFromString(String dobString) {
+  DateTime dateOfBirth = DateTime.parse(dobString.substring(0, 10));
+  final now = DateTime.now();
+  int age = now.year - dateOfBirth.year;
+  if (now.month < dateOfBirth.month || (now.month == dateOfBirth.month && now.day < dateOfBirth.day)) {
+    age--;
+  }
+  return "$age years old";
+}

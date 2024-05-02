@@ -12,7 +12,7 @@ class ClientModel {
   String password;
   String image;
   List<FeedbackModel> feedbackes;
-  String token;
+  String? token;
   String email = 'chihab@gmail.com';
   ClientModel({
     required this.id,
@@ -50,7 +50,7 @@ class ClientModel {
       phoneNumber: map['phoneNumber'] as String,
       password: '',
       image: map['image'] as String,
-      token: map['token'] as String,
+      token: map['token'] as String?,
       feedbackes: List<FeedbackModel>.from(
         (map['feedback'] as List<dynamic>).map<FeedbackModel>(
           (x) => FeedbackModel.fromMap(x as Map<String, dynamic>),
@@ -69,19 +69,19 @@ class DriverModel {
   String name;
   String familyname;
   String address;
-  String dateofbirth;
+  String birthday;
   String phoneNumber;
   String image;
   String password;
   List<FeedbackModel> feedbackes;
   bool isAccepted;
-  String token;
+  String? token;
   DriverModel({
     required this.id,
     required this.name,
     required this.familyname,
     required this.address,
-    required this.dateofbirth,
+    required this.birthday,
     required this.phoneNumber,
     required this.image,
     required this.password,
@@ -95,7 +95,7 @@ class DriverModel {
       'name': name,
       'familyname': familyname,
       'address': address,
-      'dateofbirth': dateofbirth,
+      'birthday': birthday,
       'phoneNumber': phoneNumber,
       'image': image,
       'password': password,
@@ -108,7 +108,7 @@ class DriverModel {
       name: map['name'] as String,
       familyname: map['familyname'] as String,
       address: map['address'] as String,
-      dateofbirth: map['dateofbirth'] as String,
+      birthday: map['birthday'] as String,
       phoneNumber: map['phoneNumber'] as String,
       image: map['image'] as String,
       password: '',
@@ -118,7 +118,7 @@ class DriverModel {
         ),
       ),
       isAccepted: map['isAccepted'] as bool,
-      token: map['token'] as String,
+      token: map['token'] as String?,
     );
   }
 
@@ -192,7 +192,7 @@ class FeedbackModel {
 }
 
 class TravelModel {
-  String driverId;
+  String travelId;
   String placeOfDeparture;
   String timeOfDeparture;
   String placeOfArrival;
@@ -200,12 +200,15 @@ class TravelModel {
   int numberOfPlaces;
   String carName;
   String carImage;
-  int priceOfPlace;
-  bool allowSloking;
-  bool allowAnimals;
+  int placePrice;
+  bool allowSmoking;
+  bool allowPets;
   List<RequestModel> requests;
+  DriverModel driver;
+  String baggage;
+  String dateOfDeparture;
   TravelModel({
-    required this.driverId,
+    required this.travelId,
     required this.placeOfDeparture,
     required this.timeOfDeparture,
     required this.placeOfArrival,
@@ -213,47 +216,55 @@ class TravelModel {
     required this.numberOfPlaces,
     required this.carName,
     required this.carImage,
-    required this.priceOfPlace,
-    required this.allowSloking,
-    required this.allowAnimals,
+    required this.placePrice,
+    required this.allowSmoking,
+    required this.allowPets,
     required this.requests,
+    required this.driver,
+    required this.baggage,
+    required this.dateOfDeparture,
   });
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'driverId': driverId,
       'placeOfDeparture': placeOfDeparture,
       'timeOfDeparture': timeOfDeparture,
       'placeOfArrival': placeOfArrival,
       'timeOfArrival': timeOfArrival,
       'numberOfPlaces': numberOfPlaces,
-      'carName': carName,
-      'carImage': carImage,
-      'priceOfPlace': priceOfPlace,
-      'allowSloking': allowSloking,
-      'allowAnimals': allowAnimals,
-      'requests': requests.map((x) => x.toMap()).toList(),
+      'carname': carName,
+      'carimage': carImage,
+      'placeprice': placePrice,
+      'allowSmoking': allowSmoking,
+      'allowPets': allowPets,
+      'requestList': requests.map((x) => x.toMap()).toList(),
+      'driverinf': driver,
+      'Baggage': baggage,
+      'dateOfDeparture': dateOfDeparture,
     };
   }
 
   factory TravelModel.fromMap(Map<String, dynamic> map) {
     return TravelModel(
-      driverId: map['driverId'] as String,
-      placeOfDeparture: map['placeOfDeparture'] as String,
-      timeOfDeparture: map['timeOfDeparture'] as String,
-      placeOfArrival: map['placeOfArrival'] as String,
-      timeOfArrival: map['timeOfArrival'] as String,
-      numberOfPlaces: map['numberOfPlaces'] as int,
-      carName: map['carName'] as String,
-      carImage: map['carImage'] as String,
-      priceOfPlace: map['priceOfPlace'] as int,
-      allowSloking: map['allowSloking'] as bool,
-      allowAnimals: map['allowAnimals'] as bool,
+      travelId: map['_id'] as String,
+      placeOfDeparture: map['PlaceOfDeparture'] as String,
+      placeOfArrival: map['PlaceOfArrival'] as String,
+      timeOfDeparture: map['TimeOfDeparture'] as String,
+      timeOfArrival: map['TimeOfArrival'] as String,
+      numberOfPlaces: map['NumberOfPlaces'] as int,
+      carName: map['carname'] as String,
+      carImage: map['carimage'] as String,
+      placePrice: map['placeprice'] as int,
+      allowSmoking: map['allowSmoking'] as bool,
+      allowPets: map['allowPets'] as bool,
       requests: List<RequestModel>.from(
-        (map['requests'] as List<int>).map<RequestModel>(
+        (map['requestList'] as List).map<RequestModel>(
           (x) => RequestModel.fromMap(x as Map<String, dynamic>),
         ),
       ),
+      driver: DriverModel.fromMap(map['driverinf'] as Map<String, dynamic>),
+      baggage: map['Baggage'] as String,
+      dateOfDeparture: map['dateOfDeparture'] as String,
     );
   }
 
