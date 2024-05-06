@@ -4,6 +4,7 @@ import 'package:carpool/domain/usecase/admin/login_usecase.dart';
 import 'package:carpool/presentation/components/constants.dart';
 import 'package:carpool/presentation/components/strings_manager.dart';
 import 'package:carpool/presentation/components/widgets.dart';
+import 'package:carpool/presentation/screens/admin/screens/main.dart';
 import 'package:carpool/presentation/screens/auth/admin%20login/cubit/login_states.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -53,8 +54,13 @@ class AdminLoginCubit extends Cubit<AdminLoginStates> {
       (driver) {
         _appPrefences.setId(driver.id);
         _appPrefences.setToken(driver.token!);
-        _appPrefences.setIsClient(isClient);
-
+        _appPrefences.setRole('admin');
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const AdminMainView(),
+            ),
+            (route) => false);
         emit(AdminLoginSuccessState());
       },
     );

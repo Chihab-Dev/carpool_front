@@ -197,7 +197,7 @@ class RegisterCubit extends Cubit<RegisterStates> {
         (data) {
           _appPrefences.setId(data.id);
           _appPrefences.setToken(data.token!);
-          _appPrefences.setIsClient(isClient);
+          _appPrefences.setRole('client');
           Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
@@ -233,7 +233,7 @@ class RegisterCubit extends Cubit<RegisterStates> {
         (data) {
           _appPrefences.setId(data.id);
           _appPrefences.setToken(data.token!);
-          _appPrefences.setIsClient(isClient);
+          _appPrefences.setRole('driver');
           Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(

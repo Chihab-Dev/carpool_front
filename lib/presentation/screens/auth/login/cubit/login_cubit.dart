@@ -60,7 +60,7 @@ class LoginCubit extends Cubit<LoginStates> {
         (data) {
           _appPrefences.setId(data.id);
           _appPrefences.setToken(data.token!);
-          _appPrefences.setIsClient(isClient);
+          _appPrefences.setRole('client');
           Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
@@ -81,7 +81,7 @@ class LoginCubit extends Cubit<LoginStates> {
         (driver) {
           _appPrefences.setId(driver.id);
           _appPrefences.setToken(driver.token!);
-          _appPrefences.setIsClient(isClient);
+          _appPrefences.setRole('driver');
           if (driver.isAccepted) {
             Navigator.pushAndRemoveUntil(
               context,

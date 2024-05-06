@@ -6,6 +6,7 @@ import 'package:carpool/presentation/screens/Client/home/cubit/home_cubit.dart';
 import 'package:carpool/presentation/screens/Client/main/view/main_view.dart';
 import 'package:carpool/presentation/screens/Driver/home/cubit/driver_home_cubit.dart';
 import 'package:carpool/presentation/screens/Driver/main/view/driver_main_view.dart';
+import 'package:carpool/presentation/screens/admin/screens/main.dart';
 import 'package:carpool/presentation/screens/auth/travellerOrDriver/travellerOrDriver.dart';
 import 'package:carpool/presentation/screens/onboarding/onboarding.dart';
 import 'package:flutter/material.dart';
@@ -28,11 +29,11 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    _appPrefences.removeId();
-    _appPrefences.removeIsClient();
+    // _appPrefences.removeId();
+    // _appPrefences.removeIsClient();
     bool isOnboardingWatched = _appPrefences.getWatchedOnBoarding();
     String id = _appPrefences.getId();
-    bool isClient = _appPrefences.getIsClient();
+    String role = _appPrefences.getRole();
 
     return MultiBlocProvider(
       providers: [
@@ -68,9 +69,13 @@ class MainApp extends StatelessWidget {
             home: isOnboardingWatched
                 ? id == ''
                     ? const TravellerOrDriverView()
-                    : isClient
+                    : role == 'client'
                         ? const MainView()
-                        : const DriverMainView()
+                        : role == 'driver'
+                            ? const DriverMainView()
+                            : role == 'admin'
+                                ? const AdminMainView()
+                                : const TravellerOrDriverView()
                 : OnboardingView(),
           );
         },

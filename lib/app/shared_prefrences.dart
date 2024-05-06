@@ -3,7 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 const String PREFS_KEY_ON_BOARDING = "PREFS_KEY_ON_BOARDING";
 const String PREFS_KEY_ON_ID = "PREFS_KEY_ON_ID";
 const String PREFS_KEY_ON_TOKEN = "PREFS_KEY_ON_TOKEN";
-const String PREFS_KEY_ON_ISCLIENT = "PREFS_KEY_ON_ISCLIENT";
+const String PREFS_KEY_ON_ROLE = "PREFS_KEY_ON_ROLE";
 
 class AppPrefences {
   final SharedPreferences _sharedPreferences;
@@ -24,16 +24,16 @@ class AppPrefences {
   }
 
   // is client ::
-  Future<void> setIsClient(bool isClient) async {
-    await _sharedPreferences.setBool(PREFS_KEY_ON_ISCLIENT, isClient);
+  Future<void> setRole(String role) async {
+    await _sharedPreferences.setString(PREFS_KEY_ON_ROLE, role);
   }
 
-  bool getIsClient() {
-    return _sharedPreferences.getBool(PREFS_KEY_ON_ISCLIENT) ?? true;
+  String getRole() {
+    return _sharedPreferences.getString(PREFS_KEY_ON_ROLE) ?? '';
   }
 
-  void removeIsClient() async {
-    await _sharedPreferences.remove(PREFS_KEY_ON_ISCLIENT);
+  void removeRole() async {
+    await _sharedPreferences.remove(PREFS_KEY_ON_ROLE);
   }
 
   // id ::

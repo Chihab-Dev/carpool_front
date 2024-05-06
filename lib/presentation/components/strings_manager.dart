@@ -93,4 +93,9 @@ class AppStrings {
   static const String baggageLAllowed = 'Baggage up to size L allowed';
 
   static const String requestToBook = 'Request to book';
+
+  static const String drivers = 'Drivers';
+  static const String travels = 'Travles';
+
+  static const String clients = 'Clients';
 }

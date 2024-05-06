@@ -19,4 +19,5 @@ class ImageAsset {
 
 class LottieAsset {
   static const String map = "$lottiePath/map.json";
+  static const String admin = "$lottiePath/admin.json";
 }
