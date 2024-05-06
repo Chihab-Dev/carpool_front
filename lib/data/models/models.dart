@@ -129,28 +129,44 @@ class DriverModel {
 
 class AdminModel {
   String id;
+  String familyName;
   String name;
+  String email;
+  String image;
   String phoneNumber;
-
+  String? password;
+  String? token;
   AdminModel({
     required this.id,
+    required this.familyName,
     required this.name,
+    required this.email,
+    required this.image,
     required this.phoneNumber,
+    this.password,
+    this.token,
   });
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'id': id,
+      'familyname': familyName,
       'name': name,
+      'email': email,
+      'image': image,
       'phoneNumber': phoneNumber,
     };
   }
 
   factory AdminModel.fromMap(Map<String, dynamic> map) {
     return AdminModel(
-      id: map['id'] as String,
+      id: map['_id'] as String,
+      familyName: map['familyname'] as String,
       name: map['name'] as String,
+      email: map['email'] as String,
+      image: map['image'] as String,
       phoneNumber: map['phoneNumber'] as String,
+      token: map['token'] != null ? map['token'] as String : null,
+      password: map['password'] != null ? map['password'] as String : null,
     );
   }
 

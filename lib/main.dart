@@ -28,8 +28,8 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // _appPrefences.removeId();
-    // _appPrefences.removeIsClient();
+    _appPrefences.removeId();
+    _appPrefences.removeIsClient();
     bool isOnboardingWatched = _appPrefences.getWatchedOnBoarding();
     String id = _appPrefences.getId();
     bool isClient = _appPrefences.getIsClient();

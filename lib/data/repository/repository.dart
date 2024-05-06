@@ -151,4 +151,20 @@ class RepositoryImpl extends Repository {
       return left(Failure('No internet connection'));
     }
   }
+
+  //----------------------------------------------------- ADMIN -----------------------------------------------------
+  @override
+  Future<Either<Failure, AdminModel>> adminLogin(String phoneNumber, String password) async {
+    if (await networkInfo.isConnected()) {
+      try {
+        final result = await remoteDataSource.adminLogin(phoneNumber, password);
+        return right(result);
+      } catch (e) {
+        print(e.toString());
+        return left(Failure(e.toString()));
+      }
+    } else {
+      return left(Failure('No internet connection'));
+    }
+  }
 }

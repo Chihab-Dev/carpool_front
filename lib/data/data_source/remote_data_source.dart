@@ -20,11 +20,16 @@ abstract class RemoteDataSource {
   Future<DriverModel> driverRegister(DriverModel driver);
   Future<DriverModel> getDriverById(String id);
   Future<void> createTravel(TravelModel travelModel);
+
+  //----------------------------------------------------- ADMIN -----------------------------------------------------
+  Future<AdminModel> adminLogin(String phoneNumber, String password);
 }
 
 class RemoteDataSourceImpl extends RemoteDataSource {
   final AppPrefences _appPrefences = AppPrefences(getIt());
+
   //----------------------------------------------------- CLIENT -----------------------------------------------------
+
   @override
   Future<ClientModel> clientLogin(String phoneNumber, String password) async {
     final url = Uri.parse("${ApiConstance.clientBaseUrl}login");
@@ -184,6 +189,7 @@ class RemoteDataSourceImpl extends RemoteDataSource {
       throw response.body;
     }
   }
+
   //----------------------------------------------------- DRIVER -----------------------------------------------------
 
   @override
@@ -304,6 +310,39 @@ class RemoteDataSourceImpl extends RemoteDataSource {
       print("🔥🌟${response.body}");
     } else {
       print('🛑 createTravel FAILURE 🛑');
+      print(response.body);
+      throw response.body;
+    }
+  }
+
+  //----------------------------------------------------- ADMIN -----------------------------------------------------
+
+  @override
+  Future<AdminModel> adminLogin(String phoneNumber, String password) async {
+    final url = Uri.parse("${ApiConstance.adminBaseUrl}login");
+    final headers = {
+      "Content-Type": ApiConstance.contentType,
+    };
+    final json = {
+      "phoneNumber": phoneNumber,
+      "password": password,
+    };
+    final Response response = await post(
+      url,
+      headers: headers,
+      body: jsonEncode(json),
+    );
+
+    final statusCode = response.statusCode;
+
+    if (statusCode == 200) {
+      print('✅ adminLogin SUCCESS ✅');
+      print("🔥🌟${response.body}");
+      var x = AdminModel.fromJson(response.body);
+      print("😎😎 $x");
+      return x;
+    } else {
+      print('🛑 adminLogin FAILURE 🛑');
       print(response.body);
       throw response.body;
     }

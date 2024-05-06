@@ -5,6 +5,7 @@ import 'package:carpool/presentation/components/color_manager.dart';
 import 'package:carpool/presentation/components/strings_manager.dart';
 import 'package:carpool/presentation/components/styles_manager.dart';
 import 'package:carpool/presentation/components/widgets.dart';
+import 'package:carpool/presentation/screens/auth/admin%20login/view/login.dart';
 import 'package:carpool/presentation/screens/auth/login/view/login.dart';
 import 'package:flutter/material.dart';
 
@@ -14,6 +15,25 @@ class TravellerOrDriverView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: ColorManager.white,
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const AdminLoginView(),
+                  ));
+            },
+            icon: Icon(
+              Icons.admin_panel_settings_outlined,
+              color: ColorManager.yellow,
+            ),
+          ),
+        ],
+      ),
+      extendBodyBehindAppBar: true,
       backgroundColor: ColorManager.white,
       body: Center(
         child: Padding(
