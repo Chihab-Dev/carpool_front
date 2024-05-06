@@ -8,8 +8,10 @@ import 'package:flutter/material.dart';
 class CustomLargeButton extends StatelessWidget {
   final String label;
   final Function()? onPressed;
+  final Color? color;
   const CustomLargeButton({
     super.key,
+    this.color,
     required this.label,
     required this.onPressed,
   });
@@ -22,7 +24,7 @@ class CustomLargeButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: ColorManager.yellow,
+          backgroundColor: color ?? ColorManager.yellow,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppPadding.p10),
           ),

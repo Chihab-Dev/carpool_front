@@ -23,6 +23,13 @@ abstract class RemoteDataSource {
 
   //----------------------------------------------------- ADMIN -----------------------------------------------------
   Future<AdminModel> adminLogin(String phoneNumber, String password);
+  Future<List<DriverModel>> getAllDrivers();
+  Future<List<TravelModel>> getAllTravels();
+  Future<List<ClientModel>> getAllClients();
+
+  Future<void> acceptDriver(String id);
+  Future<void> rejectDriver(String id);
+  Future<void> deleteDriver(String id);
 }
 
 class RemoteDataSourceImpl extends RemoteDataSource {
@@ -347,6 +354,199 @@ class RemoteDataSourceImpl extends RemoteDataSource {
       throw response.body;
     }
   }
+
+  @override
+  Future<List<DriverModel>> getAllDrivers() async {
+    String token = _appPrefences.getToken();
+
+    final url = Uri.parse("${ApiConstance.driverBaseUrl}admin/drivers");
+    final headers = {
+      "Content-Type": ApiConstance.contentType,
+      "token": token,
+    };
+
+    final Response response = await get(
+      url,
+      headers: headers,
+    );
+
+    final statusCode = response.statusCode;
+
+    if (statusCode == 200) {
+      print('✅ getAllDrivers SUCCESS ✅');
+      print("🔥🌟${response.body}");
+      final decodedBody = convert.jsonDecode(response.body) as List<dynamic>;
+
+      var x = List<DriverModel>.from(
+        decodedBody.map(
+          (driver) {
+            return DriverModel.fromMap(driver);
+          },
+        ),
+      );
+      print("😎😎 $x");
+      return x;
+    } else {
+      print('🛑 getAllDrivers FAILURE 🛑');
+      print(response.body);
+      throw response.body;
+    }
+  }
+
+  @override
+  Future<List<ClientModel>> getAllClients() async {
+    String token = _appPrefences.getToken();
+
+    final url = Uri.parse("${ApiConstance.clientBaseUrl}admin/clients");
+    final headers = {
+      "Content-Type": ApiConstance.contentType,
+      "token": token,
+    };
+
+    final Response response = await get(
+      url,
+      headers: headers,
+    );
+
+    final statusCode = response.statusCode;
+
+    if (statusCode == 200) {
+      print('✅ getAllClients SUCCESS ✅');
+      print("🔥🌟${response.body}");
+      final decodedBody = convert.jsonDecode(response.body) as List<dynamic>;
+      var x = List<ClientModel>.from(
+        decodedBody.map(
+          (client) {
+            return ClientModel.fromMap(client);
+          },
+        ),
+      );
+      print("😎😎 $x");
+      return x;
+    } else {
+      print('🛑 getAllClients FAILURE 🛑');
+      print(response.body);
+      throw response.body;
+    }
+  }
+
+  @override
+  Future<List<TravelModel>> getAllTravels() async {
+    String token = _appPrefences.getToken();
+
+    final url = Uri.parse("${ApiConstance.travelsBaseUrl}/admin/travels");
+    final headers = {
+      "Content-Type": ApiConstance.contentType,
+      "token": token,
+    };
+
+    final Response response = await get(
+      url,
+      headers: headers,
+    );
+
+    final statusCode = response.statusCode;
+
+    if (statusCode == 200) {
+      print('✅ GET ALL TRAVELS  SUCCESS ✅');
+      print("🔥🌟${response.body}");
+      final decodedBody = convert.jsonDecode(response.body) as List<dynamic>;
+
+      var x = List<TravelModel>.from(
+        decodedBody.map(
+          (travelData) {
+            return TravelModel.fromMap(travelData);
+          },
+        ),
+      );
+      return x;
+    } else {
+      print('🛑 getAllTravels FAILURE 🛑');
+      print(response.body);
+      throw response.body;
+    }
+  }
+
+  @override
+  Future<void> acceptDriver(String id) async {
+    String token = _appPrefences.getToken();
+
+    final url = Uri.parse("${ApiConstance.adminBaseUrl}admin/driver/$id/accept");
+    final headers = {
+      "Content-Type": ApiConstance.contentType,
+      "token": token,
+    };
+
+    final Response response = await put(
+      url,
+      headers: headers,
+    );
+
+    final statusCode = response.statusCode;
+
+    if (statusCode == 200) {
+      print('✅ acceptDriver  SUCCESS ✅');
+      print("🔥🌟${response.body}");
+    } else {
+      print('🛑 acceptDriver FAILURE 🛑');
+      print(response.body);
+      throw response.body;
+    }
+  }
+
+  @override
+  Future<void> rejectDriver(String id) async {
+    String token = _appPrefences.getToken();
+
+    final url = Uri.parse("${ApiConstance.adminBaseUrl}admin/driver/$id/reject");
+    final headers = {
+      "Content-Type": ApiConstance.contentType,
+      "token": token,
+    };
+
+    final Response response = await put(
+      url,
+      headers: headers,
+    );
+
+    final statusCode = response.statusCode;
+
+    if (statusCode == 200) {
+      print('✅ rejectDriver  SUCCESS ✅');
+      print("🔥🌟${response.body}");
+    } else {
+      print('🛑 rejectDriver FAILURE 🛑');
+      print(response.body);
+      throw response.body;
+    }
+  }
+
+  @override
+  Future<void> deleteDriver(String id) async {
+    String token = _appPrefences.getToken();
+
+    final url = Uri.parse("${ApiConstance.adminBaseUrl}admin/driver/$id");
+    final headers = {
+      "Content-Type": ApiConstance.contentType,
+      "token": token,
+    };
+
+    final Response response = await delete(
+      url,
+      headers: headers,
+    );
+
+    final statusCode = response.statusCode;
+
+    if (statusCode == 200) {
+      print('✅ deleteDriver  SUCCESS ✅');
+      print("🔥🌟${response.body}");
+    } else {
+      print('🛑 deleteDriver FAILURE 🛑');
+      print(response.body);
+      throw response.body;
+    }
+  }
 }
 
 // bool validateTravelJson(Map<String, dynamic> map) {
@@ -378,3 +578,6 @@ class RemoteDataSourceImpl extends RemoteDataSource {
 //   // }
 //   return true;
 // }
+
+
+

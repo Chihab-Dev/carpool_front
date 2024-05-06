@@ -167,4 +167,94 @@ class RepositoryImpl extends Repository {
       return left(Failure('No internet connection'));
     }
   }
+
+  @override
+  Future<Either<Failure, List<ClientModel>>> getAllClients() async {
+    if (await networkInfo.isConnected()) {
+      try {
+        final result = await remoteDataSource.getAllClients();
+        return right(result);
+      } catch (e) {
+        print(e.toString());
+        return left(Failure(e.toString()));
+      }
+    } else {
+      return left(Failure('No internet connection'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<DriverModel>>> getAllDrivers() async {
+    if (await networkInfo.isConnected()) {
+      try {
+        final result = await remoteDataSource.getAllDrivers();
+        return right(result);
+      } catch (e) {
+        print(e.toString());
+        return left(Failure(e.toString()));
+      }
+    } else {
+      return left(Failure('No internet connection'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<TravelModel>>> getAllTravels() async {
+    if (await networkInfo.isConnected()) {
+      try {
+        final result = await remoteDataSource.getAllTravels();
+        return right(result);
+      } catch (e) {
+        print(e.toString());
+        return left(Failure(e.toString()));
+      }
+    } else {
+      return left(Failure('No internet connection'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> acceptDriver(String id) async {
+    if (await networkInfo.isConnected()) {
+      try {
+        final result = await remoteDataSource.acceptDriver(id);
+        return right(result);
+      } catch (e) {
+        print(e.toString());
+        return left(Failure(e.toString()));
+      }
+    } else {
+      return left(Failure('No internet connection'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> rejectDriver(String id) async {
+    if (await networkInfo.isConnected()) {
+      try {
+        final result = await remoteDataSource.rejectDriver(id);
+        return right(result);
+      } catch (e) {
+        print(e.toString());
+        return left(Failure(e.toString()));
+      }
+    } else {
+      return left(Failure('No internet connection'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> deleteDriver(String id) async {
+    if (await networkInfo.isConnected()) {
+      try {
+        final result = await remoteDataSource.deleteDriver(id);
+        return right(result);
+      } catch (e) {
+        print(e.toString());
+        return left(Failure(e.toString()));
+      }
+    } else {
+      return left(Failure('No internet connection'));
+    }
+  }
 }

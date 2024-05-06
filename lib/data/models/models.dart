@@ -268,15 +268,16 @@ class TravelModel {
       timeOfArrival: map['TimeOfArrival'] as String,
       numberOfPlaces: map['NumberOfPlaces'] as int,
       carName: map['carname'] as String,
-      carImage: map['carimage'] as String,
+      carImage: map['carImage'] as String,
       placePrice: map['placeprice'] as int,
       allowSmoking: map['allowSmoking'] as bool,
       allowPets: map['allowPets'] as bool,
-      requests: List<RequestModel>.from(
-        (map['requestList'] as List).map<RequestModel>(
-          (x) => RequestModel.fromMap(x as Map<String, dynamic>),
-        ),
-      ),
+      // requests: List<RequestModel>.from(
+      //   (map['requestList'] as List).map<RequestModel>(
+      //     (x) => RequestModel.fromMap(x as Map<String, dynamic>),
+      //   ),
+      // ),
+      requests: [],
       driver: DriverModel.fromMap(map['driverinf'] as Map<String, dynamic>),
       baggage: map['Baggage'] as String,
       dateOfDeparture: map['dateOfDeparture'] as String,

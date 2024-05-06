@@ -18,4 +18,10 @@ abstract class Repository {
 
   //----------------------------------------------------- ADMIN -----------------------------------------------------
   Future<Either<Failure, AdminModel>> adminLogin(String phoneNumber, String password);
+  Future<Either<Failure, List<DriverModel>>> getAllDrivers();
+  Future<Either<Failure, List<ClientModel>>> getAllClients();
+  Future<Either<Failure, List<TravelModel>>> getAllTravels();
+  Future<Either<Failure, void>> acceptDriver(String id);
+  Future<Either<Failure, void>> rejectDriver(String id);
+  Future<Either<Failure, void>> deleteDriver(String id);
 }

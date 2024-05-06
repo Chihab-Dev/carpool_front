@@ -6,6 +6,7 @@ import 'package:carpool/presentation/screens/Client/home/cubit/home_cubit.dart';
 import 'package:carpool/presentation/screens/Client/main/view/main_view.dart';
 import 'package:carpool/presentation/screens/Driver/home/cubit/driver_home_cubit.dart';
 import 'package:carpool/presentation/screens/Driver/main/view/driver_main_view.dart';
+import 'package:carpool/presentation/screens/admin/cubit/cubit.dart';
 import 'package:carpool/presentation/screens/admin/screens/main.dart';
 import 'package:carpool/presentation/screens/auth/travellerOrDriver/travellerOrDriver.dart';
 import 'package:carpool/presentation/screens/onboarding/onboarding.dart';
@@ -35,6 +36,10 @@ class MainApp extends StatelessWidget {
     String id = _appPrefences.getId();
     String role = _appPrefences.getRole();
 
+    // RemoteDataSource remoteDataSource = RemoteDataSourceImpl();
+
+    // remoteDataSource.getAllClients();
+
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -42,6 +47,9 @@ class MainApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => DriverHomeCubit(),
+        ),
+        BlocProvider(
+          create: (context) => AdminCubit(),
         ),
       ],
       child: ScreenUtilInit(
