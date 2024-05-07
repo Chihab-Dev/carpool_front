@@ -1,7 +1,9 @@
 import 'package:carpool/app/service_locator.dart';
 import 'package:carpool/data/models/models.dart';
 import 'package:carpool/domain/usecase/admin/accept_driver_usecase.dart';
+import 'package:carpool/domain/usecase/admin/delete_client_usecase.dart';
 import 'package:carpool/domain/usecase/admin/delete_driver_usecase.dart';
+import 'package:carpool/domain/usecase/admin/delete_travel_usecase.dart';
 import 'package:carpool/domain/usecase/admin/get_all_clients_usecase.dart';
 import 'package:carpool/domain/usecase/admin/get_all_drivers_usecase.dart';
 import 'package:carpool/domain/usecase/admin/get_all_travels_usecase.dart';
@@ -22,8 +24,11 @@ class AdminCubit extends Cubit<AdminStates> {
   final AdminAcceptDriverUsecase _adminAcceptDriverUsecase = AdminAcceptDriverUsecase(getIt());
   final AdminRejectDriverUsecase _adminRejectDriverUsecase = AdminRejectDriverUsecase(getIt());
   final AdminDeleteDriverUsecase _adminDeleteDriverUsecase = AdminDeleteDriverUsecase(getIt());
+  final AdminDeleteClientUsecase _adminDeleteClientUsecase = AdminDeleteClientUsecase(getIt());
+  final AdminDeleteTravelUsecase _adminDeleteTravelUsecase = AdminDeleteTravelUsecase(getIt());
 
-  List<DriverModel> drivers = [];
+  List<DriverModel> acceptedDrivers = [];
+  List<DriverModel> notAcceptedDrivers = [];
   List<ClientModel> clients = [];
   List<TravelModel> travels = [];
 
@@ -35,7 +40,15 @@ class AdminCubit extends Cubit<AdminStates> {
         emit(AdminGetAllDriversErrorState());
       },
       (data) {
-        drivers = data;
+        acceptedDrivers = [];
+        notAcceptedDrivers = [];
+        for (var driver in data) {
+          if (driver.isAccepted == true) {
+            acceptedDrivers.add(driver);
+          } else {
+            notAcceptedDrivers.add(driver);
+          }
+        }
         emit(AdminGetAllDriversSuccessState());
       },
     );
@@ -105,6 +118,34 @@ class AdminCubit extends Cubit<AdminStates> {
       (data) {
         Navigator.pop(context);
         emit(AdminDeleteDriverSuccessState());
+      },
+    );
+  }
+
+  Future<void> deleteClient(BuildContext context, String id) async {
+    emit(AdminDeleteClientLoadingState());
+    (await _adminDeleteClientUsecase.execute(id)).fold(
+      (failure) {
+        errorToast(failure.message).show(context);
+        emit(AdminDeleteClientErrorState());
+      },
+      (data) {
+        Navigator.pop(context);
+        emit(AdminDeleteClientSuccessState());
+      },
+    );
+  }
+
+  Future<void> deleteTravel(BuildContext context, String id) async {
+    emit(AdminDeleteTravelLoadingState());
+    (await _adminDeleteTravelUsecase.execute(id)).fold(
+      (failure) {
+        errorToast(failure.message).show(context);
+        emit(AdminDeleteTravelErrorState());
+      },
+      (data) {
+        Navigator.pop(context);
+        emit(AdminDeleteTravelSuccessState());
       },
     );
   }

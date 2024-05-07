@@ -6,7 +6,8 @@ import 'package:carpool/presentation/components/color_manager.dart';
 import 'package:carpool/presentation/components/strings_manager.dart';
 import 'package:carpool/presentation/components/styles_manager.dart';
 import 'package:carpool/presentation/components/widgets.dart';
-import 'package:carpool/presentation/screens/Client/home/cubit/home_cubit.dart';
+import 'package:carpool/presentation/screens/admin/cubit/cubit.dart';
+import 'package:carpool/presentation/screens/admin/cubit/states.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,17 +15,17 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class TravelDetailsView extends StatelessWidget {
-  const TravelDetailsView(this.travel, {super.key});
+class AdminTravelDetailsView extends StatelessWidget {
+  const AdminTravelDetailsView(this.travel, {super.key});
 
   final TravelModel travel;
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<HomeCubit, HomeState>(
+    return BlocConsumer<AdminCubit, AdminStates>(
       listener: (context, state) {},
       builder: (context, state) {
-        var cubit = HomeCubit.get(context);
+        var cubit = AdminCubit.get(context);
         return Scaffold(
           extendBodyBehindAppBar: true,
           appBar: AppBar(
@@ -289,17 +290,18 @@ class TravelDetailsView extends StatelessWidget {
                 )
               ],
             ),
-            child: state is HomeRequestToBookLoadingState
-                ? Center(
+            child: state is AdminDeleteTravelLoadingState
+                ? const Center(
                     child: CircularProgressIndicator(
-                      color: ColorManager.yellow,
+                      color: Colors.red,
                     ),
                   )
                 : Center(
                     child: CustomLargeButton(
-                      label: AppStrings.requestToBook,
+                      label: "Delete travel",
+                      color: Colors.red,
                       onPressed: () {
-                        cubit.requestToBook(travel.travelId, context);
+                        cubit.deleteTravel(context, travel.travelId);
                       },
                     ),
                   ),

@@ -58,7 +58,7 @@ class DriverMyTravelView extends StatelessWidget {
                         ),
                       ),
                       startChild: cubit.pickedFromTime != null
-                          ? Text("${cubit.pickedFromTime!.hour}:${cubit.pickedFromTime!.minute}",
+                          ? Text(("${cubit.pickedFromTime}"),
                               style: getMeduimStyle(color: ColorManager.dark))
                           : Text("00:00", style: getMeduimStyle(color: ColorManager.dark)),
                       endChild: Text("${cubit.pickedFromLocation?.address.toString()}",
@@ -88,8 +88,7 @@ class DriverMyTravelView extends StatelessWidget {
                         ),
                       ),
                       startChild: cubit.pickedtoTime != null
-                          ? Text("${cubit.pickedtoTime!.hour}:${cubit.pickedtoTime!.minute}",
-                              style: getMeduimStyle(color: ColorManager.dark))
+                          ? Text("${cubit.pickedtoTime}", style: getMeduimStyle(color: ColorManager.dark))
                           : Text("00:00", style: getMeduimStyle(color: ColorManager.dark)),
                       endChild: Text("${cubit.pickedToLocation?.address.toString()}",
                           style: getMeduimStyle(color: ColorManager.dark)),

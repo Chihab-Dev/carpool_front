@@ -30,6 +30,9 @@ abstract class RemoteDataSource {
   Future<void> acceptDriver(String id);
   Future<void> rejectDriver(String id);
   Future<void> deleteDriver(String id);
+
+  Future<void> deleteTravel(String id);
+  Future<void> deleteClient(String id);
 }
 
 class RemoteDataSourceImpl extends RemoteDataSource {
@@ -543,6 +546,60 @@ class RemoteDataSourceImpl extends RemoteDataSource {
       print("🔥🌟${response.body}");
     } else {
       print('🛑 deleteDriver FAILURE 🛑');
+      print(response.body);
+      throw response.body;
+    }
+  }
+
+  @override
+  Future<void> deleteClient(String id) async {
+    String token = _appPrefences.getToken();
+
+    final url = Uri.parse("${ApiConstance.adminBaseUrl}admin/client/$id");
+    final headers = {
+      "Content-Type": ApiConstance.contentType,
+      "token": token,
+    };
+
+    final Response response = await delete(
+      url,
+      headers: headers,
+    );
+
+    final statusCode = response.statusCode;
+
+    if (statusCode == 200) {
+      print('✅ deleteClient  SUCCESS ✅');
+      print("🔥🌟${response.body}");
+    } else {
+      print('🛑 deleteClient FAILURE 🛑');
+      print(response.body);
+      throw response.body;
+    }
+  }
+
+  @override
+  Future<void> deleteTravel(String id) async {
+    String token = _appPrefences.getToken();
+
+    final url = Uri.parse("${ApiConstance.adminBaseUrl}admin/travel/$id");
+    final headers = {
+      "Content-Type": ApiConstance.contentType,
+      "token": token,
+    };
+
+    final Response response = await delete(
+      url,
+      headers: headers,
+    );
+
+    final statusCode = response.statusCode;
+
+    if (statusCode == 200) {
+      print('✅ deleteTravel  SUCCESS ✅');
+      print("🔥🌟${response.body}");
+    } else {
+      print('🛑 deleteTravel FAILURE 🛑');
       print(response.body);
       throw response.body;
     }

@@ -37,3 +37,15 @@ class AdminDeleteDriverLoadingState extends AdminStates {}
 class AdminDeleteDriverSuccessState extends AdminStates {}
 
 class AdminDeleteDriverErrorState extends AdminStates {}
+
+class AdminDeleteClientLoadingState extends AdminStates {}
+
+class AdminDeleteClientSuccessState extends AdminStates {}
+
+class AdminDeleteClientErrorState extends AdminStates {}
+
+class AdminDeleteTravelLoadingState extends AdminStates {}
+
+class AdminDeleteTravelSuccessState extends AdminStates {}
+
+class AdminDeleteTravelErrorState extends AdminStates {}

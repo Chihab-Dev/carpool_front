@@ -1,10 +1,15 @@
+import 'package:carpool/app/service_locator.dart';
+import 'package:carpool/app/shared_prefrences.dart';
 import 'package:carpool/presentation/components/appsize.dart';
 import 'package:carpool/presentation/components/assets_manager.dart';
 import 'package:carpool/presentation/components/strings_manager.dart';
 import 'package:carpool/presentation/components/widgets.dart';
 import 'package:carpool/presentation/screens/admin/cubit/cubit.dart';
 import 'package:carpool/presentation/screens/admin/cubit/states.dart';
+import 'package:carpool/presentation/screens/admin/screens/clients.dart';
 import 'package:carpool/presentation/screens/admin/screens/drivers.dart';
+import 'package:carpool/presentation/screens/admin/screens/travels.dart';
+import 'package:carpool/presentation/screens/auth/travellerOrDriver/travellerOrDriver.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
@@ -41,12 +46,43 @@ class AdminMainView extends StatelessWidget {
                   SizedBox(height: AppSize.s18),
                   CustomLargeButton(
                     label: AppStrings.travels,
-                    onPressed: () {},
+                    onPressed: () {
+                      cubit.getAllTravels(context);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const AdminTravelsView(),
+                          ));
+                    },
                   ),
                   SizedBox(height: AppSize.s18),
                   CustomLargeButton(
                     label: AppStrings.clients,
-                    onPressed: () {},
+                    onPressed: () {
+                      cubit.getAllClients(context);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const AdminClientsView(),
+                          ));
+                    },
+                  ),
+                  SizedBox(height: AppSize.s18),
+                  CustomLargeButton(
+                    label: AppStrings.logout,
+                    color: Colors.red,
+                    onPressed: () {
+                      AppPrefences appPrefences = AppPrefences(getIt());
+                      appPrefences.removeId();
+                      appPrefences.removeRole();
+                      appPrefences.removeToken();
+                      Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const TravellerOrDriverView(),
+                          ),
+                          (route) => false);
+                    },
                   ),
                 ],
               ),

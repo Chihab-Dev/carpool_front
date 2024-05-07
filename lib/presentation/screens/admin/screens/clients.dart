@@ -3,16 +3,15 @@ import 'package:carpool/presentation/components/appsize.dart';
 import 'package:carpool/presentation/components/assets_manager.dart';
 import 'package:carpool/presentation/components/color_manager.dart';
 import 'package:carpool/presentation/components/styles_manager.dart';
-import 'package:carpool/presentation/components/widgets.dart';
 import 'package:carpool/presentation/screens/admin/cubit/cubit.dart';
 import 'package:carpool/presentation/screens/admin/cubit/states.dart';
-import 'package:carpool/presentation/screens/admin/screens/driver_profile.dart';
+import 'package:carpool/presentation/screens/admin/screens/client_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class AdminDriversView extends StatelessWidget {
-  const AdminDriversView({super.key});
+class AdminClientsView extends StatelessWidget {
+  const AdminClientsView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,20 +31,19 @@ class AdminDriversView extends StatelessWidget {
             child: SingleChildScrollView(
               physics: const ScrollPhysics(),
               child: Center(
-                child: state is AdminGetAllDriversLoadingState
+                child: state is AdminGetAllClientsLoadingState
                     ? CircularProgressIndicator(
                         color: ColorManager.yellow,
                       )
                     : Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          customSeparator('NOT ACCEPTED'),
                           ListView.builder(
                             physics: const NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
-                            itemCount: cubit.notAcceptedDrivers.length,
+                            itemCount: cubit.clients.length,
                             itemBuilder: (context, index) {
-                              DriverModel driver = cubit.notAcceptedDrivers[index];
+                              ClientModel client = cubit.clients[index];
                               return Padding(
                                 padding: EdgeInsets.only(bottom: AppPadding.p18),
                                 child: Row(
@@ -60,7 +58,7 @@ class AdminDriversView extends StatelessWidget {
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          '${driver.familyname} ${driver.name}',
+                                          '${client.familyname} ${client.name}',
                                           style:
                                               getMeduimStyle(color: ColorManager.dark).copyWith(fontSize: AppSize.s16),
                                         ),
@@ -73,7 +71,7 @@ class AdminDriversView extends StatelessWidget {
                                             ),
                                             SizedBox(width: AppSize.s5),
                                             Text(
-                                              driver.phoneNumber,
+                                              client.phoneNumber,
                                               style: getMeduimStyle(color: ColorManager.dark)
                                                   .copyWith(fontSize: AppSize.s16),
                                             ),
@@ -88,71 +86,7 @@ class AdminDriversView extends StatelessWidget {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (context) => AdminDriverProfileView(driver),
-                                          ),
-                                        );
-                                      },
-                                      icon: Icon(
-                                        FontAwesomeIcons.arrowRight,
-                                        size: AppSize.s25,
-                                        color: ColorManager.yellow,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              );
-                            },
-                          ),
-                          customSeparator('ACCEPTED'),
-                          ListView.builder(
-                            physics: const NeverScrollableScrollPhysics(),
-                            shrinkWrap: true,
-                            itemCount: cubit.acceptedDrivers.length,
-                            itemBuilder: (context, index) {
-                              DriverModel driver = cubit.acceptedDrivers[index];
-                              return Padding(
-                                padding: EdgeInsets.only(bottom: AppPadding.p18),
-                                child: Row(
-                                  children: [
-                                    CircleAvatar(
-                                      radius: AppSize.s30,
-                                      backgroundColor: ColorManager.lightGrey,
-                                      backgroundImage: const AssetImage(ImageAsset.profilePicture),
-                                    ),
-                                    SizedBox(width: AppSize.s12),
-                                    Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          '${driver.familyname} ${driver.name}',
-                                          style:
-                                              getMeduimStyle(color: ColorManager.dark).copyWith(fontSize: AppSize.s16),
-                                        ),
-                                        Row(
-                                          children: [
-                                            Icon(
-                                              Icons.phone,
-                                              size: AppSize.s18,
-                                              color: ColorManager.green,
-                                            ),
-                                            SizedBox(width: AppSize.s5),
-                                            Text(
-                                              driver.phoneNumber,
-                                              style: getMeduimStyle(color: ColorManager.dark)
-                                                  .copyWith(fontSize: AppSize.s16),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                    const Spacer(),
-                                    SizedBox(width: AppSize.s12),
-                                    IconButton(
-                                      onPressed: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => AdminDriverProfileView(driver),
+                                            builder: (context) => AdminClientProfileView(client),
                                           ),
                                         );
                                       },

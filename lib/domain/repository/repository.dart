@@ -24,4 +24,7 @@ abstract class Repository {
   Future<Either<Failure, void>> acceptDriver(String id);
   Future<Either<Failure, void>> rejectDriver(String id);
   Future<Either<Failure, void>> deleteDriver(String id);
+
+  Future<Either<Failure, void>> deleteClient(String id);
+  Future<Either<Failure, void>> deleteTravel(String id);
 }

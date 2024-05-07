@@ -98,4 +98,5 @@ class AppStrings {
   static const String travels = 'Travles';
 
   static const String clients = 'Clients';
+  static const String logout = 'Logout';
 }

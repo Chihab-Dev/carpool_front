@@ -47,8 +47,8 @@ class DriverHomeCubit extends Cubit<DriverHomeState> {
     Navigator.pop(context);
   }
 
-  TimeOfDay? pickedFromTime;
-  TimeOfDay? pickedtoTime;
+  String? pickedFromTime;
+  String? pickedtoTime;
 
   Future<void> pickTime(BuildContext context) async {
     TimeOfDay? time = await showTimePicker(
@@ -56,11 +56,17 @@ class DriverHomeCubit extends Cubit<DriverHomeState> {
       initialTime: TimeOfDay.now(),
     );
     if (isItFrom == true && time != null) {
-      pickedFromTime = time;
-    } else {
-      pickedtoTime = time;
+      pickedFromTime = _formatTime(time);
+    } else if (isItFrom == false && time != null) {
+      pickedtoTime = _formatTime(time);
     }
     emit(DriverHomePickTime());
+  }
+
+  String _formatTime(TimeOfDay time) {
+    String hour = time.hour.toString().padLeft(2, '0');
+    String minute = time.minute.toString().padLeft(2, '0');
+    return '$hour:$minute';
   }
 
   int numberOfSeats = 1;
@@ -194,9 +200,9 @@ class DriverHomeCubit extends Cubit<DriverHomeState> {
       TravelModel(
         travelId: '',
         placeOfDeparture: pickedFromLocation!.address.toString(),
-        timeOfDeparture: "${pickedFromTime!.hour}:${pickedFromTime!.minute}",
+        timeOfDeparture: "$pickedFromTime",
         placeOfArrival: pickedToLocation!.address.toString(),
-        timeOfArrival: "${pickedtoTime!.hour}:${pickedtoTime!.minute}",
+        timeOfArrival: "$pickedtoTime",
         numberOfPlaces: numberOfSeats,
         carName: carNameController.text,
         carImage: image.toString(),
@@ -227,6 +233,7 @@ class DriverHomeCubit extends Cubit<DriverHomeState> {
         emit(DriverCreateTravelErrorState());
       },
       (data) {
+        successToast('✅ CREATED TRAVEL SUCCESS ✅').show(context);
         emit(DriverCreateTravelSuccessState());
       },
     );

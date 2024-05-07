@@ -65,7 +65,7 @@ class DriverHomeView extends StatelessWidget {
                         },
                         icon: cubit.pickedFromTime != null
                             ? Text(
-                                "${cubit.pickedFromTime!.hour}:${cubit.pickedFromTime!.minute}",
+                                "${cubit.pickedFromTime}",
                                 style: getMeduimStyle(color: ColorManager.yellow),
                               )
                             : Icon(
@@ -116,7 +116,7 @@ class DriverHomeView extends StatelessWidget {
                         },
                         icon: cubit.pickedtoTime != null
                             ? Text(
-                                "${cubit.pickedtoTime!.hour}:${cubit.pickedtoTime!.minute}",
+                                "${cubit.pickedtoTime}",
                                 style: getMeduimStyle(color: ColorManager.yellow),
                               )
                             : Icon(
