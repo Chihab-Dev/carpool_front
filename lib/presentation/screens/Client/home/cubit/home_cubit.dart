@@ -210,4 +210,7 @@ class HomeCubit extends Cubit<HomeState> {
       },
     );
   }
+
+
+  Future<void> logout()async{}
 }

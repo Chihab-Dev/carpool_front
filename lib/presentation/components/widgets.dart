@@ -1,8 +1,11 @@
+import 'package:carpool/app/service_locator.dart';
+import 'package:carpool/app/shared_prefrences.dart';
 import 'package:carpool/data/models/models.dart';
 import 'package:carpool/presentation/components/appsize.dart';
 import 'package:carpool/presentation/components/assets_manager.dart';
 import 'package:carpool/presentation/components/color_manager.dart';
 import 'package:carpool/presentation/components/styles_manager.dart';
+import 'package:carpool/presentation/screens/auth/travellerOrDriver/travellerOrDriver.dart';
 import 'package:cherry_toast/cherry_toast.dart';
 import 'package:cherry_toast/resources/arrays.dart';
 import 'package:flutter/material.dart';
@@ -556,4 +559,17 @@ class CustomLargeFormField extends StatelessWidget {
       ),
     );
   }
+}
+
+void logout(BuildContext context) {
+  AppPrefences appPrefences = AppPrefences(getIt());
+  appPrefences.removeId();
+  appPrefences.removeRole();
+  appPrefences.removeToken();
+  Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const TravellerOrDriverView(),
+      ),
+      (route) => false);
 }
