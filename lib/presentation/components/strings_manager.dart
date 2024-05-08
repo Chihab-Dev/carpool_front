@@ -99,4 +99,8 @@ class AppStrings {
 
   static const String clients = 'Clients';
   static const String logout = 'Logout';
+
+  static const String rating = 'Rating';
+  static const String comment = 'Comment';
+  static const String skip = 'Skip';
 }

@@ -14,9 +14,11 @@ class CustomLargeButton extends StatelessWidget {
   final String label;
   final Function()? onPressed;
   final Color? color;
+  final double? width;
   const CustomLargeButton({
     super.key,
     this.color,
+    this.width,
     required this.label,
     required this.onPressed,
   });
@@ -24,7 +26,7 @@ class CustomLargeButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: AppSize.s350,
+      width: width ?? AppSize.s350,
       height: AppSize.s55,
       child: ElevatedButton(
         onPressed: onPressed,
@@ -94,7 +96,7 @@ class CustomFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 350,
+      width: AppSize.s350,
       child: TextFormField(
         controller: textEditingcontroller,
         keyboardType: keyboardType,
@@ -445,4 +447,113 @@ Widget travelDetailsContainer(BuildContext context, TravelModel travel, Widget o
       ),
     ),
   );
+}
+
+typedef RatingChangeCallback = void Function(double rating);
+
+class StarRating extends StatelessWidget {
+  final int starCount;
+  final double rating;
+  final RatingChangeCallback? onRatingChanged;
+  final double? size;
+
+  const StarRating({super.key, this.starCount = 5, this.rating = .0, this.onRatingChanged, this.size});
+
+  Widget buildStar(BuildContext context, int index) {
+    Icon icon;
+    if (index >= rating) {
+      icon = Icon(
+        Icons.star_border,
+        size: size,
+        color: ColorManager.darkGrey,
+      );
+    } else if (index > rating - 1 && index < rating) {
+      icon = Icon(
+        Icons.star_half,
+        size: size,
+        color: ColorManager.yellow,
+      );
+    } else {
+      icon = Icon(
+        Icons.star,
+        size: size,
+        color: ColorManager.yellow,
+      );
+    }
+    return InkResponse(
+      onTap: onRatingChanged == null ? null : () => onRatingChanged!(index + 1.0),
+      child: icon,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(children: List.generate(starCount, (index) => buildStar(context, index)));
+  }
+}
+
+class CustomLargeFormField extends StatelessWidget {
+  final TextEditingController textEditingcontroller;
+  final String label;
+  final TextInputType? keyboardType;
+  final String? errorLabel;
+  final Function(String) onChanged;
+  final IconData? icon;
+  const CustomLargeFormField({
+    super.key,
+    required this.textEditingcontroller,
+    required this.label,
+    required this.keyboardType,
+    required this.errorLabel,
+    required this.onChanged,
+    required this.icon,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      maxLines: 12,
+      maxLength: 200,
+      controller: textEditingcontroller,
+      keyboardType: keyboardType,
+      onChanged: onChanged,
+      decoration: InputDecoration(
+        errorText: errorLabel,
+        suffixIcon: Icon(
+          icon,
+          color: ColorManager.dark.withOpacity(0.5),
+        ),
+        contentPadding: EdgeInsets.symmetric(horizontal: AppPadding.p14, vertical: AppPadding.p16),
+        // floatingLabelBehavior: FloatingLabelBehavior.never,
+        border: InputBorder.none,
+        filled: true,
+        fillColor: ColorManager.lightGrey,
+        alignLabelWithHint: true,
+        label: Text(
+          label,
+          style: getSmallLightStyle(color: ColorManager.dark.withOpacity(0.5)),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(AppSize.s10),
+          borderSide: BorderSide.none,
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(AppSize.s10),
+          borderSide: BorderSide.none,
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(AppSize.s10),
+          borderSide: BorderSide.none,
+        ),
+        disabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(AppSize.s10),
+          borderSide: BorderSide.none,
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(AppSize.s10),
+          borderSide: BorderSide.none,
+        ),
+      ),
+    );
+  }
 }

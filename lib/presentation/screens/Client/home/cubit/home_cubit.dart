@@ -4,6 +4,7 @@ import 'package:carpool/data/models/models.dart';
 import 'package:carpool/domain/usecase/client/get_client_by_id_usecase.dart';
 import 'package:carpool/domain/usecase/client/get_travel_usecase.dart';
 import 'package:carpool/domain/usecase/client/request_to_book_usecase.dart';
+import 'package:carpool/domain/usecase/client/send_feedback_usecase.dart';
 import 'package:carpool/presentation/components/color_manager.dart';
 import 'package:carpool/presentation/components/widgets.dart';
 import 'package:flutter/material.dart';
@@ -127,8 +128,8 @@ class HomeCubit extends Cubit<HomeState> {
 
   Future<void> getTravel(BuildContext context) async {
     emit(HomeGetTravelLoadingState());
-    (await _clientGetTravelUsecase.execute(pickedFromLocation!.address.toString().split(',').first,
-            pickedToLocation!.address.toString().split(',').first))
+    (await _clientGetTravelUsecase.execute(
+            pickedFromLocation!.address.toString(), pickedToLocation!.address.toString()))
         .fold(
       (failure) {
         errorToast(failure.message).show(context);
@@ -173,6 +174,39 @@ class HomeCubit extends Cubit<HomeState> {
       },
       (data) {
         emit(HomeRequestToBookSuccessState());
+      },
+    );
+  }
+
+  double rating = .0;
+  void changeRating(double rate) {
+    rating = rate;
+    emit(HomeChangeRatingState());
+  }
+
+  TextEditingController feedbackCommentController = TextEditingController();
+  final ClientSendFeedbackUsecase _clientSendFeedbackUsecase = ClientSendFeedbackUsecase(getIt());
+
+  bool feedbackValid = false;
+
+  void changeFeedbackValidation() {
+    if (rating != .0 && feedbackCommentController.text.isNotEmpty) {
+      feedbackValid = true;
+      emit(HomeChangeValidationState());
+    }
+  }
+
+  Future<void> sendFeedback(BuildContext context) async {
+    emit(HomeSendFeedbackLoadingState());
+    (await _clientSendFeedbackUsecase.execute(
+            FeedbackModel(note: rating, comment: feedbackCommentController.text, userId: '662d0334d105bfaef2080831')))
+        .fold(
+      (failure) {
+        errorToast(failure.message).show(context);
+        emit(HomeSendFeedbackErrorState());
+      },
+      (data) {
+        emit(HomeSendFeedbackSuccessState());
       },
     );
   }
