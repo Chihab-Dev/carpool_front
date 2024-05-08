@@ -6,6 +6,7 @@ import 'package:carpool/presentation/components/strings_manager.dart';
 import 'package:carpool/presentation/components/styles_manager.dart';
 import 'package:carpool/presentation/components/widgets.dart';
 import 'package:carpool/presentation/screens/Driver/home/cubit/driver_home_cubit.dart';
+import 'package:carpool/presentation/screens/Driver/home/view/driver_feedback.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -58,8 +59,7 @@ class DriverMyTravelView extends StatelessWidget {
                         ),
                       ),
                       startChild: cubit.pickedFromTime != null
-                          ? Text(("${cubit.pickedFromTime}"),
-                              style: getMeduimStyle(color: ColorManager.dark))
+                          ? Text(("${cubit.pickedFromTime}"), style: getMeduimStyle(color: ColorManager.dark))
                           : Text("00:00", style: getMeduimStyle(color: ColorManager.dark)),
                       endChild: Text("${cubit.pickedFromLocation?.address.toString()}",
                           style: getMeduimStyle(color: ColorManager.dark)),
@@ -240,7 +240,7 @@ class DriverMyTravelView extends StatelessWidget {
                     ),
                     separator(),
                     Text(
-                      AppStrings.clientsRequests,
+                      AppStrings.acceptedRequests,
                       style: getMeduimStyle(color: ColorManager.dark),
                     ),
                     SizedBox(height: AppSize.s16),
@@ -276,12 +276,28 @@ class DriverMyTravelView extends StatelessWidget {
                           ),
                         ),
                         // const Spacer(),
+                        // CustomSmallButton(
+                        //   label: AppStrings.accepted,
+                        //   onPressed: () {},
+                        //   backgroundColor: ColorManager.green,
+                        // ),
                         CustomSmallButton(
-                          label: AppStrings.accepted,
-                          onPressed: () {},
-                          backgroundColor: ColorManager.green,
+                          label: AppStrings.feedback,
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const DriverFeedbackView('662d0917155f9414c4d1d0ee'),
+                                ));
+                          },
+                          backgroundColor: ColorManager.yellow,
                         ),
                       ],
+                    ),
+                    separator(),
+                    Text(
+                      AppStrings.pendingRequests,
+                      style: getMeduimStyle(color: ColorManager.dark),
                     ),
                     SizedBox(height: AppSize.s16),
                     Row(
@@ -319,7 +335,7 @@ class DriverMyTravelView extends StatelessWidget {
                         CustomSmallButton(
                           label: AppStrings.reject,
                           onPressed: () {},
-                          backgroundColor: ColorManager.darkGrey,
+                          backgroundColor: Colors.red,
                         ),
                         SizedBox(width: AppSize.s5),
                         CustomSmallButton(

@@ -5,6 +5,7 @@ import 'package:carpool/app/shared_prefrences.dart';
 import 'package:carpool/data/models/models.dart';
 import 'package:carpool/domain/usecase/driver/create_travel_usecase.dart';
 import 'package:carpool/domain/usecase/driver/get_driver_by_id_usecase.dart';
+import 'package:carpool/domain/usecase/driver/send_feedback_usecase.dart';
 import 'package:carpool/presentation/components/color_manager.dart';
 import 'package:carpool/presentation/components/widgets.dart';
 import 'package:flutter/material.dart';
@@ -272,6 +273,42 @@ class DriverHomeCubit extends Cubit<DriverHomeState> {
       (data) {
         driverModel = data;
         emit(DriverGetDriverSuccessState());
+      },
+    );
+  }
+
+  double rating = .0;
+  void changeRating(double rate) {
+    rating = rate;
+    emit(DriverChangeRatingState());
+  }
+
+  TextEditingController feedbackCommentController = TextEditingController();
+  final DriverSendFeedbackUsecase _driverSendFeedbackUsecase = DriverSendFeedbackUsecase(getIt());
+
+  bool feedbackValid = false;
+
+  void changeFeedbackValidation() {
+    if (rating != .0 && feedbackCommentController.text.isNotEmpty) {
+      feedbackValid = true;
+      emit(DriverChangeValidationState());
+    }
+  }
+
+  Future<void> sendFeedback(BuildContext context, String clientId) async {
+    emit(DriverSendFeedbackLoadingState());
+    (await _driverSendFeedbackUsecase
+            .execute(FeedbackModel(note: rating, comment: feedbackCommentController.text, userId: clientId)))
+        .fold(
+      (failure) {
+        errorToast(failure.message).show(context);
+        emit(DriverSendFeedbackErrorState());
+      },
+      (data) {
+        feedbackCommentController.clear();
+        rating = .0;
+        feedbackValid = false;
+        emit(DriverSendFeedbackSuccessState());
       },
     );
   }

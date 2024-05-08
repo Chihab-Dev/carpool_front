@@ -112,11 +112,12 @@ class DriverModel {
       phoneNumber: map['phoneNumber'] as String,
       image: map['image'] as String,
       password: '',
-      feedbackes: List<FeedbackModel>.from(
-        (map['feedback'] as List<dynamic>).map<FeedbackModel>(
-          (x) => FeedbackModel.fromMap(x as Map<String, dynamic>),
-        ),
-      ),
+      feedbackes: [],
+      // feedbackes: List<FeedbackModel>.from(
+      //   (map['feedback'] as List<dynamic>).map<FeedbackModel>(
+      //     (x) => FeedbackModel.fromMap(x as Map<String, dynamic>),
+      //   ),
+      // ),
       isAccepted: map['isAccepted'] as bool,
       token: map['token'] as String?,
     );

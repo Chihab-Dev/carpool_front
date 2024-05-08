@@ -38,3 +38,13 @@ final class DriverGetDriverLoadingState extends DriverHomeState {}
 final class DriverGetDriverSuccessState extends DriverHomeState {}
 
 final class DriverGetDriverErrorState extends DriverHomeState {}
+
+final class DriverChangeRatingState extends DriverHomeState {}
+
+final class DriverChangeValidationState extends DriverHomeState {}
+
+final class DriverSendFeedbackLoadingState extends DriverHomeState {}
+
+final class DriverSendFeedbackSuccessState extends DriverHomeState {}
+
+final class DriverSendFeedbackErrorState extends DriverHomeState {}

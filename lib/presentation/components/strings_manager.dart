@@ -76,7 +76,9 @@ class AppStrings {
   static const String carName = "Car name";
   static const String carImage = "Car image";
   static const String createTravel = "Create travel";
-  static const String clientsRequests = "Client requests";
+  static const String pendingRequests = "Pending requests";
+  static const String acceptedRequests = "Accepted requests";
+
   static const String accept = "Accept";
   static const String reject = "Reject";
   static const String accepted = "Accepted";
@@ -103,4 +105,5 @@ class AppStrings {
   static const String rating = 'Rating';
   static const String comment = 'Comment';
   static const String skip = 'Skip';
+  static const String feedback = 'Feedback';
 }
