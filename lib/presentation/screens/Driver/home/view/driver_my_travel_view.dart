@@ -1,4 +1,5 @@
 import 'package:carpool/app/localizations.dart';
+import 'package:carpool/data/models/models.dart';
 import 'package:carpool/presentation/components/appsize.dart';
 import 'package:carpool/presentation/components/assets_manager.dart';
 import 'package:carpool/presentation/components/color_manager.dart';
@@ -7,6 +8,7 @@ import 'package:carpool/presentation/components/styles_manager.dart';
 import 'package:carpool/presentation/components/widgets.dart';
 import 'package:carpool/presentation/screens/Driver/home/cubit/driver_home_cubit.dart';
 import 'package:carpool/presentation/screens/Driver/home/view/driver_feedback.dart';
+import 'package:carpool/presentation/screens/Driver/update%20travel/view/update_travel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -344,6 +346,55 @@ class DriverMyTravelView extends StatelessWidget {
                           backgroundColor: ColorManager.yellow,
                         ),
                       ],
+                    ),
+                    separator(),
+                    CustomLargeButton(
+                      label: 'Update the travel',
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => UpdateTravelView(
+                                TravelModel(
+                                  travelId: 'dkfjkdjflskjdkfjag',
+                                  placeOfDeparture: 'kais',
+                                  timeOfDeparture: '12:00',
+                                  placeOfArrival: 'batna',
+                                  timeOfArrival: '03:00',
+                                  numberOfPlaces: 5,
+                                  carName: 'leon',
+                                  carImage: 'image',
+                                  placePrice: 1000,
+                                  allowSmoking: true,
+                                  allowPets: true,
+                                  requests: [],
+                                  driver: DriverModel(
+                                    id: 'id',
+                                    name: 'name',
+                                    familyname: 'familyname',
+                                    address: 'address',
+                                    birthday: 'birthday',
+                                    phoneNumber: 'phoneNumber',
+                                    image: 'image',
+                                    password: 'password',
+                                    feedbackes: [],
+                                    isAccepted: true,
+                                    token: 'ddfas',
+                                  ),
+                                  baggage: 'S',
+                                  dateOfDeparture: "11-11-2011",
+                                ),
+                              ),
+                            ));
+                      },
+                      width: double.infinity,
+                    ),
+                    SizedBox(height: AppSize.s16),
+                    CustomLargeButton(
+                      label: 'Delete the travel',
+                      onPressed: () {},
+                      color: Colors.red,
+                      width: double.infinity,
                     ),
                     separator(),
                   ],

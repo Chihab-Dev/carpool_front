@@ -1,11 +1,13 @@
 import 'package:carpool/app/localizations.dart';
+import 'package:carpool/data/models/models.dart';
 import 'package:carpool/presentation/components/appsize.dart';
 import 'package:carpool/presentation/components/assets_manager.dart';
 import 'package:carpool/presentation/components/color_manager.dart';
 import 'package:carpool/presentation/components/strings_manager.dart';
 import 'package:carpool/presentation/components/styles_manager.dart';
 import 'package:carpool/presentation/components/widgets.dart';
-import 'package:carpool/presentation/screens/Driver/home/cubit/driver_home_cubit.dart';
+import 'package:carpool/presentation/screens/Driver/update%20travel/cubit/cubit.dart';
+import 'package:carpool/presentation/screens/Driver/update%20travel/cubit/states.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,8 +15,21 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 
-class DriverHomeView extends StatelessWidget {
-  const DriverHomeView({super.key});
+class UpdateTravelView extends StatefulWidget {
+  const UpdateTravelView(this.travel, {super.key});
+
+  final TravelModel travel;
+
+  @override
+  State<UpdateTravelView> createState() => _UpdateTravelViewState();
+}
+
+class _UpdateTravelViewState extends State<UpdateTravelView> {
+  @override
+  void initState() {
+    UpdateTravelCubit.get(context).start(widget.travel);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +45,10 @@ class DriverHomeView extends StatelessWidget {
           style: getRegularStyle(color: ColorManager.dark),
         ),
       ),
-      body: BlocConsumer<DriverHomeCubit, DriverHomeState>(
+      body: BlocConsumer<UpdateTravelCubit, UpdateTravelState>(
         listener: (context, state) {},
         builder: (context, state) {
-          var cubit = DriverHomeCubit.get(context);
+          var cubit = UpdateTravelCubit.get(context);
           return Padding(
             padding: EdgeInsets.all(AppSize.s18).copyWith(bottom: 0),
             child: SingleChildScrollView(
@@ -79,9 +94,7 @@ class DriverHomeView extends StatelessWidget {
                           customBottomSheet(context, cubit);
                         },
                         child: Text(
-                          cubit.pickedFromLocation != null
-                              ? cubit.pickedFromLocation!.address.toString()
-                              : AppStrings.from.tr(context),
+                          cubit.pickedFromLocation != null ? cubit.pickedFromLocation! : AppStrings.from.tr(context),
                           style: getMeduimStyle(color: ColorManager.dark.withOpacity(0.75)),
                         ),
                       ),
@@ -130,9 +143,7 @@ class DriverHomeView extends StatelessWidget {
                           customBottomSheet(context, cubit);
                         },
                         child: Text(
-                          cubit.pickedToLocation != null
-                              ? cubit.pickedToLocation!.address.toString()
-                              : AppStrings.to.tr(context),
+                          cubit.pickedToLocation != null ? cubit.pickedToLocation! : AppStrings.to.tr(context),
                           style: getMeduimStyle(color: ColorManager.dark.withOpacity(0.75)),
                         ),
                       ),
@@ -325,15 +336,15 @@ class DriverHomeView extends StatelessWidget {
                       ),
                     ),
                     separator(),
-                    state is DriverCreateTravelLoadingState
+                    state is UpdateTravelLoadingState
                         ? CircularProgressIndicator(
                             color: ColorManager.yellow,
                           )
                         : CustomLargeButton(
-                            label: AppStrings.createTravel,
+                            label: 'Update',
                             onPressed: cubit.isEverythingValid
                                 ? () {
-                                    cubit.createTravel(context);
+                                    cubit.updateTravel(context, widget.travel);
                                   }
                                 : null,
                           ),
@@ -348,13 +359,13 @@ class DriverHomeView extends StatelessWidget {
     );
   }
 
-  Future<dynamic> pickPriceOfPlace(BuildContext context, DriverHomeCubit cubit) {
+  Future<dynamic> pickPriceOfPlace(BuildContext context, UpdateTravelCubit cubit) {
     return showModalBottomSheet(
         backgroundColor: ColorManager.white,
         useSafeArea: true,
         context: context,
         builder: (context) {
-          return BlocConsumer<DriverHomeCubit, DriverHomeState>(
+          return BlocConsumer<UpdateTravelCubit, UpdateTravelState>(
             listener: (context, state) {},
             builder: (context, state) {
               return Container(
@@ -399,13 +410,13 @@ class DriverHomeView extends StatelessWidget {
         });
   }
 
-  Future<dynamic> pickNumberOfPlaces(BuildContext context, DriverHomeCubit cubit) {
+  Future<dynamic> pickNumberOfPlaces(BuildContext context, UpdateTravelCubit cubit) {
     return showModalBottomSheet(
         backgroundColor: ColorManager.white,
         useSafeArea: true,
         context: context,
         builder: (context) {
-          return BlocConsumer<DriverHomeCubit, DriverHomeState>(
+          return BlocConsumer<UpdateTravelCubit, UpdateTravelState>(
             listener: (context, state) {},
             builder: (context, state) {
               return Container(
@@ -466,13 +477,13 @@ class DriverHomeView extends StatelessWidget {
         });
   }
 
-  Future<dynamic> customBottomSheet(BuildContext context, DriverHomeCubit cubit) {
+  Future<dynamic> customBottomSheet(BuildContext context, UpdateTravelCubit cubit) {
     return showModalBottomSheet(
         backgroundColor: ColorManager.white,
         isScrollControlled: true,
         context: context,
         builder: (context) {
-          return BlocConsumer<DriverHomeCubit, DriverHomeState>(
+          return BlocConsumer<UpdateTravelCubit, UpdateTravelState>(
             listener: (context, state) {},
             builder: (context, state) {
               return Padding(

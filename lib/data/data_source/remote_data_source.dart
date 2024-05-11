@@ -22,6 +22,7 @@ abstract class RemoteDataSource {
   Future<DriverModel> getDriverById(String id);
   Future<void> createTravel(TravelModel travelModel);
   Future<void> driverSendFeedback(FeedbackModel feedback);
+  Future<void> updateTravel(TravelModel travel);
 
   //----------------------------------------------------- ADMIN -----------------------------------------------------
   Future<AdminModel> adminLogin(String phoneNumber, String password);
@@ -382,6 +383,34 @@ class RemoteDataSourceImpl extends RemoteDataSource {
       print("🔥🌟${response.body}");
     } else {
       print('🛑 driverSendFeedback FAILURE 🛑');
+      print(response.body);
+      throw response.body;
+    }
+  }
+
+  @override
+  Future<void> updateTravel(TravelModel travel) async {
+    String token = _appPrefences.getToken();
+    final url = Uri.parse("${ApiConstance.travelsBaseUrl}/${travel.travelId}");
+    final headers = {
+      "Content-Type": ApiConstance.contentType,
+      "token": token,
+    };
+    final json = travel.toJson();
+
+    final Response response = await put(
+      url,
+      headers: headers,
+      body: json,
+    );
+
+    final statusCode = response.statusCode;
+    print(statusCode);
+    if (statusCode == 201) {
+      print('✅ updateTravel SUCCESS ✅');
+      print("🔥🌟${response.body}");
+    } else {
+      print('🛑 updateTravel FAILURE 🛑');
       print(response.body);
       throw response.body;
     }

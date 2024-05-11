@@ -6,6 +6,7 @@ import 'package:carpool/presentation/screens/Client/home/cubit/home_cubit.dart';
 import 'package:carpool/presentation/screens/Client/main/view/main_view.dart';
 import 'package:carpool/presentation/screens/Driver/home/cubit/driver_home_cubit.dart';
 import 'package:carpool/presentation/screens/Driver/main/view/driver_main_view.dart';
+import 'package:carpool/presentation/screens/Driver/update%20travel/cubit/cubit.dart';
 import 'package:carpool/presentation/screens/admin/cubit/cubit.dart';
 import 'package:carpool/presentation/screens/admin/screens/main.dart';
 import 'package:carpool/presentation/screens/auth/travellerOrDriver/travellerOrDriver.dart';
@@ -51,6 +52,9 @@ class MainApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => AdminCubit(),
+        ),
+        BlocProvider(
+          create: (context) => UpdateTravelCubit(),
         ),
       ],
       child: ScreenUtilInit(

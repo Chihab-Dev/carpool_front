@@ -1,29 +1,50 @@
 import 'dart:io';
 
 import 'package:carpool/app/service_locator.dart';
-import 'package:carpool/app/shared_prefrences.dart';
 import 'package:carpool/data/models/models.dart';
-import 'package:carpool/domain/usecase/driver/create_travel_usecase.dart';
-import 'package:carpool/domain/usecase/driver/get_driver_by_id_usecase.dart';
-import 'package:carpool/domain/usecase/driver/send_feedback_usecase.dart';
+import 'package:carpool/domain/usecase/driver/update_travel_usecase.dart';
 import 'package:carpool/presentation/components/color_manager.dart';
 import 'package:carpool/presentation/components/widgets.dart';
+import 'package:carpool/presentation/screens/Driver/update%20travel/cubit/states.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
 import 'package:image_picker/image_picker.dart';
 
-part 'driver_home_state.dart';
+class UpdateTravelCubit extends Cubit<UpdateTravelState> {
+  UpdateTravelCubit() : super(UpdateTravelInitialState());
 
-class DriverHomeCubit extends Cubit<DriverHomeState> {
-  DriverHomeCubit() : super(DriverHomeInitial());
+  static UpdateTravelCubit get(context) => BlocProvider.of(context);
 
-  static DriverHomeCubit get(context) => BlocProvider.of(context);
+  void start(TravelModel travel) {
+    pickedFromLocation = travel.placeOfDeparture;
+    pickedToLocation = travel.placeOfArrival;
+
+    pickedFromTime = travel.timeOfDeparture;
+    pickedtoTime = travel.timeOfArrival;
+    numberOfSeats = travel.numberOfPlaces;
+    placePrice = travel.placePrice;
+    baggageSizeAllowed = travel.baggage;
+    numOfBaggageSizeAllowed = travel.baggage == 'S'
+        ? 1
+        : travel.baggage == "M"
+            ? 2
+            : travel.baggage == 'L'
+                ? 3
+                : 2;
+    petsAllowed = travel.allowPets;
+    numOfPetsAllowed = travel.allowPets == false ? 1 : 2;
+    smokingAllowed = travel.allowSmoking;
+    numOfsmokingAllowed = travel.allowSmoking == false ? 1 : 2;
+    selectedDate = travel.dateOfDeparture;
+    carNameController.text = travel.carName;
+    isEverythingValid = true;
+  }
 
   TextEditingController locationController = TextEditingController();
   List<SearchInfo> listSource = [];
-  SearchInfo? pickedFromLocation;
-  SearchInfo? pickedToLocation;
+  String? pickedFromLocation;
+  String? pickedToLocation;
   bool? isItFrom;
 
   Future<void> searchForLocation() async {
@@ -32,21 +53,20 @@ class DriverHomeCubit extends Cubit<DriverHomeState> {
     if (data.isNotEmpty) {
       listSource = data;
     }
-    emit(DriverHomeSearchForLocation());
+    emit(UpdateTravelSearchForLocation());
   }
 
   void chooseLocation(int index, BuildContext context) {
     if (isItFrom!) {
-      pickedFromLocation = listSource[index];
+      pickedFromLocation = listSource[index].address.toString();
     } else {
-      pickedToLocation = listSource[index];
+      pickedToLocation = listSource[index].address.toString();
     }
     locationController.clear();
     print(listSource[index].address);
     listSource = [];
     checkValidation();
-
-    emit(DriverHomeChooseLocation());
+    emit(UpdateTravelChooseLocation());
     Navigator.pop(context);
   }
 
@@ -64,7 +84,8 @@ class DriverHomeCubit extends Cubit<DriverHomeState> {
       pickedtoTime = _formatTime(time);
     }
     checkValidation();
-    emit(DriverHomePickTime());
+
+    emit(UpdateTravelPickTime());
   }
 
   String _formatTime(TimeOfDay time) {
@@ -77,14 +98,18 @@ class DriverHomeCubit extends Cubit<DriverHomeState> {
 
   void pickNumberOfPlaces(int? value) {
     numberOfSeats = value ?? 1;
-    emit(DriverHomePickNumberOfSeats());
+    checkValidation();
+
+    emit(UpdateTravelPickNumberOfSeats());
   }
 
   int placePrice = 500;
 
   void pickPrice(int? value) {
     placePrice = value ?? 1;
-    emit(DriverHomePickPersonPrice());
+    checkValidation();
+
+    emit(UpdateTravelPickPersonPrice());
   }
 
   String baggageSizeAllowed = 'M';
@@ -109,7 +134,8 @@ class DriverHomeCubit extends Cubit<DriverHomeState> {
         numOfBaggageSizeAllowed = 2;
         break;
     }
-    emit(DriverHomePickBaggageSize());
+    checkValidation();
+    emit(UpdateTravelPickBaggageSize());
   }
 
   bool petsAllowed = false;
@@ -131,7 +157,8 @@ class DriverHomeCubit extends Cubit<DriverHomeState> {
         numOfPetsAllowed = 1;
         break;
     }
-    emit(DriverHomePickPetsAllowed());
+    checkValidation();
+    emit(UpdateTravelPickPetsAllowed());
   }
 
   bool smokingAllowed = false;
@@ -153,15 +180,16 @@ class DriverHomeCubit extends Cubit<DriverHomeState> {
         numOfsmokingAllowed = 1;
         break;
     }
-    emit(DriverHomePickSmokingAllowed());
+    checkValidation();
+    emit(UpdateTravelPickSmokingAllowed());
   }
 
-  DateTime selectedDate = DateTime.now();
+  String selectedDate = DateTime.now().toString();
 
   pickDate(BuildContext context) async {
     final DateTime? datetime = await showDatePicker(
       context: context,
-      firstDate: selectedDate,
+      firstDate: DateTime.now(),
       lastDate: DateTime(2026),
       builder: (context, child) {
         return Theme(
@@ -178,11 +206,11 @@ class DriverHomeCubit extends Cubit<DriverHomeState> {
       },
     );
     if (datetime != null) {
-      selectedDate = datetime;
+      selectedDate = datetime.toString();
     }
     checkValidation();
 
-    emit(DriverHomePickDate());
+    emit(UpdateTravelPickDate());
   }
 
   TextEditingController carNameController = TextEditingController();
@@ -196,19 +224,19 @@ class DriverHomeCubit extends Cubit<DriverHomeState> {
       image = File(selectedImage.path);
     }
     checkValidation();
-    emit(DriverHomePickImage());
+
+    emit(UpdateTravelPickImage());
   }
 
-  DriverCreateTravelUsecase driverCreateTravelUsecase = DriverCreateTravelUsecase(getIt());
-
-  Future<void> createTravel(BuildContext context) async {
-    emit(DriverCreateTravelLoadingState());
-    (await driverCreateTravelUsecase.execute(
+  final UpdateTravelUsecase _updateTravelUsecase = UpdateTravelUsecase(getIt());
+  Future<void> updateTravel(BuildContext context, TravelModel travel) async {
+    emit(UpdateTravelLoadingState());
+    (await _updateTravelUsecase.execute(
       TravelModel(
-        travelId: '',
-        placeOfDeparture: pickedFromLocation!.address.toString(),
+        travelId: '663fb10a800855596543bd07',
+        placeOfDeparture: pickedFromLocation!,
         timeOfDeparture: "$pickedFromTime",
-        placeOfArrival: pickedToLocation!.address.toString(),
+        placeOfArrival: pickedToLocation!,
         timeOfArrival: "$pickedtoTime",
         numberOfPlaces: numberOfSeats,
         carName: carNameController.text,
@@ -237,11 +265,11 @@ class DriverHomeCubit extends Cubit<DriverHomeState> {
         .fold(
       (failure) {
         errorToast(failure.message).show(context);
-        emit(DriverCreateTravelErrorState());
+        emit(UpdateTravelErrorState());
       },
       (data) {
         successToast('✅ CREATED TRAVEL SUCCESS ✅').show(context);
-        emit(DriverCreateTravelSuccessState());
+        emit(UpdateTravelSuccessState());
       },
     );
   }
@@ -258,64 +286,13 @@ class DriverHomeCubit extends Cubit<DriverHomeState> {
     } else {
       isEverythingValid = false;
     }
-    emit(DriverCheckValidationState());
+    print(pickedFromLocation.toString() +
+        pickedToLocation.toString() +
+        pickedFromTime.toString() +
+        pickedtoTime.toString() +
+        carNameController.text.isNotEmpty.toString() +
+        image.toString());
+    emit(UpdateTravelCheckValidationState());
     return isEverythingValid;
-  }
-
-  final DriverGetDriverByIdUsecase _driverByIdUsecase = DriverGetDriverByIdUsecase(getIt());
-
-  DriverModel? driverModel;
-
-  Future<void> getDriverById(BuildContext context) async {
-    emit(DriverGetDriverLoadingState());
-    final AppPrefences appPrefences = AppPrefences(getIt());
-    var id = appPrefences.getId();
-
-    (await _driverByIdUsecase.execute(id)).fold(
-      (failure) {
-        errorToast(failure.message).show(context);
-        emit(DriverGetDriverErrorState());
-      },
-      (data) {
-        driverModel = data;
-        emit(DriverGetDriverSuccessState());
-      },
-    );
-  }
-
-  double rating = .0;
-  void changeRating(double rate) {
-    rating = rate;
-    emit(DriverChangeRatingState());
-  }
-
-  TextEditingController feedbackCommentController = TextEditingController();
-  final DriverSendFeedbackUsecase _driverSendFeedbackUsecase = DriverSendFeedbackUsecase(getIt());
-
-  bool feedbackValid = false;
-
-  void changeFeedbackValidation() {
-    if (rating != .0 && feedbackCommentController.text.isNotEmpty) {
-      feedbackValid = true;
-      emit(DriverChangeValidationState());
-    }
-  }
-
-  Future<void> sendFeedback(BuildContext context, String clientId) async {
-    emit(DriverSendFeedbackLoadingState());
-    (await _driverSendFeedbackUsecase
-            .execute(FeedbackModel(note: rating, comment: feedbackCommentController.text, userId: clientId)))
-        .fold(
-      (failure) {
-        errorToast(failure.message).show(context);
-        emit(DriverSendFeedbackErrorState());
-      },
-      (data) {
-        feedbackCommentController.clear();
-        rating = .0;
-        feedbackValid = false;
-        emit(DriverSendFeedbackSuccessState());
-      },
-    );
   }
 }

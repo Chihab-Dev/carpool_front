@@ -14,8 +14,6 @@ class RepositoryImpl extends Repository {
     required this.remoteDataSource,
   });
 
-  //----------------------------------------------------- CLIENT -----------------------------------------------------
-
   @override
   Future<Either<Failure, ClientModel>> clientLogin(String phoneNumber, String password) async {
     if (await networkInfo.isConnected()) {
@@ -90,7 +88,6 @@ class RepositoryImpl extends Repository {
       return left(Failure('No internet connection'));
     }
   }
-  //----------------------------------------------------- DRIVER -----------------------------------------------------
 
   @override
   Future<Either<Failure, DriverModel>> driverLogin(String phoneNumber, String password) async {
@@ -152,7 +149,6 @@ class RepositoryImpl extends Repository {
     }
   }
 
-  //----------------------------------------------------- ADMIN -----------------------------------------------------
   @override
   Future<Either<Failure, AdminModel>> adminLogin(String phoneNumber, String password) async {
     if (await networkInfo.isConnected()) {
@@ -308,6 +304,21 @@ class RepositoryImpl extends Repository {
     if (await networkInfo.isConnected()) {
       try {
         final result = await remoteDataSource.driverSendFeedback(feedback);
+        return right(result);
+      } catch (e) {
+        print(e.toString());
+        return left(Failure(e.toString()));
+      }
+    } else {
+      return left(Failure('No internet connection'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> updateTravel(TravelModel travel) async {
+    if (await networkInfo.isConnected()) {
+      try {
+        final result = await remoteDataSource.updateTravel(travel);
         return right(result);
       } catch (e) {
         print(e.toString());
