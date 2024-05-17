@@ -233,7 +233,7 @@ class UpdateTravelCubit extends Cubit<UpdateTravelState> {
     emit(UpdateTravelLoadingState());
     (await _updateTravelUsecase.execute(
       TravelModel(
-        travelId: '663fb10a800855596543bd07',
+        travelId: '663a0229733f21f5503fd157',
         placeOfDeparture: pickedFromLocation!,
         timeOfDeparture: "$pickedFromTime",
         placeOfArrival: pickedToLocation!,

@@ -169,7 +169,7 @@ class CustomPasswordFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 350,
+      width: AppSize.s350,
       child: TextFormField(
         keyboardType: keyboardType,
         obscureText: isPasswordVisible,
@@ -318,7 +318,7 @@ Widget travelDetailsContainer(BuildContext context, TravelModel travel, Widget o
     child: Container(
       width: AppSize.s350,
       // height: AppSize.s250,
-      margin: EdgeInsets.symmetric(horizontal: AppSize.s20),
+      margin: EdgeInsets.symmetric(horizontal: AppSize.s20, vertical: AppSize.s15),
       padding: EdgeInsets.all(AppPadding.p18),
       decoration: BoxDecoration(
         color: ColorManager.white,
@@ -356,11 +356,14 @@ Widget travelDetailsContainer(BuildContext context, TravelModel travel, Widget o
             endChild: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text(
-                  travel.placeOfDeparture.split(',').first,
-                  style: getMeduimStyle(color: ColorManager.dark).copyWith(fontSize: AppSize.s16),
+                Expanded(
+                  child: Text(
+                    travel.placeOfDeparture.split(',').first,
+                    style: getMeduimStyle(color: ColorManager.dark).copyWith(fontSize: AppSize.s16),
+                  ),
                 ),
-                const Spacer(),
+                // const Spacer(),
+                SizedBox(width: AppSize.s20),
                 Text(
                   "${travel.placePrice} DA",
                   style: getMeduimStyle(color: ColorManager.dark).copyWith(fontSize: AppSize.s16),

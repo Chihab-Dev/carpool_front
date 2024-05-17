@@ -40,23 +40,25 @@ class TravelsView extends StatelessWidget {
                             },
                             icon: const Icon(Icons.arrow_back_ios_new_rounded),
                           ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                '${cubit.pickedFromLocation?.address.toString().split(',').first}  →  ${cubit.pickedToLocation?.address.toString().split(',').first}',
-                                style: getMeduimStyle(color: ColorManager.dark).copyWith(fontSize: AppSize.s16),
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              Text(
-                                '${cubit.selectedDate.toString().substring(0, 10)}  ,  ${cubit.numberOfPlaces} person',
-                                style: getSmallRegularStyle(color: ColorManager.dark),
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ],
+                          Expanded(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  '${cubit.pickedFromLocation?.address.toString().split(',').first}  →  ${cubit.pickedToLocation?.address.toString().split(',').first}',
+                                  style: getMeduimStyle(color: ColorManager.dark).copyWith(fontSize: AppSize.s16),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                Text(
+                                  '${cubit.selectedDate.toString().substring(0, 10)}  ,  ${cubit.numberOfPlaces} person',
+                                  style: getSmallRegularStyle(color: ColorManager.dark),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),

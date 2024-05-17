@@ -51,11 +51,12 @@ class ClientModel {
       password: '',
       image: map['image'] as String,
       token: map['token'] as String?,
-      feedbackes: List<FeedbackModel>.from(
-        (map['feedback'] as List<dynamic>).map<FeedbackModel>(
-          (x) => FeedbackModel.fromMap(x as Map<String, dynamic>),
-        ),
-      ),
+      feedbackes: [],
+      // feedbackes: List<FeedbackModel>.from(
+      //   (map['feedback'] as List<dynamic>).map<FeedbackModel>(
+      //     (x) => FeedbackModel.fromMap(x as Map<String, dynamic>),
+      //   ),
+      // ),
     );
   }
 

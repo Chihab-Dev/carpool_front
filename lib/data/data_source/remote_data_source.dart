@@ -193,7 +193,7 @@ class RemoteDataSourceImpl extends RemoteDataSource {
 
     final statusCode = response.statusCode;
     print(statusCode);
-    if (statusCode == 201) {
+    if (statusCode == 200) {
       print('✅ requestToBook SUCCESS ✅');
       print("🔥🌟${response.body}");
     } else {
@@ -406,7 +406,7 @@ class RemoteDataSourceImpl extends RemoteDataSource {
 
     final statusCode = response.statusCode;
     print(statusCode);
-    if (statusCode == 201) {
+    if (statusCode == 200) {
       print('✅ updateTravel SUCCESS ✅');
       print("🔥🌟${response.body}");
     } else {
