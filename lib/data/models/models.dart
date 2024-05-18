@@ -274,12 +274,11 @@ class TravelModel {
       placePrice: map['placeprice'] as int,
       allowSmoking: map['allowSmoking'] as bool,
       allowPets: map['allowPets'] as bool,
-      // requests: List<RequestModel>.from(
-      //   (map['requestList'] as List).map<RequestModel>(
-      //     (x) => RequestModel.fromMap(x as Map<String, dynamic>),
-      //   ),
-      // ),
-      requests: [],
+      requests: List<RequestModel>.from(
+        (map['requestList'] as List).map<RequestModel>(
+          (x) => RequestModel.fromMap(x as Map<String, dynamic>),
+        ),
+      ),
       driver: DriverModel.fromMap(map['driverinf'] as Map<String, dynamic>),
       baggage: map['Baggage'] as String,
       dateOfDeparture: map['dateOfDeparture'] as String,
@@ -293,27 +292,35 @@ class TravelModel {
 
 class RequestModel {
   String clientId;
-  String driverId;
-  bool isAccepted;
+  String name;
+  String image;
+  String phoneNumber;
+  String state;
   RequestModel({
     required this.clientId,
-    required this.driverId,
-    required this.isAccepted,
+    required this.name,
+    required this.image,
+    required this.phoneNumber,
+    required this.state,
   });
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'clientId': clientId,
-      'driverId': driverId,
-      'isAccepted': isAccepted,
+      'name': name,
+      'image': image,
+      'phoneNumber': phoneNumber,
+      'state': state,
     };
   }
 
   factory RequestModel.fromMap(Map<String, dynamic> map) {
     return RequestModel(
       clientId: map['clientId'] as String,
-      driverId: map['driverId'] as String,
-      isAccepted: map['isAccepted'] as bool,
+      name: map['name'] as String,
+      image: map['image'] as String,
+      phoneNumber: map['phoneNumber'] as String,
+      state: map['state'] as String,
     );
   }
 

@@ -14,10 +14,21 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class TravelDetailsView extends StatelessWidget {
+class TravelDetailsView extends StatefulWidget {
   const TravelDetailsView(this.travel, {super.key});
 
   final TravelModel travel;
+
+  @override
+  State<TravelDetailsView> createState() => _TravelDetailsViewState();
+}
+
+class _TravelDetailsViewState extends State<TravelDetailsView> {
+  @override
+  void initState() {
+    super.initState();
+    HomeCubit.get(context).calculateAcceptedRequests(widget.travel.requests);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +53,11 @@ class TravelDetailsView extends StatelessWidget {
                   children: [
                     const SizedBox(height: kToolbarHeight * 2),
                     Text(
-                      travel.dateOfDeparture.substring(0, 10),
+                      widget.travel.dateOfDeparture.substring(0, 10),
+                      style: getMeduimStyle(color: ColorManager.dark),
+                    ),
+                    Text(
+                      widget.travel.requests.first.state,
                       style: getMeduimStyle(color: ColorManager.dark),
                     ),
                     SizedBox(height: AppSize.s20),
@@ -61,8 +76,8 @@ class TravelDetailsView extends StatelessWidget {
                           fontSize: 20,
                         ),
                       ),
-                      startChild: Text(travel.timeOfDeparture, style: getMeduimStyle(color: ColorManager.dark)),
-                      endChild: Text(travel.placeOfDeparture, style: getMeduimStyle(color: ColorManager.dark)),
+                      startChild: Text(widget.travel.timeOfDeparture, style: getMeduimStyle(color: ColorManager.dark)),
+                      endChild: Text(widget.travel.placeOfDeparture, style: getMeduimStyle(color: ColorManager.dark)),
                     ),
                     SizedBox(
                       height: AppSize.s70,
@@ -87,8 +102,8 @@ class TravelDetailsView extends StatelessWidget {
                           fontSize: 20,
                         ),
                       ),
-                      startChild: Text(travel.timeOfArrival, style: getMeduimStyle(color: ColorManager.dark)),
-                      endChild: Text(travel.placeOfArrival, style: getMeduimStyle(color: ColorManager.dark)),
+                      startChild: Text(widget.travel.timeOfArrival, style: getMeduimStyle(color: ColorManager.dark)),
+                      endChild: Text(widget.travel.placeOfArrival, style: getMeduimStyle(color: ColorManager.dark)),
                     ),
                     separator(),
                     Row(
@@ -96,20 +111,22 @@ class TravelDetailsView extends StatelessWidget {
                         Icon(
                           Icons.chair_outlined,
                           size: AppSize.s30,
-                          // color: ColorManager.white,
+                          color: cubit.acceptedRequests > 0 ? ColorManager.green : null,
                         ),
                         SizedBox(width: AppSize.s5),
-                        travel.numberOfPlaces > 1
+                        widget.travel.numberOfPlaces > 1
                             ? Icon(
                                 Icons.chair_outlined,
                                 size: AppSize.s30,
+                                color: cubit.acceptedRequests > 1 ? ColorManager.green : null,
                               )
                             : const SizedBox(),
                         SizedBox(width: AppSize.s5),
-                        travel.numberOfPlaces > 2
+                        widget.travel.numberOfPlaces > 2
                             ? Icon(
                                 Icons.chair_outlined,
                                 size: AppSize.s30,
+                                color: cubit.acceptedRequests > 2 ? ColorManager.green : null,
                               )
                             : const SizedBox(),
                         const Spacer(),
@@ -118,7 +135,7 @@ class TravelDetailsView extends StatelessWidget {
                           style: getSmallRegularStyle(color: ColorManager.darkGrey),
                         ),
                         Text(
-                          travel.placePrice.toString(),
+                          widget.travel.placePrice.toString(),
                           style: getMeduimStyle(color: ColorManager.dark),
                         ),
                       ],
@@ -135,7 +152,7 @@ class TravelDetailsView extends StatelessWidget {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('${travel.driver.name} ${travel.driver.familyname}',
+                            Text('${widget.travel.driver.name} ${widget.travel.driver.familyname}',
                                 style: getMeduimStyle(color: ColorManager.dark)),
                             Row(
                               children: [
@@ -146,7 +163,7 @@ class TravelDetailsView extends StatelessWidget {
                                 ),
                                 SizedBox(width: AppSize.s5),
                                 Text(
-                                  travel.driver.feedbackes.length.toString(),
+                                  widget.travel.driver.feedbackes.length.toString(),
                                   style: getMeduimStyle(color: ColorManager.dark),
                                 ),
                               ],
@@ -156,7 +173,7 @@ class TravelDetailsView extends StatelessWidget {
                         const Spacer(),
                         IconButton(
                           onPressed: () async {
-                            final call = Uri.parse('tel:+213 ${travel.driver.phoneNumber}');
+                            final call = Uri.parse('tel:+213 ${widget.travel.driver.phoneNumber}');
                             if (await canLaunchUrl(call)) {
                               launchUrl(call);
                             } else {
@@ -183,11 +200,11 @@ class TravelDetailsView extends StatelessWidget {
                           ),
                           SizedBox(width: AppSize.s25),
                           Text(
-                            travel.baggage == "S"
+                            widget.travel.baggage == "S"
                                 ? AppStrings.baggageSAllowed
-                                : travel.baggage == "M"
+                                : widget.travel.baggage == "M"
                                     ? AppStrings.baggageMAllowed
-                                    : travel.baggage == "L"
+                                    : widget.travel.baggage == "L"
                                         ? AppStrings.baggageLAllowed
                                         : AppStrings.baggageSAllowed,
                             style: getSmallRegularStyle(color: ColorManager.dark),
@@ -207,7 +224,7 @@ class TravelDetailsView extends StatelessWidget {
                                 size: AppSize.s25,
                                 color: ColorManager.darkGrey,
                               ),
-                              travel.allowPets
+                              widget.travel.allowPets
                                   ? const SizedBox()
                                   : Icon(
                                       FontAwesomeIcons.slash,
@@ -218,7 +235,7 @@ class TravelDetailsView extends StatelessWidget {
                           ),
                           SizedBox(width: AppSize.s25),
                           Text(
-                            travel.allowPets ? AppStrings.allowPets : AppStrings.petsNotAllowed.tr(context),
+                            widget.travel.allowPets ? AppStrings.allowPets : AppStrings.petsNotAllowed.tr(context),
                             style: getSmallRegularStyle(color: ColorManager.dark),
                           ),
                         ],
@@ -236,7 +253,7 @@ class TravelDetailsView extends StatelessWidget {
                                 size: AppSize.s25,
                                 color: ColorManager.darkGrey,
                               ),
-                              travel.allowSmoking
+                              widget.travel.allowSmoking
                                   ? const SizedBox()
                                   : Icon(
                                       FontAwesomeIcons.slash,
@@ -247,7 +264,9 @@ class TravelDetailsView extends StatelessWidget {
                           ),
                           SizedBox(width: AppSize.s25),
                           Text(
-                            travel.allowSmoking ? AppStrings.smokingAllowed.tr(context) : AppStrings.dontAllowSmoking,
+                            widget.travel.allowSmoking
+                                ? AppStrings.smokingAllowed.tr(context)
+                                : AppStrings.dontAllowSmoking,
                             style: getSmallRegularStyle(color: ColorManager.dark),
                           ),
                         ],
@@ -256,7 +275,7 @@ class TravelDetailsView extends StatelessWidget {
                     SizedBox(height: AppSize.s16),
                     separator(),
                     Text(
-                      travel.carName,
+                      widget.travel.carName,
                       style: getMeduimStyle(color: ColorManager.dark),
                     ),
                     SizedBox(height: AppSize.s16),
@@ -299,7 +318,7 @@ class TravelDetailsView extends StatelessWidget {
                     child: CustomLargeButton(
                       label: AppStrings.requestToBook,
                       onPressed: () {
-                        cubit.requestToBook(travel.travelId, context);
+                        cubit.requestToBook(widget.travel.travelId, context);
                       },
                     ),
                   ),

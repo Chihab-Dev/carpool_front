@@ -5,6 +5,7 @@ import 'package:carpool/app/shared_prefrences.dart';
 import 'package:carpool/data/models/models.dart';
 import 'package:carpool/domain/usecase/driver/create_travel_usecase.dart';
 import 'package:carpool/domain/usecase/driver/get_driver_by_id_usecase.dart';
+import 'package:carpool/domain/usecase/driver/get_travel_by_id_usecase.dart';
 import 'package:carpool/domain/usecase/driver/send_feedback_usecase.dart';
 import 'package:carpool/presentation/components/color_manager.dart';
 import 'package:carpool/presentation/components/widgets.dart';
@@ -315,6 +316,25 @@ class DriverHomeCubit extends Cubit<DriverHomeState> {
         rating = .0;
         feedbackValid = false;
         emit(DriverSendFeedbackSuccessState());
+      },
+    );
+  }
+
+  final DriverGetTravelByIdUsecase _driverGetTravelByIdUsecase = DriverGetTravelByIdUsecase(getIt());
+  TravelModel? myTravel;
+
+  Future<void> getMyTravel(BuildContext context) async {
+    emit(DriverGetTravelByIdLoadingState());
+
+    (await _driverGetTravelByIdUsecase.execute('6648b75203b341bbafac2351')).fold(
+      (failure) {
+        errorToast(failure.message).show(context);
+        emit(DriverGetTravelByIdErrorState());
+      },
+      (data) {
+        myTravel = data;
+        successToast('Success get my travel').show(context);
+        emit(DriverGetTravelByIdSuccessState());
       },
     );
   }

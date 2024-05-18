@@ -10,6 +10,7 @@ abstract class Repository {
   Future<Either<Failure, ClientModel>> getClientById(String id);
   Future<Either<Failure, void>> requestToBook(String travelId);
   Future<Either<Failure, void>> clientSendFeedback(FeedbackModel feedback);
+  Future<Either<Failure, TravelModel>> clientGetTravelById(String id);
 
   //----------------------------------------------------- DRIVER -----------------------------------------------------
   Future<Either<Failure, DriverModel>> driverLogin(String phoneNumber, String password);
@@ -18,6 +19,7 @@ abstract class Repository {
   Future<Either<Failure, void>> createTravel(TravelModel travelModel);
   Future<Either<Failure, void>> driverSendFeedback(FeedbackModel feedback);
   Future<Either<Failure, void>> updateTravel(TravelModel travel);
+  Future<Either<Failure, TravelModel>> driverGetTravelById(String id);
 
   //----------------------------------------------------- ADMIN -----------------------------------------------------
   Future<Either<Failure, AdminModel>> adminLogin(String phoneNumber, String password);

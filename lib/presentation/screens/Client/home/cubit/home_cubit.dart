@@ -211,5 +211,16 @@ class HomeCubit extends Cubit<HomeState> {
     );
   }
 
-
+  int acceptedRequests = 0;
+  void calculateAcceptedRequests(List<RequestModel>? requests) {
+    acceptedRequests = 0;
+    if (requests != null && requests.isNotEmpty) {
+      for (var request in requests) {
+        if (request.state == 'ACCEPTED') {
+          acceptedRequests++;
+        }
+      }
+    }
+    emit(HomeCalculateAcceptedRequestsState());
+  }
 }

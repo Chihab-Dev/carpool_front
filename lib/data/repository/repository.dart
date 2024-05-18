@@ -328,4 +328,34 @@ class RepositoryImpl extends Repository {
       return left(Failure('No internet connection'));
     }
   }
+
+  @override
+  Future<Either<Failure, TravelModel>> clientGetTravelById(String id) async {
+    if (await networkInfo.isConnected()) {
+      try {
+        final result = await remoteDataSource.clientGetTravelById(id);
+        return right(result);
+      } catch (e) {
+        print(e.toString());
+        return left(Failure(e.toString()));
+      }
+    } else {
+      return left(Failure('No internet connection'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, TravelModel>> driverGetTravelById(String id) async {
+    if (await networkInfo.isConnected()) {
+      try {
+        final result = await remoteDataSource.driverGetTravelById(id);
+        return right(result);
+      } catch (e) {
+        print(e.toString());
+        return left(Failure(e.toString()));
+      }
+    } else {
+      return left(Failure('No internet connection'));
+    }
+  }
 }

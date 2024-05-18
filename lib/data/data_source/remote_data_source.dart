@@ -15,6 +15,7 @@ abstract class RemoteDataSource {
   Future<ClientModel> getClientById(String id);
   Future<void> requestToBook(String travelId);
   Future<void> clientSendFeedback(FeedbackModel feedback);
+  Future<TravelModel> clientGetTravelById(String id);
 
   //----------------------------------------------------- DRIVER -----------------------------------------------------
   Future<DriverModel> driverLogin(String phoneNumber, String password);
@@ -23,6 +24,7 @@ abstract class RemoteDataSource {
   Future<void> createTravel(TravelModel travelModel);
   Future<void> driverSendFeedback(FeedbackModel feedback);
   Future<void> updateTravel(TravelModel travel);
+  Future<TravelModel> driverGetTravelById(String id);
 
   //----------------------------------------------------- ADMIN -----------------------------------------------------
   Future<AdminModel> adminLogin(String phoneNumber, String password);
@@ -233,6 +235,34 @@ class RemoteDataSourceImpl extends RemoteDataSource {
     }
   }
 
+  @override
+  Future<TravelModel> clientGetTravelById(String id) async {
+    String token = _appPrefences.getToken();
+
+    final url = Uri.parse("${ApiConstance.travelsBaseUrl}/$id");
+    final headers = {
+      "Content-Type": ApiConstance.contentType,
+      "token": token,
+    };
+
+    final Response response = await get(
+      url,
+      headers: headers,
+    );
+
+    final statusCode = response.statusCode;
+
+    if (statusCode == 200) {
+      print('✅ GET TRAVELS BY ID SUCCESS ✅');
+      print("🔥🌟${response.body}");
+
+      return TravelModel.fromJson(response.body);
+    } else {
+      print('🛑 GET TRAVELS BY ID  FAILURE 🛑');
+      print(response.body);
+      throw response.body;
+    }
+  }
   //----------------------------------------------------- DRIVER -----------------------------------------------------
 
   @override
@@ -416,6 +446,34 @@ class RemoteDataSourceImpl extends RemoteDataSource {
     }
   }
 
+  @override
+  Future<TravelModel> driverGetTravelById(String id) async {
+    String token = _appPrefences.getToken();
+
+    final url = Uri.parse("${ApiConstance.travelsBaseUrl}/driver/$id");
+    final headers = {
+      "Content-Type": ApiConstance.contentType,
+      "token": token,
+    };
+
+    final Response response = await get(
+      url,
+      headers: headers,
+    );
+
+    final statusCode = response.statusCode;
+
+    if (statusCode == 200) {
+      print('✅ GET TRAVELS BY ID SUCCESS ✅');
+      print("🔥🌟${response.body}");
+
+      return TravelModel.fromJson(response.body);
+    } else {
+      print('🛑 GET TRAVELS BY ID  FAILURE 🛑');
+      print(response.body);
+      throw response.body;
+    }
+  }
   //----------------------------------------------------- ADMIN -----------------------------------------------------
 
   @override

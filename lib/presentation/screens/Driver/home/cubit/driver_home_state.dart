@@ -48,3 +48,9 @@ final class DriverSendFeedbackLoadingState extends DriverHomeState {}
 final class DriverSendFeedbackSuccessState extends DriverHomeState {}
 
 final class DriverSendFeedbackErrorState extends DriverHomeState {}
+
+final class DriverGetTravelByIdLoadingState extends DriverHomeState {}
+
+final class DriverGetTravelByIdSuccessState extends DriverHomeState {}
+
+final class DriverGetTravelByIdErrorState extends DriverHomeState {}

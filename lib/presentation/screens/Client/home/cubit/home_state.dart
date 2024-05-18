@@ -32,11 +32,13 @@ final class HomeRequestToBookSuccessState extends HomeState {}
 final class HomeRequestToBookErrorState extends HomeState {}
 
 final class HomeChangeRatingState extends HomeState {}
-final class HomeChangeValidationState extends HomeState {}
 
+final class HomeChangeValidationState extends HomeState {}
 
 final class HomeSendFeedbackLoadingState extends HomeState {}
 
 final class HomeSendFeedbackSuccessState extends HomeState {}
 
 final class HomeSendFeedbackErrorState extends HomeState {}
+
+final class HomeCalculateAcceptedRequestsState extends HomeState {}
