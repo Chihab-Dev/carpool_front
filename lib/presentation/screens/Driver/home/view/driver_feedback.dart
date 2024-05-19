@@ -51,11 +51,11 @@ class DriverFeedbackView extends StatelessWidget {
                   ),
                   SizedBox(height: AppSize.s12),
                   StarRating(
-                    rating: cubit.rating,
+                    rating: cubit.rating.toDouble(),
                     starCount: 5,
                     size: AppSize.s35,
                     onRatingChanged: (rating) {
-                      cubit.changeRating(rating);
+                      cubit.changeRating(rating.toInt());
                       cubit.changeFeedbackValidation();
                     },
                   ),

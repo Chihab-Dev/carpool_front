@@ -314,10 +314,14 @@ class _TravelDetailsViewState extends State<TravelDetailsView> {
                   )
                 : Center(
                     child: CustomLargeButton(
-                      label: AppStrings.requestToBook.tr(context),
-                      onPressed: () {
-                        cubit.requestToBook(widget.travel.travelId, context);
-                      },
+                      label: widget.travel.numberOfPlaces == cubit.acceptedRequests
+                          ? AppStrings.travelIsFull
+                          : AppStrings.requestToBook.tr(context),
+                      onPressed: widget.travel.numberOfPlaces == cubit.acceptedRequests
+                          ? null
+                          : () {
+                              cubit.requestToBook(widget.travel.travelId, context);
+                            },
                     ),
                   ),
           ),

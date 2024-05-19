@@ -97,12 +97,13 @@ class AppStrings {
   static const String fullName = 'fullName';
   static const String rate = 'rate';
   static const String old = 'old';
-
-  // additional new strings
-
   static const String location = 'location';
   static const String pickNumberOfPlaces = 'pickNumberOfPlaces';
   static const String person = 'person';
   static const String updateTheTravel = 'updateTheTravel';
   static const String deleteTheTravel = 'deleteTheTravel';
+
+  // additional new strings
+
+  static const String travelIsFull = 'Travel is full';
 }

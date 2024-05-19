@@ -65,7 +65,7 @@ class MainApp extends StatelessWidget {
         builder: (context, child) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            locale: const Locale('ar'),
+            locale: const Locale('en'),
             theme: ThemeData(
               scaffoldBackgroundColor: ColorManager.white,
             ),

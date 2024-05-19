@@ -183,7 +183,7 @@ class FeedbackModel {
   String? image;
   String? phoneNumber;
   String comment;
-  double note;
+  int note;
   FeedbackModel({
     this.feedbackId,
     this.fromUser,
@@ -212,7 +212,7 @@ class FeedbackModel {
       image: map['image'] != null ? map['image'] as String : null,
       phoneNumber: map['phoneNumber'] != null ? map['phoneNumber'] as String : null,
       comment: map['comment'] as String,
-      note: (map['note'] as int).toDouble(),
+      note: map['note'] as int,
     );
   }
 

@@ -1,5 +1,6 @@
 import 'dart:convert' as convert;
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:carpool/app/api_constance.dart';
 import 'package:carpool/app/service_locator.dart';
@@ -465,12 +466,22 @@ class RemoteDataSourceImpl extends RemoteDataSource {
     final statusCode = response.statusCode;
 
     if (statusCode == 200) {
-      print('✅ GET TRAVELS BY ID SUCCESS ✅');
-      print("🔥🌟${response.body}");
+      print('✅ GET Driver TRAVELS BY ID SUCCESS ✅');
+      // print("🔥🌟${response.body}");
+      log(response.body);
 
-      return TravelModel.fromJson(response.body);
+      final decodedBody = convert.jsonDecode(response.body) as List<dynamic>;
+
+      var x = List<TravelModel>.from(
+        decodedBody.map(
+          (travelData) {
+            return TravelModel.fromMap(travelData);
+          },
+        ),
+      );
+      return x.first;
     } else {
-      print('🛑 GET TRAVELS BY ID  FAILURE 🛑');
+      print('🛑 GET Driver TRAVELS BY ID  FAILURE 🛑');
       print(response.body);
       throw response.body;
     }

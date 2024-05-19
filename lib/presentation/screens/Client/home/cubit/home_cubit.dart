@@ -178,8 +178,8 @@ class HomeCubit extends Cubit<HomeState> {
     );
   }
 
-  double rating = .0;
-  void changeRating(double rate) {
+  int rating = 0;
+  void changeRating(int rate) {
     rating = rate;
     emit(HomeChangeRatingState());
   }
@@ -221,7 +221,7 @@ class HomeCubit extends Cubit<HomeState> {
     acceptedRequests = 0;
     if (requests != null && requests.isNotEmpty) {
       for (var request in requests) {
-        if (request.state == 'ACCEPTED') {
+        if (request.state == 'accept') {
           acceptedRequests++;
         }
       }

@@ -41,7 +41,7 @@ class _UpdateTravelViewState extends State<UpdateTravelView> {
         bottomOpacity: 0,
         scrolledUnderElevation: 0,
         title: Text(
-          'New travel',
+          AppStrings.updateTheTravel.tr(context),
           style: getRegularStyle(color: ColorManager.dark),
         ),
       ),
@@ -152,7 +152,7 @@ class _UpdateTravelViewState extends State<UpdateTravelView> {
                     Row(
                       children: [
                         Text(
-                          AppStrings.numberOfSeats,
+                          AppStrings.numberOfSeats.tr(context),
                           style: getMeduimStyle(color: ColorManager.dark),
                         ),
                         Text(
@@ -174,7 +174,7 @@ class _UpdateTravelViewState extends State<UpdateTravelView> {
                     Row(
                       children: [
                         Text(
-                          AppStrings.placePrice,
+                          AppStrings.placePrice.tr(context),
                           style: getMeduimStyle(color: ColorManager.dark),
                         ),
                         Text(
@@ -196,7 +196,7 @@ class _UpdateTravelViewState extends State<UpdateTravelView> {
                     Row(
                       children: [
                         Text(
-                          AppStrings.date,
+                          AppStrings.date.tr(context),
                           style: getMeduimStyle(color: ColorManager.dark),
                         ),
                         Text(
@@ -220,7 +220,7 @@ class _UpdateTravelViewState extends State<UpdateTravelView> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          AppStrings.baggageAllowed2,
+                          AppStrings.baggageAllowed2.tr(context),
                           style: getMeduimStyle(color: ColorManager.dark),
                         ),
                         CupertinoSlidingSegmentedControl(
@@ -255,7 +255,7 @@ class _UpdateTravelViewState extends State<UpdateTravelView> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          AppStrings.petsAllowed2,
+                          AppStrings.petsAllowed2.tr(context),
                           style: getMeduimStyle(color: ColorManager.dark),
                         ),
                         CupertinoSlidingSegmentedControl(
@@ -266,12 +266,12 @@ class _UpdateTravelViewState extends State<UpdateTravelView> {
                             1: Padding(
                               padding: EdgeInsets.all(AppPadding.p10),
                               child: Text(
-                                AppStrings.no,
+                                AppStrings.no.tr(context),
                                 style: getMeduimStyle(color: ColorManager.dark),
                               ),
                             ),
                             2: Text(
-                              AppStrings.yes,
+                              AppStrings.yes.tr(context),
                               style: getMeduimStyle(color: ColorManager.dark),
                             ),
                           },
@@ -286,7 +286,7 @@ class _UpdateTravelViewState extends State<UpdateTravelView> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          AppStrings.smokingAllowed,
+                          AppStrings.smokingAllowed.tr(context),
                           style: getMeduimStyle(color: ColorManager.dark),
                         ),
                         CupertinoSlidingSegmentedControl(
@@ -297,12 +297,12 @@ class _UpdateTravelViewState extends State<UpdateTravelView> {
                             1: Padding(
                               padding: EdgeInsets.all(AppPadding.p10),
                               child: Text(
-                                AppStrings.no,
+                                AppStrings.no.tr(context),
                                 style: getMeduimStyle(color: ColorManager.dark),
                               ),
                             ),
                             2: Text(
-                              AppStrings.yes,
+                              AppStrings.yes.tr(context),
                               style: getMeduimStyle(color: ColorManager.dark),
                             ),
                           },
@@ -315,7 +315,7 @@ class _UpdateTravelViewState extends State<UpdateTravelView> {
                     separator(),
                     CustomFormField(
                       textEditingcontroller: cubit.carNameController,
-                      label: AppStrings.carName,
+                      label: AppStrings.carName.tr(context),
                       keyboardType: TextInputType.name,
                       errorLabel: null,
                       onChanged: (value) {},
@@ -341,7 +341,7 @@ class _UpdateTravelViewState extends State<UpdateTravelView> {
                             color: ColorManager.yellow,
                           )
                         : CustomLargeButton(
-                            label: 'Update',
+                            label: AppStrings.updateTheTravel.tr(context),
                             onPressed: cubit.isEverythingValid
                                 ? () {
                                     cubit.updateTravel(context, widget.travel);

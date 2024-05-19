@@ -285,8 +285,8 @@ class DriverHomeCubit extends Cubit<DriverHomeState> {
     );
   }
 
-  double rating = .0;
-  void changeRating(double rate) {
+  int rating = 0;
+  void changeRating(int rate) {
     rating = rate;
     emit(DriverChangeRatingState());
   }
@@ -297,7 +297,7 @@ class DriverHomeCubit extends Cubit<DriverHomeState> {
   bool feedbackValid = false;
 
   void changeFeedbackValidation() {
-    if (rating != .0 && feedbackCommentController.text.isNotEmpty) {
+    if (rating != 0 && feedbackCommentController.text.isNotEmpty) {
       feedbackValid = true;
       emit(DriverChangeValidationState());
     }
@@ -319,7 +319,7 @@ class DriverHomeCubit extends Cubit<DriverHomeState> {
       },
       (data) {
         feedbackCommentController.clear();
-        rating = .0;
+        rating = 0;
         feedbackValid = false;
         emit(DriverSendFeedbackSuccessState());
       },
@@ -329,57 +329,58 @@ class DriverHomeCubit extends Cubit<DriverHomeState> {
   final DriverGetTravelByIdUsecase _driverGetTravelByIdUsecase = DriverGetTravelByIdUsecase(getIt());
 
   TravelModel? myTravel;
-  var myTravelTest = TravelModel(
-    travelId: 'hellas;dlkfjasdf',
-    placeOfDeparture: 'Kais',
-    timeOfDeparture: "10:00",
-    placeOfArrival: 'al hamma',
-    timeOfArrival: '10:30',
-    numberOfPlaces: 4,
-    carName: 'king long',
-    carImage: 'carImage',
-    placePrice: 200,
-    allowSmoking: false,
-    allowPets: false,
-    requests: [
-      RequestModel(
-        requestId: 'kdkdkd',
-        clientId: 'clientId',
-        name: 'anis',
-        image: 'image',
-        phoneNumber: '0656933390',
-        state: 'pending',
-      ),
-      RequestModel(
-        requestId: 'idididid',
-        clientId: 'clientId',
-        name: 'ayoub',
-        image: 'image',
-        phoneNumber: '0656933390',
-        state: 'accepted',
-      ),
-    ],
-    driver: DriverModel(
-      id: 'id',
-      name: 'name',
-      familyname: 'familyname',
-      address: 'address',
-      birthday: 'birthday',
-      phoneNumber: 'phoneNumber',
-      image: 'image',
-      password: 'password',
-      feedbackes: [],
-      isAccepted: true,
-      token: 'token',
-    ),
-    baggage: 'S',
-    dateOfDeparture: '2024-05-30',
-  );
+  // var myTravelTest = TravelModel(
+  //   travelId: 'hellas;dlkfjasdf',
+  //   placeOfDeparture: 'Kais',
+  //   timeOfDeparture: "10:00",
+  //   placeOfArrival: 'al hamma',
+  //   timeOfArrival: '10:30',
+  //   numberOfPlaces: 4,
+  //   carName: 'king long',
+  //   carImage: 'carImage',
+  //   placePrice: 200,
+  //   allowSmoking: false,
+  //   allowPets: false,
+  //   requests: [
+  //     RequestModel(
+  //       requestId: 'kdkdkd',
+  //       clientId: 'clientId',
+  //       name: 'anis',
+  //       image: 'image',
+  //       phoneNumber: '0656933390',
+  //       state: 'pending',
+  //     ),
+  //     RequestModel(
+  //       requestId: 'idididid',
+  //       clientId: 'clientId',
+  //       name: 'ayoub',
+  //       image: 'image',
+  //       phoneNumber: '0656933390',
+  //       state: 'accepted',
+  //     ),
+  //   ],
+  //   driver: DriverModel(
+  //     id: 'id',
+  //     name: 'name',
+  //     familyname: 'familyname',
+  //     address: 'address',
+  //     birthday: 'birthday',
+  //     phoneNumber: 'phoneNumber',
+  //     image: 'image',
+  //     password: 'password',
+  //     feedbackes: [],
+  //     isAccepted: true,
+  //     token: 'token',
+  //   ),
+  //   baggage: 'S',
+  //   dateOfDeparture: '2024-05-30',
+  // );
 
   Future<void> getMyTravel(BuildContext context) async {
     emit(DriverGetTravelByIdLoadingState());
-    calculateAcceptedRequests(myTravelTest.requests);
-    (await _driverGetTravelByIdUsecase.execute('66498df4b4b85004c3d6365e')).fold(
+    final AppPrefences appPrefences = AppPrefences(getIt());
+    var id = appPrefences.getId();
+    (await _driverGetTravelByIdUsecase.execute(id)).fold(
       (failure) {
         errorToast(failure.message).show(context);
         emit(DriverGetTravelByIdErrorState());
@@ -387,24 +388,29 @@ class DriverHomeCubit extends Cubit<DriverHomeState> {
       (data) {
         myTravel = data;
         successToast('Success get travel').show(context);
+        calculateAcceptedRequests(myTravel!.requests);
         emit(DriverGetTravelByIdSuccessState());
       },
     );
   }
 
   int acceptedRequests = 0;
-  List<RequestModel> acceptedRequestsList = [];
+  List<RequestModel> acceptRequestsList = [];
   List<RequestModel> pendingRequestsList = [];
+  List<RequestModel> rejectRequestsList = [];
 
   void calculateAcceptedRequests(List<RequestModel>? requests) {
     acceptedRequests = 0;
-    acceptedRequestsList = [];
+    acceptRequestsList = [];
     pendingRequestsList = [];
+    rejectRequestsList = [];
     if (requests != null && requests.isNotEmpty) {
       for (var request in requests) {
-        if (request.state == 'accepted') {
+        if (request.state == 'accept') {
           acceptedRequests++;
-          acceptedRequestsList.add(request);
+          acceptRequestsList.add(request);
+        } else if (request.state == 'reject') {
+          rejectRequestsList.add(request);
         } else {
           pendingRequestsList.add(request);
         }
@@ -417,16 +423,20 @@ class DriverHomeCubit extends Cubit<DriverHomeState> {
 
   Future<void> updateRequestState(BuildContext context, String state, String requestId, String travelId) async {
     emit(DriverUpdateRequestStateLoadingState());
-    (await _updateRequestStateUsecase.execute(state, requestId, travelId)).fold(
-      (failure) {
-        errorToast(failure.message).show(context);
-        emit(DriverUpdateRequestStateErrorState());
-      },
-      (data) {
-        successToast("Request updated").show(context);
-        emit(DriverUpdateRequestStateSuccessState());
-      },
-    );
+    if (myTravel!.numberOfPlaces == acceptedRequests && state == 'accept') {
+      errorToast('travel is full').show(context);
+    } else {
+      (await _updateRequestStateUsecase.execute(state, requestId, travelId)).fold(
+        (failure) {
+          errorToast(failure.message).show(context);
+          emit(DriverUpdateRequestStateErrorState());
+        },
+        (data) {
+          successToast("Request updated").show(context);
+          emit(DriverUpdateRequestStateSuccessState());
+        },
+      );
+    }
   }
 
   double calculateRate(List<FeedbackModel> feedbacks) {

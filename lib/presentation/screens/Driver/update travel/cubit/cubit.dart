@@ -233,7 +233,7 @@ class UpdateTravelCubit extends Cubit<UpdateTravelState> {
     emit(UpdateTravelLoadingState());
     (await _updateTravelUsecase.execute(
       TravelModel(
-        travelId: '663a0229733f21f5503fd157',
+        travelId: travel.travelId,
         placeOfDeparture: pickedFromLocation!,
         timeOfDeparture: "$pickedFromTime",
         placeOfArrival: pickedToLocation!,
@@ -244,20 +244,8 @@ class UpdateTravelCubit extends Cubit<UpdateTravelState> {
         placePrice: placePrice,
         allowSmoking: smokingAllowed,
         allowPets: petsAllowed,
-        requests: [],
-        driver: DriverModel(
-          id: 'id',
-          name: 'name',
-          familyname: 'familyname',
-          address: 'address',
-          birthday: 'birthday',
-          phoneNumber: 'adsfaf',
-          image: 'image',
-          password: 'password',
-          feedbackes: [],
-          isAccepted: true,
-          token: 'token',
-        ),
+        requests: travel.requests,
+        driver: travel.driver,
         baggage: baggageSizeAllowed,
         dateOfDeparture: selectedDate.toString(),
       ),
