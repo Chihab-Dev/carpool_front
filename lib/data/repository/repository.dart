@@ -345,10 +345,10 @@ class RepositoryImpl extends Repository {
   }
 
   @override
-  Future<Either<Failure, TravelModel>> driverGetTravelById(String id) async {
+  Future<Either<Failure, List<TravelModel>>> driverGetTravelById() async {
     if (await networkInfo.isConnected()) {
       try {
-        final result = await remoteDataSource.driverGetTravelById(id);
+        final result = await remoteDataSource.driverGetTravelById();
         return right(result);
       } catch (e) {
         print(e.toString());

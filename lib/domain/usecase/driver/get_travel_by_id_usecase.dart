@@ -8,7 +8,7 @@ class DriverGetTravelByIdUsecase {
 
   DriverGetTravelByIdUsecase(this._repository);
 
-  Future<Either<Failure, TravelModel>> execute(String id) async {
-    return await _repository.driverGetTravelById(id);
+   Future<Either<Failure, List<TravelModel>>> execute() async {
+    return await _repository.driverGetTravelById();
   }
 }

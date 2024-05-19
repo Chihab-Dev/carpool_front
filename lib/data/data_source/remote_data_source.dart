@@ -25,7 +25,7 @@ abstract class RemoteDataSource {
   Future<void> createTravel(TravelModel travelModel);
   Future<void> driverSendFeedback(FeedbackModel feedback);
   Future<void> updateTravel(TravelModel travel);
-  Future<TravelModel> driverGetTravelById(String id);
+  Future<List<TravelModel>> driverGetTravelById();
   Future<void> updateRequestState(String state, String requestId, String travelId);
 
   //----------------------------------------------------- ADMIN -----------------------------------------------------
@@ -449,8 +449,10 @@ class RemoteDataSourceImpl extends RemoteDataSource {
   }
 
   @override
-  Future<TravelModel> driverGetTravelById(String id) async {
+  Future<List<TravelModel>> driverGetTravelById() async {
     String token = _appPrefences.getToken();
+    final AppPrefences appPrefences = AppPrefences(getIt());
+    var id = appPrefences.getId();
 
     final url = Uri.parse("${ApiConstance.travelsBaseUrl}/driver/$id");
     final headers = {
@@ -479,7 +481,7 @@ class RemoteDataSourceImpl extends RemoteDataSource {
           },
         ),
       );
-      return x.first;
+      return x;
     } else {
       print('🛑 GET Driver TRAVELS BY ID  FAILURE 🛑');
       print(response.body);

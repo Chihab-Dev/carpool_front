@@ -20,4 +20,5 @@ class ImageAsset {
 class LottieAsset {
   static const String map = "$lottiePath/map.json";
   static const String admin = "$lottiePath/admin.json";
+  static const String empty = "$lottiePath/empty.json";
 }

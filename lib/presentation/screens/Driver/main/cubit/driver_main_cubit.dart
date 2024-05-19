@@ -1,4 +1,4 @@
-import 'package:carpool/presentation/screens/Driver/home/view/driver_my_travel_view.dart';
+import 'package:carpool/presentation/screens/Driver/home/view/driver_all_travels.dart';
 import 'package:carpool/presentation/screens/Driver/home/view/driver_new_travel_view.dart';
 import 'package:carpool/presentation/screens/Driver/home/view/driver_profile_view.dart';
 import 'package:carpool/presentation/screens/Driver/main/cubit/driver_main_states.dart';
@@ -16,7 +16,7 @@ class DriverMainCubit extends Cubit<DriverMainStates> {
 
   List<Widget> pages = [
     const DriverHomeView(),
-    const DriverMyTravelView(),
+    const DriverAllTravelsView(),
     const DriverProfileView(),
   ];
 
