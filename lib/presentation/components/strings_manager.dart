@@ -103,4 +103,6 @@ class AppStrings {
   static const String location = 'location';
   static const String pickNumberOfPlaces = 'pickNumberOfPlaces';
   static const String person = 'person';
+  static const String updateTheTravel = 'updateTheTravel';
+  static const String deleteTheTravel = 'deleteTheTravel';
 }

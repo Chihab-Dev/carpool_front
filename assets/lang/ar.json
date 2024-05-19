@@ -43,7 +43,7 @@
     "forOnePerson": " لشخص الواحد",
     "baggageAllowed": "الحقائب بحجم L مسموح بها",
     "petsNotAllowed": "الحيوانات الأليفة غير مسموحة",
-    "smokingAllowed": "التدخين مسموح",
+    "smokingAllowed": "التدخين مسموح : ",
     "newTravel": "رحلة جديدة",
     "numberOfSeats": "عدد المقاعد : ",
     "placePrice": "سعر المكان الواحد : ",
@@ -81,5 +81,7 @@
     "old": "عمر : ",
     "location": "المكان",
     "pickNumberOfPlaces": "اختر عدد المقاعد : ",
-    "person": "شخص"
+    "person": "شخص",
+    "updateTheTravel": "تحديث الرحلة",
+    "deleteTheTravel": "حذف الرحلة"
 }

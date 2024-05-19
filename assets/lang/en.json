@@ -81,5 +81,7 @@
     "old": "Old : ",
     "location": "Location",
     "pickNumberOfPlaces": "Pick number of plcaes : ",
-    "person": "Person"
+    "person": "Person",
+    "updateTheTravel": "Update the travel",
+    "deleteTheTravel": "Delete the travel"
 }

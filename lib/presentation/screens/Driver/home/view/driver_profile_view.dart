@@ -1,7 +1,9 @@
+import 'package:carpool/app/localizations.dart';
 import 'package:carpool/data/models/models.dart';
 import 'package:carpool/presentation/components/appsize.dart';
 import 'package:carpool/presentation/components/assets_manager.dart';
 import 'package:carpool/presentation/components/color_manager.dart';
+import 'package:carpool/presentation/components/strings_manager.dart';
 import 'package:carpool/presentation/components/styles_manager.dart';
 import 'package:carpool/presentation/components/widgets.dart';
 import 'package:carpool/presentation/screens/Driver/home/cubit/driver_home_cubit.dart';
@@ -51,13 +53,13 @@ class _DriverProfileViewState extends State<DriverProfileView> {
                               SizedBox(height: AppSize.s18),
                               separator(),
                               CustomInformationRow(
-                                  label: 'Full name :',
+                                  label: AppStrings.fullName.tr(context),
                                   content: "${cubit.driverModel!.familyname} ${cubit.driverModel!.name}"),
                               separator(),
                               Row(
                                 children: [
                                   Text(
-                                    "Rate : ",
+                                    AppStrings.rate.tr(context),
                                     style: getMeduimStyle(color: ColorManager.dark),
                                   ),
                                   Icon(
@@ -72,18 +74,22 @@ class _DriverProfileViewState extends State<DriverProfileView> {
                                 ],
                               ),
                               separator(),
-                              CustomInformationRow(label: "Phone number : ", content: cubit.driverModel!.phoneNumber),
-                              separator(),
-                              CustomInformationRow(label: "Address : ", content: cubit.driverModel!.address),
+                              CustomInformationRow(
+                                  label: '${AppStrings.phoneNumber.tr(context)} : ',
+                                  content: cubit.driverModel!.phoneNumber),
                               separator(),
                               CustomInformationRow(
-                                  label: "Old : ", content: calculateAgeFromString(cubit.driverModel!.birthday)),
+                                  label: "${AppStrings.address.tr(context)} : ", content: cubit.driverModel!.address),
+                              separator(),
+                              CustomInformationRow(
+                                  label: AppStrings.old.tr(context),
+                                  content: calculateAgeFromString(cubit.driverModel!.birthday)),
                               separator(),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "Feedbacks : ${cubit.driverModel!.feedbackes.length}",
+                                    "${AppStrings.feedback.tr(context)} : ${cubit.driverModel!.feedbackes.length}",
                                     style: getRegularStyle(color: ColorManager.dark),
                                   ),
                                   SizedBox(height: AppSize.s16),
@@ -140,7 +146,7 @@ class _DriverProfileViewState extends State<DriverProfileView> {
                                 ],
                               ),
                               CustomLargeButton(
-                                label: 'Logout',
+                                label: AppStrings.logout.tr(context),
                                 width: double.infinity,
                                 onPressed: () {
                                   logout(context);

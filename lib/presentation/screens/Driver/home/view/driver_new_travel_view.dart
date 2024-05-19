@@ -26,7 +26,7 @@ class DriverHomeView extends StatelessWidget {
         bottomOpacity: 0,
         scrolledUnderElevation: 0,
         title: Text(
-          'New travel',
+          AppStrings.newTravel.tr(context),
           style: getRegularStyle(color: ColorManager.dark),
         ),
       ),
@@ -141,7 +141,7 @@ class DriverHomeView extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          AppStrings.numberOfSeats,
+                          AppStrings.numberOfSeats.tr(context),
                           style: getMeduimStyle(color: ColorManager.dark),
                         ),
                         Text(
@@ -163,7 +163,7 @@ class DriverHomeView extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          AppStrings.placePrice,
+                          AppStrings.placePrice.tr(context),
                           style: getMeduimStyle(color: ColorManager.dark),
                         ),
                         Text(
@@ -185,7 +185,7 @@ class DriverHomeView extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          AppStrings.date,
+                          AppStrings.date.tr(context),
                           style: getMeduimStyle(color: ColorManager.dark),
                         ),
                         Text(
@@ -209,7 +209,7 @@ class DriverHomeView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          AppStrings.baggageAllowed2,
+                          AppStrings.baggageAllowed2.tr(context),
                           style: getMeduimStyle(color: ColorManager.dark),
                         ),
                         CupertinoSlidingSegmentedControl(
@@ -244,7 +244,7 @@ class DriverHomeView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          AppStrings.petsAllowed2,
+                          AppStrings.petsAllowed2.tr(context),
                           style: getMeduimStyle(color: ColorManager.dark),
                         ),
                         CupertinoSlidingSegmentedControl(
@@ -255,12 +255,12 @@ class DriverHomeView extends StatelessWidget {
                             1: Padding(
                               padding: EdgeInsets.all(AppPadding.p10),
                               child: Text(
-                                AppStrings.no,
+                                AppStrings.no.tr(context),
                                 style: getMeduimStyle(color: ColorManager.dark),
                               ),
                             ),
                             2: Text(
-                              AppStrings.yes,
+                              AppStrings.yes.tr(context),
                               style: getMeduimStyle(color: ColorManager.dark),
                             ),
                           },
@@ -275,7 +275,7 @@ class DriverHomeView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          AppStrings.smokingAllowed,
+                          AppStrings.smokingAllowed.tr(context),
                           style: getMeduimStyle(color: ColorManager.dark),
                         ),
                         CupertinoSlidingSegmentedControl(
@@ -286,12 +286,12 @@ class DriverHomeView extends StatelessWidget {
                             1: Padding(
                               padding: EdgeInsets.all(AppPadding.p10),
                               child: Text(
-                                AppStrings.no,
+                                AppStrings.no.tr(context),
                                 style: getMeduimStyle(color: ColorManager.dark),
                               ),
                             ),
                             2: Text(
-                              AppStrings.yes,
+                              AppStrings.yes.tr(context),
                               style: getMeduimStyle(color: ColorManager.dark),
                             ),
                           },
@@ -304,7 +304,7 @@ class DriverHomeView extends StatelessWidget {
                     separator(),
                     CustomFormField(
                       textEditingcontroller: cubit.carNameController,
-                      label: AppStrings.carName,
+                      label: AppStrings.carName.tr(context),
                       keyboardType: TextInputType.name,
                       errorLabel: null,
                       onChanged: (value) {},
@@ -330,7 +330,7 @@ class DriverHomeView extends StatelessWidget {
                             color: ColorManager.yellow,
                           )
                         : CustomLargeButton(
-                            label: AppStrings.createTravel,
+                            label: AppStrings.createTravel.tr(context),
                             onPressed: cubit.isEverythingValid
                                 ? () {
                                     cubit.createTravel(context);
@@ -369,7 +369,7 @@ class DriverHomeView extends StatelessWidget {
                   child: Column(
                     children: [
                       Text(
-                        AppStrings.placePrice,
+                        AppStrings.placePrice.tr(context),
                         style: getMeduimStyle(color: ColorManager.dark),
                       ),
                       SizedBox(height: AppSize.s20),
@@ -420,7 +420,7 @@ class DriverHomeView extends StatelessWidget {
                   child: Column(
                     children: [
                       Text(
-                        AppStrings.numberOfSeats,
+                        AppStrings.numberOfSeats.tr(context),
                         style: getMeduimStyle(color: ColorManager.dark),
                       ),
                       SizedBox(height: AppSize.s20),
@@ -500,7 +500,7 @@ class DriverHomeView extends StatelessWidget {
                             contentPadding: EdgeInsets.symmetric(horizontal: AppPadding.p8, vertical: AppPadding.p6),
                             floatingLabelBehavior: FloatingLabelBehavior.never,
                             label: Text(
-                              'location',
+                              AppStrings.location.tr(context),
                               style: getSmallLightStyle(color: ColorManager.dark.withOpacity(0.5)),
                             ),
                             enabledBorder: UnderlineInputBorder(

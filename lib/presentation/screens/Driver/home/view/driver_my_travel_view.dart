@@ -147,7 +147,7 @@ class _DriverMyTravelViewState extends State<DriverMyTravelView> {
                                   : const SizedBox(),
                               const Spacer(),
                               Text(
-                                AppStrings.forOnePerson.tr(context),
+                                '${AppStrings.forOnePerson.tr(context)} ',
                                 style: getSmallRegularStyle(color: ColorManager.darkGrey),
                               ),
                               Text(
@@ -214,12 +214,12 @@ class _DriverMyTravelViewState extends State<DriverMyTravelView> {
                                 SizedBox(width: AppSize.s25),
                                 Text(
                                   cubit.myTravelTest.baggage == "S"
-                                      ? AppStrings.baggageSAllowed
+                                      ? AppStrings.baggageSAllowed.tr(context)
                                       : cubit.myTravelTest.baggage == "M"
-                                          ? AppStrings.baggageMAllowed
+                                          ? AppStrings.baggageMAllowed.tr(context)
                                           : cubit.myTravelTest.baggage == "L"
-                                              ? AppStrings.baggageLAllowed
-                                              : AppStrings.baggageSAllowed,
+                                              ? AppStrings.baggageLAllowed.tr(context)
+                                              : AppStrings.baggageSAllowed.tr(context),
                                   style: getSmallRegularStyle(color: ColorManager.dark),
                                 ),
                               ],
@@ -249,7 +249,7 @@ class _DriverMyTravelViewState extends State<DriverMyTravelView> {
                                 SizedBox(width: AppSize.s25),
                                 Text(
                                   cubit.myTravelTest.allowPets
-                                      ? AppStrings.allowPets
+                                      ? AppStrings.allowPets.tr(context)
                                       : AppStrings.petsNotAllowed.tr(context),
                                   style: getSmallRegularStyle(color: ColorManager.dark),
                                 ),
@@ -281,7 +281,7 @@ class _DriverMyTravelViewState extends State<DriverMyTravelView> {
                                 Text(
                                   cubit.myTravelTest.allowSmoking
                                       ? AppStrings.smokingAllowed.tr(context)
-                                      : AppStrings.dontAllowSmoking,
+                                      : AppStrings.dontAllowSmoking.tr(context),
                                   style: getSmallRegularStyle(color: ColorManager.dark),
                                 ),
                               ],
@@ -305,7 +305,7 @@ class _DriverMyTravelViewState extends State<DriverMyTravelView> {
                           ),
                           separator(),
                           Text(
-                            AppStrings.acceptedRequests,
+                            AppStrings.acceptedRequests.tr(context),
                             style: getMeduimStyle(color: ColorManager.dark),
                           ),
                           SizedBox(height: AppSize.s16),
@@ -320,7 +320,7 @@ class _DriverMyTravelViewState extends State<DriverMyTravelView> {
                           ),
                           separator(),
                           Text(
-                            AppStrings.pendingRequests,
+                            AppStrings.pendingRequests.tr(context),
                             style: getMeduimStyle(color: ColorManager.dark),
                           ),
                           SizedBox(height: AppSize.s16),
@@ -336,7 +336,7 @@ class _DriverMyTravelViewState extends State<DriverMyTravelView> {
                           ),
                           separator(),
                           CustomLargeButton(
-                            label: 'Update the travel',
+                            label: AppStrings.updateTheTravel.tr(context),
                             onPressed: () {
                               Navigator.push(
                                   context,
@@ -378,7 +378,7 @@ class _DriverMyTravelViewState extends State<DriverMyTravelView> {
                           ),
                           SizedBox(height: AppSize.s16),
                           CustomLargeButton(
-                            label: 'Delete the travel',
+                            label: AppStrings.deleteTheTravel.tr(context),
                             onPressed: () {},
                             color: Colors.red,
                             width: double.infinity,
@@ -426,14 +426,14 @@ class _DriverMyTravelViewState extends State<DriverMyTravelView> {
         Column(
           children: [
             CustomSmallButton(
-              label: AppStrings.accept,
+              label: AppStrings.accept.tr(context),
               onPressed: () {
                 cubit.updateRequestState(context, 'accept', requestModel.requestId, travel.travelId);
               },
               backgroundColor: ColorManager.yellow,
             ),
             CustomSmallButton(
-              label: AppStrings.reject,
+              label: AppStrings.reject.tr(context),
               onPressed: () {
                 cubit.updateRequestState(context, 'reject', requestModel.requestId, travel.travelId);
               },
@@ -475,7 +475,7 @@ class _DriverMyTravelViewState extends State<DriverMyTravelView> {
         ),
         SizedBox(width: AppSize.s20),
         CustomSmallButton(
-          label: AppStrings.feedback,
+          label: AppStrings.feedback.tr(context),
           onPressed: () {
             Navigator.push(
                 context,
