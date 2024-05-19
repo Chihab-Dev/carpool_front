@@ -357,6 +357,7 @@ class DriverHomeCubit extends Cubit<DriverHomeState> {
     rejectRequestsList = [];
     if (requests != null && requests.isNotEmpty) {
       for (var request in requests) {
+        print(request.state);
         if (request.state == 'accept') {
           acceptedRequests++;
           acceptRequestsList.add(request);
@@ -372,22 +373,22 @@ class DriverHomeCubit extends Cubit<DriverHomeState> {
 
   final UpdateRequestStateUsecase _updateRequestStateUsecase = UpdateRequestStateUsecase(getIt());
 
-  Future<void> updateRequestState(BuildContext context, String state, String requestId, String travelId) async {
-    // emit(DriverUpdateRequestStateLoadingState());
-    // if (myTravel!.numberOfPlaces == acceptedRequests && state == 'accept') {
-    //   errorToast('travel is full').show(context);
-    // } else {
-    //   (await _updateRequestStateUsecase.execute(state, requestId, travelId)).fold(
-    //     (failure) {
-    //       errorToast(failure.message).show(context);
-    //       emit(DriverUpdateRequestStateErrorState());
-    //     },
-    //     (data) {
-    //       successToast("Request updated").show(context);
-    //       emit(DriverUpdateRequestStateSuccessState());
-    //     },
-    //   );
-    // }
+  Future<void> updateRequestState(BuildContext context, String state, String requestId, TravelModel travelModel) async {
+    emit(DriverUpdateRequestStateLoadingState());
+    if (travelModel.numberOfPlaces == acceptedRequests && state == 'accept') {
+      errorToast('travel is full').show(context);
+    } else {
+      (await _updateRequestStateUsecase.execute(state, requestId, travelModel.travelId)).fold(
+        (failure) {
+          errorToast(failure.message).show(context);
+          emit(DriverUpdateRequestStateErrorState());
+        },
+        (data) {
+          successToast("Request updated").show(context);
+          emit(DriverUpdateRequestStateSuccessState());
+        },
+      );
+    }
   }
 
   double calculateRate(List<FeedbackModel> feedbacks) {

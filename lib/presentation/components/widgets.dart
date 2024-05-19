@@ -290,7 +290,7 @@ CherryToast errorToast(String msg) {
 
 CherryToast successToast(String msg) {
   return CherryToast.success(
-    title: Text(msg, style: TextStyle(color: ColorManager.yellow)),
+    title: Text(msg, style: TextStyle(color: ColorManager.green)),
     toastPosition: Position.bottom,
     toastDuration: const Duration(seconds: 5),
   );

@@ -173,6 +173,7 @@ class HomeCubit extends Cubit<HomeState> {
         emit(HomeRequestToBookErrorState());
       },
       (data) {
+        successToast('Request send success').show(context);
         emit(HomeRequestToBookSuccessState());
       },
     );
@@ -211,6 +212,7 @@ class HomeCubit extends Cubit<HomeState> {
         emit(HomeSendFeedbackErrorState());
       },
       (data) {
+        successToast('Send feedback success').show(context);
         emit(HomeSendFeedbackSuccessState());
       },
     );

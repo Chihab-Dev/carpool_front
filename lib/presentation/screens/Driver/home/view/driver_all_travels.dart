@@ -31,52 +31,59 @@ class _DriverAllTravelsViewState extends State<DriverAllTravelsView> {
       listener: (context, state) {},
       builder: (context, state) {
         var cubit = DriverHomeCubit.get(context);
-        return state is DriverGetTravelByIdLoadingState
-            ? Center(
-                child: CircularProgressIndicator(
-                  color: ColorManager.yellow,
-                ),
-              )
-            : Scaffold(
-                appBar: AppBar(
-                  backgroundColor: Colors.transparent,
-                  elevation: 0,
-                  bottomOpacity: 0,
-                  scrolledUnderElevation: 0,
-                  title: Text(
-                    'Your travels',
-                    style: getRegularStyle(color: ColorManager.dark),
+        return Scaffold(
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            bottomOpacity: 0,
+            scrolledUnderElevation: 0,
+            title: Text(
+              'Your travels',
+              style: getRegularStyle(color: ColorManager.dark),
+            ),
+            actions: [
+              IconButton(
+                  onPressed: () {
+                    cubit.getMyTravels(context);
+                  },
+                  icon: const Icon(Icons.replay_outlined))
+            ],
+          ),
+          body: state is DriverGetTravelByIdLoadingState
+              ? Center(
+                  child: CircularProgressIndicator(
+                    color: ColorManager.yellow,
                   ),
-                ),
-                body: cubit.allMyTravels.isEmpty
-                    ? Center(
-                        child: Lottie.asset(LottieAsset.empty),
-                      )
-                    : Padding(
-                        padding: EdgeInsets.symmetric(horizontal: AppPadding.p18),
-                        child: Center(
-                          child: Column(
-                            children: [
-                              Expanded(
-                                child: ListView.builder(
-                                  shrinkWrap: false,
-                                  itemCount: cubit.allMyTravels.length,
-                                  itemBuilder: (context, index) {
-                                    return travelDetailsContainer(
-                                      context,
+                )
+              : cubit.allMyTravels.isEmpty
+                  ? Center(
+                      child: Lottie.asset(LottieAsset.empty),
+                    )
+                  : Padding(
+                      padding: EdgeInsets.symmetric(horizontal: AppPadding.p18),
+                      child: Center(
+                        child: Column(
+                          children: [
+                            Expanded(
+                              child: ListView.builder(
+                                shrinkWrap: false,
+                                itemCount: cubit.allMyTravels.length,
+                                itemBuilder: (context, index) {
+                                  return travelDetailsContainer(
+                                    context,
+                                    cubit.allMyTravels[index],
+                                    DriverMyTravelView(
                                       cubit.allMyTravels[index],
-                                      DriverMyTravelView(
-                                        cubit.allMyTravels[index],
-                                      ),
-                                    );
-                                  },
-                                ),
+                                    ),
+                                  );
+                                },
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
-              );
+                    ),
+        );
       },
     );
   }

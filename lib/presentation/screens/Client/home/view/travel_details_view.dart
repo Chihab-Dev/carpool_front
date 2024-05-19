@@ -159,7 +159,7 @@ class _TravelDetailsViewState extends State<TravelDetailsView> {
                                 ),
                                 SizedBox(width: AppSize.s5),
                                 Text(
-                                  widget.travel.driver.feedbackes.length.toString(),
+                                  cubit.calculateRate(widget.travel.driver.feedbackes).toString(),
                                   style: getMeduimStyle(color: ColorManager.dark),
                                 ),
                               ],

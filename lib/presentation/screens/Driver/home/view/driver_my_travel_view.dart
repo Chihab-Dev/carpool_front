@@ -407,14 +407,14 @@ class _DriverMyTravelViewState extends State<DriverMyTravelView> {
             CustomSmallButton(
               label: AppStrings.accept.tr(context),
               onPressed: () {
-                cubit.updateRequestState(context, 'accept', requestModel.requestId, travel.travelId);
+                cubit.updateRequestState(context, 'accept', requestModel.requestId, travel);
               },
               backgroundColor: ColorManager.yellow,
             ),
             CustomSmallButton(
               label: AppStrings.reject.tr(context),
               onPressed: () {
-                cubit.updateRequestState(context, 'reject', requestModel.requestId, travel.travelId);
+                cubit.updateRequestState(context, 'reject', requestModel.requestId, travel);
               },
               backgroundColor: Colors.red,
             ),
@@ -505,7 +505,7 @@ class _DriverMyTravelViewState extends State<DriverMyTravelView> {
           CustomSmallButton(
             label: AppStrings.accept.tr(context),
             onPressed: () {
-              cubit.updateRequestState(context, 'accept', requestModel.requestId, travel.travelId);
+              cubit.updateRequestState(context, 'accept', requestModel.requestId, travel);
             },
             backgroundColor: ColorManager.yellow,
           ),
