@@ -56,10 +56,6 @@ class _TravelDetailsViewState extends State<TravelDetailsView> {
                       widget.travel.dateOfDeparture.substring(0, 10),
                       style: getMeduimStyle(color: ColorManager.dark),
                     ),
-                    Text(
-                      widget.travel.requests.first.state,
-                      style: getMeduimStyle(color: ColorManager.dark),
-                    ),
                     SizedBox(height: AppSize.s20),
                     TimelineTile(
                       alignment: TimelineAlign.manual,

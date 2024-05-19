@@ -7,6 +7,7 @@ import 'package:carpool/domain/usecase/driver/create_travel_usecase.dart';
 import 'package:carpool/domain/usecase/driver/get_driver_by_id_usecase.dart';
 import 'package:carpool/domain/usecase/driver/get_travel_by_id_usecase.dart';
 import 'package:carpool/domain/usecase/driver/send_feedback_usecase.dart';
+import 'package:carpool/domain/usecase/driver/update_request_state_usecase.dart';
 import 'package:carpool/presentation/components/color_manager.dart';
 import 'package:carpool/presentation/components/widgets.dart';
 import 'package:flutter/material.dart';
@@ -321,20 +322,104 @@ class DriverHomeCubit extends Cubit<DriverHomeState> {
   }
 
   final DriverGetTravelByIdUsecase _driverGetTravelByIdUsecase = DriverGetTravelByIdUsecase(getIt());
+
   TravelModel? myTravel;
+  var myTravelTest = TravelModel(
+    travelId: 'hellas;dlkfjasdf',
+    placeOfDeparture: 'Kais',
+    timeOfDeparture: "10:00",
+    placeOfArrival: 'al hamma',
+    timeOfArrival: '10:30',
+    numberOfPlaces: 4,
+    carName: 'king long',
+    carImage: 'carImage',
+    placePrice: 200,
+    allowSmoking: false,
+    allowPets: false,
+    requests: [
+      RequestModel(
+        requestId: 'kdkdkd',
+        clientId: 'clientId',
+        name: 'anis',
+        image: 'image',
+        phoneNumber: '0656933390',
+        state: 'pending',
+      ),
+      RequestModel(
+        requestId: 'idididid',
+        clientId: 'clientId',
+        name: 'ayoub',
+        image: 'image',
+        phoneNumber: '0656933390',
+        state: 'accepted',
+      ),
+    ],
+    driver: DriverModel(
+      id: 'id',
+      name: 'name',
+      familyname: 'familyname',
+      address: 'address',
+      birthday: 'birthday',
+      phoneNumber: 'phoneNumber',
+      image: 'image',
+      password: 'password',
+      feedbackes: [],
+      isAccepted: true,
+      token: 'token',
+    ),
+    baggage: 'S',
+    dateOfDeparture: '2024-05-30',
+  );
 
   Future<void> getMyTravel(BuildContext context) async {
     emit(DriverGetTravelByIdLoadingState());
-
-    (await _driverGetTravelByIdUsecase.execute('6648b75203b341bbafac2351')).fold(
+    calculateAcceptedRequests(myTravelTest.requests);
+    (await _driverGetTravelByIdUsecase.execute('66498df4b4b85004c3d6365e')).fold(
       (failure) {
         errorToast(failure.message).show(context);
         emit(DriverGetTravelByIdErrorState());
       },
       (data) {
         myTravel = data;
-        successToast('Success get my travel').show(context);
+        successToast('Success get travel').show(context);
         emit(DriverGetTravelByIdSuccessState());
+      },
+    );
+  }
+
+  int acceptedRequests = 0;
+  List<RequestModel> acceptedRequestsList = [];
+  List<RequestModel> pendingRequestsList = [];
+
+  void calculateAcceptedRequests(List<RequestModel>? requests) {
+    acceptedRequests = 0;
+    acceptedRequestsList = [];
+    pendingRequestsList = [];
+    if (requests != null && requests.isNotEmpty) {
+      for (var request in requests) {
+        if (request.state == 'accepted') {
+          acceptedRequests++;
+          acceptedRequestsList.add(request);
+        } else {
+          pendingRequestsList.add(request);
+        }
+      }
+    }
+    emit(DriverCalculateAcceptedRequestsState());
+  }
+
+  final UpdateRequestStateUsecase _updateRequestStateUsecase = UpdateRequestStateUsecase(getIt());
+
+  Future<void> updateRequestState(BuildContext context, String state, String requestId, String travelId) async {
+    emit(DriverUpdateRequestStateLoadingState());
+    (await _updateRequestStateUsecase.execute(state, requestId, travelId)).fold(
+      (failure) {
+        errorToast(failure.message).show(context);
+        emit(DriverUpdateRequestStateErrorState());
+      },
+      (data) {
+        successToast("Request updated").show(context);
+        emit(DriverUpdateRequestStateSuccessState());
       },
     );
   }

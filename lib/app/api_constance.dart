@@ -1,11 +1,12 @@
 class ApiConstance {
-  static const String clientBaseUrl = 'https://carapp-7o9p.vercel.app/api/clients/';
-  static const String driverBaseUrl = 'https://carapp-7o9p.vercel.app/api/drivers/';
-  static const String travelsBaseUrl = 'https://carapp-7o9p.vercel.app/api/travels';
-  static const String requestsBaseUrl = 'https://carapp-7o9p.vercel.app/api/requests/';
-  static const String adminBaseUrl = 'https://carapp-7o9p.vercel.app/api/admins/';
-  static const String adminnBaseUrl = 'https://carapp-7o9p.vercel.app/api/admin/';
-  static const String feedbackBaseUrl = 'https://carapp-7o9p.vercel.app/api/feedbacks/';
+  static const String baseUrl = "https://work-hgze.onrender.com";
+  static const String clientBaseUrl = '$baseUrl/api/clients/';
+  static const String driverBaseUrl = '$baseUrl/api/drivers/';
+  static const String travelsBaseUrl = '$baseUrl/api/travels';
+  static const String requestsBaseUrl = '$baseUrl/api/requests/';
+  static const String adminBaseUrl = '$baseUrl/api/admins/';
+  static const String adminnBaseUrl = '$baseUrl/api/admin/';
+  static const String feedbackBaseUrl = '$baseUrl/api/feedbacks/';
 
   static const String contentType = "application/json";
 }

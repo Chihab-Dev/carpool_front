@@ -358,4 +358,19 @@ class RepositoryImpl extends Repository {
       return left(Failure('No internet connection'));
     }
   }
+
+  @override
+  Future<Either<Failure, void>> updateRequestState(String state, String requestId, String travelId) async {
+    if (await networkInfo.isConnected()) {
+      try {
+        final result = await remoteDataSource.updateRequestState(state, requestId, travelId);
+        return right(result);
+      } catch (e) {
+        print(e.toString());
+        return left(Failure(e.toString()));
+      }
+    } else {
+      return left(Failure('No internet connection'));
+    }
+  }
 }

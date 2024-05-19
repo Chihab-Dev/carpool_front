@@ -20,6 +20,7 @@ abstract class Repository {
   Future<Either<Failure, void>> driverSendFeedback(FeedbackModel feedback);
   Future<Either<Failure, void>> updateTravel(TravelModel travel);
   Future<Either<Failure, TravelModel>> driverGetTravelById(String id);
+  Future<Either<Failure, void>> updateRequestState(String state, String requestId, String travelId);
 
   //----------------------------------------------------- ADMIN -----------------------------------------------------
   Future<Either<Failure, AdminModel>> adminLogin(String phoneNumber, String password);

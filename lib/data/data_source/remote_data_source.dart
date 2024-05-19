@@ -25,6 +25,7 @@ abstract class RemoteDataSource {
   Future<void> driverSendFeedback(FeedbackModel feedback);
   Future<void> updateTravel(TravelModel travel);
   Future<TravelModel> driverGetTravelById(String id);
+  Future<void> updateRequestState(String state, String requestId, String travelId);
 
   //----------------------------------------------------- ADMIN -----------------------------------------------------
   Future<AdminModel> adminLogin(String phoneNumber, String password);
@@ -195,7 +196,7 @@ class RemoteDataSourceImpl extends RemoteDataSource {
 
     final statusCode = response.statusCode;
     print(statusCode);
-    if (statusCode == 200) {
+    if (statusCode == 201) {
       print('✅ requestToBook SUCCESS ✅');
       print("🔥🌟${response.body}");
     } else {
@@ -470,6 +471,38 @@ class RemoteDataSourceImpl extends RemoteDataSource {
       return TravelModel.fromJson(response.body);
     } else {
       print('🛑 GET TRAVELS BY ID  FAILURE 🛑');
+      print(response.body);
+      throw response.body;
+    }
+  }
+
+  @override
+  Future<void> updateRequestState(String state, String requestId, String travelId) async {
+    String token = _appPrefences.getToken();
+
+    final url = Uri.parse("${ApiConstance.requestsBaseUrl}$requestId");
+    final headers = {
+      "Content-Type": ApiConstance.contentType,
+      "token": token,
+    };
+    final json = {
+      "state": state,
+      "travelId": travelId,
+    };
+
+    final Response response = await put(
+      url,
+      headers: headers,
+      body: jsonEncode(json),
+    );
+
+    final statusCode = response.statusCode;
+
+    if (statusCode == 200) {
+      print('✅ updateRequestState SUCCESS ✅');
+      print("🔥🌟${response.body}");
+    } else {
+      print('🛑 updateRequestState  FAILURE 🛑');
       print(response.body);
       throw response.body;
     }

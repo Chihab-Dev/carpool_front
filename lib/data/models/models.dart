@@ -291,12 +291,14 @@ class TravelModel {
 }
 
 class RequestModel {
+  String requestId;
   String clientId;
   String name;
   String image;
   String phoneNumber;
   String state;
   RequestModel({
+    required this.requestId,
     required this.clientId,
     required this.name,
     required this.image,
@@ -316,6 +318,7 @@ class RequestModel {
 
   factory RequestModel.fromMap(Map<String, dynamic> map) {
     return RequestModel(
+      requestId: map['_id'] as String,
       clientId: map['clientId'] as String,
       name: map['name'] as String,
       image: map['image'] as String,
