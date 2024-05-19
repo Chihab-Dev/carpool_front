@@ -1,5 +1,7 @@
+import 'package:carpool/app/localizations.dart';
 import 'package:carpool/presentation/components/appsize.dart';
 import 'package:carpool/presentation/components/color_manager.dart';
+import 'package:carpool/presentation/components/strings_manager.dart';
 import 'package:carpool/presentation/components/styles_manager.dart';
 import 'package:carpool/presentation/components/widgets.dart';
 import 'package:carpool/presentation/screens/Client/home/cubit/home_cubit.dart';
@@ -52,7 +54,7 @@ class TravelsView extends StatelessWidget {
                                   overflow: TextOverflow.ellipsis,
                                 ),
                                 Text(
-                                  '${cubit.selectedDate.toString().substring(0, 10)}  ,  ${cubit.numberOfPlaces} person',
+                                  '${cubit.selectedDate.toString().substring(0, 10)}  ,  ${cubit.numberOfPlaces} ${AppStrings.person.tr(context)}',
                                   style: getSmallRegularStyle(color: ColorManager.dark),
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,

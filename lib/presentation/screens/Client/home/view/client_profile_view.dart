@@ -1,3 +1,4 @@
+import 'package:carpool/app/localizations.dart';
 import 'package:carpool/data/models/models.dart';
 import 'package:carpool/presentation/components/appsize.dart';
 import 'package:carpool/presentation/components/assets_manager.dart';
@@ -52,13 +53,13 @@ class _ClientProfileViewState extends State<ClientProfileView> {
                               SizedBox(height: AppSize.s18),
                               separator(),
                               CustomInformationRow(
-                                  label: 'Full name :',
+                                  label: AppStrings.fullName.tr(context),
                                   content: "${cubit.clientModel!.familyname} ${cubit.clientModel!.name}"),
                               separator(),
                               Row(
                                 children: [
                                   Text(
-                                    "Rate : ",
+                                    AppStrings.rate.tr(context),
                                     style: getMeduimStyle(color: ColorManager.dark),
                                   ),
                                   Icon(
@@ -73,19 +74,31 @@ class _ClientProfileViewState extends State<ClientProfileView> {
                                 ],
                               ),
                               separator(),
-                              CustomInformationRow(label: "Phone number : ", content: cubit.clientModel!.phoneNumber),
-                              separator(),
-                              CustomInformationRow(label: "Address : ", content: cubit.clientModel!.address),
+                              CustomInformationRow(
+                                  label: "${AppStrings.phoneNumber.tr(context)} : ",
+                                  content: cubit.clientModel!.phoneNumber),
                               separator(),
                               CustomInformationRow(
-                                  label: "Old : ", content: calculateAgeFromString(cubit.clientModel!.dateofbirth)),
+                                  label: '${AppStrings.address.tr(context)} : ', content: cubit.clientModel!.address),
+                              separator(),
+                              CustomInformationRow(
+                                  label: AppStrings.old.tr(context),
+                                  content: calculateAgeFromString(cubit.clientModel!.dateofbirth)),
                               separator(),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    "Feedbacks : ${cubit.clientModel!.feedbackes.length}",
-                                    style: getRegularStyle(color: ColorManager.dark),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        "${AppStrings.feedback.tr(context)} : ",
+                                        style: getRegularStyle(color: ColorManager.dark),
+                                      ),
+                                      Text(
+                                        "${cubit.clientModel!.feedbackes.length}",
+                                        style: getRegularStyle(color: ColorManager.dark),
+                                      ),
+                                    ],
                                   ),
                                   SizedBox(height: AppSize.s16),
                                   ListView.builder(
@@ -144,7 +157,7 @@ class _ClientProfileViewState extends State<ClientProfileView> {
                                 ],
                               ),
                               CustomLargeButton(
-                                label: AppStrings.logout,
+                                label: AppStrings.logout.tr(context),
                                 width: double.infinity,
                                 onPressed: () {
                                   logout(context);

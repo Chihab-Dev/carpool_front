@@ -236,7 +236,7 @@ class _HomeViewState extends State<HomeView> {
                   child: Column(
                     children: [
                       Text(
-                        'Pick number of plcaes : ',
+                        AppStrings.pickNumberOfPlaces.tr(context),
                         style: getMeduimStyle(color: ColorManager.dark),
                       ),
                       SizedBox(height: AppSize.s20),
@@ -308,7 +308,7 @@ class _HomeViewState extends State<HomeView> {
                             contentPadding: EdgeInsets.symmetric(horizontal: AppPadding.p8, vertical: AppPadding.p6),
                             floatingLabelBehavior: FloatingLabelBehavior.never,
                             label: Text(
-                              'location',
+                              AppStrings.location.tr(context),
                               style: getSmallLightStyle(color: ColorManager.dark.withOpacity(0.5)),
                             ),
                             enabledBorder: UnderlineInputBorder(

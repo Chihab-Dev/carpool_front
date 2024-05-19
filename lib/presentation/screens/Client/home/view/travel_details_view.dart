@@ -197,12 +197,12 @@ class _TravelDetailsViewState extends State<TravelDetailsView> {
                           SizedBox(width: AppSize.s25),
                           Text(
                             widget.travel.baggage == "S"
-                                ? AppStrings.baggageSAllowed
+                                ? AppStrings.baggageSAllowed.tr(context)
                                 : widget.travel.baggage == "M"
-                                    ? AppStrings.baggageMAllowed
+                                    ? AppStrings.baggageMAllowed.tr(context)
                                     : widget.travel.baggage == "L"
-                                        ? AppStrings.baggageLAllowed
-                                        : AppStrings.baggageSAllowed,
+                                        ? AppStrings.baggageLAllowed.tr(context)
+                                        : AppStrings.baggageSAllowed.tr(context),
                             style: getSmallRegularStyle(color: ColorManager.dark),
                           ),
                         ],
@@ -231,7 +231,9 @@ class _TravelDetailsViewState extends State<TravelDetailsView> {
                           ),
                           SizedBox(width: AppSize.s25),
                           Text(
-                            widget.travel.allowPets ? AppStrings.allowPets : AppStrings.petsNotAllowed.tr(context),
+                            widget.travel.allowPets
+                                ? AppStrings.allowPets.tr(context)
+                                : AppStrings.petsNotAllowed.tr(context),
                             style: getSmallRegularStyle(color: ColorManager.dark),
                           ),
                         ],
@@ -262,7 +264,7 @@ class _TravelDetailsViewState extends State<TravelDetailsView> {
                           Text(
                             widget.travel.allowSmoking
                                 ? AppStrings.smokingAllowed.tr(context)
-                                : AppStrings.dontAllowSmoking,
+                                : AppStrings.dontAllowSmoking.tr(context),
                             style: getSmallRegularStyle(color: ColorManager.dark),
                           ),
                         ],
@@ -312,7 +314,7 @@ class _TravelDetailsViewState extends State<TravelDetailsView> {
                   )
                 : Center(
                     child: CustomLargeButton(
-                      label: AppStrings.requestToBook,
+                      label: AppStrings.requestToBook.tr(context),
                       onPressed: () {
                         cubit.requestToBook(widget.travel.travelId, context);
                       },

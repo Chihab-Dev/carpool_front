@@ -87,7 +87,7 @@ class DriverModel {
     required this.password,
     required this.feedbackes,
     required this.isAccepted,
-    required this.token,
+    this.token,
   });
 
   Map<String, dynamic> toMap() {
@@ -320,7 +320,7 @@ class RequestModel {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'clientId': clientId,
+      'client_id': clientId,
       'name': name,
       'image': image,
       'phoneNumber': phoneNumber,
@@ -331,7 +331,7 @@ class RequestModel {
   factory RequestModel.fromMap(Map<String, dynamic> map) {
     return RequestModel(
       requestId: map['_id'] as String,
-      clientId: map['clientId'] as String,
+      clientId: map['client_id'] as String,
       name: map['name'] as String,
       image: map['image'] as String,
       phoneNumber: map['phoneNumber'] as String,
