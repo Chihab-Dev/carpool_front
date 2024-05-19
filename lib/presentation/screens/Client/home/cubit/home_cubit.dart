@@ -196,10 +196,15 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
-  Future<void> sendFeedback(BuildContext context) async {
+  Future<void> sendFeedback(BuildContext context, String toUser) async {
     emit(HomeSendFeedbackLoadingState());
     (await _clientSendFeedbackUsecase.execute(
-            FeedbackModel(note: rating, comment: feedbackCommentController.text, userId: '662d0334d105bfaef2080831')))
+      FeedbackModel(
+        toUser: toUser,
+        note: rating,
+        comment: feedbackCommentController.text,
+      ),
+    ))
         .fold(
       (failure) {
         errorToast(failure.message).show(context);
@@ -222,5 +227,17 @@ class HomeCubit extends Cubit<HomeState> {
       }
     }
     emit(HomeCalculateAcceptedRequestsState());
+  }
+
+  double calculateRate(List<FeedbackModel> feedbacks) {
+    if (feedbacks.isNotEmpty) {
+      double somme = 0;
+      for (var feedback in feedbacks) {
+        somme += feedback.note;
+      }
+      return somme / feedbacks.length;
+    } else {
+      return 0.0;
+    }
   }
 }

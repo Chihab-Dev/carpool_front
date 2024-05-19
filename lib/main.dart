@@ -1,6 +1,7 @@
 import 'package:carpool/app/localizations.dart';
 import 'package:carpool/app/service_locator.dart';
 import 'package:carpool/app/shared_prefrences.dart';
+import 'package:carpool/data/data_source/remote_data_source.dart';
 import 'package:carpool/presentation/components/color_manager.dart';
 import 'package:carpool/presentation/screens/Client/home/cubit/home_cubit.dart';
 import 'package:carpool/presentation/screens/Client/main/view/main_view.dart';
@@ -31,16 +32,16 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // _appPrefences.removeId();
-    // _appPrefences.removeRole();
-    // _appPrefences.removeToken();
+    _appPrefences.removeId();
+    _appPrefences.removeRole();
+    _appPrefences.removeToken();
     bool isOnboardingWatched = _appPrefences.getWatchedOnBoarding();
     String id = _appPrefences.getId();
     String role = _appPrefences.getRole();
 
-    // RemoteDataSource remoteDataSource = RemoteDataSourceImpl();
+    RemoteDataSource remoteDataSource = RemoteDataSourceImpl();
 
-    // remoteDataSource.getAllClients();
+    remoteDataSource.clientLogin('0656933390', 'password');
 
     return MultiBlocProvider(
       providers: [

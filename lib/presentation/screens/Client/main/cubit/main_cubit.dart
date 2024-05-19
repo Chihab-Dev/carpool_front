@@ -1,4 +1,3 @@
-import 'package:carpool/presentation/screens/Client/home/view/client_feedback.dart';
 import 'package:carpool/presentation/screens/Client/home/view/client_profile_view.dart';
 import 'package:carpool/presentation/screens/Client/home/view/home_view.dart';
 import 'package:carpool/presentation/screens/Client/main/cubit/main_states.dart';
@@ -16,7 +15,7 @@ class MainCubit extends Cubit<MainStates> {
 
   List<Widget> pages = [
     const HomeView(),
-    const ClientFeedbackView(),
+    const SizedBox(),
     const ClientProfileView(),
   ];
 

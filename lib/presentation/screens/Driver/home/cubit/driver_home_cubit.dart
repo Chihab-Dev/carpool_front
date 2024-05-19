@@ -305,8 +305,13 @@ class DriverHomeCubit extends Cubit<DriverHomeState> {
 
   Future<void> sendFeedback(BuildContext context, String clientId) async {
     emit(DriverSendFeedbackLoadingState());
-    (await _driverSendFeedbackUsecase
-            .execute(FeedbackModel(note: rating, comment: feedbackCommentController.text, userId: clientId)))
+    (await _driverSendFeedbackUsecase.execute(
+      FeedbackModel(
+        toUser: clientId,
+        note: rating,
+        comment: feedbackCommentController.text,
+      ),
+    ))
         .fold(
       (failure) {
         errorToast(failure.message).show(context);
@@ -422,5 +427,17 @@ class DriverHomeCubit extends Cubit<DriverHomeState> {
         emit(DriverUpdateRequestStateSuccessState());
       },
     );
+  }
+
+  double calculateRate(List<FeedbackModel> feedbacks) {
+    if (feedbacks.isNotEmpty) {
+      double somme = 0;
+      for (var feedback in feedbacks) {
+        somme += feedback.note;
+      }
+      return somme / feedbacks.length;
+    } else {
+      return 0.0;
+    }
   }
 }

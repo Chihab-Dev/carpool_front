@@ -8,8 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ClientFeedbackView extends StatelessWidget {
-  const ClientFeedbackView({super.key});
-
+  const ClientFeedbackView(this.toUser, {super.key});
+  final String toUser;
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<HomeCubit, HomeState>(
@@ -90,7 +90,7 @@ class ClientFeedbackView extends StatelessWidget {
                           onPressed: cubit.feedbackValid == false
                               ? null
                               : () async {
-                                  await cubit.sendFeedback(context);
+                                  await cubit.sendFeedback(context,toUser);
                                 },
                           width: double.infinity,
                         ),

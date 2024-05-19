@@ -209,7 +209,7 @@ class RemoteDataSourceImpl extends RemoteDataSource {
   @override
   Future<void> clientSendFeedback(FeedbackModel feedback) async {
     String token = _appPrefences.getToken();
-    final url = Uri.parse("${ApiConstance.feedbackBaseUrl}client-rate-driver/${feedback.userId}");
+    final url = Uri.parse("${ApiConstance.feedbackBaseUrl}client-rate-driver/${feedback.toUser}");
     final headers = {
       "Content-Type": ApiConstance.contentType,
       "token": token,
@@ -392,7 +392,7 @@ class RemoteDataSourceImpl extends RemoteDataSource {
   @override
   Future<void> driverSendFeedback(FeedbackModel feedback) async {
     String token = _appPrefences.getToken();
-    final url = Uri.parse("${ApiConstance.feedbackBaseUrl}driver-rate-client/${feedback.userId}");
+    final url = Uri.parse("${ApiConstance.feedbackBaseUrl}driver-rate-client/${feedback.toUser}");
     final headers = {
       "Content-Type": ApiConstance.contentType,
       "token": token,

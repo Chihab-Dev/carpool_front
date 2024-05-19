@@ -51,12 +51,11 @@ class ClientModel {
       password: '',
       image: map['image'] as String,
       token: map['token'] as String?,
-      feedbackes: [],
-      // feedbackes: List<FeedbackModel>.from(
-      //   (map['feedback'] as List<dynamic>).map<FeedbackModel>(
-      //     (x) => FeedbackModel.fromMap(x as Map<String, dynamic>),
-      //   ),
-      // ),
+      feedbackes: List<FeedbackModel>.from(
+        (map['feedback'] as List<dynamic>).map<FeedbackModel>(
+          (x) => FeedbackModel.fromMap(x as Map<String, dynamic>),
+        ),
+      ),
     );
   }
 
@@ -113,12 +112,11 @@ class DriverModel {
       phoneNumber: map['phoneNumber'] as String,
       image: map['image'] as String,
       password: '',
-      feedbackes: [],
-      // feedbackes: List<FeedbackModel>.from(
-      //   (map['feedback'] as List<dynamic>).map<FeedbackModel>(
-      //     (x) => FeedbackModel.fromMap(x as Map<String, dynamic>),
-      //   ),
-      // ),
+      feedbackes: List<FeedbackModel>.from(
+        (map['feedback'] as List<dynamic>).map<FeedbackModel>(
+          (x) => FeedbackModel.fromMap(x as Map<String, dynamic>),
+        ),
+      ),
       isAccepted: map['isAccepted'] as bool,
       token: map['token'] as String?,
     );
@@ -178,29 +176,43 @@ class AdminModel {
 }
 
 class FeedbackModel {
-  double note;
+  String? feedbackId;
+  String? fromUser;
+  String toUser;
+  String? name;
+  String? image;
+  String? phoneNumber;
   String comment;
-  String userId;
-
+  double note;
   FeedbackModel({
-    required this.note,
+    this.feedbackId,
+    this.fromUser,
+    required this.toUser,
+    this.name,
+    this.image,
+    this.phoneNumber,
     required this.comment,
-    required this.userId,
+    required this.note,
   });
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'note': note,
+      'toUser': toUser,
       'comment': comment,
-      'userId': userId,
+      'note': note,
     };
   }
 
   factory FeedbackModel.fromMap(Map<String, dynamic> map) {
     return FeedbackModel(
-      note: map['note'] as double,
+      feedbackId: map['feedbackId'] != null ? map['feedbackId'] as String : null,
+      fromUser: map['fromUser'] != null ? map['fromUser'] as String : null,
+      toUser: '',
+      name: map['name'] != null ? map['name'] as String : null,
+      image: map['image'] != null ? map['image'] as String : null,
+      phoneNumber: map['phoneNumber'] != null ? map['phoneNumber'] as String : null,
       comment: map['comment'] as String,
-      userId: map['userId'] as String,
+      note: (map['note'] as int).toDouble(),
     );
   }
 

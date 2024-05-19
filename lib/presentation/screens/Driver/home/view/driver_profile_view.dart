@@ -31,121 +31,129 @@ class _DriverProfileViewState extends State<DriverProfileView> {
       listener: (context, state) {},
       builder: (context, state) {
         var cubit = DriverHomeCubit.get(context);
-        return cubit.driverModel == null
+        return state is DriverGetDriverLoadingState
             ? CircularProgressIndicator(color: ColorManager.yellow)
-            : Scaffold(
-                body: Padding(
-                  padding: EdgeInsets.all(AppPadding.p18),
-                  child: SingleChildScrollView(
-                    child: Center(
-                      child: Column(
-                        children: [
-                          const SizedBox(height: kToolbarHeight),
-                          CircleAvatar(
-                            radius: AppSize.s70,
-                            backgroundColor: ColorManager.lightGrey,
-                            backgroundImage: const AssetImage(ImageAsset.profilePicture),
-                          ),
-                          SizedBox(height: AppSize.s18),
-                          separator(),
-                          CustomInformationRow(
-                              label: 'Full name :',
-                              content: "${cubit.driverModel!.familyname} ${cubit.driverModel!.name}"),
-                          separator(),
-                          Row(
+            : cubit.driverModel == null
+                ? const SizedBox()
+                : Scaffold(
+                    body: Padding(
+                      padding: EdgeInsets.all(AppPadding.p18),
+                      child: SingleChildScrollView(
+                        child: Center(
+                          child: Column(
                             children: [
-                              Text(
-                                "Rate : ",
-                                style: getMeduimStyle(color: ColorManager.dark),
+                              const SizedBox(height: kToolbarHeight),
+                              CircleAvatar(
+                                radius: AppSize.s70,
+                                backgroundColor: ColorManager.lightGrey,
+                                backgroundImage: const AssetImage(ImageAsset.profilePicture),
                               ),
-                              Icon(
-                                Icons.star_purple500_sharp,
-                                color: ColorManager.yellow,
-                              ),
-                              SizedBox(width: AppSize.s5),
-                              Text(cubit.driverModel!.feedbackes.length.toString(),
-                                  style: getMeduimStyle(color: ColorManager.dark)),
-                            ],
-                          ),
-                          separator(),
-                          CustomInformationRow(label: "Phone number : ", content: cubit.driverModel!.phoneNumber),
-                          separator(),
-                          CustomInformationRow(label: "Address : ", content: cubit.driverModel!.address),
-                          separator(),
-                          CustomInformationRow(
-                              label: "Old : ", content: calculateAgeFromString(cubit.driverModel!.birthday)),
-                          separator(),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Feedbacks : ${cubit.driverModel!.feedbackes.length}",
-                                style: getRegularStyle(color: ColorManager.dark),
-                              ),
-                              SizedBox(height: AppSize.s16),
-                              ListView.builder(
-                                itemCount: cubit.driverModel!.feedbackes.length,
-                                shrinkWrap: true,
-                                padding: EdgeInsets.zero,
-                                itemBuilder: (context, index) {
-                                  FeedbackModel feedback = cubit.driverModel!.feedbackes[index];
-                                  return Row(
-                                    children: [
-                                      CircleAvatar(
-                                        radius: AppSize.s30,
-                                        backgroundColor: ColorManager.lightGrey,
-                                        backgroundImage: const AssetImage(ImageAsset.userProfile),
-                                      ),
-                                      SizedBox(width: AppSize.s10),
-                                      Flexible(
-                                        child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Text(
-                                                  'USER',
-                                                  overflow: TextOverflow.ellipsis,
-                                                  style: getMeduimStyle(color: ColorManager.dark),
-                                                ),
-                                                Icon(
-                                                  Icons.star_purple500_sharp,
-                                                  color: ColorManager.yellow,
-                                                ),
-                                                SizedBox(width: AppSize.s5),
-                                                Text(feedback.note.toString(),
-                                                    style: getMeduimStyle(color: ColorManager.dark))
-                                              ],
-                                            ),
-                                            Text(
-                                              feedback.comment,
-                                              style: getSmallRegularStyle(color: ColorManager.darkGrey),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  );
-                                },
+                              SizedBox(height: AppSize.s18),
+                              separator(),
+                              CustomInformationRow(
+                                  label: 'Full name :',
+                                  content: "${cubit.driverModel!.familyname} ${cubit.driverModel!.name}"),
+                              separator(),
+                              Row(
+                                children: [
+                                  Text(
+                                    "Rate : ",
+                                    style: getMeduimStyle(color: ColorManager.dark),
+                                  ),
+                                  Icon(
+                                    Icons.star_purple500_sharp,
+                                    color: ColorManager.yellow,
+                                  ),
+                                  SizedBox(width: AppSize.s5),
+                                  Text(
+                                    cubit.calculateRate(cubit.driverModel!.feedbackes).toString(),
+                                    style: getMeduimStyle(color: ColorManager.dark),
+                                  ),
+                                ],
                               ),
                               separator(),
+                              CustomInformationRow(label: "Phone number : ", content: cubit.driverModel!.phoneNumber),
+                              separator(),
+                              CustomInformationRow(label: "Address : ", content: cubit.driverModel!.address),
+                              separator(),
+                              CustomInformationRow(
+                                  label: "Old : ", content: calculateAgeFromString(cubit.driverModel!.birthday)),
+                              separator(),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Feedbacks : ${cubit.driverModel!.feedbackes.length}",
+                                    style: getRegularStyle(color: ColorManager.dark),
+                                  ),
+                                  SizedBox(height: AppSize.s16),
+                                  ListView.builder(
+                                    itemCount: cubit.driverModel!.feedbackes.length,
+                                    shrinkWrap: true,
+                                    padding: EdgeInsets.zero,
+                                    physics: const NeverScrollableScrollPhysics(),
+                                    itemBuilder: (context, index) {
+                                      FeedbackModel feedback = cubit.driverModel!.feedbackes[index];
+                                      return Row(
+                                        children: [
+                                          CircleAvatar(
+                                            radius: AppSize.s30,
+                                            backgroundColor: ColorManager.lightGrey,
+                                            backgroundImage: const AssetImage(ImageAsset.userProfile),
+                                          ),
+                                          SizedBox(width: AppSize.s10),
+                                          Expanded(
+                                            child: Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    Text(
+                                                      feedback.name.toString(),
+                                                      overflow: TextOverflow.ellipsis,
+                                                      style: getMeduimStyle(color: ColorManager.dark),
+                                                    ),
+                                                    const Spacer(),
+                                                    Icon(
+                                                      Icons.star_purple500_sharp,
+                                                      color: ColorManager.yellow,
+                                                    ),
+                                                    SizedBox(width: AppSize.s5),
+                                                    Text(
+                                                      feedback.note.toString(),
+                                                      style: getMeduimStyle(color: ColorManager.dark),
+                                                    )
+                                                  ],
+                                                ),
+                                                Text(
+                                                  feedback.comment,
+                                                  style: getSmallRegularStyle(color: ColorManager.darkGrey),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  ),
+                                  separator(),
+                                ],
+                              ),
+                              CustomLargeButton(
+                                label: 'Logout',
+                                width: double.infinity,
+                                onPressed: () {
+                                  logout(context);
+                                },
+                                color: Colors.red,
+                              ),
+                              const SizedBox(height: kToolbarHeight),
                             ],
                           ),
-                          CustomLargeButton(
-                            label: 'Logout',
-                            width: double.infinity,
-                            onPressed: () {
-                              logout(context);
-                            },
-                            color: Colors.red,
-                          ),
-                          const SizedBox(height: kToolbarHeight),
-                        ],
+                        ),
                       ),
                     ),
-                  ),
-                ),
-              );
+                  );
       },
     );
   }
