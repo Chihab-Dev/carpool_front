@@ -121,6 +121,9 @@ class AppStrings {
 
   static const String myRequest = 'myRequest';
 
-  static const String state = 'state';
+  static const String travelState = 'travelState';
   static const String deleteTheRequest = 'deleteTheRequest';
+  static const String travelStarts = 'travelStarts';
+
+  static const String travelFinished = 'travelFinished';
 }

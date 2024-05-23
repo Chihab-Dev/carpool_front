@@ -95,6 +95,8 @@
     "rateTheClient": "تقييم المسافر",
     "rateTheDriver": "تقييم السائق",
     "myRequest": "طلبي",
-    "state": "حالة الطلب",
-    "deleteTheRequest": "حذف الطلب"
+    "travelState": "حالة الرحلة",
+    "deleteTheRequest": "حذف الطلب",
+    "travelStarts": "الرحلة بدات",
+    "travelFinished": "انتهت الرحلة"
 }

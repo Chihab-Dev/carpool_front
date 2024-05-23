@@ -1,3 +1,4 @@
+import 'package:carpool/app/localizations.dart';
 import 'package:carpool/presentation/components/appsize.dart';
 import 'package:carpool/presentation/components/color_manager.dart';
 import 'package:carpool/presentation/components/strings_manager.dart';
@@ -8,8 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ClientFeedbackView extends StatelessWidget {
-  const ClientFeedbackView(this.toUser, {super.key});
-  final String toUser;
+  const ClientFeedbackView(this.toDriver, {super.key});
+  final String toDriver;
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<HomeCubit, HomeState>(
@@ -23,18 +24,9 @@ class ClientFeedbackView extends StatelessWidget {
             bottomOpacity: 0,
             scrolledUnderElevation: 0,
             title: Text(
-              'The travel is over',
+              AppStrings.rateTheDriver.tr(context),
               style: getRegularStyle(color: ColorManager.dark),
             ),
-            actions: [
-              TextButton(
-                onPressed: () {},
-                child: Text(
-                  AppStrings.skip,
-                  style: getMeduimStyle(color: ColorManager.yellow).copyWith(fontSize: AppSize.s16),
-                ),
-              ),
-            ],
           ),
           body: Padding(
             padding: EdgeInsets.symmetric(horizontal: AppPadding.p18),
@@ -43,17 +35,17 @@ class ClientFeedbackView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    AppStrings.rating,
+                    AppStrings.rating.tr(context),
                     style: getRegularStyle(color: ColorManager.dark),
                   ),
                   SizedBox(height: AppSize.s8),
                   Text(
-                    'How would you rate your experience?',
+                    AppStrings.howWouldYouRateYourExperience.tr(context),
                     style: getMeduimStyle(color: ColorManager.darkGrey).copyWith(fontWeight: FontWeight.normal),
                   ),
                   SizedBox(height: AppSize.s8),
                   Text(
-                    'Please click on stars to select your desired rating.',
+                    AppStrings.pleaseClickOnStars.tr(context),
                     style: getSmallRegularStyle(color: ColorManager.darkGrey),
                   ),
                   SizedBox(height: AppSize.s12),
@@ -68,13 +60,13 @@ class ClientFeedbackView extends StatelessWidget {
                   ),
                   SizedBox(height: AppSize.s12),
                   Text(
-                    AppStrings.comment,
+                    AppStrings.comment.tr(context),
                     style: getRegularStyle(color: ColorManager.dark),
                   ),
                   SizedBox(height: AppSize.s25),
                   CustomLargeFormField(
                     textEditingcontroller: cubit.feedbackCommentController,
-                    label: 'Enter your feedback here',
+                    label: AppStrings.enterYourFeedbackHere.tr(context),
                     keyboardType: TextInputType.text,
                     errorLabel: null,
                     onChanged: (value) {
@@ -86,11 +78,11 @@ class ClientFeedbackView extends StatelessWidget {
                   state is HomeSendFeedbackLoadingState
                       ? Center(child: CircularProgressIndicator(color: ColorManager.yellow))
                       : CustomLargeButton(
-                          label: 'Send',
+                          label: AppStrings.send.tr(context),
                           onPressed: cubit.feedbackValid == false
                               ? null
                               : () async {
-                                  await cubit.sendFeedback(context, toUser);
+                                  await cubit.sendFeedback(context, toDriver);
                                 },
                           width: double.infinity,
                         ),

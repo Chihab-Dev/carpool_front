@@ -318,6 +318,20 @@ class _AdminTravelDetailsViewState extends State<AdminTravelDetailsView> {
                       child: Image.asset(ImageAsset.leon),
                     ),
                     separator(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          AppStrings.travelState.tr(context),
+                          style: getMeduimStyle(color: ColorManager.dark),
+                        ),
+                        Text(
+                          widget.travel.state,
+                          style: getMeduimStyle(color: ColorManager.yellow),
+                        ),
+                      ],
+                    ),
+                    separator(),
                   ],
                 ),
               ),

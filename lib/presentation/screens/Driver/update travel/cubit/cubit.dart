@@ -272,6 +272,7 @@ class UpdateTravelCubit extends Cubit<UpdateTravelState> {
         baggage: baggageSizeAllowed,
         dateOfDeparture: selectedDate.toString(),
         autoAcceptRequests: autoAcceptRequests,
+        state: '',
       ),
     ))
         .fold(

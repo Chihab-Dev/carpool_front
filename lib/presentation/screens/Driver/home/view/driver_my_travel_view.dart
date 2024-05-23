@@ -337,6 +337,42 @@ class _DriverMyTravelViewState extends State<DriverMyTravelView> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
+                          AppStrings.travelState.tr(context),
+                          style: getMeduimStyle(color: ColorManager.dark),
+                        ),
+                        Text(
+                          widget.myTravel.state,
+                          style: getMeduimStyle(color: ColorManager.yellow),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: AppSize.s20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        CustomLargeButton(
+                          label: AppStrings.travelStarts.tr(context),
+                          width: AppSize.s180,
+                          onPressed: () {
+                            cubit.changeState(context, 'start Travel', widget.myTravel.travelId);
+                          },
+                          color: ColorManager.yellow,
+                        ),
+                        CustomLargeButton(
+                          label: AppStrings.travelFinished.tr(context),
+                          onPressed: () {
+                            cubit.changeState(context, 'finished', widget.myTravel.travelId);
+                          },
+                          color: ColorManager.green,
+                          width: AppSize.s180,
+                        ),
+                      ],
+                    ),
+                    separator(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
                           AppStrings.acceptedRequests.tr(context),
                           style: getMeduimStyle(color: ColorManager.dark),
                         ),
@@ -507,28 +543,25 @@ class _DriverMyTravelViewState extends State<DriverMyTravelView> {
             ),
           ),
           SizedBox(width: AppSize.s20),
-          Column(
-            children: [
-              CustomSmallButton(
-                label: AppStrings.feedback.tr(context),
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => DriverFeedbackView(requestModel.clientId),
-                      ));
-                },
-                backgroundColor: ColorManager.yellow,
-              ),
-              CustomSmallButton(
-                label: AppStrings.accept.tr(context),
-                onPressed: () {
-                  cubit.updateRequestState(context, 'accept', requestModel.requestId, travel);
-                },
-                backgroundColor: ColorManager.yellow,
-              ),
-            ],
-          ),
+          travel.state == 'finished'
+              ? CustomSmallButton(
+                  label: AppStrings.feedback.tr(context),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DriverFeedbackView(requestModel.clientId),
+                        ));
+                  },
+                  backgroundColor: ColorManager.yellow,
+                )
+              : CustomSmallButton(
+                  label: AppStrings.reject.tr(context),
+                  onPressed: () {
+                    cubit.updateRequestState(context, 'reject', requestModel.requestId, travel);
+                  },
+                  backgroundColor: Colors.red,
+                ),
         ],
       ),
     );

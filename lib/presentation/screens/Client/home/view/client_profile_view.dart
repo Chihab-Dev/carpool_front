@@ -45,6 +45,7 @@ class _ClientProfileViewState extends State<ClientProfileView> {
                           child: Column(
                             children: [
                               const SizedBox(height: kToolbarHeight),
+                              separator(),
                               CircleAvatar(
                                 radius: AppSize.s70,
                                 backgroundColor: ColorManager.lightGrey,
@@ -164,6 +165,7 @@ class _ClientProfileViewState extends State<ClientProfileView> {
                                 },
                                 color: Colors.red,
                               ),
+                              separator(),
                               const SizedBox(height: kToolbarHeight),
                             ],
                           ),

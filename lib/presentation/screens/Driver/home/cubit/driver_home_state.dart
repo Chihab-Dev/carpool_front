@@ -70,3 +70,9 @@ final class DriverDeleteTravelLoadingState extends DriverHomeState {}
 final class DriverDeleteTravelSuccessState extends DriverHomeState {}
 
 final class DriverDeleteTravelErrorState extends DriverHomeState {}
+
+final class DriverChangeTravelStateLoadingState extends DriverHomeState {}
+
+final class DriverChangeTravelStateSuccessState extends DriverHomeState {}
+
+final class DriverChangeTravelStateErrorState extends DriverHomeState {}

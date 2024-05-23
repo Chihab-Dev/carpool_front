@@ -13,6 +13,7 @@ abstract class Repository {
   Future<Either<Failure, TravelModel>> clientGetTravelById(String id);
   Future<Either<Failure, List<TravelModel>>> clientGetAllTravels();
   Future<Either<Failure, void>> deleteClientRequest(String id);
+  Future<Either<Failure, void>> changeTravelState(String state, String travelId);
 
   //----------------------------------------------------- DRIVER -----------------------------------------------------
   Future<Either<Failure, DriverModel>> driverLogin(String phoneNumber, String password);

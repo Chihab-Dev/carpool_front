@@ -95,6 +95,8 @@
     "rateTheClient": "RATE THE CLIENT",
     "rateTheDriver": "RATE THE DRIVER",
     "myRequest": "My request",
-    "state": "State",
-    "deleteTheRequest": "Delete the request"
+    "travelState": "Travel state",
+    "deleteTheRequest": "Delete the request",
+    "travelStarts": "Starts",
+    "travelFinished": "Finished"
 }

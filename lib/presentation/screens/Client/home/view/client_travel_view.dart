@@ -7,6 +7,7 @@ import 'package:carpool/presentation/components/strings_manager.dart';
 import 'package:carpool/presentation/components/styles_manager.dart';
 import 'package:carpool/presentation/components/widgets.dart';
 import 'package:carpool/presentation/screens/Client/home/cubit/home_cubit.dart';
+import 'package:carpool/presentation/screens/Client/home/view/client_feedback.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -319,6 +320,20 @@ class ClientTravelView extends StatelessWidget {
                       child: Image.asset(ImageAsset.dodgeCar),
                     ),
                     separator(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          AppStrings.travelState.tr(context),
+                          style: getMeduimStyle(color: ColorManager.dark),
+                        ),
+                        Text(
+                          travel.state,
+                          style: getMeduimStyle(color: ColorManager.yellow),
+                        ),
+                      ],
+                    ),
+                    separator(),
                     Align(
                       alignment: Alignment.center,
                       child: Text(
@@ -331,7 +346,7 @@ class ClientTravelView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          AppStrings.state.tr(context),
+                          AppStrings.travelState.tr(context),
                           style: getMeduimStyle(color: ColorManager.dark),
                         ),
                         Text(
@@ -341,18 +356,31 @@ class ClientTravelView extends StatelessWidget {
                       ],
                     ),
                     SizedBox(height: AppSize.s16),
-                    state is HomeDeleteRequestLoadingState
-                        ? const Center(
-                            child: CircularProgressIndicator(color: Colors.red),
-                          )
-                        : CustomLargeButton(
-                            width: double.infinity,
-                            label: AppStrings.deleteTheRequest.tr(context),
+                    travel.state == 'finished'
+                        ? CustomLargeButton(
+                            label: AppStrings.feedback.tr(context),
                             onPressed: () {
-                              cubit.clientDeleteRequest(context, travel.travelId);
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ClientFeedbackView(travel.driver.id),
+                                  ));
                             },
-                            color: Colors.red,
-                          ),
+                            color: ColorManager.yellow,
+                            width: double.infinity,
+                          )
+                        : state is HomeDeleteRequestLoadingState
+                            ? const Center(
+                                child: CircularProgressIndicator(color: Colors.red),
+                              )
+                            : CustomLargeButton(
+                                width: double.infinity,
+                                label: AppStrings.deleteTheRequest.tr(context),
+                                onPressed: () {
+                                  cubit.clientDeleteRequest(context, travel.travelId);
+                                },
+                                color: Colors.red,
+                              ),
                     separator(),
                   ],
                 ),

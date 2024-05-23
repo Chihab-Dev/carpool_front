@@ -238,6 +238,7 @@ class TravelModel {
   String baggage;
   String dateOfDeparture;
   bool autoAcceptRequests;
+  String state;
   TravelModel({
     required this.travelId,
     required this.placeOfDeparture,
@@ -255,6 +256,7 @@ class TravelModel {
     required this.baggage,
     required this.dateOfDeparture,
     required this.autoAcceptRequests,
+    required this.state,
   });
 
   Map<String, dynamic> toMap() {
@@ -297,6 +299,7 @@ class TravelModel {
       baggage: map['Baggage'] as String,
       dateOfDeparture: map['dateOfDeparture'] as String,
       autoAcceptRequests: map['AcceptAutoClients'] as bool,
+      state: map['state'] as String,
     );
   }
 

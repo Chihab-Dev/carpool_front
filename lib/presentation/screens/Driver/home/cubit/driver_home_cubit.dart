@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:carpool/app/service_locator.dart';
 import 'package:carpool/app/shared_prefrences.dart';
 import 'package:carpool/data/models/models.dart';
+import 'package:carpool/domain/usecase/driver/change_travel_state_usecase.dart';
 import 'package:carpool/domain/usecase/driver/create_travel_usecase.dart';
 import 'package:carpool/domain/usecase/driver/delete_client_usecase.dart';
 import 'package:carpool/domain/usecase/driver/get_driver_by_id_usecase.dart';
@@ -258,6 +259,7 @@ class DriverHomeCubit extends Cubit<DriverHomeState> {
         baggage: baggageSizeAllowed,
         dateOfDeparture: selectedDate.toString(),
         autoAcceptRequests: autoAcceptRequests,
+        state: '',
       ),
     ))
         .fold(
@@ -437,6 +439,21 @@ class DriverHomeCubit extends Cubit<DriverHomeState> {
       },
       (data) {
         Navigator.pop(context);
+      },
+    );
+  }
+
+  final DriverChangeTravelStateUsecase _driverChangeTravelStateUsecase = DriverChangeTravelStateUsecase(getIt());
+  Future<void> changeState(BuildContext context, String state, String travelId) async {
+    emit(DriverChangeTravelStateLoadingState());
+    (await _driverChangeTravelStateUsecase.execute(state, travelId)).fold(
+      (failure) {
+        errorToast(failure.message).show(context);
+        emit(DriverChangeTravelStateErrorState());
+      },
+      (data) {
+        successToast('State changed').show(context);
+        emit(DriverChangeTravelStateSuccessState());
       },
     );
   }
