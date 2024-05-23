@@ -42,3 +42,15 @@ final class HomeSendFeedbackSuccessState extends HomeState {}
 final class HomeSendFeedbackErrorState extends HomeState {}
 
 final class HomeCalculateAcceptedRequestsState extends HomeState {}
+
+final class HomeGetTravelsLoadingState extends HomeState {}
+
+final class HomeGetTravelsSuccessState extends HomeState {}
+
+final class HomeGetTravelsErrorState extends HomeState {}
+
+final class HomeDeleteRequestLoadingState extends HomeState {}
+
+final class HomeDeleteRequestSuccessState extends HomeState {}
+
+final class HomeDeleteRequestErrorState extends HomeState {}

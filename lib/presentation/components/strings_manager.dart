@@ -118,4 +118,9 @@ class AppStrings {
 
   static const String autoAcceptEnabled = 'autoAcceptEnabled';
   static const String autoAcceptNotEnabled = 'autoAcceptNotEnabled';
+
+  static const String myRequest = 'myRequest';
+
+  static const String state = 'state';
+  static const String deleteTheRequest = 'deleteTheRequest';
 }

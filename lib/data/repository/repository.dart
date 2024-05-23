@@ -388,4 +388,34 @@ class RepositoryImpl extends Repository {
       return left(Failure('No internet connection'));
     }
   }
+
+  @override
+  Future<Either<Failure, List<TravelModel>>> clientGetAllTravels() async {
+    if (await networkInfo.isConnected()) {
+      try {
+        final result = await remoteDataSource.clientGetAllTravels();
+        return right(result);
+      } catch (e) {
+        print(e.toString());
+        return left(Failure(e.toString()));
+      }
+    } else {
+      return left(Failure('No internet connection'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> deleteClientRequest(String id) async {
+    if (await networkInfo.isConnected()) {
+      try {
+        final result = await remoteDataSource.deleteClientRequest(id);
+        return right(result);
+      } catch (e) {
+        print(e.toString());
+        return left(Failure(e.toString()));
+      }
+    } else {
+      return left(Failure('No internet connection'));
+    }
+  }
 }

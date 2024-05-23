@@ -11,6 +11,8 @@ abstract class Repository {
   Future<Either<Failure, void>> requestToBook(String travelId);
   Future<Either<Failure, void>> clientSendFeedback(FeedbackModel feedback);
   Future<Either<Failure, TravelModel>> clientGetTravelById(String id);
+  Future<Either<Failure, List<TravelModel>>> clientGetAllTravels();
+  Future<Either<Failure, void>> deleteClientRequest(String id);
 
   //----------------------------------------------------- DRIVER -----------------------------------------------------
   Future<Either<Failure, DriverModel>> driverLogin(String phoneNumber, String password);

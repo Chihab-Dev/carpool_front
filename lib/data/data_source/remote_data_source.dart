@@ -17,6 +17,8 @@ abstract class RemoteDataSource {
   Future<void> requestToBook(String travelId);
   Future<void> clientSendFeedback(FeedbackModel feedback);
   Future<TravelModel> clientGetTravelById(String id);
+  Future<List<TravelModel>> clientGetAllTravels();
+  Future<void> deleteClientRequest(String id);
 
   //----------------------------------------------------- DRIVER -----------------------------------------------------
   Future<DriverModel> driverLogin(String phoneNumber, String password);
@@ -262,6 +264,71 @@ class RemoteDataSourceImpl extends RemoteDataSource {
       return TravelModel.fromJson(response.body);
     } else {
       print('🛑 GET TRAVELS BY ID  FAILURE 🛑');
+      print(response.body);
+      throw response.body;
+    }
+  }
+
+  @override
+  Future<List<TravelModel>> clientGetAllTravels() async {
+    String token = _appPrefences.getToken();
+
+    final url = Uri.parse("${ApiConstance.travelsBaseUrl}/");
+    final headers = {
+      "Content-Type": ApiConstance.contentType,
+      "token": token,
+    };
+
+    final Response response = await get(
+      url,
+      headers: headers,
+    );
+
+    final statusCode = response.statusCode;
+
+    if (statusCode == 200) {
+      print('✅ GET ALL TRAVELS  SUCCESS ✅');
+      print("🔥🌟${response.body}");
+      final decodedBody = convert.jsonDecode(response.body) as List<dynamic>;
+
+      var x = List<TravelModel>.from(
+        decodedBody.map(
+          (travelData) {
+            return TravelModel.fromMap(travelData);
+          },
+        ),
+      );
+      return x;
+    } else {
+      print('🛑 getAllTravels FAILURE 🛑');
+      print(response.body);
+      throw (response.body as Map<String, dynamic>)['message'];
+    }
+  }
+
+  @override
+  Future<void> deleteClientRequest(String id) async {
+    String token = _appPrefences.getToken();
+
+    final url = Uri.parse("${ApiConstance.requestsBaseUrl}$id");
+    final headers = {
+      "Content-Type": ApiConstance.contentType,
+      "token": token,
+    };
+
+    final Response response = await delete(
+      url,
+      headers: headers,
+    );
+
+    final statusCode = response.statusCode;
+
+    print(statusCode);
+    if (statusCode == 200) {
+      print('✅ deleteClientRequest SUCCESS ✅');
+      print("🔥🌟${response.body}");
+    } else {
+      print('🛑 deleteClientRequest  FAILURE 🛑');
       print(response.body);
       throw response.body;
     }

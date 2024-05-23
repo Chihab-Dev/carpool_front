@@ -93,5 +93,8 @@
     "enterYourFeedbackHere": "Enter your feedback here",
     "send": "Send",
     "rateTheClient": "RATE THE CLIENT",
-    "rateTheDriver": "RATE THE DRIVER"
+    "rateTheDriver": "RATE THE DRIVER",
+    "myRequest": "My request",
+    "state": "State",
+    "deleteTheRequest": "Delete the request"
 }

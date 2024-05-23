@@ -93,5 +93,8 @@
     "enterYourFeedbackHere": "ادخل تقييمك هنا",
     "send": "ارسل",
     "rateTheClient": "تقييم المسافر",
-    "rateTheDriver": "تقييم السائق"
+    "rateTheDriver": "تقييم السائق",
+    "myRequest": "طلبي",
+    "state": "حالة الطلب",
+    "deleteTheRequest": "حذف الطلب"
 }

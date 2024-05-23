@@ -1,7 +1,9 @@
 import 'package:carpool/app/service_locator.dart';
 import 'package:carpool/app/shared_prefrences.dart';
 import 'package:carpool/data/models/models.dart';
+import 'package:carpool/domain/usecase/client/delete_request_usecase.dart';
 import 'package:carpool/domain/usecase/client/get_client_by_id_usecase.dart';
+import 'package:carpool/domain/usecase/client/get_client_travels_usecase.dart';
 import 'package:carpool/domain/usecase/client/get_travel_usecase.dart';
 import 'package:carpool/domain/usecase/client/request_to_book_usecase.dart';
 import 'package:carpool/domain/usecase/client/send_feedback_usecase.dart';
@@ -231,15 +233,74 @@ class HomeCubit extends Cubit<HomeState> {
     emit(HomeCalculateAcceptedRequestsState());
   }
 
-  double calculateRate(List<FeedbackModel> feedbacks) {
+  int calculateRate(List<FeedbackModel> feedbacks) {
     if (feedbacks.isNotEmpty) {
       double somme = 0;
       for (var feedback in feedbacks) {
         somme += feedback.note;
       }
-      return somme / feedbacks.length;
+      return somme ~/ feedbacks.length;
     } else {
-      return 0.0;
+      return 0;
     }
+  }
+
+  List<TravelModel> myTravels = [];
+
+  RequestModel? getMyRequest(List<RequestModel> requests) {
+    AppPrefences appPrefences = AppPrefences(getIt());
+
+    String clientId = appPrefences.getId();
+
+    for (var request in requests) {
+      if (request.clientId == clientId) {
+        return request;
+      }
+    }
+    return null;
+  }
+
+  final ClientGetAllTravelUsecase _clientGetAllTravelUsecase = ClientGetAllTravelUsecase(getIt());
+
+  Future<void> getClientTravels(BuildContext context) async {
+    AppPrefences appPrefences = AppPrefences(getIt());
+
+    String clientId = appPrefences.getId();
+    emit(HomeGetTravelsLoadingState());
+    (await _clientGetAllTravelUsecase.execute()).fold(
+      (failure) {
+        errorToast(failure.message).show(context);
+        emit(HomeGetTravelsErrorState());
+      },
+      (data) {
+        successToast('success get travels').show(context);
+        myTravels = [];
+        for (var travel in data) {
+          for (var request in travel.requests) {
+            if (request.clientId == clientId) {
+              myTravels.add(travel);
+            }
+          }
+        }
+
+        emit(HomeGetTravelsSuccessState());
+      },
+    );
+  }
+
+  final ClientDeleteRequestUsecase _clientDeleteRequestUsecase = ClientDeleteRequestUsecase(getIt());
+
+  Future<void> clientDeleteRequest(BuildContext context, String id) async {
+    emit(HomeDeleteRequestLoadingState());
+    (await _clientDeleteRequestUsecase.execute(id)).fold(
+      (failure) {
+        errorToast(failure.message).show(context);
+        emit(HomeDeleteRequestErrorState());
+      },
+      (data) {
+        successToast('Delete success').show(context);
+        emit(HomeDeleteRequestSuccessState());
+      },
+    );
   }
 }
