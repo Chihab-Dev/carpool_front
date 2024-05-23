@@ -75,7 +75,7 @@
     "rating": "التقييم",
     "comment": "تعليق",
     "skip": "تخطي",
-    "feedback": "ملاحظات",
+    "feedback": "التقييمات",
     "fullName": "الاسم الكامل : ",
     "rate": "معدل : ",
     "old": "عمر : ",
@@ -83,5 +83,15 @@
     "pickNumberOfPlaces": "اختر عدد المقاعد : ",
     "person": "شخص",
     "updateTheTravel": "تحديث الرحلة",
-    "deleteTheTravel": "حذف الرحلة"
+    "deleteTheTravel": "حذف الرحلة",
+    "autoAcceptRequests": "قبول تلقائي للطلبات : ",
+    "autoAcceptEnabled": "القبول التلقائي مفعل",
+    "autoAcceptNotEnabled": "القبول التلقائي غير مفعل",
+    "yourTravels": "رحلاتك",
+    "howWouldYouRateYourExperience": "كيف تقيم رحلتك ؟",
+    "pleaseClickOnStars": "اضغط على النجوم للتقييم",
+    "enterYourFeedbackHere": "ادخل تقييمك هنا",
+    "send": "ارسل",
+    "rateTheClient": "تقييم المسافر",
+    "rateTheDriver": "تقييم السائق"
 }

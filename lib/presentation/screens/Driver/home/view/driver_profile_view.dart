@@ -39,12 +39,13 @@ class _DriverProfileViewState extends State<DriverProfileView> {
                 ? const SizedBox()
                 : Scaffold(
                     body: Padding(
-                      padding: EdgeInsets.all(AppPadding.p18),
+                      padding: EdgeInsets.symmetric(horizontal: AppPadding.p18),
                       child: SingleChildScrollView(
                         child: Center(
                           child: Column(
                             children: [
                               const SizedBox(height: kToolbarHeight),
+                              separator(),
                               CircleAvatar(
                                 radius: AppSize.s70,
                                 backgroundColor: ColorManager.lightGrey,
@@ -153,6 +154,7 @@ class _DriverProfileViewState extends State<DriverProfileView> {
                                 },
                                 color: Colors.red,
                               ),
+                              separator(),
                               const SizedBox(height: kToolbarHeight),
                             ],
                           ),

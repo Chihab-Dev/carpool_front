@@ -271,6 +271,36 @@ class _TravelDetailsViewState extends State<TravelDetailsView> {
                       ),
                     ),
                     SizedBox(height: AppSize.s16),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: AppPadding.p10),
+                      child: Row(
+                        children: [
+                          Stack(
+                            children: [
+                              Icon(
+                                FontAwesomeIcons.a,
+                                size: AppSize.s25,
+                                color: ColorManager.darkGrey,
+                              ),
+                              widget.travel.autoAcceptRequests
+                                  ? const SizedBox()
+                                  : Icon(
+                                      FontAwesomeIcons.slash,
+                                      size: AppSize.s25,
+                                      color: Colors.red,
+                                    ),
+                            ],
+                          ),
+                          SizedBox(width: AppSize.s25),
+                          Text(
+                            widget.travel.autoAcceptRequests
+                                ? AppStrings.autoAcceptEnabled.tr(context)
+                                : AppStrings.autoAcceptNotEnabled.tr(context),
+                            style: getSmallRegularStyle(color: ColorManager.dark),
+                          ),
+                        ],
+                      ),
+                    ),
                     separator(),
                     Text(
                       widget.travel.carName,

@@ -128,6 +128,22 @@ class _DriverMyTravelViewState extends State<DriverMyTravelView> {
                                 color: cubit.acceptedRequests > 2 ? ColorManager.green : null,
                               )
                             : const SizedBox(),
+                        SizedBox(width: AppSize.s5),
+                        widget.myTravel.numberOfPlaces > 3
+                            ? Icon(
+                                Icons.chair_outlined,
+                                size: AppSize.s30,
+                                color: cubit.acceptedRequests > 3 ? ColorManager.green : null,
+                              )
+                            : const SizedBox(),
+                        SizedBox(width: AppSize.s5),
+                        widget.myTravel.numberOfPlaces > 4
+                            ? Icon(
+                                Icons.chair_outlined,
+                                size: AppSize.s30,
+                                color: cubit.acceptedRequests > 4 ? ColorManager.green : null,
+                              )
+                            : const SizedBox(),
                         const Spacer(),
                         Text(
                           '${AppStrings.forOnePerson.tr(context)} ',
@@ -271,6 +287,36 @@ class _DriverMyTravelViewState extends State<DriverMyTravelView> {
                       ),
                     ),
                     SizedBox(height: AppSize.s16),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: AppPadding.p10),
+                      child: Row(
+                        children: [
+                          Stack(
+                            children: [
+                              Icon(
+                                FontAwesomeIcons.a,
+                                size: AppSize.s25,
+                                color: ColorManager.darkGrey,
+                              ),
+                              widget.myTravel.autoAcceptRequests
+                                  ? const SizedBox()
+                                  : Icon(
+                                      FontAwesomeIcons.slash,
+                                      size: AppSize.s25,
+                                      color: Colors.red,
+                                    ),
+                            ],
+                          ),
+                          SizedBox(width: AppSize.s25),
+                          Text(
+                            widget.myTravel.autoAcceptRequests
+                                ? AppStrings.autoAcceptEnabled.tr(context)
+                                : AppStrings.autoAcceptNotEnabled.tr(context),
+                            style: getSmallRegularStyle(color: ColorManager.dark),
+                          ),
+                        ],
+                      ),
+                    ),
                     separator(),
                     Text(
                       widget.myTravel.carName,
@@ -309,7 +355,8 @@ class _DriverMyTravelViewState extends State<DriverMyTravelView> {
                       physics: const NeverScrollableScrollPhysics(),
                       itemCount: cubit.acceptRequestsList.length,
                       itemBuilder: (context, index) {
-                        return acceptedRequestContianer(context, cubit.acceptRequestsList[index]);
+                        return acceptedRequestContianer(
+                            context, cubit.acceptRequestsList[index], cubit, cubit.allMyTravels[index]);
                       },
                     ),
                     separator(),
@@ -356,12 +403,16 @@ class _DriverMyTravelViewState extends State<DriverMyTravelView> {
                       width: double.infinity,
                     ),
                     SizedBox(height: AppSize.s16),
-                    CustomLargeButton(
-                      label: AppStrings.deleteTheTravel.tr(context),
-                      onPressed: () {},
-                      color: Colors.red,
-                      width: double.infinity,
-                    ),
+                    state is DriverDeleteTravelLoadingState
+                        ? Center(child: CircularProgressIndicator(color: ColorManager.yellow))
+                        : CustomLargeButton(
+                            label: AppStrings.deleteTheTravel.tr(context),
+                            onPressed: () {
+                              cubit.deleteTravel(context, widget.myTravel.travelId);
+                            },
+                            color: Colors.red,
+                            width: double.infinity,
+                          ),
                     separator(),
                   ],
                 ),
@@ -425,7 +476,8 @@ class _DriverMyTravelViewState extends State<DriverMyTravelView> {
     );
   }
 
-  Widget acceptedRequestContianer(BuildContext context, RequestModel requestModel) {
+  Widget acceptedRequestContianer(
+      BuildContext context, RequestModel requestModel, DriverHomeCubit cubit, TravelModel travel) {
     return Container(
       margin: EdgeInsets.only(top: AppMargin.m18),
       child: Row(
@@ -455,16 +507,27 @@ class _DriverMyTravelViewState extends State<DriverMyTravelView> {
             ),
           ),
           SizedBox(width: AppSize.s20),
-          CustomSmallButton(
-            label: AppStrings.feedback.tr(context),
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => DriverFeedbackView(requestModel.clientId),
-                  ));
-            },
-            backgroundColor: ColorManager.yellow,
+          Column(
+            children: [
+              CustomSmallButton(
+                label: AppStrings.feedback.tr(context),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DriverFeedbackView(requestModel.clientId),
+                      ));
+                },
+                backgroundColor: ColorManager.yellow,
+              ),
+              CustomSmallButton(
+                label: AppStrings.accept.tr(context),
+                onPressed: () {
+                  cubit.updateRequestState(context, 'accept', requestModel.requestId, travel);
+                },
+                backgroundColor: ColorManager.yellow,
+              ),
+            ],
           ),
         ],
       ),

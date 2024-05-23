@@ -83,5 +83,15 @@
     "pickNumberOfPlaces": "Pick number of plcaes : ",
     "person": "Person",
     "updateTheTravel": "Update the travel",
-    "deleteTheTravel": "Delete the travel"
+    "deleteTheTravel": "Delete the travel",
+    "autoAcceptRequests": "Auto accept requests",
+    "autoAcceptEnabled": "Auto accept enabled",
+    "autoAcceptNotEnabled": "Auto accept not enabled",
+    "yourTravels": "Your travels",
+    "howWouldYouRateYourExperience": "How would you rate your experience?",
+    "pleaseClickOnStars": "Please click on stars to select your desired rating.",
+    "enterYourFeedbackHere": "Enter your feedback here",
+    "send": "Send",
+    "rateTheClient": "RATE THE CLIENT",
+    "rateTheDriver": "RATE THE DRIVER"
 }

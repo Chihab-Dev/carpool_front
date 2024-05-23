@@ -27,6 +27,7 @@ abstract class RemoteDataSource {
   Future<void> updateTravel(TravelModel travel);
   Future<List<TravelModel>> driverGetTravelById();
   Future<void> updateRequestState(String state, String requestId, String travelId);
+  Future<void> driverDeleteTravel(String id);
 
   //----------------------------------------------------- ADMIN -----------------------------------------------------
   Future<AdminModel> adminLogin(String phoneNumber, String password);
@@ -520,6 +521,34 @@ class RemoteDataSourceImpl extends RemoteDataSource {
       throw response.body;
     }
   }
+
+  @override
+  Future<void> driverDeleteTravel(String id) async {
+    String token = _appPrefences.getToken();
+
+    final url = Uri.parse("${ApiConstance.travelsBaseUrl}/$id");
+    final headers = {
+      "Content-Type": ApiConstance.contentType,
+      "token": token,
+    };
+
+    final Response response = await delete(
+      url,
+      headers: headers,
+    );
+
+    final statusCode = response.statusCode;
+
+    if (statusCode == 200) {
+      print('✅ deleteTravel  SUCCESS ✅');
+      print("🔥🌟${response.body}");
+    } else {
+      print('🛑 deleteTravel FAILURE 🛑');
+      print(response.body);
+      throw response.body;
+    }
+  }
+
   //----------------------------------------------------- ADMIN -----------------------------------------------------
 
   @override

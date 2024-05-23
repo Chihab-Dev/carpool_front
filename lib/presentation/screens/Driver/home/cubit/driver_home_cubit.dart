@@ -4,6 +4,7 @@ import 'package:carpool/app/service_locator.dart';
 import 'package:carpool/app/shared_prefrences.dart';
 import 'package:carpool/data/models/models.dart';
 import 'package:carpool/domain/usecase/driver/create_travel_usecase.dart';
+import 'package:carpool/domain/usecase/driver/delete_client_usecase.dart';
 import 'package:carpool/domain/usecase/driver/get_driver_by_id_usecase.dart';
 import 'package:carpool/domain/usecase/driver/get_travel_by_id_usecase.dart';
 import 'package:carpool/domain/usecase/driver/send_feedback_usecase.dart';
@@ -158,6 +159,28 @@ class DriverHomeCubit extends Cubit<DriverHomeState> {
     emit(DriverHomePickSmokingAllowed());
   }
 
+  bool autoAcceptRequests = false;
+  int numAutoAcceptRequests = 1;
+
+  void changeAutoAcceptRequests(int? value) {
+    switch (value) {
+      case 1:
+        autoAcceptRequests = false;
+        numAutoAcceptRequests = 1;
+        break;
+      case 2:
+        autoAcceptRequests = true;
+        numAutoAcceptRequests = 2;
+        break;
+
+      default:
+        autoAcceptRequests = false;
+        numAutoAcceptRequests = 1;
+        break;
+    }
+    emit(DriverHomeAutoAcceptRequests());
+  }
+
   DateTime selectedDate = DateTime.now();
 
   pickDate(BuildContext context) async {
@@ -234,6 +257,7 @@ class DriverHomeCubit extends Cubit<DriverHomeState> {
         ),
         baggage: baggageSizeAllowed,
         dateOfDeparture: selectedDate.toString(),
+        autoAcceptRequests: autoAcceptRequests,
       ),
     ))
         .fold(
@@ -357,7 +381,6 @@ class DriverHomeCubit extends Cubit<DriverHomeState> {
     rejectRequestsList = [];
     if (requests != null && requests.isNotEmpty) {
       for (var request in requests) {
-        print(request.state);
         if (request.state == 'accept') {
           acceptedRequests++;
           acceptRequestsList.add(request);
@@ -401,5 +424,20 @@ class DriverHomeCubit extends Cubit<DriverHomeState> {
     } else {
       return 0.0;
     }
+  }
+
+  final DriverDeleteTravelUsecase _driverDeleteTravelUsecase = DriverDeleteTravelUsecase(getIt());
+
+  Future<void> deleteTravel(BuildContext context, String travelId) async {
+    emit(DriverDeleteTravelLoadingState());
+    (await _driverDeleteTravelUsecase.execute(travelId)).fold(
+      (failure) {
+        errorToast(failure.message).show(context);
+        emit(DriverDeleteTravelErrorState());
+      },
+      (data) {
+        Navigator.pop(context);
+      },
+    );
   }
 }

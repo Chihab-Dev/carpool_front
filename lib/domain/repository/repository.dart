@@ -21,6 +21,7 @@ abstract class Repository {
   Future<Either<Failure, void>> updateTravel(TravelModel travel);
   Future<Either<Failure, List<TravelModel>>> driverGetTravelById();
   Future<Either<Failure, void>> updateRequestState(String state, String requestId, String travelId);
+  Future<Either<Failure, void>> driverDeleteTravel(String id);
 
   //----------------------------------------------------- ADMIN -----------------------------------------------------
   Future<Either<Failure, AdminModel>> adminLogin(String phoneNumber, String password);

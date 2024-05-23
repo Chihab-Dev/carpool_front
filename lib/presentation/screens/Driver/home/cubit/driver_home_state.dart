@@ -21,6 +21,8 @@ final class DriverHomePickPetsAllowed extends DriverHomeState {}
 
 final class DriverHomePickSmokingAllowed extends DriverHomeState {}
 
+final class DriverHomeAutoAcceptRequests extends DriverHomeState {}
+
 final class DriverHomePickDate extends DriverHomeState {}
 
 final class DriverHomePickImage extends DriverHomeState {}
@@ -62,3 +64,9 @@ final class DriverUpdateRequestStateLoadingState extends DriverHomeState {}
 final class DriverUpdateRequestStateSuccessState extends DriverHomeState {}
 
 final class DriverUpdateRequestStateErrorState extends DriverHomeState {}
+
+final class DriverDeleteTravelLoadingState extends DriverHomeState {}
+
+final class DriverDeleteTravelSuccessState extends DriverHomeState {}
+
+final class DriverDeleteTravelErrorState extends DriverHomeState {}

@@ -237,6 +237,7 @@ class TravelModel {
   DriverModel driver;
   String baggage;
   String dateOfDeparture;
+  bool autoAcceptRequests;
   TravelModel({
     required this.travelId,
     required this.placeOfDeparture,
@@ -253,6 +254,7 @@ class TravelModel {
     required this.driver,
     required this.baggage,
     required this.dateOfDeparture,
+    required this.autoAcceptRequests,
   });
 
   Map<String, dynamic> toMap() {
@@ -269,7 +271,7 @@ class TravelModel {
       'allowPets': allowPets,
       'Baggage': baggage,
       'dateOfDeparture': dateOfDeparture,
-      'AcceptAutoClients': false,
+      'AcceptAutoClients': autoAcceptRequests,
     };
   }
 
@@ -294,6 +296,7 @@ class TravelModel {
       driver: DriverModel.fromMap(map['driverinf'] as Map<String, dynamic>),
       baggage: map['Baggage'] as String,
       dateOfDeparture: map['dateOfDeparture'] as String,
+      autoAcceptRequests: map['AcceptAutoClients'] as bool,
     );
   }
 

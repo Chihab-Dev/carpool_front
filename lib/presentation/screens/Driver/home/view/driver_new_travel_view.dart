@@ -301,6 +301,37 @@ class DriverHomeView extends StatelessWidget {
                         ),
                       ],
                     ),
+                    SizedBox(height: AppSize.s10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          AppStrings.autoAcceptRequests.tr(context),
+                          style: getMeduimStyle(color: ColorManager.dark),
+                        ),
+                        CupertinoSlidingSegmentedControl(
+                          onValueChanged: (value) {
+                            cubit.changeAutoAcceptRequests(value);
+                          },
+                          children: {
+                            1: Padding(
+                              padding: EdgeInsets.all(AppPadding.p10),
+                              child: Text(
+                                AppStrings.no.tr(context),
+                                style: getMeduimStyle(color: ColorManager.dark),
+                              ),
+                            ),
+                            2: Text(
+                              AppStrings.yes.tr(context),
+                              style: getMeduimStyle(color: ColorManager.dark),
+                            ),
+                          },
+                          groupValue: cubit.numAutoAcceptRequests,
+                          backgroundColor: ColorManager.lightGrey,
+                          thumbColor: ColorManager.white,
+                        ),
+                      ],
+                    ),
                     separator(),
                     CustomFormField(
                       textEditingcontroller: cubit.carNameController,

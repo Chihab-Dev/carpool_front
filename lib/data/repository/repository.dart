@@ -373,4 +373,19 @@ class RepositoryImpl extends Repository {
       return left(Failure('No internet connection'));
     }
   }
+
+  @override
+  Future<Either<Failure, void>> driverDeleteTravel(String id) async {
+    if (await networkInfo.isConnected()) {
+      try {
+        final result = await remoteDataSource.driverDeleteTravel(id);
+        return right(result);
+      } catch (e) {
+        print(e.toString());
+        return left(Failure(e.toString()));
+      }
+    } else {
+      return left(Failure('No internet connection'));
+    }
+  }
 }

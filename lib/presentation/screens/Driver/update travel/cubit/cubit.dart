@@ -39,6 +39,7 @@ class UpdateTravelCubit extends Cubit<UpdateTravelState> {
     selectedDate = travel.dateOfDeparture;
     carNameController.text = travel.carName;
     isEverythingValid = true;
+    autoAcceptRequests = travel.autoAcceptRequests;
   }
 
   TextEditingController locationController = TextEditingController();
@@ -228,6 +229,28 @@ class UpdateTravelCubit extends Cubit<UpdateTravelState> {
     emit(UpdateTravelPickImage());
   }
 
+  bool autoAcceptRequests = false;
+  int numAutoAcceptRequests = 1;
+
+  void changeAutoAcceptRequests(int? value) {
+    switch (value) {
+      case 1:
+        autoAcceptRequests = false;
+        numAutoAcceptRequests = 1;
+        break;
+      case 2:
+        autoAcceptRequests = true;
+        numAutoAcceptRequests = 2;
+        break;
+
+      default:
+        autoAcceptRequests = false;
+        numAutoAcceptRequests = 1;
+        break;
+    }
+    emit(UpdateTravelAutoAcceptRequestsState());
+  }
+
   final UpdateTravelUsecase _updateTravelUsecase = UpdateTravelUsecase(getIt());
   Future<void> updateTravel(BuildContext context, TravelModel travel) async {
     emit(UpdateTravelLoadingState());
@@ -248,6 +271,7 @@ class UpdateTravelCubit extends Cubit<UpdateTravelState> {
         driver: travel.driver,
         baggage: baggageSizeAllowed,
         dateOfDeparture: selectedDate.toString(),
+        autoAcceptRequests: autoAcceptRequests,
       ),
     ))
         .fold(

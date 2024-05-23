@@ -29,3 +29,5 @@ final class UpdateTravelSuccessState extends UpdateTravelState {}
 final class UpdateTravelErrorState extends UpdateTravelState {}
 
 final class UpdateTravelCheckValidationState extends UpdateTravelState {}
+
+final class UpdateTravelAutoAcceptRequestsState extends UpdateTravelState {}

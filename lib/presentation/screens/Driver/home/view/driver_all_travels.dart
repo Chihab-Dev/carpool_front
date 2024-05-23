@@ -1,6 +1,8 @@
+import 'package:carpool/app/localizations.dart';
 import 'package:carpool/presentation/components/appsize.dart';
 import 'package:carpool/presentation/components/assets_manager.dart';
 import 'package:carpool/presentation/components/color_manager.dart';
+import 'package:carpool/presentation/components/strings_manager.dart';
 import 'package:carpool/presentation/components/styles_manager.dart';
 import 'package:carpool/presentation/components/widgets.dart';
 import 'package:carpool/presentation/screens/Driver/home/cubit/driver_home_cubit.dart';
@@ -32,13 +34,14 @@ class _DriverAllTravelsViewState extends State<DriverAllTravelsView> {
       builder: (context, state) {
         var cubit = DriverHomeCubit.get(context);
         return Scaffold(
+          extendBodyBehindAppBar: true,
           appBar: AppBar(
             backgroundColor: Colors.transparent,
             elevation: 0,
             bottomOpacity: 0,
             scrolledUnderElevation: 0,
             title: Text(
-              'Your travels',
+              AppStrings.yourTravels.tr(context),
               style: getRegularStyle(color: ColorManager.dark),
             ),
             actions: [

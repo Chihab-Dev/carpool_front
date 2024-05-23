@@ -1,3 +1,4 @@
+import 'package:carpool/app/localizations.dart';
 import 'package:carpool/presentation/components/appsize.dart';
 import 'package:carpool/presentation/components/color_manager.dart';
 import 'package:carpool/presentation/components/strings_manager.dart';
@@ -25,7 +26,7 @@ class DriverFeedbackView extends StatelessWidget {
             bottomOpacity: 0,
             scrolledUnderElevation: 0,
             title: Text(
-              'RATE THE CLIENT',
+              AppStrings.rateTheClient.tr(context),
               style: getRegularStyle(color: ColorManager.dark),
             ),
           ),
@@ -36,17 +37,17 @@ class DriverFeedbackView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    AppStrings.rating,
+                    AppStrings.rating.tr(context),
                     style: getRegularStyle(color: ColorManager.dark),
                   ),
                   SizedBox(height: AppSize.s8),
                   Text(
-                    'How would you rate your experience?',
+                    AppStrings.howWouldYouRateYourExperience.tr(context),
                     style: getMeduimStyle(color: ColorManager.darkGrey).copyWith(fontWeight: FontWeight.normal),
                   ),
                   SizedBox(height: AppSize.s8),
                   Text(
-                    'Please click on stars to select your desired rating.',
+                    AppStrings.pleaseClickOnStars.tr(context),
                     style: getSmallRegularStyle(color: ColorManager.darkGrey),
                   ),
                   SizedBox(height: AppSize.s12),
@@ -61,13 +62,13 @@ class DriverFeedbackView extends StatelessWidget {
                   ),
                   SizedBox(height: AppSize.s12),
                   Text(
-                    AppStrings.comment,
+                    AppStrings.comment.tr(context),
                     style: getRegularStyle(color: ColorManager.dark),
                   ),
                   SizedBox(height: AppSize.s25),
                   CustomLargeFormField(
                     textEditingcontroller: cubit.feedbackCommentController,
-                    label: 'Enter your feedback here',
+                    label: AppStrings.enterYourFeedbackHere.tr(context),
                     keyboardType: TextInputType.text,
                     errorLabel: null,
                     onChanged: (value) {
@@ -79,7 +80,7 @@ class DriverFeedbackView extends StatelessWidget {
                   state is DriverSendFeedbackLoadingState
                       ? Center(child: CircularProgressIndicator(color: ColorManager.yellow))
                       : CustomLargeButton(
-                          label: 'Send',
+                          label: AppStrings.send.tr(context),
                           onPressed: cubit.feedbackValid == false
                               ? null
                               : () async {

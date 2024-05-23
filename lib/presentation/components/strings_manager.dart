@@ -106,4 +106,16 @@ class AppStrings {
   // additional new strings
 
   static const String travelIsFull = 'Travel is full';
+  static const String autoAcceptRequests = 'autoAcceptRequests';
+  static const String yourTravels = 'yourTravels';
+  static const String howWouldYouRateYourExperience = 'howWouldYouRateYourExperience';
+  static const String pleaseClickOnStars = 'pleaseClickOnStars';
+  static const String enterYourFeedbackHere = 'enterYourFeedbackHere';
+  static const String send = 'send';
+  static const String rateTheClient = 'rateTheClient';
+
+  static const String rateTheDriver = 'rateTheDriver';
+
+  static const String autoAcceptEnabled = 'autoAcceptEnabled';
+  static const String autoAcceptNotEnabled = 'autoAcceptNotEnabled';
 }
