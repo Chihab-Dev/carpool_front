@@ -15,10 +15,21 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class AdminTravelDetailsView extends StatelessWidget {
+class AdminTravelDetailsView extends StatefulWidget {
   const AdminTravelDetailsView(this.travel, {super.key});
 
   final TravelModel travel;
+
+  @override
+  State<AdminTravelDetailsView> createState() => _AdminTravelDetailsViewState();
+}
+
+class _AdminTravelDetailsViewState extends State<AdminTravelDetailsView> {
+  @override
+  void initState() {
+    super.initState();
+    AdminCubit.get(context).calculateAcceptedRequests(widget.travel.requests);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +54,7 @@ class AdminTravelDetailsView extends StatelessWidget {
                   children: [
                     const SizedBox(height: kToolbarHeight * 2),
                     Text(
-                      travel.dateOfDeparture.substring(0, 10),
+                      widget.travel.dateOfDeparture.substring(0, 10),
                       style: getMeduimStyle(color: ColorManager.dark),
                     ),
                     SizedBox(height: AppSize.s20),
@@ -62,8 +73,8 @@ class AdminTravelDetailsView extends StatelessWidget {
                           fontSize: 20,
                         ),
                       ),
-                      startChild: Text(travel.timeOfDeparture, style: getMeduimStyle(color: ColorManager.dark)),
-                      endChild: Text(travel.placeOfDeparture, style: getMeduimStyle(color: ColorManager.dark)),
+                      startChild: Text(widget.travel.timeOfDeparture, style: getMeduimStyle(color: ColorManager.dark)),
+                      endChild: Text(widget.travel.placeOfDeparture, style: getMeduimStyle(color: ColorManager.dark)),
                     ),
                     SizedBox(
                       height: AppSize.s70,
@@ -88,8 +99,8 @@ class AdminTravelDetailsView extends StatelessWidget {
                           fontSize: 20,
                         ),
                       ),
-                      startChild: Text(travel.timeOfArrival, style: getMeduimStyle(color: ColorManager.dark)),
-                      endChild: Text(travel.placeOfArrival, style: getMeduimStyle(color: ColorManager.dark)),
+                      startChild: Text(widget.travel.timeOfArrival, style: getMeduimStyle(color: ColorManager.dark)),
+                      endChild: Text(widget.travel.placeOfArrival, style: getMeduimStyle(color: ColorManager.dark)),
                     ),
                     separator(),
                     Row(
@@ -97,20 +108,22 @@ class AdminTravelDetailsView extends StatelessWidget {
                         Icon(
                           Icons.chair_outlined,
                           size: AppSize.s30,
-                          // color: ColorManager.white,
+                          color: cubit.acceptedRequests > 0 ? ColorManager.green : null,
                         ),
                         SizedBox(width: AppSize.s5),
-                        travel.numberOfPlaces > 1
+                        widget.travel.numberOfPlaces > 1
                             ? Icon(
                                 Icons.chair_outlined,
                                 size: AppSize.s30,
+                                color: cubit.acceptedRequests > 1 ? ColorManager.green : null,
                               )
                             : const SizedBox(),
                         SizedBox(width: AppSize.s5),
-                        travel.numberOfPlaces > 2
+                        widget.travel.numberOfPlaces > 2
                             ? Icon(
                                 Icons.chair_outlined,
                                 size: AppSize.s30,
+                                color: cubit.acceptedRequests > 2 ? ColorManager.green : null,
                               )
                             : const SizedBox(),
                         const Spacer(),
@@ -119,7 +132,7 @@ class AdminTravelDetailsView extends StatelessWidget {
                           style: getSmallRegularStyle(color: ColorManager.darkGrey),
                         ),
                         Text(
-                          travel.placePrice.toString(),
+                          widget.travel.placePrice.toString(),
                           style: getMeduimStyle(color: ColorManager.dark),
                         ),
                       ],
@@ -136,7 +149,7 @@ class AdminTravelDetailsView extends StatelessWidget {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('${travel.driver.name} ${travel.driver.familyname}',
+                            Text('${widget.travel.driver.name} ${widget.travel.driver.familyname}',
                                 style: getMeduimStyle(color: ColorManager.dark)),
                             Row(
                               children: [
@@ -147,7 +160,7 @@ class AdminTravelDetailsView extends StatelessWidget {
                                 ),
                                 SizedBox(width: AppSize.s5),
                                 Text(
-                                  travel.driver.feedbackes.length.toString(),
+                                  cubit.calculateRate(widget.travel.driver.feedbackes).toString(),
                                   style: getMeduimStyle(color: ColorManager.dark),
                                 ),
                               ],
@@ -157,7 +170,7 @@ class AdminTravelDetailsView extends StatelessWidget {
                         const Spacer(),
                         IconButton(
                           onPressed: () async {
-                            final call = Uri.parse('tel:+213 ${travel.driver.phoneNumber}');
+                            final call = Uri.parse('tel:+213 ${widget.travel.driver.phoneNumber}');
                             if (await canLaunchUrl(call)) {
                               launchUrl(call);
                             } else {
@@ -184,13 +197,13 @@ class AdminTravelDetailsView extends StatelessWidget {
                           ),
                           SizedBox(width: AppSize.s25),
                           Text(
-                            travel.baggage == "S"
-                                ? AppStrings.baggageSAllowed
-                                : travel.baggage == "M"
-                                    ? AppStrings.baggageMAllowed
-                                    : travel.baggage == "L"
-                                        ? AppStrings.baggageLAllowed
-                                        : AppStrings.baggageSAllowed,
+                            widget.travel.baggage == "S"
+                                ? AppStrings.baggageSAllowed.tr(context)
+                                : widget.travel.baggage == "M"
+                                    ? AppStrings.baggageMAllowed.tr(context)
+                                    : widget.travel.baggage == "L"
+                                        ? AppStrings.baggageLAllowed.tr(context)
+                                        : AppStrings.baggageSAllowed.tr(context),
                             style: getSmallRegularStyle(color: ColorManager.dark),
                           ),
                         ],
@@ -208,7 +221,7 @@ class AdminTravelDetailsView extends StatelessWidget {
                                 size: AppSize.s25,
                                 color: ColorManager.darkGrey,
                               ),
-                              travel.allowPets
+                              widget.travel.allowPets
                                   ? const SizedBox()
                                   : Icon(
                                       FontAwesomeIcons.slash,
@@ -219,7 +232,9 @@ class AdminTravelDetailsView extends StatelessWidget {
                           ),
                           SizedBox(width: AppSize.s25),
                           Text(
-                            travel.allowPets ? AppStrings.allowPets : AppStrings.petsNotAllowed.tr(context),
+                            widget.travel.allowPets
+                                ? AppStrings.allowPets.tr(context)
+                                : AppStrings.petsNotAllowed.tr(context),
                             style: getSmallRegularStyle(color: ColorManager.dark),
                           ),
                         ],
@@ -237,7 +252,7 @@ class AdminTravelDetailsView extends StatelessWidget {
                                 size: AppSize.s25,
                                 color: ColorManager.darkGrey,
                               ),
-                              travel.allowSmoking
+                              widget.travel.allowSmoking
                                   ? const SizedBox()
                                   : Icon(
                                       FontAwesomeIcons.slash,
@@ -248,16 +263,48 @@ class AdminTravelDetailsView extends StatelessWidget {
                           ),
                           SizedBox(width: AppSize.s25),
                           Text(
-                            travel.allowSmoking ? AppStrings.smokingAllowed.tr(context) : AppStrings.dontAllowSmoking,
+                            widget.travel.allowSmoking
+                                ? AppStrings.smokingAllowed.tr(context)
+                                : AppStrings.dontAllowSmoking.tr(context),
                             style: getSmallRegularStyle(color: ColorManager.dark),
                           ),
                         ],
                       ),
                     ),
                     SizedBox(height: AppSize.s16),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: AppPadding.p10),
+                      child: Row(
+                        children: [
+                          Stack(
+                            children: [
+                              Icon(
+                                FontAwesomeIcons.a,
+                                size: AppSize.s25,
+                                color: ColorManager.darkGrey,
+                              ),
+                              widget.travel.autoAcceptRequests
+                                  ? const SizedBox()
+                                  : Icon(
+                                      FontAwesomeIcons.slash,
+                                      size: AppSize.s25,
+                                      color: Colors.red,
+                                    ),
+                            ],
+                          ),
+                          SizedBox(width: AppSize.s25),
+                          Text(
+                            widget.travel.autoAcceptRequests
+                                ? AppStrings.autoAcceptEnabled.tr(context)
+                                : AppStrings.autoAcceptNotEnabled.tr(context),
+                            style: getSmallRegularStyle(color: ColorManager.dark),
+                          ),
+                        ],
+                      ),
+                    ),
                     separator(),
                     Text(
-                      travel.carName,
+                      widget.travel.carName,
                       style: getMeduimStyle(color: ColorManager.dark),
                     ),
                     SizedBox(height: AppSize.s16),
@@ -291,17 +338,17 @@ class AdminTravelDetailsView extends StatelessWidget {
               ],
             ),
             child: state is AdminDeleteTravelLoadingState
-                ? const Center(
+                ? Center(
                     child: CircularProgressIndicator(
-                      color: Colors.red,
+                      color: ColorManager.yellow,
                     ),
                   )
                 : Center(
                     child: CustomLargeButton(
-                      label: "Delete travel",
+                      label: AppStrings.deleteTheTravel.tr(context),
                       color: Colors.red,
                       onPressed: () {
-                        cubit.deleteTravel(context, travel.travelId);
+                        cubit.deleteTravel(context, widget.travel.travelId);
                       },
                     ),
                   ),

@@ -149,4 +149,29 @@ class AdminCubit extends Cubit<AdminStates> {
       },
     );
   }
+
+  int acceptedRequests = 0;
+  void calculateAcceptedRequests(List<RequestModel>? requests) {
+    acceptedRequests = 0;
+    if (requests != null && requests.isNotEmpty) {
+      for (var request in requests) {
+        if (request.state == 'accept') {
+          acceptedRequests++;
+        }
+      }
+    }
+    emit(AdminCalculateAcceptedRequestsState());
+  }
+
+  double calculateRate(List<FeedbackModel> feedbacks) {
+    if (feedbacks.isNotEmpty) {
+      double somme = 0;
+      for (var feedback in feedbacks) {
+        somme += feedback.note;
+      }
+      return somme / feedbacks.length;
+    } else {
+      return 0.0;
+    }
+  }
 }

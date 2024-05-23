@@ -444,8 +444,9 @@ Widget travelDetailsContainer(BuildContext context, TravelModel travel, Widget o
               ),
               SizedBox(width: AppSize.s12),
               Text(
-                travel.baggage,
+                travel.baggage.substring(0, 1),
                 style: getMeduimStyle(color: ColorManager.dark),
+                maxLines: 1,
               ),
             ],
           ),

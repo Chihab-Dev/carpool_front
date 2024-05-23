@@ -35,6 +35,7 @@ class AdminClientProfileView extends StatelessWidget {
                 child: Column(
                   children: [
                     const SizedBox(height: kToolbarHeight),
+                    separator(),
                     CircleAvatar(
                       radius: AppSize.s70,
                       backgroundColor: ColorManager.lightGrey,
@@ -76,45 +77,52 @@ class AdminClientProfileView extends StatelessWidget {
                         ListView.builder(
                           itemCount: client.feedbackes.length,
                           shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
                           padding: EdgeInsets.zero,
                           itemBuilder: (context, index) {
                             FeedbackModel feedback = client.feedbackes[index];
-                            return Row(
-                              children: [
-                                CircleAvatar(
-                                  radius: AppSize.s30,
-                                  backgroundColor: ColorManager.lightGrey,
-                                  backgroundImage: const AssetImage(ImageAsset.userProfile),
-                                ),
-                                SizedBox(width: AppSize.s10),
-                                Flexible(
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Text(
-                                            'USER',
-                                            overflow: TextOverflow.ellipsis,
-                                            style: getMeduimStyle(color: ColorManager.dark),
-                                          ),
-                                          Icon(
-                                            Icons.star_purple500_sharp,
-                                            color: ColorManager.yellow,
-                                          ),
-                                          SizedBox(width: AppSize.s5),
-                                          Text(feedback.note.toString(),
-                                              style: getMeduimStyle(color: ColorManager.dark))
-                                        ],
-                                      ),
-                                      Text(
-                                        feedback.comment,
-                                        style: getSmallRegularStyle(color: ColorManager.darkGrey),
-                                      ),
-                                    ],
+                            return Container(
+                              margin: EdgeInsets.only(top: AppSize.s12),
+                              child: Row(
+                                children: [
+                                  CircleAvatar(
+                                    radius: AppSize.s30,
+                                    backgroundColor: ColorManager.lightGrey,
+                                    backgroundImage: const AssetImage(ImageAsset.userProfile),
                                   ),
-                                ),
-                              ],
+                                  SizedBox(width: AppSize.s10),
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Text(
+                                              feedback.name.toString(),
+                                              overflow: TextOverflow.ellipsis,
+                                              style: getMeduimStyle(color: ColorManager.dark),
+                                            ),
+                                            const Spacer(),
+                                            Icon(
+                                              Icons.star_purple500_sharp,
+                                              color: ColorManager.yellow,
+                                            ),
+                                            SizedBox(width: AppSize.s5),
+                                            Text(
+                                              feedback.note.toString(),
+                                              style: getMeduimStyle(color: ColorManager.dark),
+                                            )
+                                          ],
+                                        ),
+                                        Text(
+                                          feedback.comment,
+                                          style: getSmallRegularStyle(color: ColorManager.darkGrey),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
                             );
                           },
                         ),
@@ -132,6 +140,7 @@ class AdminClientProfileView extends StatelessWidget {
                             },
                             color: Colors.red,
                           ),
+                    separator(),
                     const SizedBox(height: kToolbarHeight),
                   ],
                 ),
