@@ -1,5 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-// ignore_for_String: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
 class ClientModel {
@@ -14,6 +12,7 @@ class ClientModel {
   List<FeedbackModel> feedbackes;
   String? token;
   String email = 'chihab@gmail.com';
+
   ClientModel({
     required this.id,
     required this.name,
@@ -42,20 +41,18 @@ class ClientModel {
 
   factory ClientModel.fromMap(Map<String, dynamic> map) {
     return ClientModel(
-      id: map['_id'] as String,
-      familyname: map['familyname'] as String,
-      name: map['name'] as String,
-      dateofbirth: map['birthday'] as String,
-      address: map['address'] as String,
-      phoneNumber: map['phoneNumber'] as String,
+      id: map['_id'] as String? ?? '',
+      familyname: map['familyname'] as String? ?? '',
+      name: map['name'] as String? ?? '',
+      dateofbirth: map['birthday'] as String? ?? '',
+      address: map['address'] as String? ?? '',
+      phoneNumber: map['phoneNumber'] as String? ?? '',
       password: '',
-      image: map['image'] as String,
+      image: map['image'] as String? ?? '',
       token: map['token'] as String?,
-      feedbackes: List<FeedbackModel>.from(
-        (map['feedback'] as List<dynamic>).map<FeedbackModel>(
-          (x) => FeedbackModel.fromMap(x as Map<String, dynamic>),
-        ),
-      ),
+      feedbackes:
+          (map['feedback'] as List<dynamic>?)?.map((x) => FeedbackModel.fromMap(x as Map<String, dynamic>)).toList() ??
+              [],
     );
   }
 
@@ -76,6 +73,7 @@ class DriverModel {
   List<FeedbackModel> feedbackes;
   bool isAccepted;
   String? token;
+
   DriverModel({
     required this.id,
     required this.name,
@@ -104,20 +102,18 @@ class DriverModel {
 
   factory DriverModel.fromMap(Map<String, dynamic> map) {
     return DriverModel(
-      id: map['_id'] as String,
-      name: map['name'] as String,
-      familyname: map['familyname'] as String,
-      address: map['address'] as String,
-      birthday: map['birthday'] as String,
-      phoneNumber: map['phoneNumber'] as String,
-      image: map['image'] as String,
+      id: map['_id'] as String? ?? '',
+      name: map['name'] as String? ?? '',
+      familyname: map['familyname'] as String? ?? '',
+      address: map['address'] as String? ?? '',
+      birthday: map['birthday'] as String? ?? '',
+      phoneNumber: map['phoneNumber'] as String? ?? '',
+      image: map['image'] as String? ?? '',
       password: '',
-      feedbackes: List<FeedbackModel>.from(
-        (map['feedback'] as List<dynamic>).map<FeedbackModel>(
-          (x) => FeedbackModel.fromMap(x as Map<String, dynamic>),
-        ),
-      ),
-      isAccepted: map['isAccepted'] as bool,
+      feedbackes:
+          (map['feedback'] as List<dynamic>?)?.map((x) => FeedbackModel.fromMap(x as Map<String, dynamic>)).toList() ??
+              [],
+      isAccepted: map['isAccepted'] as bool? ?? false,
       token: map['token'] as String?,
     );
   }
@@ -136,6 +132,7 @@ class AdminModel {
   String phoneNumber;
   String? password;
   String? token;
+
   AdminModel({
     required this.id,
     required this.familyName,
@@ -159,14 +156,14 @@ class AdminModel {
 
   factory AdminModel.fromMap(Map<String, dynamic> map) {
     return AdminModel(
-      id: map['_id'] as String,
-      familyName: map['familyname'] as String,
-      name: map['name'] as String,
-      email: map['email'] as String,
-      image: map['image'] as String,
-      phoneNumber: map['phoneNumber'] as String,
-      token: map['token'] != null ? map['token'] as String : null,
-      password: map['password'] != null ? map['password'] as String : null,
+      id: map['_id'] as String? ?? '',
+      familyName: map['familyname'] as String? ?? '',
+      name: map['name'] as String? ?? '',
+      email: map['email'] as String? ?? '',
+      image: map['image'] as String? ?? '',
+      phoneNumber: map['phoneNumber'] as String? ?? '',
+      token: map['token'] as String?,
+      password: map['password'] as String?,
     );
   }
 
@@ -184,6 +181,7 @@ class FeedbackModel {
   String? phoneNumber;
   String comment;
   int note;
+
   FeedbackModel({
     this.feedbackId,
     this.fromUser,
@@ -205,14 +203,14 @@ class FeedbackModel {
 
   factory FeedbackModel.fromMap(Map<String, dynamic> map) {
     return FeedbackModel(
-      feedbackId: map['feedbackId'] != null ? map['feedbackId'] as String : null,
-      fromUser: map['fromUser'] != null ? map['fromUser'] as String : null,
-      toUser: '',
-      name: map['name'] != null ? map['name'] as String : null,
-      image: map['image'] != null ? map['image'] as String : null,
-      phoneNumber: map['phoneNumber'] != null ? map['phoneNumber'] as String : null,
-      comment: map['comment'] as String,
-      note: map['note'] as int,
+      feedbackId: map['feedbackId'] as String?,
+      fromUser: map['fromUser'] as String?,
+      toUser: map['toUser'] as String? ?? '',
+      name: map['name'] as String?,
+      image: map['image'] as String?,
+      phoneNumber: map['phoneNumber'] as String?,
+      comment: map['comment'] as String? ?? '',
+      note: map['note'] as int? ?? 0,
     );
   }
 
@@ -239,6 +237,7 @@ class TravelModel {
   String dateOfDeparture;
   bool autoAcceptRequests;
   String state;
+
   TravelModel({
     required this.travelId,
     required this.placeOfDeparture,
@@ -279,27 +278,26 @@ class TravelModel {
 
   factory TravelModel.fromMap(Map<String, dynamic> map) {
     return TravelModel(
-      travelId: map['_id'] as String,
-      placeOfDeparture: map['PlaceOfDeparture'] as String,
-      placeOfArrival: map['PlaceOfArrival'] as String,
-      timeOfDeparture: map['TimeOfDeparture'] as String,
-      timeOfArrival: map['TimeOfArrival'] as String,
-      numberOfPlaces: map['NumberOfPlaces'] as int,
-      carName: map['carname'] as String,
-      carImage: map['carImage'] as String,
-      placePrice: map['placeprice'] as int,
-      allowSmoking: map['allowSmoking'] as bool,
-      allowPets: map['allowPets'] as bool,
-      requests: List<RequestModel>.from(
-        (map['requestList'] as List).map<RequestModel>(
-          (x) => RequestModel.fromMap(x as Map<String, dynamic>),
-        ),
-      ),
-      driver: DriverModel.fromMap(map['driverinf'] as Map<String, dynamic>),
-      baggage: map['Baggage'] as String,
-      dateOfDeparture: map['dateOfDeparture'] as String,
-      autoAcceptRequests: map['AcceptAutoClients'] as bool,
-      state: map['state'] as String,
+      travelId: map['_id'] as String? ?? '',
+      placeOfDeparture: map['PlaceOfDeparture'] as String? ?? '',
+      placeOfArrival: map['PlaceOfArrival'] as String? ?? '',
+      timeOfDeparture: map['TimeOfDeparture'] as String? ?? '',
+      timeOfArrival: map['TimeOfArrival'] as String? ?? '',
+      numberOfPlaces: map['NumberOfPlaces'] as int? ?? 0,
+      carName: map['carname'] as String? ?? '',
+      carImage: map['carImage'] as String? ?? '',
+      placePrice: map['placeprice'] as int? ?? 0,
+      allowSmoking: map['allowSmoking'] as bool? ?? false,
+      allowPets: map['allowPets'] as bool? ?? false,
+      requests: (map['requestList'] as List<dynamic>?)
+              ?.map((x) => RequestModel.fromMap(x as Map<String, dynamic>))
+              .toList() ??
+          [],
+      driver: DriverModel.fromMap(map['driverinf'] as Map<String, dynamic>? ?? {}),
+      baggage: map['Baggage'] as String? ?? '',
+      dateOfDeparture: map['dateOfDeparture'] as String? ?? '',
+      autoAcceptRequests: map['AcceptAutoClients'] as bool? ?? false,
+      state: map['state'] as String? ?? '',
     );
   }
 
@@ -315,6 +313,7 @@ class RequestModel {
   String image;
   String phoneNumber;
   String state;
+
   RequestModel({
     required this.requestId,
     required this.clientId,
@@ -336,12 +335,12 @@ class RequestModel {
 
   factory RequestModel.fromMap(Map<String, dynamic> map) {
     return RequestModel(
-      requestId: map['_id'] as String,
-      clientId: map['client_id'] as String,
-      name: map['name'] as String,
-      image: map['image'] as String,
-      phoneNumber: map['phoneNumber'] as String,
-      state: map['state'] as String,
+      requestId: map['_id'] as String? ?? '',
+      clientId: map['client_id'] as String? ?? '',
+      name: map['name'] as String? ?? '',
+      image: map['image'] as String? ?? '',
+      phoneNumber: map['phoneNumber'] as String? ?? '',
+      state: map['state'] as String? ?? '',
     );
   }
 

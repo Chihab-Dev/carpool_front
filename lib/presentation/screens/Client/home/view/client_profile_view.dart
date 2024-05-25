@@ -8,8 +8,10 @@ import 'package:carpool/presentation/components/styles_manager.dart';
 import 'package:carpool/presentation/components/widgets.dart';
 import 'package:carpool/presentation/screens/Client/home/cubit/home_cubit.dart';
 import 'package:carpool/presentation/screens/admin/screens/client_profile.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 
 class ClientProfileView extends StatefulWidget {
   const ClientProfileView({super.key});
@@ -154,9 +156,41 @@ class _ClientProfileViewState extends State<ClientProfileView> {
                                       );
                                     },
                                   ),
-                                  separator(),
                                 ],
                               ),
+                              separator(),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    AppStrings.appLanguage.tr(context),
+                                    style: getMeduimStyle(color: ColorManager.dark),
+                                  ),
+                                  CupertinoSlidingSegmentedControl(
+                                    onValueChanged: (value) async {
+                                      await cubit.chnageAppLanauge(value);
+                                      Phoenix.rebirth(context);
+                                    },
+                                    children: {
+                                      1: Padding(
+                                        padding: EdgeInsets.all(AppPadding.p10),
+                                        child: Text(
+                                          'en',
+                                          style: getMeduimStyle(color: ColorManager.dark),
+                                        ),
+                                      ),
+                                      2: Text(
+                                        'ar',
+                                        style: getMeduimStyle(color: ColorManager.dark),
+                                      ),
+                                    },
+                                    groupValue: cubit.numAppLanguage,
+                                    backgroundColor: ColorManager.lightGrey,
+                                    thumbColor: ColorManager.white,
+                                  ),
+                                ],
+                              ),
+                              separator(),
                               CustomLargeButton(
                                 label: AppStrings.logout.tr(context),
                                 width: double.infinity,

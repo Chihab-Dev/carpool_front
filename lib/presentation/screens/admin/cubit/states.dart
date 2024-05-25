@@ -51,3 +51,5 @@ class AdminDeleteTravelSuccessState extends AdminStates {}
 class AdminDeleteTravelErrorState extends AdminStates {}
 
 class AdminCalculateAcceptedRequestsState extends AdminStates {}
+
+class AdminChangeLanguageState extends AdminStates {}

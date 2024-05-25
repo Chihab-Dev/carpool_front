@@ -126,4 +126,8 @@ class AppStrings {
   static const String travelStarts = 'travelStarts';
 
   static const String travelFinished = 'travelFinished';
+
+  static const String appLanguage = 'appLanguage';
+  static const String notAccepted = 'notAccepted';
+  static const String delete = 'delete';
 }

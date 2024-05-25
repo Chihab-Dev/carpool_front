@@ -1,7 +1,9 @@
+import 'package:carpool/app/localizations.dart';
 import 'package:carpool/data/models/models.dart';
 import 'package:carpool/presentation/components/appsize.dart';
 import 'package:carpool/presentation/components/assets_manager.dart';
 import 'package:carpool/presentation/components/color_manager.dart';
+import 'package:carpool/presentation/components/strings_manager.dart';
 import 'package:carpool/presentation/components/styles_manager.dart';
 import 'package:carpool/presentation/components/widgets.dart';
 import 'package:carpool/presentation/screens/admin/cubit/cubit.dart';
@@ -42,12 +44,13 @@ class AdminDriverProfileView extends StatelessWidget {
                     ),
                     SizedBox(height: AppSize.s18),
                     separator(),
-                    CustomInformationRow(label: 'Full name :', content: "${driver.familyname} ${driver.name}"),
+                    CustomInformationRow(
+                        label: AppStrings.fullName.tr(context), content: "${driver.familyname} ${driver.name}"),
                     separator(),
                     Row(
                       children: [
                         Text(
-                          "Rate : ",
+                          AppStrings.rate.tr(context),
                           style: getMeduimStyle(color: ColorManager.dark),
                         ),
                         Icon(
@@ -59,17 +62,18 @@ class AdminDriverProfileView extends StatelessWidget {
                       ],
                     ),
                     separator(),
-                    CustomInformationRow(label: "Phone number : ", content: driver.phoneNumber),
+                    CustomInformationRow(label: AppStrings.phoneNumber.tr(context), content: driver.phoneNumber),
                     separator(),
-                    CustomInformationRow(label: "Address : ", content: driver.address),
+                    CustomInformationRow(label: AppStrings.address.tr(context), content: driver.address),
                     separator(),
-                    CustomInformationRow(label: "Old : ", content: calculateAgeFromString(driver.birthday)),
+                    CustomInformationRow(
+                        label: AppStrings.old.tr(context), content: calculateAgeFromString(driver.birthday)),
                     separator(),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Feedbacks : ${driver.feedbackes.length}",
+                          "${AppStrings.feedback.tr(context)} : ${driver.feedbackes.length}",
                           style: getRegularStyle(color: ColorManager.dark),
                         ),
                         SizedBox(height: AppSize.s16),
@@ -134,14 +138,14 @@ class AdminDriverProfileView extends StatelessWidget {
                                 color: ColorManager.green,
                               )
                             : CustomLargeButton(
-                                label: 'Accept',
+                                label: AppStrings.accept.tr(context),
                                 onPressed: () {
                                   cubit.acceptDriver(context, driver.id);
                                 },
                                 color: ColorManager.green,
                               )
                         : Text(
-                            'Already accepted',
+                            AppStrings.accepted.tr(context),
                             style: getMeduimStyle(color: ColorManager.dark),
                           ),
                     separator(),
@@ -151,7 +155,7 @@ class AdminDriverProfileView extends StatelessWidget {
                                 color: Colors.red,
                               )
                             : CustomLargeButton(
-                                label: 'Reject',
+                                label: AppStrings.reject.tr(context),
                                 onPressed: () {
                                   cubit.rejectDriver(context, driver.id);
                                 },
@@ -164,7 +168,7 @@ class AdminDriverProfileView extends StatelessWidget {
                             color: Colors.red,
                           )
                         : CustomLargeButton(
-                            label: 'Delete',
+                            label: AppStrings.delete.tr(context),
                             onPressed: () {
                               cubit.deleteDriver(context, driver.id);
                             },

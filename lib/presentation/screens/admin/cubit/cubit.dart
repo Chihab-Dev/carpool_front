@@ -1,4 +1,5 @@
 import 'package:carpool/app/service_locator.dart';
+import 'package:carpool/app/shared_prefrences.dart';
 import 'package:carpool/data/models/models.dart';
 import 'package:carpool/domain/usecase/admin/accept_driver_usecase.dart';
 import 'package:carpool/domain/usecase/admin/delete_client_usecase.dart';
@@ -173,5 +174,28 @@ class AdminCubit extends Cubit<AdminStates> {
     } else {
       return 0.0;
     }
+  }
+
+  int numAppLanguage = AppPrefences(getIt()).getLangugage() == 'ar' ? 2 : 1;
+
+  Future<void> chnageAppLanauge(int? value) async {
+    AppPrefences appPrefences = AppPrefences(getIt());
+    String languageCode;
+    switch (value) {
+      case 1:
+        numAppLanguage = 1;
+        languageCode = 'en';
+        break;
+      case 2:
+        numAppLanguage = 2;
+        languageCode = 'ar';
+        break;
+      default:
+        numAppLanguage = 1;
+        languageCode = 'en';
+        break;
+    }
+    await appPrefences.setLanguage(languageCode);
+    emit(AdminChangeLanguageState());
   }
 }

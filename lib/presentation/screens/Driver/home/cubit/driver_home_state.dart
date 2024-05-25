@@ -76,3 +76,5 @@ final class DriverChangeTravelStateLoadingState extends DriverHomeState {}
 final class DriverChangeTravelStateSuccessState extends DriverHomeState {}
 
 final class DriverChangeTravelStateErrorState extends DriverHomeState {}
+
+final class DriverChangeLanguageState extends DriverHomeState {}

@@ -98,5 +98,8 @@
     "travelState": "Travel state",
     "deleteTheRequest": "Delete the request",
     "travelStarts": "Starts",
-    "travelFinished": "Finished"
+    "travelFinished": "Finished",
+    "appLanguage": "App Language",
+    "notAccepted": "NOT ACCEPTED",
+    "delete": "Delete"
 }

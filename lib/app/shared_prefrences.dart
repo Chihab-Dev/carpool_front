@@ -4,6 +4,7 @@ const String PREFS_KEY_ON_BOARDING = "PREFS_KEY_ON_BOARDING";
 const String PREFS_KEY_ON_ID = "PREFS_KEY_ON_ID";
 const String PREFS_KEY_ON_TOKEN = "PREFS_KEY_ON_TOKEN";
 const String PREFS_KEY_ON_ROLE = "PREFS_KEY_ON_ROLE";
+const String PREFS_KEY_ON_LANG = "PREFS_KEY_ON_LANG";
 
 class AppPrefences {
   final SharedPreferences _sharedPreferences;
@@ -60,5 +61,14 @@ class AppPrefences {
 
   void removeToken() async {
     await _sharedPreferences.remove(PREFS_KEY_ON_TOKEN);
+  }
+
+  // id ::
+  Future<void> setLanguage(String lang) async {
+    await _sharedPreferences.setString(PREFS_KEY_ON_LANG, lang);
+  }
+
+  String getLangugage() {
+    return _sharedPreferences.getString(PREFS_KEY_ON_LANG) ?? 'en';
   }
 }

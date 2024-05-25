@@ -16,6 +16,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_osm_plugin: ^0.70.4
+  flutter_phoenix: ^1.1.1
   flutter_screenutil: ^5.9.0
   font_awesome_flutter: ^10.7.0
   get_it: ^7.6.7

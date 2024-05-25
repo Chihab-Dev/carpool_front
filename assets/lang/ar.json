@@ -77,7 +77,7 @@
     "skip": "تخطي",
     "feedback": "التقييمات",
     "fullName": "الاسم الكامل : ",
-    "rate": "معدل : ",
+    "rate": "تقييم : ",
     "old": "عمر : ",
     "location": "المكان",
     "pickNumberOfPlaces": "اختر عدد المقاعد : ",
@@ -98,5 +98,8 @@
     "travelState": "حالة الرحلة",
     "deleteTheRequest": "حذف الطلب",
     "travelStarts": "الرحلة بدات",
-    "travelFinished": "انتهت الرحلة"
+    "travelFinished": "انتهت الرحلة",
+    "appLanguage": "لغة التطبيق",
+    "notAccepted": "غير مقبول",
+    "delete": "حذف"
 }

@@ -1,7 +1,9 @@
+import 'package:carpool/app/localizations.dart';
 import 'package:carpool/data/models/models.dart';
 import 'package:carpool/presentation/components/appsize.dart';
 import 'package:carpool/presentation/components/assets_manager.dart';
 import 'package:carpool/presentation/components/color_manager.dart';
+import 'package:carpool/presentation/components/strings_manager.dart';
 import 'package:carpool/presentation/components/styles_manager.dart';
 import 'package:carpool/presentation/components/widgets.dart';
 import 'package:carpool/presentation/screens/admin/cubit/cubit.dart';
@@ -39,7 +41,7 @@ class AdminDriversView extends StatelessWidget {
                     : Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          customSeparator('NOT ACCEPTED'),
+                          customSeparator(AppStrings.notAccepted.tr(context)),
                           ListView.builder(
                             physics: const NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
@@ -103,7 +105,7 @@ class AdminDriversView extends StatelessWidget {
                               );
                             },
                           ),
-                          customSeparator('ACCEPTED'),
+                          customSeparator(AppStrings.accepted.tr(context).toUpperCase()),
                           ListView.builder(
                             physics: const NeverScrollableScrollPhysics(),
                             shrinkWrap: true,

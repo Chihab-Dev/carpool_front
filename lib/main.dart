@@ -14,6 +14,7 @@ import 'package:carpool/presentation/screens/onboarding/onboarding.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() async {
@@ -21,7 +22,7 @@ void main() async {
 
   await ServiceLocator().init();
 
-  runApp(MainApp());
+  runApp(Phoenix(child: MainApp()));
 }
 
 class MainApp extends StatelessWidget {
@@ -63,9 +64,11 @@ class MainApp extends StatelessWidget {
         splitScreenMode: true,
         useInheritedMediaQuery: true,
         builder: (context, child) {
+          String lang = _appPrefences.getLangugage();
+
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            locale: const Locale('en'),
+            locale: Locale(lang),
             theme: ThemeData(
               scaffoldBackgroundColor: ColorManager.white,
             ),

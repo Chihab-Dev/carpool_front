@@ -457,4 +457,27 @@ class DriverHomeCubit extends Cubit<DriverHomeState> {
       },
     );
   }
+
+  int numAppLanguage = AppPrefences(getIt()).getLangugage() == 'ar' ? 2 : 1;
+
+  Future<void> chnageAppLanauge(int? value) async {
+    AppPrefences appPrefences = AppPrefences(getIt());
+    String languageCode;
+    switch (value) {
+      case 1:
+        numAppLanguage = 1;
+        languageCode = 'en';
+        break;
+      case 2:
+        numAppLanguage = 2;
+        languageCode = 'ar';
+        break;
+      default:
+        numAppLanguage = 1;
+        languageCode = 'en';
+        break;
+    }
+    await appPrefences.setLanguage(languageCode);
+    emit(DriverChangeLanguageState());
+  }
 }

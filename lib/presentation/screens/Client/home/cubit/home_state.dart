@@ -54,3 +54,6 @@ final class HomeDeleteRequestLoadingState extends HomeState {}
 final class HomeDeleteRequestSuccessState extends HomeState {}
 
 final class HomeDeleteRequestErrorState extends HomeState {}
+
+
+final class HomeChangeLanguageState extends HomeState {}
