@@ -101,5 +101,6 @@
     "travelFinished": "Finished",
     "appLanguage": "App Language",
     "notAccepted": "NOT ACCEPTED",
-    "delete": "Delete"
+    "delete": "Delete",
+    "youAlreadyRegistered": "You already registered"
 }

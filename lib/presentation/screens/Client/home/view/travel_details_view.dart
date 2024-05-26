@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carpool/app/localizations.dart';
 import 'package:carpool/data/models/models.dart';
 import 'package:carpool/presentation/components/appsize.dart';
@@ -127,7 +128,7 @@ class _TravelDetailsViewState extends State<TravelDetailsView> {
                             : const SizedBox(),
                         const Spacer(),
                         Text(
-                          AppStrings.forOnePerson.tr(context),
+                          '${AppStrings.forOnePerson.tr(context)} ',
                           style: getSmallRegularStyle(color: ColorManager.darkGrey),
                         ),
                         Text(
@@ -142,7 +143,8 @@ class _TravelDetailsViewState extends State<TravelDetailsView> {
                         CircleAvatar(
                           radius: AppSize.s30,
                           backgroundColor: ColorManager.lightGrey,
-                          backgroundImage: const AssetImage(ImageAsset.profilePicture),
+                          backgroundImage: const AssetImage(ImageAsset.userProfile),
+                          foregroundImage: NetworkImage(widget.travel.driver.image),
                         ),
                         SizedBox(width: AppSize.s12),
                         Column(
@@ -314,7 +316,15 @@ class _TravelDetailsViewState extends State<TravelDetailsView> {
                         color: ColorManager.lightGrey,
                         borderRadius: BorderRadius.circular(AppPadding.p10),
                       ),
-                      child: Image.asset(ImageAsset.leon),
+                      child: CachedNetworkImage(
+                        imageUrl: widget.travel.carImage,
+                        placeholder: (context, url) => CircularProgressIndicator(
+                          color: ColorManager.yellow,
+                        ),
+                        errorWidget: (context, url, error) {
+                          return Image.asset(ImageAsset.dodgeCar);
+                        },
+                      ),
                     ),
                     separator(),
                   ],
@@ -342,18 +352,39 @@ class _TravelDetailsViewState extends State<TravelDetailsView> {
                       color: ColorManager.yellow,
                     ),
                   )
-                : Center(
-                    child: CustomLargeButton(
-                      label: widget.travel.numberOfPlaces == cubit.acceptedRequests
-                          ? AppStrings.travelIsFull
-                          : AppStrings.requestToBook.tr(context),
-                      onPressed: widget.travel.numberOfPlaces == cubit.acceptedRequests
-                          ? null
-                          : () {
-                              cubit.requestToBook(widget.travel.travelId, context);
-                            },
-                    ),
-                  ),
+                : cubit.getMyRequest(widget.travel.requests) != null
+                    ? Center(
+                        child: CustomLargeButton(
+                          label: AppStrings.youAlreadyRegistered.tr(context),
+                          onPressed: null,
+                        ),
+                      )
+                    : widget.travel.state == 'Travel starts'
+                        ? Center(
+                            child: CustomLargeButton(
+                              label: AppStrings.travelStarts.tr(context),
+                              onPressed: null,
+                            ),
+                          )
+                        : widget.travel.state == 'Travel finished'
+                            ? Center(
+                                child: CustomLargeButton(
+                                  label: AppStrings.travelFinished.tr(context),
+                                  onPressed: null,
+                                ),
+                              )
+                            : Center(
+                                child: CustomLargeButton(
+                                  label: widget.travel.numberOfPlaces == cubit.acceptedRequests
+                                      ? AppStrings.travelIsFull
+                                      : AppStrings.requestToBook.tr(context),
+                                  onPressed: widget.travel.numberOfPlaces == cubit.acceptedRequests
+                                      ? null
+                                      : () {
+                                          cubit.requestToBook(widget.travel.travelId, context);
+                                        },
+                                ),
+                              ),
           ),
         );
       },

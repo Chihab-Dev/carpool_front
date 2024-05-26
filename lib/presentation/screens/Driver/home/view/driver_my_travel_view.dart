@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carpool/app/localizations.dart';
 import 'package:carpool/data/models/models.dart';
 import 'package:carpool/presentation/components/appsize.dart';
@@ -162,6 +163,7 @@ class _DriverMyTravelViewState extends State<DriverMyTravelView> {
                           radius: AppSize.s30,
                           backgroundColor: ColorManager.lightGrey,
                           backgroundImage: const AssetImage(ImageAsset.profilePicture),
+                          foregroundImage: NetworkImage(widget.myTravel.driver.image),
                         ),
                         SizedBox(width: AppSize.s12),
                         Column(
@@ -330,7 +332,17 @@ class _DriverMyTravelViewState extends State<DriverMyTravelView> {
                         color: ColorManager.lightGrey,
                         borderRadius: BorderRadius.circular(AppPadding.p10),
                       ),
-                      child: cubit.image == null ? Image.asset(ImageAsset.dodgeCar) : Image.file(cubit.image!),
+                      child: CachedNetworkImage(
+                        imageUrl: widget.myTravel.carImage,
+                        placeholder: (context, url) => Center(
+                          child: CircularProgressIndicator(
+                            color: ColorManager.yellow,
+                          ),
+                        ),
+                        errorWidget: (context, url, error) {
+                          return Image.asset(ImageAsset.dodgeCar);
+                        },
+                      ),
                     ),
                     separator(),
                     Row(
@@ -354,14 +366,14 @@ class _DriverMyTravelViewState extends State<DriverMyTravelView> {
                           label: AppStrings.travelStarts.tr(context),
                           width: AppSize.s180,
                           onPressed: () {
-                            cubit.changeState(context, 'start Travel', widget.myTravel.travelId);
+                            cubit.changeState(context, 'Travel starts', widget.myTravel.travelId);
                           },
                           color: ColorManager.yellow,
                         ),
                         CustomLargeButton(
                           label: AppStrings.travelFinished.tr(context),
                           onPressed: () {
-                            cubit.changeState(context, 'finished', widget.myTravel.travelId);
+                            cubit.changeState(context, 'Travel finished', widget.myTravel.travelId);
                           },
                           color: ColorManager.green,
                           width: AppSize.s180,
@@ -468,6 +480,7 @@ class _DriverMyTravelViewState extends State<DriverMyTravelView> {
           radius: AppSize.s30,
           backgroundColor: ColorManager.lightGrey,
           backgroundImage: const AssetImage(ImageAsset.userProfile),
+          foregroundImage: NetworkImage(requestModel.image),
         ),
         SizedBox(width: AppSize.s12),
         Expanded(
@@ -522,6 +535,7 @@ class _DriverMyTravelViewState extends State<DriverMyTravelView> {
             radius: AppSize.s30,
             backgroundColor: ColorManager.lightGrey,
             backgroundImage: const AssetImage(ImageAsset.userProfile),
+            foregroundImage: NetworkImage(requestModel.image),
           ),
           SizedBox(width: AppSize.s12),
           Expanded(
@@ -543,7 +557,7 @@ class _DriverMyTravelViewState extends State<DriverMyTravelView> {
             ),
           ),
           SizedBox(width: AppSize.s20),
-          travel.state == 'finished'
+          travel.state == 'Travel finished'
               ? CustomSmallButton(
                   label: AppStrings.feedback.tr(context),
                   onPressed: () {
@@ -577,6 +591,7 @@ class _DriverMyTravelViewState extends State<DriverMyTravelView> {
             radius: AppSize.s30,
             backgroundColor: ColorManager.lightGrey,
             backgroundImage: const AssetImage(ImageAsset.userProfile),
+            foregroundImage: NetworkImage(requestModel.image),
           ),
           SizedBox(width: AppSize.s12),
           Expanded(

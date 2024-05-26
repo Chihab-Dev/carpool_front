@@ -101,5 +101,6 @@
     "travelFinished": "انتهت الرحلة",
     "appLanguage": "لغة التطبيق",
     "notAccepted": "غير مقبول",
-    "delete": "حذف"
+    "delete": "حذف",
+    "youAlreadyRegistered": "قمت بالتسجيل مسبقا"
 }

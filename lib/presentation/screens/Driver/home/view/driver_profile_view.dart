@@ -52,12 +52,13 @@ class _DriverProfileViewState extends State<DriverProfileView> {
                                 radius: AppSize.s70,
                                 backgroundColor: ColorManager.lightGrey,
                                 backgroundImage: const AssetImage(ImageAsset.profilePicture),
+                                foregroundImage: NetworkImage(cubit.driverModel!.image),
                               ),
                               SizedBox(height: AppSize.s18),
                               separator(),
                               CustomInformationRow(
                                   label: AppStrings.fullName.tr(context),
-                                  content: "${cubit.driverModel!.familyname} ${cubit.driverModel!.name}"),
+                                  content: " ${cubit.driverModel!.familyname} ${cubit.driverModel!.name}"),
                               separator(),
                               Row(
                                 children: [
@@ -103,45 +104,49 @@ class _DriverProfileViewState extends State<DriverProfileView> {
                                     physics: const NeverScrollableScrollPhysics(),
                                     itemBuilder: (context, index) {
                                       FeedbackModel feedback = cubit.driverModel!.feedbackes[index];
-                                      return Row(
-                                        children: [
-                                          CircleAvatar(
-                                            radius: AppSize.s30,
-                                            backgroundColor: ColorManager.lightGrey,
-                                            backgroundImage: const AssetImage(ImageAsset.userProfile),
-                                          ),
-                                          SizedBox(width: AppSize.s10),
-                                          Expanded(
-                                            child: Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                Row(
-                                                  children: [
-                                                    Text(
-                                                      feedback.name.toString(),
-                                                      overflow: TextOverflow.ellipsis,
-                                                      style: getMeduimStyle(color: ColorManager.dark),
-                                                    ),
-                                                    const Spacer(),
-                                                    Icon(
-                                                      Icons.star_purple500_sharp,
-                                                      color: ColorManager.yellow,
-                                                    ),
-                                                    SizedBox(width: AppSize.s5),
-                                                    Text(
-                                                      feedback.note.toString(),
-                                                      style: getMeduimStyle(color: ColorManager.dark),
-                                                    )
-                                                  ],
-                                                ),
-                                                Text(
-                                                  feedback.comment,
-                                                  style: getSmallRegularStyle(color: ColorManager.darkGrey),
-                                                ),
-                                              ],
+                                      return Container(
+                                        margin: EdgeInsets.only(top: AppPadding.p18),
+                                        child: Row(
+                                          children: [
+                                            CircleAvatar(
+                                              radius: AppSize.s30,
+                                              backgroundColor: ColorManager.lightGrey,
+                                              backgroundImage: const AssetImage(ImageAsset.userProfile),
+                                              foregroundImage: NetworkImage(feedback.image!),
                                             ),
-                                          ),
-                                        ],
+                                            SizedBox(width: AppSize.s10),
+                                            Expanded(
+                                              child: Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  Row(
+                                                    children: [
+                                                      Text(
+                                                        feedback.name.toString(),
+                                                        overflow: TextOverflow.ellipsis,
+                                                        style: getMeduimStyle(color: ColorManager.dark),
+                                                      ),
+                                                      const Spacer(),
+                                                      Icon(
+                                                        Icons.star_purple500_sharp,
+                                                        color: ColorManager.yellow,
+                                                      ),
+                                                      SizedBox(width: AppSize.s5),
+                                                      Text(
+                                                        feedback.note.toString(),
+                                                        style: getMeduimStyle(color: ColorManager.dark),
+                                                      )
+                                                    ],
+                                                  ),
+                                                  Text(
+                                                    feedback.comment,
+                                                    style: getSmallRegularStyle(color: ColorManager.darkGrey),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                       );
                                     },
                                   ),

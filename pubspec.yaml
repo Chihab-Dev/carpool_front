@@ -8,6 +8,7 @@ environment:
 
 dependencies:
   bloc: ^8.1.4
+  cached_network_image: ^3.3.1
   cherry_toast: ^1.10.1
   dartz: ^0.10.1
   firebase_core: ^2.31.1

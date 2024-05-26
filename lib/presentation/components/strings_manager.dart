@@ -130,4 +130,5 @@ class AppStrings {
   static const String appLanguage = 'appLanguage';
   static const String notAccepted = 'notAccepted';
   static const String delete = 'delete';
+  static const String youAlreadyRegistered = 'youAlreadyRegistered';
 }

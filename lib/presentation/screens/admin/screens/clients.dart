@@ -51,7 +51,8 @@ class AdminClientsView extends StatelessWidget {
                                     CircleAvatar(
                                       radius: AppSize.s30,
                                       backgroundColor: ColorManager.lightGrey,
-                                      backgroundImage: const AssetImage(ImageAsset.profilePicture),
+                                      backgroundImage: const AssetImage(ImageAsset.userProfile),
+                                      foregroundImage: NetworkImage(client.image),
                                     ),
                                     SizedBox(width: AppSize.s12),
                                     Column(

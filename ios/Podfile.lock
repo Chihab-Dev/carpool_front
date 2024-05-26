@@ -50,11 +50,17 @@ PODS:
   - GTMSessionFetcher/Core (3.4.1)
   - image_picker_ios (0.0.1):
     - Flutter
+  - path_provider_foundation (0.0.1):
+    - Flutter
+    - FlutterMacOS
   - permission_handler_apple (9.3.0):
     - Flutter
   - Polyline (5.1.0)
   - PromisesObjC (2.4.0)
   - shared_preferences_foundation (0.0.1):
+    - Flutter
+    - FlutterMacOS
+  - sqflite (0.0.3):
     - Flutter
     - FlutterMacOS
   - Tangram-es (0.17.1)
@@ -69,8 +75,10 @@ DEPENDENCIES:
   - flutter_keyboard_visibility (from `.symlinks/plugins/flutter_keyboard_visibility/ios`)
   - flutter_osm_plugin (from `.symlinks/plugins/flutter_osm_plugin/ios`)
   - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
+  - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
   - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
+  - sqflite (from `.symlinks/plugins/sqflite/darwin`)
   - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
 
 SPEC REPOS:
@@ -103,10 +111,14 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_osm_plugin/ios"
   image_picker_ios:
     :path: ".symlinks/plugins/image_picker_ios/ios"
+  path_provider_foundation:
+    :path: ".symlinks/plugins/path_provider_foundation/darwin"
   permission_handler_apple:
     :path: ".symlinks/plugins/permission_handler_apple/ios"
   shared_preferences_foundation:
     :path: ".symlinks/plugins/shared_preferences_foundation/darwin"
+  sqflite:
+    :path: ".symlinks/plugins/sqflite/darwin"
   url_launcher_ios:
     :path: ".symlinks/plugins/url_launcher_ios/ios"
 
@@ -127,10 +139,12 @@ SPEC CHECKSUMS:
   GoogleUtilities: ea963c370a38a8069cc5f7ba4ca849a60b6d7d15
   GTMSessionFetcher: 8000756fc1c19d2e5697b90311f7832d2e33f6cd
   image_picker_ios: b545a5f16c0fa88e3ecbbce3ed4de45567a8ec18
+  path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
   permission_handler_apple: 9878588469a2b0d0fc1e048d9f43605f92e6cec2
   Polyline: 2a1f29f87f8d9b7de868940f4f76deb8c678a5b1
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   shared_preferences_foundation: b4c3b4cddf1c21f02770737f147a3f5da9d39695
+  sqflite: 673a0e54cc04b7d6dba8d24fb8095b31c3a99eec
   Tangram-es: 628b634f7fc09d2217469b9914de00d9de49ff9d
   url_launcher_ios: 6116280ddcfe98ab8820085d8d76ae7449447586
   Yams: e10dae147f517ed57ecae37c5e8681bdf8fcab65

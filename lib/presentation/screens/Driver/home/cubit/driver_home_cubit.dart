@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:carpool/app/service_locator.dart';
 import 'package:carpool/app/shared_prefrences.dart';
 import 'package:carpool/data/models/models.dart';
+import 'package:carpool/domain/usecase/client/upload_image.dart';
 import 'package:carpool/domain/usecase/driver/change_travel_state_usecase.dart';
 import 'package:carpool/domain/usecase/driver/create_travel_usecase.dart';
 import 'package:carpool/domain/usecase/driver/delete_client_usecase.dart';
@@ -226,51 +227,77 @@ class DriverHomeCubit extends Cubit<DriverHomeState> {
   }
 
   DriverCreateTravelUsecase driverCreateTravelUsecase = DriverCreateTravelUsecase(getIt());
+  final UploadImageUsecase _uploadImageUsecase = UploadImageUsecase(getIt());
 
   Future<void> createTravel(BuildContext context) async {
     emit(DriverCreateTravelLoadingState());
-    (await driverCreateTravelUsecase.execute(
-      TravelModel(
-        travelId: '',
-        placeOfDeparture: pickedFromLocation!.address.toString(),
-        timeOfDeparture: "$pickedFromTime",
-        placeOfArrival: pickedToLocation!.address.toString(),
-        timeOfArrival: "$pickedtoTime",
-        numberOfPlaces: numberOfSeats,
-        carName: carNameController.text,
-        carImage: image.toString(),
-        placePrice: placePrice,
-        allowSmoking: smokingAllowed,
-        allowPets: petsAllowed,
-        requests: [],
-        driver: DriverModel(
-          id: 'id',
-          name: 'name',
-          familyname: 'familyname',
-          address: 'address',
-          birthday: 'birthday',
-          phoneNumber: 'adsfaf',
-          image: 'image',
-          password: 'password',
-          feedbackes: [],
-          isAccepted: true,
-          token: 'token',
-          email: 'email',
-        ),
-        baggage: baggageSizeAllowed,
-        dateOfDeparture: selectedDate.toString(),
-        autoAcceptRequests: autoAcceptRequests,
-        state: '',
-      ),
-    ))
-        .fold(
+
+    (await _uploadImageUsecase.execute(image!)).fold(
       (failure) {
         errorToast(failure.message).show(context);
-        emit(DriverCreateTravelErrorState());
       },
-      (data) {
-        successToast('✅ CREATED TRAVEL SUCCESS ✅').show(context);
-        emit(DriverCreateTravelSuccessState());
+      (imageUrl) async {
+        (await driverCreateTravelUsecase.execute(
+          TravelModel(
+            travelId: '',
+            placeOfDeparture: pickedFromLocation!.address.toString(),
+            timeOfDeparture: "$pickedFromTime",
+            placeOfArrival: pickedToLocation!.address.toString(),
+            timeOfArrival: "$pickedtoTime",
+            numberOfPlaces: numberOfSeats,
+            carName: carNameController.text,
+            carImage: imageUrl,
+            placePrice: placePrice,
+            allowSmoking: smokingAllowed,
+            allowPets: petsAllowed,
+            requests: [],
+            driver: DriverModel(
+              id: 'id',
+              name: 'name',
+              familyname: 'familyname',
+              address: 'address',
+              birthday: 'birthday',
+              phoneNumber: 'adsfaf',
+              image: 'image',
+              password: 'password',
+              feedbackes: [],
+              isAccepted: true,
+              token: 'token',
+              email: 'email',
+            ),
+            baggage: baggageSizeAllowed,
+            dateOfDeparture: selectedDate.toString(),
+            autoAcceptRequests: autoAcceptRequests,
+            state: '',
+          ),
+        ))
+            .fold(
+          (failure) {
+            errorToast(failure.message).show(context);
+            emit(DriverCreateTravelErrorState());
+          },
+          (data) {
+            successToast('✅ CREATED TRAVEL SUCCESS ✅').show(context);
+            listSource = [];
+            pickedFromLocation = null;
+            pickedToLocation = null;
+            pickedFromTime = null;
+            carNameController.clear();
+            pickedtoTime = null;
+            image = null;
+            isEverythingValid = false;
+            baggageSizeAllowed = 'M';
+            numOfBaggageSizeAllowed = 2;
+            petsAllowed = false;
+            numOfPetsAllowed = 1;
+            smokingAllowed = false;
+            numOfsmokingAllowed = 1;
+            autoAcceptRequests = false;
+            numAutoAcceptRequests = 1;
+            selectedDate = DateTime.now();
+            emit(DriverCreateTravelSuccessState());
+          },
+        );
       },
     );
   }

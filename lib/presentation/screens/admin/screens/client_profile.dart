@@ -39,11 +39,12 @@ class AdminClientProfileView extends StatelessWidget {
                     CircleAvatar(
                       radius: AppSize.s70,
                       backgroundColor: ColorManager.lightGrey,
-                      backgroundImage: const AssetImage(ImageAsset.profilePicture),
+                      backgroundImage: const AssetImage(ImageAsset.userProfile),
+                      foregroundImage: NetworkImage(client.image),
                     ),
                     SizedBox(height: AppSize.s18),
                     separator(),
-                    CustomInformationRow(label: 'Full name :', content: "${client.familyname} ${client.name}"),
+                    CustomInformationRow(label: 'Full name : ', content: "${client.familyname} ${client.name}"),
                     separator(),
                     Row(
                       children: [

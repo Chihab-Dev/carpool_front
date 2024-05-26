@@ -1,5 +1,6 @@
 import 'package:carpool/data/models/models.dart';
 import 'package:carpool/presentation/components/appsize.dart';
+import 'package:carpool/presentation/components/assets_manager.dart';
 import 'package:carpool/presentation/components/color_manager.dart';
 import 'package:carpool/presentation/components/widgets.dart';
 import 'package:carpool/presentation/screens/admin/cubit/cubit.dart';
@@ -7,6 +8,7 @@ import 'package:carpool/presentation/screens/admin/cubit/states.dart';
 import 'package:carpool/presentation/screens/admin/screens/travel_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 
 class AdminTravelsView extends StatelessWidget {
   const AdminTravelsView({super.key});
@@ -18,6 +20,7 @@ class AdminTravelsView extends StatelessWidget {
       builder: (context, state) {
         var cubit = AdminCubit.get(context);
         return Scaffold(
+          extendBodyBehindAppBar: true,
           appBar: AppBar(
             backgroundColor: Colors.transparent,
             elevation: 0,
@@ -33,25 +36,29 @@ class AdminTravelsView extends StatelessWidget {
                     ? CircularProgressIndicator(
                         color: ColorManager.yellow,
                       )
-                    : Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          ListView.builder(
-                            physics: const NeverScrollableScrollPhysics(),
-                            shrinkWrap: true,
-                            itemCount: cubit.travels.length,
-                            itemBuilder: (context, index) {
-                              TravelModel travel = cubit.travels[index];
-                              return Column(
-                                children: [
-                                  travelDetailsContainer(context, travel, AdminTravelDetailsView(travel)),
-                                  SizedBox(height: AppSize.s18),
-                                ],
-                              );
-                            },
+                    : cubit.travels.isEmpty
+                        ? Center(
+                            child: Lottie.asset(LottieAsset.empty),
+                          )
+                        : Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              ListView.builder(
+                                physics: const NeverScrollableScrollPhysics(),
+                                shrinkWrap: true,
+                                itemCount: cubit.travels.length,
+                                itemBuilder: (context, index) {
+                                  TravelModel travel = cubit.travels[index];
+                                  return Column(
+                                    children: [
+                                      travelDetailsContainer(context, travel, AdminTravelDetailsView(travel)),
+                                      SizedBox(height: AppSize.s18),
+                                    ],
+                                  );
+                                },
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
               ),
             ),
           ),

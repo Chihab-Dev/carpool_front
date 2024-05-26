@@ -78,7 +78,7 @@ class _RegisterViewState extends State<RegisterView> {
                         keyboardType: TextInputType.name,
                         errorLabel: cubit.nameErrorMessage,
                         onChanged: (value) {
-                          cubit.isNameValid();
+                          cubit.isNameValid(context);
                         },
                         icon: Icons.person_outline_rounded,
                       ),
@@ -89,7 +89,7 @@ class _RegisterViewState extends State<RegisterView> {
                         keyboardType: TextInputType.name,
                         errorLabel: cubit.familyNameErrorMessage,
                         onChanged: (value) {
-                          cubit.isFamilyNameValid();
+                          cubit.isFamilyNameValid(context);
                         },
                         icon: Icons.person_outline_rounded,
                       ),
@@ -100,7 +100,7 @@ class _RegisterViewState extends State<RegisterView> {
                         keyboardType: TextInputType.name,
                         errorLabel: cubit.phoneNumberErrorMessage,
                         onChanged: (value) {
-                          cubit.isPhoneNumberValid();
+                          cubit.isPhoneNumberValid(context);
                         },
                         icon: Icons.phone_outlined,
                       ),

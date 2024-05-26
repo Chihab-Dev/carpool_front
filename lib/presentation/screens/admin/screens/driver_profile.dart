@@ -37,15 +37,17 @@ class AdminDriverProfileView extends StatelessWidget {
                 child: Column(
                   children: [
                     const SizedBox(height: kToolbarHeight),
+                    separator(),
                     CircleAvatar(
                       radius: AppSize.s70,
                       backgroundColor: ColorManager.lightGrey,
-                      backgroundImage: const AssetImage(ImageAsset.profilePicture),
+                      backgroundImage: const AssetImage(ImageAsset.userProfile),
+                      foregroundImage: NetworkImage(driver.image),
                     ),
                     SizedBox(height: AppSize.s18),
                     separator(),
                     CustomInformationRow(
-                        label: AppStrings.fullName.tr(context), content: "${driver.familyname} ${driver.name}"),
+                        label: AppStrings.fullName.tr(context), content: " ${driver.familyname} ${driver.name}"),
                     separator(),
                     Row(
                       children: [
@@ -62,9 +64,10 @@ class AdminDriverProfileView extends StatelessWidget {
                       ],
                     ),
                     separator(),
-                    CustomInformationRow(label: AppStrings.phoneNumber.tr(context), content: driver.phoneNumber),
+                    CustomInformationRow(
+                        label: "${AppStrings.phoneNumber.tr(context)} : ", content: driver.phoneNumber),
                     separator(),
-                    CustomInformationRow(label: AppStrings.address.tr(context), content: driver.address),
+                    CustomInformationRow(label: "${AppStrings.address.tr(context)} : ", content: driver.address),
                     separator(),
                     CustomInformationRow(
                         label: AppStrings.old.tr(context), content: calculateAgeFromString(driver.birthday)),
@@ -174,6 +177,7 @@ class AdminDriverProfileView extends StatelessWidget {
                             },
                             color: Colors.red,
                           ),
+                    separator(),
                     const SizedBox(height: kToolbarHeight),
                   ],
                 ),

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:carpool/app/service_locator.dart';
 import 'package:carpool/data/models/models.dart';
+import 'package:carpool/domain/usecase/client/upload_image.dart';
 import 'package:carpool/domain/usecase/driver/update_travel_usecase.dart';
 import 'package:carpool/presentation/components/color_manager.dart';
 import 'package:carpool/presentation/components/widgets.dart';
@@ -252,37 +253,46 @@ class UpdateTravelCubit extends Cubit<UpdateTravelState> {
   }
 
   final UpdateTravelUsecase _updateTravelUsecase = UpdateTravelUsecase(getIt());
+  final UploadImageUsecase _uploadImageUsecase = UploadImageUsecase(getIt());
   Future<void> updateTravel(BuildContext context, TravelModel travel) async {
     emit(UpdateTravelLoadingState());
-    (await _updateTravelUsecase.execute(
-      TravelModel(
-        travelId: travel.travelId,
-        placeOfDeparture: pickedFromLocation!,
-        timeOfDeparture: "$pickedFromTime",
-        placeOfArrival: pickedToLocation!,
-        timeOfArrival: "$pickedtoTime",
-        numberOfPlaces: numberOfSeats,
-        carName: carNameController.text,
-        carImage: image.toString(),
-        placePrice: placePrice,
-        allowSmoking: smokingAllowed,
-        allowPets: petsAllowed,
-        requests: travel.requests,
-        driver: travel.driver,
-        baggage: baggageSizeAllowed,
-        dateOfDeparture: selectedDate.toString(),
-        autoAcceptRequests: autoAcceptRequests,
-        state: '',
-      ),
-    ))
-        .fold(
+
+    (await _uploadImageUsecase.execute(image!)).fold(
       (failure) {
         errorToast(failure.message).show(context);
-        emit(UpdateTravelErrorState());
       },
-      (data) {
-        successToast('✅ CREATED TRAVEL SUCCESS ✅').show(context);
-        emit(UpdateTravelSuccessState());
+      (imageUrl) async {
+        (await _updateTravelUsecase.execute(
+          TravelModel(
+            travelId: travel.travelId,
+            placeOfDeparture: pickedFromLocation!,
+            timeOfDeparture: "$pickedFromTime",
+            placeOfArrival: pickedToLocation!,
+            timeOfArrival: "$pickedtoTime",
+            numberOfPlaces: numberOfSeats,
+            carName: carNameController.text,
+            carImage: imageUrl,
+            placePrice: placePrice,
+            allowSmoking: smokingAllowed,
+            allowPets: petsAllowed,
+            requests: travel.requests,
+            driver: travel.driver,
+            baggage: baggageSizeAllowed,
+            dateOfDeparture: selectedDate.toString(),
+            autoAcceptRequests: autoAcceptRequests,
+            state: '',
+          ),
+        ))
+            .fold(
+          (failure) {
+            errorToast(failure.message).show(context);
+            emit(UpdateTravelErrorState());
+          },
+          (data) {
+            successToast('✅ CREATED TRAVEL SUCCESS ✅').show(context);
+            emit(UpdateTravelSuccessState());
+          },
+        );
       },
     );
   }

@@ -80,9 +80,14 @@ class RemoteDataSourceImpl extends RemoteDataSource {
       print("😎😎 $x");
       return x;
     } else {
-      print('🛑 LOGIN FAILURE 🛑');
+      print('🛑 clientLogin FAILURE 🛑');
       print(response.body);
-      throw response.body;
+      // Parse the JSON response body
+      final Map<String, dynamic> errorResponse = jsonDecode(response.body);
+      // Extract the message field
+      final String errorMessage = errorResponse['message'];
+      // Throw the message field content
+      throw errorMessage;
     }
   }
 
@@ -110,9 +115,11 @@ class RemoteDataSourceImpl extends RemoteDataSource {
       print("😎😎 $x");
       return x;
     } else {
-      print('🛑 REgister FAILURE 🛑');
+      print('🛑 Register FAILURE 🛑');
       print(response.body);
-      throw response.body;
+      final Map<String, dynamic> errorResponse = jsonDecode(response.body);
+      final String errorMessage = errorResponse['message'];
+      throw errorMessage;
     }
   }
 
@@ -150,7 +157,9 @@ class RemoteDataSourceImpl extends RemoteDataSource {
     } else {
       print('🛑 GET TRAVELS  FAILURE 🛑');
       print(response.body);
-      throw response.body;
+      final Map<String, dynamic> errorResponse = jsonDecode(response.body);
+      final String errorMessage = errorResponse['message'];
+      throw errorMessage;
     }
   }
 
@@ -181,7 +190,9 @@ class RemoteDataSourceImpl extends RemoteDataSource {
     } else {
       print('🛑 getClientById FAILURE 🛑');
       print(response.body);
-      throw response.body;
+      final Map<String, dynamic> errorResponse = jsonDecode(response.body);
+      final String errorMessage = errorResponse['message'];
+      throw errorMessage;
     }
   }
 
@@ -211,7 +222,9 @@ class RemoteDataSourceImpl extends RemoteDataSource {
     } else {
       print('🛑 requestToBook FAILURE 🛑');
       print(response.body);
-      throw response.body;
+      final Map<String, dynamic> errorResponse = jsonDecode(response.body);
+      final String errorMessage = errorResponse['message'];
+      throw errorMessage;
     }
   }
 
@@ -241,7 +254,9 @@ class RemoteDataSourceImpl extends RemoteDataSource {
     } else {
       print('🛑 clientSendFeedback FAILURE 🛑');
       print(response.body);
-      throw response.body;
+      final Map<String, dynamic> errorResponse = jsonDecode(response.body);
+      final String errorMessage = errorResponse['message'];
+      throw errorMessage;
     }
   }
 
@@ -270,7 +285,9 @@ class RemoteDataSourceImpl extends RemoteDataSource {
     } else {
       print('🛑 GET TRAVELS BY ID  FAILURE 🛑');
       print(response.body);
-      throw response.body;
+      final Map<String, dynamic> errorResponse = jsonDecode(response.body);
+      final String errorMessage = errorResponse['message'];
+      throw errorMessage;
     }
   }
 
@@ -335,7 +352,9 @@ class RemoteDataSourceImpl extends RemoteDataSource {
     } else {
       print('🛑 deleteClientRequest  FAILURE 🛑');
       print(response.body);
-      throw response.body;
+      final Map<String, dynamic> errorResponse = jsonDecode(response.body);
+      final String errorMessage = errorResponse['message'];
+      throw errorMessage;
     }
   }
   //----------------------------------------------------- DRIVER -----------------------------------------------------
@@ -367,7 +386,9 @@ class RemoteDataSourceImpl extends RemoteDataSource {
     } else {
       print('🛑 LOGIN FAILURE 🛑');
       print(response.body);
-      throw response.body;
+      final Map<String, dynamic> errorResponse = jsonDecode(response.body);
+      final String errorMessage = errorResponse['message'];
+      throw errorMessage;
     }
   }
 
@@ -397,7 +418,9 @@ class RemoteDataSourceImpl extends RemoteDataSource {
     } else {
       print('🛑 REgister FAILURE 🛑');
       print(response.body);
-      throw response.body;
+      final Map<String, dynamic> errorResponse = jsonDecode(response.body);
+      final String errorMessage = errorResponse['message'];
+      throw errorMessage;
     }
   }
 
@@ -428,7 +451,9 @@ class RemoteDataSourceImpl extends RemoteDataSource {
     } else {
       print('🛑 getDriverById FAILURE 🛑');
       print(response.body);
-      throw response.body;
+      final Map<String, dynamic> errorResponse = jsonDecode(response.body);
+      final String errorMessage = errorResponse['message'];
+      throw errorMessage;
     }
   }
 
@@ -459,7 +484,9 @@ class RemoteDataSourceImpl extends RemoteDataSource {
     } else {
       print('🛑 createTravel FAILURE 🛑');
       print(response.body);
-      throw response.body;
+      final Map<String, dynamic> errorResponse = jsonDecode(response.body);
+      final String errorMessage = errorResponse['message'];
+      throw errorMessage;
     }
   }
 
@@ -489,7 +516,9 @@ class RemoteDataSourceImpl extends RemoteDataSource {
     } else {
       print('🛑 driverSendFeedback FAILURE 🛑');
       print(response.body);
-      throw response.body;
+      final Map<String, dynamic> errorResponse = jsonDecode(response.body);
+      final String errorMessage = errorResponse['message'];
+      throw errorMessage;
     }
   }
 
@@ -517,7 +546,9 @@ class RemoteDataSourceImpl extends RemoteDataSource {
     } else {
       print('🛑 updateTravel FAILURE 🛑');
       print(response.body);
-      throw response.body;
+      final Map<String, dynamic> errorResponse = jsonDecode(response.body);
+      final String errorMessage = errorResponse['message'];
+      throw errorMessage;
     }
   }
 
@@ -558,7 +589,9 @@ class RemoteDataSourceImpl extends RemoteDataSource {
     } else {
       print('🛑 GET Driver TRAVELS BY ID  FAILURE 🛑');
       print(response.body);
-      throw response.body;
+      final Map<String, dynamic> errorResponse = jsonDecode(response.body);
+      final String errorMessage = errorResponse['message'];
+      throw errorMessage;
     }
   }
 
@@ -590,7 +623,9 @@ class RemoteDataSourceImpl extends RemoteDataSource {
     } else {
       print('🛑 updateRequestState  FAILURE 🛑');
       print(response.body);
-      throw response.body;
+      final Map<String, dynamic> errorResponse = jsonDecode(response.body);
+      final String errorMessage = errorResponse['message'];
+      throw errorMessage;
     }
   }
 
@@ -617,7 +652,9 @@ class RemoteDataSourceImpl extends RemoteDataSource {
     } else {
       print('🛑 deleteTravel FAILURE 🛑');
       print(response.body);
-      throw response.body;
+      final Map<String, dynamic> errorResponse = jsonDecode(response.body);
+      final String errorMessage = errorResponse['message'];
+      throw errorMessage;
     }
   }
 
@@ -647,7 +684,9 @@ class RemoteDataSourceImpl extends RemoteDataSource {
     } else {
       print('🛑 changeTravelState FAILURE 🛑');
       print(response.body);
-      throw response.body;
+      final Map<String, dynamic> errorResponse = jsonDecode(response.body);
+      final String errorMessage = errorResponse['message'];
+      throw errorMessage;
     }
   }
 
@@ -680,7 +719,9 @@ class RemoteDataSourceImpl extends RemoteDataSource {
     } else {
       print('🛑 adminLogin FAILURE 🛑');
       print(response.body);
-      throw response.body;
+      final Map<String, dynamic> errorResponse = jsonDecode(response.body);
+      final String errorMessage = errorResponse['message'];
+      throw errorMessage;
     }
   }
 
@@ -718,7 +759,9 @@ class RemoteDataSourceImpl extends RemoteDataSource {
     } else {
       print('🛑 getAllDrivers FAILURE 🛑');
       print(response.body);
-      throw response.body;
+      final Map<String, dynamic> errorResponse = jsonDecode(response.body);
+      final String errorMessage = errorResponse['message'];
+      throw errorMessage;
     }
   }
 
@@ -755,7 +798,9 @@ class RemoteDataSourceImpl extends RemoteDataSource {
     } else {
       print('🛑 getAllClients FAILURE 🛑');
       print(response.body);
-      throw response.body;
+      final Map<String, dynamic> errorResponse = jsonDecode(response.body);
+      final String errorMessage = errorResponse['message'];
+      throw errorMessage;
     }
   }
 
@@ -792,7 +837,9 @@ class RemoteDataSourceImpl extends RemoteDataSource {
     } else {
       print('🛑 getAllTravels FAILURE 🛑');
       print(response.body);
-      throw response.body;
+      final Map<String, dynamic> errorResponse = jsonDecode(response.body);
+      final String errorMessage = errorResponse['message'];
+      throw errorMessage;
     }
   }
 
@@ -819,7 +866,9 @@ class RemoteDataSourceImpl extends RemoteDataSource {
     } else {
       print('🛑 acceptDriver FAILURE 🛑');
       print(response.body);
-      throw response.body;
+      final Map<String, dynamic> errorResponse = jsonDecode(response.body);
+      final String errorMessage = errorResponse['message'];
+      throw errorMessage;
     }
   }
 
@@ -846,7 +895,9 @@ class RemoteDataSourceImpl extends RemoteDataSource {
     } else {
       print('🛑 rejectDriver FAILURE 🛑');
       print(response.body);
-      throw response.body;
+      final Map<String, dynamic> errorResponse = jsonDecode(response.body);
+      final String errorMessage = errorResponse['message'];
+      throw errorMessage;
     }
   }
 
@@ -873,7 +924,9 @@ class RemoteDataSourceImpl extends RemoteDataSource {
     } else {
       print('🛑 deleteDriver FAILURE 🛑');
       print(response.body);
-      throw response.body;
+      final Map<String, dynamic> errorResponse = jsonDecode(response.body);
+      final String errorMessage = errorResponse['message'];
+      throw errorMessage;
     }
   }
 
@@ -900,7 +953,9 @@ class RemoteDataSourceImpl extends RemoteDataSource {
     } else {
       print('🛑 deleteClient FAILURE 🛑');
       print(response.body);
-      throw response.body;
+      final Map<String, dynamic> errorResponse = jsonDecode(response.body);
+      final String errorMessage = errorResponse['message'];
+      throw errorMessage;
     }
   }
 
@@ -927,7 +982,9 @@ class RemoteDataSourceImpl extends RemoteDataSource {
     } else {
       print('🛑 deleteTravel FAILURE 🛑');
       print(response.body);
-      throw response.body;
+      final Map<String, dynamic> errorResponse = jsonDecode(response.body);
+      final String errorMessage = errorResponse['message'];
+      throw errorMessage;
     }
   }
 

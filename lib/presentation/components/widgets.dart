@@ -409,7 +409,7 @@ Widget travelDetailsContainer(BuildContext context, TravelModel travel, Widget o
               CircleAvatar(
                 radius: AppSize.s30,
                 backgroundColor: ColorManager.lightGrey,
-                backgroundImage: const AssetImage(ImageAsset.profilePicture),
+                backgroundImage: const AssetImage(ImageAsset.userProfile),
                 foregroundImage: NetworkImage(travel.driver.image),
               ),
               SizedBox(width: AppSize.s12),
@@ -571,6 +571,7 @@ void logout(BuildContext context) {
   appPrefences.removeId();
   appPrefences.removeRole();
   appPrefences.removeToken();
+
   Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(

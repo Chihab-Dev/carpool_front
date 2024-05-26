@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carpool/app/localizations.dart';
 import 'package:carpool/data/models/models.dart';
 import 'package:carpool/presentation/components/appsize.dart';
@@ -363,7 +364,15 @@ class _UpdateTravelViewState extends State<UpdateTravelView> {
                           color: ColorManager.lightGrey,
                           borderRadius: BorderRadius.circular(AppPadding.p10),
                         ),
-                        child: cubit.image == null ? Image.asset(ImageAsset.dodgeCar) : Image.file(cubit.image!),
+                        child: CachedNetworkImage(
+                          imageUrl: widget.travel.carImage,
+                          placeholder: (context, url) => CircularProgressIndicator(
+                            color: ColorManager.yellow,
+                          ),
+                          errorWidget: (context, url, error) {
+                            return Image.asset(ImageAsset.dodgeCar);
+                          },
+                        ),
                       ),
                     ),
                     separator(),

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:carpool/app/localizations.dart';
 import 'package:carpool/app/service_locator.dart';
 import 'package:carpool/app/shared_prefrences.dart';
 import 'package:carpool/data/models/models.dart';
@@ -124,35 +125,35 @@ class RegisterCubit extends Cubit<RegisterStates> {
     emit(RegisterChangePasswordVisibilityState());
   }
 
-  void isNameValid() {
+  void isNameValid(BuildContext context) {
     bool isNameValid = PresentationConstances.isNameValid(nameController.text);
     if (isNameValid == true) {
       nameValid = true;
       nameErrorMessage = null;
     } else {
-      nameErrorMessage = AppStrings.nameNotValid;
+      nameErrorMessage = AppStrings.nameNotValid.tr(context);
     }
     emit(RegisterIsNameValidState());
   }
 
-  void isFamilyNameValid() {
+  void isFamilyNameValid(BuildContext context) {
     bool isNameValid = PresentationConstances.isNameValid(familyNameController.text);
     if (isNameValid == true) {
       familyNameValid = true;
       familyNameErrorMessage = null;
     } else {
-      familyNameErrorMessage = AppStrings.familyNameNotValid;
+      familyNameErrorMessage = AppStrings.familyNameNotValid.tr(context);
     }
     emit(RegisterIsFamilyNameValidState());
   }
 
-  void isPhoneNumberValid() {
+  void isPhoneNumberValid(BuildContext context) {
     bool isPhoneNumberValid = PresentationConstances.isPhoneNumberValid(phoneNumberController.text);
     if (isPhoneNumberValid) {
       phoneNumberErrorMessage = null;
       phoneNumberValid = true;
     } else {
-      phoneNumberErrorMessage = AppStrings.phoneNumberNotValid;
+      phoneNumberErrorMessage = AppStrings.phoneNumberNotValid.tr(context);
     }
     emit(RegisterIsPhoneNumberValidState());
   }

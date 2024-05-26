@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carpool/app/localizations.dart';
 import 'package:carpool/data/models/models.dart';
 import 'package:carpool/presentation/components/appsize.dart';
@@ -318,7 +319,15 @@ class ClientTravelView extends StatelessWidget {
                         color: ColorManager.lightGrey,
                         borderRadius: BorderRadius.circular(AppPadding.p10),
                       ),
-                      child: Image.asset(ImageAsset.car),
+                      child: CachedNetworkImage(
+                        imageUrl: travel.carImage,
+                        placeholder: (context, url) => CircularProgressIndicator(
+                          color: ColorManager.yellow,
+                        ),
+                        errorWidget: (context, url, error) {
+                          return Image.asset(ImageAsset.dodgeCar);
+                        },
+                      ),
                     ),
                     separator(),
                     Row(
@@ -357,7 +366,7 @@ class ClientTravelView extends StatelessWidget {
                       ],
                     ),
                     SizedBox(height: AppSize.s16),
-                    travel.state == 'finished'
+                    travel.state == 'Travel finished'
                         ? CustomLargeButton(
                             label: AppStrings.feedback.tr(context),
                             onPressed: () {
