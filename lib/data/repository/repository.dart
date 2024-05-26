@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:carpool/app/failure.dart';
 import 'package:carpool/data/data_source/remote_data_source.dart';
 import 'package:carpool/data/models/models.dart';
@@ -424,6 +426,21 @@ class RepositoryImpl extends Repository {
     if (await networkInfo.isConnected()) {
       try {
         final result = await remoteDataSource.changeTravelState(state, travelId);
+        return right(result);
+      } catch (e) {
+        print(e.toString());
+        return left(Failure(e.toString()));
+      }
+    } else {
+      return left(Failure('No internet connection'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, String>> uploadImageAndGetUrl(File imageFile) async {
+    if (await networkInfo.isConnected()) {
+      try {
+        final result = await remoteDataSource.uploadImageAndGetUrl(imageFile);
         return right(result);
       } catch (e) {
         print(e.toString());

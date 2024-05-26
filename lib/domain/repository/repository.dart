@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:carpool/app/failure.dart';
 import 'package:carpool/data/models/models.dart';
 import 'package:dartz/dartz.dart';
@@ -14,6 +16,7 @@ abstract class Repository {
   Future<Either<Failure, List<TravelModel>>> clientGetAllTravels();
   Future<Either<Failure, void>> deleteClientRequest(String id);
   Future<Either<Failure, void>> changeTravelState(String state, String travelId);
+  Future<Either<Failure, String>> uploadImageAndGetUrl(File imageFile);
 
   //----------------------------------------------------- DRIVER -----------------------------------------------------
   Future<Either<Failure, DriverModel>> driverLogin(String phoneNumber, String password);

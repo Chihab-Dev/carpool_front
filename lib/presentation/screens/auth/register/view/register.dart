@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:carpool/app/localizations.dart';
 import 'package:carpool/presentation/components/appsize.dart';
 import 'package:carpool/presentation/components/assets_manager.dart';
@@ -56,8 +54,7 @@ class _RegisterViewState extends State<RegisterView> {
                             radius: AppSize.s70,
                             backgroundColor: ColorManager.lightGrey,
                             backgroundImage: const AssetImage(ImageAsset.userProfile),
-                            foregroundImage:
-                                cubit.base64String != '' ? MemoryImage(base64Decode(cubit.base64String)) : null,
+                            foregroundImage: cubit.image != null ? FileImage(cubit.image!) : null,
                           ),
                           InkWell(
                             onTap: () async {

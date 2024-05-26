@@ -1,10 +1,10 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:carpool/app/service_locator.dart';
 import 'package:carpool/app/shared_prefrences.dart';
 import 'package:carpool/data/models/models.dart';
 import 'package:carpool/domain/usecase/client/register_usecase.dart';
+import 'package:carpool/domain/usecase/client/upload_image.dart';
 import 'package:carpool/domain/usecase/driver/driver_register.dart';
 import 'package:carpool/presentation/components/color_manager.dart';
 import 'package:carpool/presentation/components/constants.dart';
@@ -23,15 +23,11 @@ class RegisterCubit extends Cubit<RegisterStates> {
   static RegisterCubit get(context) => BlocProvider.of(context);
 
   File? image;
-  String base64String = '';
 
   pickImage() async {
     var selectedImage = await ImagePicker().pickImage(source: ImageSource.gallery, imageQuality: 50);
     if (selectedImage != null) {
       image = File(selectedImage.path);
-      List<int> imageBytes = File(selectedImage.path).readAsBytesSync();
-      base64String = base64Encode(imageBytes);
-      print(base64String);
     }
     emit(RegisterPickImageState());
   }
@@ -162,7 +158,7 @@ class RegisterCubit extends Cubit<RegisterStates> {
   }
 
   bool isEverythingValid() {
-    if (nameValid && familyNameValid && wilaya != '' && passwordValid && phoneNumberValid && base64String != '') {
+    if (nameValid && familyNameValid && wilaya != '' && passwordValid && phoneNumberValid && image != null) {
       return true;
     }
     return false;
@@ -171,77 +167,95 @@ class RegisterCubit extends Cubit<RegisterStates> {
   final ClientRegisterUsecase _clientRegisterUsecase = ClientRegisterUsecase(getIt());
   final DriverRegisterUsecase _driverRegisterUsecase = DriverRegisterUsecase(getIt());
 
+  final UploadImageUsecase _uploadImageUsecase = UploadImageUsecase(getIt());
+
   final AppPrefences _appPrefences = AppPrefences(getIt());
   Future<void> register(BuildContext context, bool isClient) async {
     if (isClient) {
       emit(RegisterLoadingState());
-      (await _clientRegisterUsecase.execute(
-        ClientModel(
-          id: '',
-          name: nameController.text,
-          familyname: familyNameController.text,
-          address: wilaya,
-          dateofbirth: selectedDate.toString().substring(0, 10),
-          password: passwordController.text,
-          phoneNumber: phoneNumberController.text,
-          image: "base64String",
-          feedbackes: [],
-          token: '',
-        ),
-      ))
-          .fold(
+      (await _uploadImageUsecase.execute(image!)).fold(
         (failure) {
           errorToast(failure.message).show(context);
-          emit(RegisterErrorState());
         },
-        (data) {
-          _appPrefences.setId(data.id);
-          _appPrefences.setToken(data.token!);
-          _appPrefences.setRole('client');
-          Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const MainView(),
+        (imageUrl) async {
+          (await _clientRegisterUsecase.execute(
+            ClientModel(
+              id: '',
+              name: nameController.text,
+              familyname: familyNameController.text,
+              address: wilaya,
+              dateofbirth: selectedDate.toString().substring(0, 10),
+              password: passwordController.text,
+              phoneNumber: phoneNumberController.text,
+              image: imageUrl,
+              feedbackes: [],
+              token: '',
+              email: '$wilaya${phoneNumberController.text}@gmail.com',
             ),
-            (route) => false,
+          ))
+              .fold(
+            (failure) {
+              errorToast(failure.message).show(context);
+              emit(RegisterErrorState());
+            },
+            (data) {
+              _appPrefences.setId(data.id);
+              _appPrefences.setToken(data.token!);
+              _appPrefences.setRole('client');
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const MainView(),
+                ),
+                (route) => false,
+              );
+              emit(RegisterSuccessState());
+            },
           );
-          emit(RegisterSuccessState());
         },
       );
     } else {
       emit(RegisterLoadingState());
-      (await _driverRegisterUsecase.execute(
-        DriverModel(
-          id: '',
-          name: nameController.text,
-          familyname: familyNameController.text,
-          address: wilaya,
-          birthday: selectedDate.toString().substring(0, 10),
-          password: passwordController.text,
-          phoneNumber: phoneNumberController.text,
-          image: 'base64String',
-          feedbackes: [],
-          token: '',
-          isAccepted: false,
-        ),
-      ))
-          .fold(
+      (await _uploadImageUsecase.execute(image!)).fold(
         (failure) {
           errorToast(failure.message).show(context);
-          emit(RegisterErrorState());
         },
-        (data) {
-          _appPrefences.setId(data.id);
-          _appPrefences.setToken(data.token!);
-          _appPrefences.setRole('driver');
-          Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const UnderReviewView(),
+        (imageUrl) async {
+          (await _driverRegisterUsecase.execute(
+            DriverModel(
+              id: '',
+              name: nameController.text,
+              familyname: familyNameController.text,
+              address: wilaya,
+              birthday: selectedDate.toString().substring(0, 10),
+              password: passwordController.text,
+              phoneNumber: phoneNumberController.text,
+              image: imageUrl,
+              feedbackes: [],
+              token: '',
+              isAccepted: false,
+              email: '$wilaya${phoneNumberController.text}@gmail.com',
             ),
-            (route) => false,
+          ))
+              .fold(
+            (failure) {
+              errorToast(failure.message).show(context);
+              emit(RegisterErrorState());
+            },
+            (data) {
+              // _appPrefences.setId(data.id);
+              // _appPrefences.setToken(data.token!);
+              // _appPrefences.setRole('driver');
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const UnderReviewView(),
+                ),
+                (route) => false,
+              );
+              emit(RegisterSuccessState());
+            },
           );
-          emit(RegisterSuccessState());
         },
       );
     }

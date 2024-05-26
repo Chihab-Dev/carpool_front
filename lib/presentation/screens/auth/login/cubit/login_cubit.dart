@@ -80,10 +80,10 @@ class LoginCubit extends Cubit<LoginStates> {
           emit(LoginErrorState());
         },
         (driver) {
-          _appPrefences.setId(driver.id);
-          _appPrefences.setToken(driver.token!);
-          _appPrefences.setRole('driver');
           if (driver.isAccepted) {
+            _appPrefences.setId(driver.id);
+            _appPrefences.setToken(driver.token!);
+            _appPrefences.setRole('driver');
             Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(

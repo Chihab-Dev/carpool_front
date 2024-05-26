@@ -51,7 +51,8 @@ class _ClientProfileViewState extends State<ClientProfileView> {
                               CircleAvatar(
                                 radius: AppSize.s70,
                                 backgroundColor: ColorManager.lightGrey,
-                                backgroundImage: const AssetImage(ImageAsset.profilePicture),
+                                backgroundImage: const AssetImage(ImageAsset.userProfile),
+                                foregroundImage: NetworkImage(cubit.clientModel!.image),
                               ),
                               SizedBox(height: AppSize.s18),
                               separator(),
@@ -119,6 +120,7 @@ class _ClientProfileViewState extends State<ClientProfileView> {
                                               radius: AppSize.s30,
                                               backgroundColor: ColorManager.lightGrey,
                                               backgroundImage: const AssetImage(ImageAsset.userProfile),
+                                              foregroundImage: NetworkImage(feedback.image ?? ''),
                                             ),
                                             SizedBox(width: AppSize.s10),
                                             Expanded(

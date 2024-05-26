@@ -1,11 +1,14 @@
 import 'dart:convert' as convert;
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:carpool/app/api_constance.dart';
 import 'package:carpool/app/service_locator.dart';
 import 'package:carpool/app/shared_prefrences.dart';
 import 'package:carpool/data/models/models.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:http/http.dart';
 
 abstract class RemoteDataSource {
@@ -19,6 +22,7 @@ abstract class RemoteDataSource {
   Future<TravelModel> clientGetTravelById(String id);
   Future<List<TravelModel>> clientGetAllTravels();
   Future<void> deleteClientRequest(String id);
+  Future<String> uploadImageAndGetUrl(File imageFile);
 
   //----------------------------------------------------- DRIVER -----------------------------------------------------
   Future<DriverModel> driverLogin(String phoneNumber, String password);
@@ -925,6 +929,16 @@ class RemoteDataSourceImpl extends RemoteDataSource {
       print(response.body);
       throw response.body;
     }
+  }
+
+  @override
+  Future<String> uploadImageAndGetUrl(File imageFile) async {
+    String fileName = imageFile.path.split('/').last;
+    Reference firebaseStorageRef = firebase_storage.FirebaseStorage.instance.ref().child('images/$fileName');
+    UploadTask uploadTask = firebaseStorageRef.putFile(imageFile);
+    TaskSnapshot taskSnapshot = await uploadTask.whenComplete(() => null);
+    String imageUrl = await taskSnapshot.ref.getDownloadURL();
+    return imageUrl;
   }
 }
 

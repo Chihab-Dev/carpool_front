@@ -255,6 +255,7 @@ class DriverHomeCubit extends Cubit<DriverHomeState> {
           feedbackes: [],
           isAccepted: true,
           token: 'token',
+          email: 'email',
         ),
         baggage: baggageSizeAllowed,
         dateOfDeparture: selectedDate.toString(),

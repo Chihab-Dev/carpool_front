@@ -149,6 +149,7 @@ class ClientTravelView extends StatelessWidget {
                           radius: AppSize.s30,
                           backgroundColor: ColorManager.lightGrey,
                           backgroundImage: const AssetImage(ImageAsset.profilePicture),
+                          foregroundImage: NetworkImage(travel.driver.image),
                         ),
                         SizedBox(width: AppSize.s12),
                         Column(
@@ -317,7 +318,7 @@ class ClientTravelView extends StatelessWidget {
                         color: ColorManager.lightGrey,
                         borderRadius: BorderRadius.circular(AppPadding.p10),
                       ),
-                      child: Image.asset(ImageAsset.dodgeCar),
+                      child: Image.asset(ImageAsset.car),
                     ),
                     separator(),
                     Row(

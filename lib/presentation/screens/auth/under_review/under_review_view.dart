@@ -4,7 +4,7 @@ import 'package:carpool/presentation/components/assets_manager.dart';
 import 'package:carpool/presentation/components/color_manager.dart';
 import 'package:carpool/presentation/components/strings_manager.dart';
 import 'package:carpool/presentation/components/styles_manager.dart';
-import 'package:carpool/presentation/screens/auth/login/view/login.dart';
+import 'package:carpool/presentation/screens/auth/travellerOrDriver/travellerOrDriver.dart';
 import 'package:flutter/material.dart';
 
 class UnderReviewView extends StatelessWidget {
@@ -35,7 +35,7 @@ class UnderReviewView extends StatelessWidget {
                 Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const LoginView(true),
+                      builder: (context) => const TravellerOrDriverView(),
                     ),
                     (route) => false);
               },

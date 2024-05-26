@@ -410,6 +410,7 @@ Widget travelDetailsContainer(BuildContext context, TravelModel travel, Widget o
                 radius: AppSize.s30,
                 backgroundColor: ColorManager.lightGrey,
                 backgroundImage: const AssetImage(ImageAsset.profilePicture),
+                foregroundImage: NetworkImage(travel.driver.image),
               ),
               SizedBox(width: AppSize.s12),
               Column(

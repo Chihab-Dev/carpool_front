@@ -11,7 +11,7 @@ class PresentationConstances {
   }
 
   static bool isNameValid(String name) {
-    final RegExp nameRegex = RegExp(r'^[a-zA-Z\s\-]{5,15}$');
+    final RegExp nameRegex = RegExp(r'^[a-zA-Z\s\-]{3,15}$');
     return nameRegex.hasMatch(name);
   }
 }

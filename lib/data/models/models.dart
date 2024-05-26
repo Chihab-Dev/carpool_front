@@ -11,7 +11,7 @@ class ClientModel {
   String image;
   List<FeedbackModel> feedbackes;
   String? token;
-  String email = 'chihab@gmail.com';
+  String email;
 
   ClientModel({
     required this.id,
@@ -24,6 +24,7 @@ class ClientModel {
     required this.image,
     required this.feedbackes,
     required this.token,
+    required this.email,
   });
 
   Map<String, dynamic> toMap() {
@@ -49,7 +50,8 @@ class ClientModel {
       phoneNumber: map['phoneNumber'] as String? ?? '',
       password: '',
       image: map['image'] as String? ?? '',
-      token: map['token'] as String?,
+      token: map['token'] as String? ?? '',
+      email: map['email'] as String? ?? '',
       feedbackes:
           (map['feedback'] as List<dynamic>?)?.map((x) => FeedbackModel.fromMap(x as Map<String, dynamic>)).toList() ??
               [],
@@ -73,6 +75,7 @@ class DriverModel {
   List<FeedbackModel> feedbackes;
   bool isAccepted;
   String? token;
+  String email;
 
   DriverModel({
     required this.id,
@@ -85,6 +88,7 @@ class DriverModel {
     required this.password,
     required this.feedbackes,
     required this.isAccepted,
+    required this.email,
     this.token,
   });
 
@@ -97,6 +101,7 @@ class DriverModel {
       'phoneNumber': phoneNumber,
       'image': image,
       'password': password,
+      'email': email,
     };
   }
 
@@ -115,6 +120,7 @@ class DriverModel {
               [],
       isAccepted: map['isAccepted'] as bool? ?? false,
       token: map['token'] as String?,
+      email: map['email'] as String? ?? '',
     );
   }
 
