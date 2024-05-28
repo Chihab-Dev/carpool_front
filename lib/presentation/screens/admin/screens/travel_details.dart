@@ -144,7 +144,7 @@ class _AdminTravelDetailsViewState extends State<AdminTravelDetailsView> {
                         CircleAvatar(
                           radius: AppSize.s30,
                           backgroundColor: ColorManager.lightGrey,
-                          backgroundImage: const AssetImage(ImageAsset.profilePicture),
+                          backgroundImage: const AssetImage(ImageAsset.userProfile),
                         ),
                         SizedBox(width: AppSize.s12),
                         Column(

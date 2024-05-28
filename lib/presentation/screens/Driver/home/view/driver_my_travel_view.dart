@@ -162,7 +162,7 @@ class _DriverMyTravelViewState extends State<DriverMyTravelView> {
                         CircleAvatar(
                           radius: AppSize.s30,
                           backgroundColor: ColorManager.lightGrey,
-                          backgroundImage: const AssetImage(ImageAsset.profilePicture),
+                          backgroundImage: const AssetImage(ImageAsset.userProfile),
                           foregroundImage: NetworkImage(widget.myTravel.driver.image),
                         ),
                         SizedBox(width: AppSize.s12),

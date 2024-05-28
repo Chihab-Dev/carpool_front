@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carpool/app/localizations.dart';
 import 'package:carpool/app/service_locator.dart';
 import 'package:carpool/app/shared_prefrences.dart';
@@ -23,7 +24,20 @@ class OnboardingView extends StatelessWidget {
         PageViewModel(
           title: AppStrings.selectDateAndTime.tr(context),
           body: AppStrings.selectDateAndTimeBody.tr(context),
-          image: Image.asset(ImageAsset.onboardingDate),
+          image: CachedNetworkImage(
+            imageUrl: ImageAsset.onboardingDate,
+            progressIndicatorBuilder: (context, url, downloadProgress) => Center(
+                child: CircularProgressIndicator(
+              value: downloadProgress.progress,
+              color: ColorManager.yellow,
+            )),
+            errorWidget: (context, url, error) => Center(
+                child: Icon(
+              Icons.error,
+              color: Colors.red,
+              size: AppSize.s50,
+            )),
+          ),
           decoration: PageDecoration(
             titleTextStyle: getRegularStyle(color: ColorManager.dark),
             bodyPadding: EdgeInsets.symmetric(horizontal: AppPadding.p20),
@@ -37,7 +51,20 @@ class OnboardingView extends StatelessWidget {
         PageViewModel(
           title: AppStrings.chooseTheRoute.tr(context),
           body: AppStrings.chooseTheRouteBody.tr(context),
-          image: Image.asset(ImageAsset.onboardingRoute),
+          image: CachedNetworkImage(
+            imageUrl: ImageAsset.onboardingRoute,
+            progressIndicatorBuilder: (context, url, downloadProgress) => Center(
+                child: CircularProgressIndicator(
+              value: downloadProgress.progress,
+              color: ColorManager.yellow,
+            )),
+            errorWidget: (context, url, error) => Center(
+                child: Icon(
+              Icons.error,
+              color: Colors.red,
+              size: AppSize.s50,
+            )),
+          ),
           decoration: PageDecoration(
             titleTextStyle: getRegularStyle(color: ColorManager.dark),
             bodyPadding: EdgeInsets.symmetric(horizontal: AppPadding.p20),
@@ -51,7 +78,20 @@ class OnboardingView extends StatelessWidget {
         PageViewModel(
           title: AppStrings.travel.tr(context),
           body: AppStrings.travelBody.tr(context),
-          image: Image.asset(ImageAsset.onboardingTravel),
+          image: CachedNetworkImage(
+            imageUrl: ImageAsset.onboardingTravel,
+            progressIndicatorBuilder: (context, url, downloadProgress) => Center(
+                child: CircularProgressIndicator(
+              value: downloadProgress.progress,
+              color: ColorManager.yellow,
+            )),
+            errorWidget: (context, url, error) => Center(
+                child: Icon(
+              Icons.error,
+              color: Colors.red,
+              size: AppSize.s50,
+            )),
+          ),
           decoration: PageDecoration(
             titleTextStyle: getRegularStyle(color: ColorManager.dark),
             bodyPadding: EdgeInsets.symmetric(horizontal: AppPadding.p20),

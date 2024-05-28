@@ -20,7 +20,7 @@ class DriverprofileView22 extends StatelessWidget {
               CircleAvatar(
                 radius: AppSize.s70,
                 backgroundColor: ColorManager.lightGrey,
-                backgroundImage: const AssetImage(ImageAsset.profilePicture),
+                backgroundImage: const AssetImage(ImageAsset.userProfile),
               ),
               SizedBox(height: AppSize.s18),
               Text(

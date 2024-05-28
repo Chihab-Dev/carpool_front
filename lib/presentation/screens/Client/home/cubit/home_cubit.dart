@@ -96,7 +96,7 @@ class HomeCubit extends Cubit<HomeState> {
   pickDate(BuildContext context) async {
     final DateTime? datetime = await showDatePicker(
       context: context,
-      firstDate: selectedDate,
+      firstDate: DateTime.now(),
       lastDate: DateTime(2026),
       builder: (context, child) {
         return Theme(

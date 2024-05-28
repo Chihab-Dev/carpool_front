@@ -120,7 +120,7 @@ class AdminDriversView extends StatelessWidget {
                                     CircleAvatar(
                                       radius: AppSize.s30,
                                       backgroundColor: ColorManager.lightGrey,
-                                      backgroundImage: const AssetImage(ImageAsset.profilePicture),
+                                      backgroundImage: const AssetImage(ImageAsset.userProfile),
                                       foregroundImage: NetworkImage(driver.image),
                                     ),
                                     SizedBox(width: AppSize.s12),

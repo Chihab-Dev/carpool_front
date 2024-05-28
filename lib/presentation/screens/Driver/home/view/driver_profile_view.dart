@@ -51,7 +51,7 @@ class _DriverProfileViewState extends State<DriverProfileView> {
                               CircleAvatar(
                                 radius: AppSize.s70,
                                 backgroundColor: ColorManager.lightGrey,
-                                backgroundImage: const AssetImage(ImageAsset.profilePicture),
+                                backgroundImage: const AssetImage(ImageAsset.userProfile),
                                 foregroundImage: NetworkImage(cubit.driverModel!.image),
                               ),
                               SizedBox(height: AppSize.s18),
