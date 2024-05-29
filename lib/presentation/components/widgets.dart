@@ -429,7 +429,7 @@ Widget travelDetailsContainer(BuildContext context, TravelModel travel, Widget o
                       ),
                       SizedBox(width: AppSize.s5),
                       Text(
-                        travel.driver.feedbackes.length.toString(),
+                        calculateRate(travel.driver.feedbackes).toString(),
                         style: getMeduimStyle(color: ColorManager.dark).copyWith(fontSize: AppSize.s16),
                       ),
                     ],
@@ -578,4 +578,16 @@ void logout(BuildContext context) {
         builder: (context) => const TravellerOrDriverView(),
       ),
       (route) => false);
+}
+
+double calculateRate(List<FeedbackModel> feedbacks) {
+  if (feedbacks.isNotEmpty) {
+    double somme = 0;
+    for (var feedback in feedbacks) {
+      somme += feedback.note;
+    }
+    return somme / feedbacks.length;
+  } else {
+    return 0.0;
+  }
 }

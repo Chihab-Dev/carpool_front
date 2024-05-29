@@ -178,7 +178,7 @@ class _DriverMyTravelViewState extends State<DriverMyTravelView> {
                                   color: ColorManager.yellow,
                                 ),
                                 SizedBox(width: AppSize.s5),
-                                Text(widget.myTravel.driver.feedbackes.length.toString(),
+                                Text(calculateRate(widget.myTravel.driver.feedbackes).toString(),
                                     style: getMeduimStyle(color: ColorManager.dark)),
                               ],
                             )
@@ -404,7 +404,7 @@ class _DriverMyTravelViewState extends State<DriverMyTravelView> {
                       itemCount: cubit.acceptRequestsList.length,
                       itemBuilder: (context, index) {
                         return acceptedRequestContianer(
-                            context, cubit.acceptRequestsList[index], cubit, cubit.allMyTravels[index]);
+                            context, cubit.acceptRequestsList[index], cubit, widget.myTravel);
                       },
                     ),
                     separator(),
@@ -569,7 +569,9 @@ class _DriverMyTravelViewState extends State<DriverMyTravelView> {
                   },
                   backgroundColor: ColorManager.yellow,
                 )
-              : CustomSmallButton(
+              :
+              // const SizedBox()
+              CustomSmallButton(
                   label: AppStrings.reject.tr(context),
                   onPressed: () {
                     cubit.updateRequestState(context, 'reject', requestModel.requestId, travel);
