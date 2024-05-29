@@ -50,7 +50,7 @@ class AdminLoginView extends StatelessWidget {
                         keyboardType: TextInputType.phone,
                         errorLabel: cubit.phoneNumberErrorMessage,
                         onChanged: (value) {
-                          cubit.isPhoneNumberValid();
+                          cubit.isPhoneNumberValid(context);
                         },
                         icon: null,
                       ),

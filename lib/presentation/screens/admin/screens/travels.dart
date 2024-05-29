@@ -20,7 +20,7 @@ class AdminTravelsView extends StatelessWidget {
       builder: (context, state) {
         var cubit = AdminCubit.get(context);
         return Scaffold(
-          extendBodyBehindAppBar: true,
+          extendBodyBehindAppBar: false,
           appBar: AppBar(
             backgroundColor: Colors.transparent,
             elevation: 0,

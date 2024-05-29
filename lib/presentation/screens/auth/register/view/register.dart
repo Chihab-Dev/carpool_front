@@ -134,8 +134,8 @@ class _RegisterViewState extends State<RegisterView> {
                             children: [
                               SizedBox(height: AppSize.s10),
                               Container(
-                                width: 350,
-                                height: 55,
+                                width: AppSize.s350,
+                                height: AppSize.s55,
                                 decoration: BoxDecoration(
                                   color: ColorManager.lightGrey,
                                   borderRadius: BorderRadius.circular(AppSize.s10),
@@ -246,7 +246,7 @@ class CustomDropDown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 350,
+      width: AppSize.s350,
       child: DropdownButtonFormField<String>(
         decoration: InputDecoration(
           contentPadding: EdgeInsets.symmetric(horizontal: AppPadding.p20, vertical: AppPadding.p16),

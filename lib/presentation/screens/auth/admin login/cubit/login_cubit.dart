@@ -1,3 +1,4 @@
+import 'package:carpool/app/localizations.dart';
 import 'package:carpool/app/service_locator.dart';
 import 'package:carpool/app/shared_prefrences.dart';
 import 'package:carpool/domain/usecase/admin/login_usecase.dart';
@@ -31,13 +32,13 @@ class AdminLoginCubit extends Cubit<AdminLoginStates> {
     emit(AdminLoginChangePasswordVisibilityState());
   }
 
-  void isPhoneNumberValid() {
+  void isPhoneNumberValid(BuildContext context) {
     bool isPhoneNumberValid = PresentationConstances.isPhoneNumberValid(phoneNumberController.text);
     if (isPhoneNumberValid) {
       phoneNumberErrorMessage = null;
       phoneNumberValid = true;
     } else {
-      phoneNumberErrorMessage = AppStrings.phoneNumberNotValid;
+      phoneNumberErrorMessage = AppStrings.phoneNumberNotValid.tr(context);
     }
     emit(AdminLoginIsPhoneNumberValidState());
   }

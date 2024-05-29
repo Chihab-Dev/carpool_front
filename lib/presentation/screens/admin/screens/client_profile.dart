@@ -1,7 +1,9 @@
+import 'package:carpool/app/localizations.dart';
 import 'package:carpool/data/models/models.dart';
 import 'package:carpool/presentation/components/appsize.dart';
 import 'package:carpool/presentation/components/assets_manager.dart';
 import 'package:carpool/presentation/components/color_manager.dart';
+import 'package:carpool/presentation/components/strings_manager.dart';
 import 'package:carpool/presentation/components/styles_manager.dart';
 import 'package:carpool/presentation/components/widgets.dart';
 import 'package:carpool/presentation/screens/admin/cubit/cubit.dart';
@@ -44,12 +46,13 @@ class AdminClientProfileView extends StatelessWidget {
                     ),
                     SizedBox(height: AppSize.s18),
                     separator(),
-                    CustomInformationRow(label: 'Full name : ', content: "${client.familyname} ${client.name}"),
+                    CustomInformationRow(
+                        label: '${AppStrings.fullName.tr(context)} : ', content: "${client.familyname} ${client.name}"),
                     separator(),
                     Row(
                       children: [
                         Text(
-                          "Rate : ",
+                          "${AppStrings.rate.tr(context)} : ",
                           style: getMeduimStyle(color: ColorManager.dark),
                         ),
                         Icon(
@@ -61,17 +64,19 @@ class AdminClientProfileView extends StatelessWidget {
                       ],
                     ),
                     separator(),
-                    CustomInformationRow(label: "Phone number : ", content: client.phoneNumber),
+                    CustomInformationRow(
+                        label: "${AppStrings.phoneNumber.tr(context)} : ", content: client.phoneNumber),
                     separator(),
-                    CustomInformationRow(label: "Address : ", content: client.address),
+                    CustomInformationRow(label: "${AppStrings.address.tr(context)} : ", content: client.address),
                     separator(),
-                    CustomInformationRow(label: "Old : ", content: calculateAgeFromString(client.dateofbirth)),
+                    CustomInformationRow(
+                        label: "${AppStrings.old.tr(context)} : ", content: calculateAgeFromString(client.dateofbirth)),
                     separator(),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Feedbacks : ${client.feedbackes.length}",
+                          "${AppStrings.feedback.tr(context)} : ${client.feedbackes.length}",
                           style: getRegularStyle(color: ColorManager.dark),
                         ),
                         SizedBox(height: AppSize.s16),
@@ -135,7 +140,7 @@ class AdminClientProfileView extends StatelessWidget {
                             color: Colors.red,
                           )
                         : CustomLargeButton(
-                            label: 'Delete client',
+                            label: AppStrings.delete.tr(context),
                             onPressed: () {
                               cubit.deleteClient(context, client.id);
                             },
