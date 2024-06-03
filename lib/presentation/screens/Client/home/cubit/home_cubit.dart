@@ -138,7 +138,17 @@ class HomeCubit extends Cubit<HomeState> {
         emit(HomeGetTravelErrorState());
       },
       (data) {
-        travels = data;
+        List<TravelModel> travels11 = [];
+        List<TravelModel> travels22 = [];
+
+        for (var travel in data) {
+          if (travel.numberOfPlaces == numberOfPlaces && travel.dateOfDeparture == selectedDate.toString()) {
+            travels11.add(travel);
+          } else {
+            travels22.add(travel);
+          }
+          travels = travels11 + travels22;
+        }
         emit(HomeGetTravelSuccessState());
       },
     );
@@ -214,6 +224,9 @@ class HomeCubit extends Cubit<HomeState> {
         emit(HomeSendFeedbackErrorState());
       },
       (data) {
+        rating = 0;
+        feedbackCommentController.clear();
+        feedbackValid = false;
         successToast('Send feedback success').show(context);
         emit(HomeSendFeedbackSuccessState());
       },

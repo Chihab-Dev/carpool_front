@@ -260,6 +260,14 @@ class _HomeViewState extends State<HomeView> {
                             '3',
                             style: getLargeStyle(color: ColorManager.dark),
                           ),
+                          4: Text(
+                            '4',
+                            style: getLargeStyle(color: ColorManager.dark),
+                          ),
+                          5: Text(
+                            '5',
+                            style: getLargeStyle(color: ColorManager.dark),
+                          ),
                         },
                         groupValue: cubit.numberOfPlaces,
                         backgroundColor: ColorManager.lightGrey,

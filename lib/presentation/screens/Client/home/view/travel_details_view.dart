@@ -126,6 +126,22 @@ class _TravelDetailsViewState extends State<TravelDetailsView> {
                                 color: cubit.acceptedRequests > 2 ? ColorManager.green : null,
                               )
                             : const SizedBox(),
+                        SizedBox(width: AppSize.s5),
+                        widget.travel.numberOfPlaces > 3
+                            ? Icon(
+                                Icons.chair_outlined,
+                                size: AppSize.s30,
+                                color: cubit.acceptedRequests > 3 ? ColorManager.green : null,
+                              )
+                            : const SizedBox(),
+                        SizedBox(width: AppSize.s5),
+                        widget.travel.numberOfPlaces > 4
+                            ? Icon(
+                                Icons.chair_outlined,
+                                size: AppSize.s30,
+                                color: cubit.acceptedRequests > 4 ? ColorManager.green : null,
+                              )
+                            : const SizedBox(),
                         const Spacer(),
                         Text(
                           '${AppStrings.forOnePerson.tr(context)} ',

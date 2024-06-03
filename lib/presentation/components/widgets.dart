@@ -429,7 +429,7 @@ Widget travelDetailsContainer(BuildContext context, TravelModel travel, Widget o
                       ),
                       SizedBox(width: AppSize.s5),
                       Text(
-                        calculateRate(travel.driver.feedbackes).toString(),
+                        calculateRate(travel.driver.feedbackes).toString().substring(0, 3),
                         style: getMeduimStyle(color: ColorManager.dark).copyWith(fontSize: AppSize.s16),
                       ),
                     ],
