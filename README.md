@@ -43,7 +43,7 @@ Administrator:
  . Authentication : 
 
  <div>
-    <img src= "https://mostaql.hsoubcdn.com/uploads/portfolios/3167114/66670ec3e0fe9/Simulator-Screenshot-iPhone-15-Pro-Max-2024-06-10-at-15.01.37.png" width = "200" >
+ <img src= "https://mostaql.hsoubcdn.com/uploads/portfolios/3167114/66670ec3e0fe9/Simulator-Screenshot-iPhone-15-Pro-Max-2024-06-10-at-15.01.37.png" width = "200" >
  <img src= "https://mostaql.hsoubcdn.com/uploads/portfolios/3167114/66670ec41f0b9/Simulator-Screenshot-iPhone-15-Pro-Max-2024-06-10-at-15.02.16.png" width = "200" >
  <img src= "https://mostaql.hsoubcdn.com/uploads/portfolios/3167114/66670ec3adfe5/Simulator-Screenshot-iPhone-15-Pro-Max-2024-06-10-at-15.01.49.png" width = "200" >
  </div>
@@ -56,7 +56,7 @@ Administrator:
  . Passenger :
 
  <div>
-     <img src= "[https://github.com/Chihab-Dev/Food-App/assets/111295846/62519309-6ca0-490d-ad46-18cdd1cccdbd](https://mostaql.hsoubcdn.com/uploads/portfolios/3167114/66670ec450f1a/Simulator-Screenshot-iPhone-15-Pro-Max-2024-06-10-at-15.03.55.png)" width = "200" >
+   <img src= "https://mostaql.hsoubcdn.com/uploads/portfolios/3167114/66670ec450f1a/Simulator-Screenshot-iPhone-15-Pro-Max-2024-06-10-at-15.03.55.png" width = "200" >
   <img src= "https://mostaql.hsoubcdn.com/uploads/portfolios/3167114/66670ec484524/Simulator-Screenshot-iPhone-15-Pro-Max-2024-06-10-at-15.04.20.png" width = "200" >
   <img src= "https://mostaql.hsoubcdn.com/uploads/portfolios/3167114/66670ec4be2c9/Simulator-Screenshot-iPhone-15-Pro-Max-2024-06-10-at-15.06.03.png" width = "200" >
   <img src= "https://mostaql.hsoubcdn.com/uploads/portfolios/3167114/66670ec50607e/Simulator-Screenshot-iPhone-15-Pro-Max-2024-06-10-at-15.06.13.png
